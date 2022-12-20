@@ -1,5 +1,4 @@
 import './style.scss';
-
 class View {
     app: HTMLElement | undefined;
     header: HTMLElement;
@@ -18,7 +17,7 @@ class View {
         this.header = this.createElement('header', 'header');
         this.header__wrapper = this.createElement('div', 'header__wrapper');
         this.header__logo = this.createElement('div', 'header__logo');
-        this.header__logo_link = this.createLinkElement('//link', 'header__logo_link');
+        this.header__logo_link = this.createLinkElement('//linkToHome', 'header__logo_link');
         this.header__logo_link.innerHTML = 'Online-Store';
         this.header__totalCost = this.createElement('span', 'header__totalCost');
         this.header__totalCost.textContent = 'Total cost: # $';
