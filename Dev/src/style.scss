@@ -1,5 +1,9 @@
+* {
+  outline: 1px solid black;  
+}
+
 body {
-    background-color: chartreuse;    
+    background-color: chartreuse;        
 }
 
 .link {
@@ -38,8 +42,10 @@ body {
 
 .header__logo_link {
     font-size: 3rem;
-    text-shadow: 0 0 10px rgb(184 24 24), 0 0 20px red, 0 0 30px red, 0 0 40px red;
+    
+    text-shadow: 0 0 10px rgb(184 24 24), 0 0 20px red, 0 0 30px red, 0 0 40px rgb(85, 55, 178);
     &::before {
+        color:rgb(22, 237, 86);
         font-size: 4rem;
         content: "🛍 "
     }
