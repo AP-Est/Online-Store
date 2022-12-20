@@ -7,10 +7,11 @@ body {
 }
 
 .header__wrapper {
+    background-color: rgb(33, 171, 171);
+
     display: flex;
     justify-content: space-between;
     padding: 10px;
-    background-color: rgb(33, 171, 171);
     font-size: 4rem;
     height: 7vh;
 
@@ -18,15 +19,17 @@ body {
 }
 .main__wrapper {
     background-color: rgb(87, 65, 161);
+
     font-size: 60px;
     height: 80vh;
     border-radius: 20px;
 }
 .footer__wrapper {
+    background-color: rgb(176, 86, 166);
+
     display: flex;
     flex-direction: column;
-    align-items: center;
-    background-color: rgb(176, 86, 166);
+    align-items: center;   
     font-size: 60px;
     height: 10vh;
 
