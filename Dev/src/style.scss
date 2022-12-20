@@ -1,5 +1,48 @@
-.wrap {
-    color: rgb(206, 23, 23);
-    background-color: aqua;
+body {
+    background-color: chartreuse;    
+}
+
+.link {
+    text-decoration: none;
+}
+
+.header__wrapper {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: rgb(33, 171, 171);
+    font-size: 4rem;
+    height: 7vh;
+
+    border-radius: 20px;
+}
+.main__wrapper {
+    background-color: rgb(87, 65, 161);
     font-size: 60px;
+    height: 80vh;
+    border-radius: 20px;
+}
+.footer__wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(176, 86, 166);
+    font-size: 60px;
+    height: 10vh;
+
+    border-radius: 20px;
+}
+
+.header__logo_link {
+    font-size: 3rem;
+    text-shadow: 0 0 10px rgb(184 24 24), 0 0 20px red, 0 0 30px red, 0 0 40px red;
+    &::before {
+        font-size: 4rem;
+        content: "🛍 "
+    }
+
+}
+
+.header__cart_link {
+    font-size: 3rem;
 }
