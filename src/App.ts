@@ -1,11 +1,12 @@
 import { ViewMainPage } from './components/MainPageView';
+import { ViewDetailPage } from './components/DetailPageView';
 
-export class App extends ViewMainPage {
-    view: ViewMainPage;
+export class App extends ViewDetailPage {
+    view: ViewDetailPage;
 
     constructor() {
         super();
-        this.view = new ViewMainPage();
+        this.view = new ViewDetailPage();
     }
 
     init() {
@@ -14,6 +15,6 @@ export class App extends ViewMainPage {
     }
 
     navigate = () => {
-        this.view = new ViewMainPage();
+        this.view = new ViewDetailPage();
     };
 }
