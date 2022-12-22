@@ -23,10 +23,10 @@ body {
 }
 .main__wrapper {
     background-color: rgb(87, 65, 161);
-
     font-size: 60px;
     height: 86vh;
     border-radius: 20px;
+    display: flex;
 }
 .footer__wrapper {
     background-color: rgb(176, 86, 166);
