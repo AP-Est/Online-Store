@@ -10,8 +10,8 @@ export class App extends ViewDetailPage {
     }
 
     init() {
-        // window.addEventListener('popstate', this.navigate);
-        // this.navigate();
+        window.addEventListener('popstate', this.navigate);
+        this.navigate();
     }
 
     navigate = () => {
