@@ -1,0 +1,105 @@
+.detail__wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 80vh;
+}
+
+.wayBlock {
+  text-transform: uppercase;
+}
+
+.productBlock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80vw;
+    height: 70vh; 
+    border-radius: 20px; 
+    margin: 20px;
+    border-radius: 20px; 
+}
+
+.productBlock__title {    
+    color: antiquewhite;
+    width: 80vw;
+    background-color: aqua;
+    text-align: center;
+}
+
+.productBlock_productBlockMainBlock {
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(33, 61, 61);
+    width: 100%;
+}
+
+.productBlockMainBlock__pictures {
+    background-color: aqua;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.pictures_pic {
+    height: 100px;
+    width: 150px;
+    border-radius: 10px;
+    margin: 10px;
+    background-size: cover;
+    background-position: center;
+    cursor: pointer;
+}
+
+.productBlockMainBlock__preview {
+  display: flex;  
+}
+
+.productBlockMainBlock__preview_pic {
+    border-radius: 10px;
+    height: 200px;
+    width: 350px;
+    margin: auto 10px;
+}
+
+.productBlockMainBlock__info_card {
+    margin: auto 10px;
+    margin-top: 15px;
+    border-radius: 10px;
+    background-color: aquamarine;
+    text-align: center;
+    font-size: 2rem;
+
+}
+.productBlockMainBlock__info_cardTitle {
+    margin: 0;
+    border-radius: 10px;
+    text-align: center;
+    background-color: bisque;
+}
+
+.productBlockMainBlock__price {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.productBlockMainBlock__price_price {
+    color: aquamarine;
+}
+
+.productBlockMainBlock__price_buttonAdd,
+.productBlockMainBlock__price_buttonDel,
+.productBlockMainBlock__price_buttonBuyNow {
+    width: 160px;
+    height: 50px;
+    font-size: 1.4rem;
+    background-color: antiquewhite;
+    cursor: pointer;
+    &:hover {
+        background-color: rgb(56, 159, 44);
+    }
+}

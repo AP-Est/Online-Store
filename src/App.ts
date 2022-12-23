@@ -1,19 +1,20 @@
 import { ViewMainPage } from './components/MainPageView';
+import { ViewDetailPage } from './components/DetailPageView';
 
-export class App extends ViewMainPage {
-    //view: ViewMainPage;
+export class App extends ViewDetailPage {
+    view: ViewDetailPage;
 
     constructor() {
         super();
-        //this.view = new ViewMainPage();
+        this.view = new ViewDetailPage();
     }
 
     init() {
-        // window.addEventListener('popstate', this.navigate);
-        // this.navigate();
+        window.addEventListener('popstate', this.navigate);
+        this.navigate();
     }
 
-    // navigate = () => {
-    //     this.view = new ViewMainPage();
-    // };
+    navigate = () => {
+        this.view = new ViewDetailPage();
+    };
 }
