@@ -21,18 +21,15 @@ const baseConfig = {
             {
                 test: /\.s[ac]ss$/i,
                 use: [
-                    "style-loader",
-                    "css-loader",
-                    "sass-loader",
+                    'style-loader',
+                    'css-loader',
+                    'sass-loader',
                     {
                         loader: 'sass-resources-loader',
                         options: {
-                            resources: [
-                                'src/styles/vars.scss',
-                                'src/styles/mixins.scss',
-                            ]
-                        }
-                    }
+                            resources: ['src/styles/vars.scss', 'src/styles/mixins.scss'],
+                        },
+                    },
                 ],
             },
         ],
