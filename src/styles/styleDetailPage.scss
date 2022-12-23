@@ -9,6 +9,7 @@
 
 .wayBlock {
   text-transform: uppercase;
+  font-size: $bigFontSize;
 }
 
 .productBlock {
@@ -17,9 +18,8 @@
     align-items: center;
     width: 80vw;
     height: 70vh; 
-    border-radius: 20px; 
+    border-radius: $mainBorderRadius; 
     margin: 20px;
-    border-radius: 20px; 
 }
 
 .productBlock__title {    
@@ -46,7 +46,7 @@
 .pictures_pic {
     height: 100px;
     width: 150px;
-    border-radius: 10px;
+    border-radius: $smallBorderRadius;
     margin: 10px;
     background-size: cover;
     background-position: center;
@@ -58,7 +58,7 @@
 }
 
 .productBlockMainBlock__preview_pic {
-    border-radius: 10px;
+    border-radius: $smallBorderRadius;
     height: 200px;
     width: 350px;
     margin: auto 10px;
@@ -67,15 +67,15 @@
 .productBlockMainBlock__info_card {
     margin: auto 10px;
     margin-top: 15px;
-    border-radius: 10px;
+    border-radius: $smallBorderRadius;
     background-color: aquamarine;
     text-align: center;
-    font-size: 2rem;
+    font-size: $bigFontSize;
 
 }
 .productBlockMainBlock__info_cardTitle {
     margin: 0;
-    border-radius: 10px;
+    border-radius: $smallBorderRadius;
     text-align: center;
     background-color: bisque;
 }
@@ -96,7 +96,7 @@
 .productBlockMainBlock__price_buttonBuyNow {
     width: 160px;
     height: 50px;
-    font-size: 1.4rem;
+    font-size: $bigFontSize;
     background-color: antiquewhite;
     cursor: pointer;
     &:hover {
