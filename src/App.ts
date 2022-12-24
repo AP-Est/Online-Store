@@ -1,21 +1,30 @@
 import { ViewMainPage } from './components/MainPageView';
 import { ViewDetailPage } from './components/DetailPageView';
+import { ControllerMainPage } from './components/MainPageConstroller';
+import { ControllerDetailPage } from './components/DetailPageConstroller';
 
-const pag = 'a';
 export class App {
     view: ViewMainPage | ViewDetailPage | undefined;
+    controller: ControllerMainPage | ControllerDetailPage | undefined;
+
     init() {
-        window.addEventListener('popstate', this.navigate);
+        window.addEventListener('myEvent', this.navigate);
         this.navigate();
     }
 
     navigate = () => {
-        switch (pag) {
-            case 'a':
-                this.view = new ViewMainPage();
+        const path = window.location.pathname;
+        console.log(path);
+        switch (path) {
+            case '/details':
+                this.view = new ViewDetailPage();
+                this.controller = new ControllerDetailPage(this.view);
+                console.log(2);
                 break;
             default:
-                this.view = new ViewDetailPage();
+                this.view = new ViewMainPage();
+                this.controller = new ControllerMainPage(this.view);
+                console.log(3);
                 break;
         }
     };

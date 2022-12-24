@@ -1,6 +1,7 @@
 import '../styles/styleMainPage.scss';
 import { storeData } from '../data/data';
 import { View } from './BaseView';
+//import { ControllerMainPage } from 'MainPageController';
 
 export class ViewMainPage extends View {
     app: HTMLElement | undefined;
@@ -95,5 +96,13 @@ export class ViewMainPage extends View {
         if (className) element.classList.add(className);
 
         return element;
+    }
+
+    bindAddDetailAdress(handler: any) {
+        this.cards.addEventListener('click', () => {
+            handler();
+            const myEvent = new CustomEvent('myEvent');
+            dispatchEvent(myEvent);
+        });
     }
 }
