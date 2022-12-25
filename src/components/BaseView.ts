@@ -1,6 +1,6 @@
 import '../styles/styleBase.scss';
 export class View {
-    app: HTMLElement | undefined;
+    app: HTMLElement;
     header: HTMLElement;
     main: HTMLElement;
     footer: HTMLElement;
@@ -13,7 +13,8 @@ export class View {
     header__cart_link: HTMLAnchorElement;
     footer__wrapper: HTMLElement;
     constructor() {
-        this.app = this.getElement('body');
+        this.app = this.getElement('body') as HTMLElement;
+        this.app.innerHTML = '';
         this.header = this.createElement('header', 'header');
         this.header__wrapper = this.createElement('div', 'header__wrapper');
         this.header__logo = this.createElement('div', 'header__logo');

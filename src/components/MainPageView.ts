@@ -4,7 +4,8 @@ import { View } from './BaseView';
 //import { ControllerMainPage } from 'MainPageController';
 
 export class ViewMainPage extends View {
-    app: HTMLElement | undefined;
+    cardNumber: number;
+    //app: HTMLElement | undefined;
     filters: HTMLElement;
     filters__wrapper: HTMLElement;
     goods: HTMLElement;
@@ -30,6 +31,8 @@ export class ViewMainPage extends View {
 
     constructor() {
         super();
+
+        this.cardNumber = 0;
 
         this.filters = this.createElement('div', 'filters');
         this.filters__wrapper = this.createElement('div', 'filters__wrapper');
@@ -66,6 +69,7 @@ export class ViewMainPage extends View {
             this.cardDiv[i] = this.createElement('div', 'cardDiv');
             this.cardDiv[i].style.background = `url(${storeData.products[i].thumbnail})`;
             this.cardDiv[i].style.backgroundSize = 'cover';
+            this.cardDiv[i].id = `${i}`;
             this.cards.append(this.cardDiv[i]);
         }
 
@@ -98,11 +102,13 @@ export class ViewMainPage extends View {
         return element;
     }
 
-    bindAddDetailAdress(handler: any) {
-        this.cards.addEventListener('click', () => {
-            handler();
-            const myEvent = new CustomEvent('myEvent');
-            dispatchEvent(myEvent);
+    bindAddDetailAddress(handler: (cardNumber: number) => void) {
+        this.cards.addEventListener('click', (event) => {
+            const target = event.target as Element;
+            if (target.classList.contains('cardDiv')) {
+                this.cardNumber = Number(target.id);
+                handler(this.cardNumber);
+            }
         });
     }
 }

@@ -5,10 +5,10 @@ export class ControllerMainPage {
 
     constructor(view: ViewMainPage) {
         this.view = view;
-        this.view.bindAddDetailAdress(this.handleAddDetailAdress);
+        this.view.bindAddDetailAddress(this.handleAddDetailAddress);
     }
 
-    handleAddDetailAdress = () => {
-        history.pushState({}, '', '/details');
+    handleAddDetailAddress = (cardNumber: number) => {
+        window.location.hash = `details/${cardNumber}`;
     };
 }

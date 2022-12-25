@@ -4,7 +4,7 @@ import { View } from './BaseView';
 import createButton from '../modules/createButton';
 
 export class ViewDetailPage extends View {
-    app: HTMLElement | undefined;
+    //app: HTMLElement | undefined;
     wayBlock: HTMLElement;
     productBlock: HTMLElement;
     detail__wrapper: HTMLElement;
@@ -27,15 +27,16 @@ export class ViewDetailPage extends View {
 
     constructor() {
         super();
+        const cardNumber = Number(window.location.hash.slice(1).split('/')[1]); // Номер товара, на который кликнули
         this.detail__wrapper = this.createElement('div', 'detail__wrapper');
         this.wayBlock = this.createElement('div', 'wayBlock');
-        this.wayBlock.textContent = this.getWay(1); // TODO сюда пробрасываем ID
+        this.wayBlock.textContent = this.getWay(cardNumber); // TODO сюда пробрасываем ID
         this.productBlock = this.createElement('div', 'productBlock');
         this.productBlock__title = this.createElement('span', 'productBlock__title');
-        this.productBlock__title.textContent = storeData.products[0].title; // TODO сюда пробрасываем ID
+        this.productBlock__title.textContent = storeData.products[cardNumber].title; // TODO сюда пробрасываем ID
         this.productBlock__productBlockMainBlock = this.createElement('div', 'productBlock_productBlockMainBlock');
         this.productBlockMainBlock__pictures = this.createElement('div', 'productBlockMainBlock__pictures');
-        this.pic_array = [...storeData.products[0].images]; // TODO сюда пробрасываем ID
+        this.pic_array = [...storeData.products[cardNumber].images]; // TODO сюда пробрасываем ID
         for (let i = 0; i < this.pic_array.length; i++) {
             this.productBlockMainBlock__pictures_pic = this.createElement(
                 'div',
@@ -47,12 +48,12 @@ export class ViewDetailPage extends View {
         }
         this.productBlockMainBlock__preview = this.createElement('div', 'productBlockMainBlock__preview');
         this.productBlockMainBlock__preview_pic = this.createElement('div', 'productBlockMainBlock__preview_pic');
-        this.productBlockMainBlock__preview_pic.style.backgroundImage = `url(${this.pic_array[0]})`; // TODO сюда пробрасываем ID
+        this.productBlockMainBlock__preview_pic.style.backgroundImage = `url(${this.pic_array[cardNumber]})`; // TODO сюда пробрасываем ID
         this.productBlockMainBlock__info = this.createElement('div', 'productBlockMainBlock__info');
         this.createInfoFields();
         this.productBlockMainBlock__price = this.createElement('div', 'productBlockMainBlock__price');
         this.productBlockMainBlock__price_price = this.createElement('span', 'productBlockMainBlock__price_price');
-        this.productBlockMainBlock__price_price.textContent = `$${storeData.products[0].price}`; // TODO сюда пробрасываем ID
+        this.productBlockMainBlock__price_price.textContent = `$${storeData.products[cardNumber].price}`; // TODO сюда пробрасываем ID
 
         this.productBlockMainBlock__price_buttonAdd = createButton(
             'add to cart',
