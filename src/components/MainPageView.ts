@@ -4,7 +4,6 @@ import { View } from './BaseView';
 //import { ControllerMainPage } from 'MainPageController';
 
 export class ViewMainPage extends View {
-    cardNumber: number;
     //app: HTMLElement | undefined;
     filters: HTMLElement;
     filters__wrapper: HTMLElement;
@@ -31,8 +30,6 @@ export class ViewMainPage extends View {
 
     constructor() {
         super();
-
-        this.cardNumber = 0;
 
         this.filters = this.createElement('div', 'filters');
         this.filters__wrapper = this.createElement('div', 'filters__wrapper');
@@ -106,8 +103,8 @@ export class ViewMainPage extends View {
         this.cards.addEventListener('click', (event) => {
             const target = event.target as Element;
             if (target.classList.contains('cardDiv')) {
-                this.cardNumber = Number(target.id);
-                handler(this.cardNumber);
+                const cardNumber = Number(target.id);
+                handler(cardNumber);
             }
         });
     }
