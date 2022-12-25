@@ -9,6 +9,6 @@ export class ControllerMainPage {
     }
 
     handleAddDetailAddress = (cardNumber: number) => {
-        window.location.hash = `details/${cardNumber}`;
+        window.location.hash = `details/${cardNumber + 1}`;
     };
 }
