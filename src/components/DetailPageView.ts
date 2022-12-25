@@ -2,8 +2,9 @@ import '../styles/styleDetailPage.scss';
 import { storeData } from '../data/data';
 import { View } from './BaseView';
 import createButton from '../modules/createButton';
+import createElement from '../modules/createElement';
 
-export class ViewDetailPage extends View {
+export class DetailPageView extends View {
     //app: HTMLElement | undefined;
     wayBlock: HTMLElement;
     productBlock: HTMLElement;
@@ -28,20 +29,17 @@ export class ViewDetailPage extends View {
     constructor() {
         super();
         const cardNumber = Number(window.location.hash.slice(1).split('/')[1]); // Номер товара, на который кликнули
-        this.detail__wrapper = this.createElement('div', 'detail__wrapper');
-        this.wayBlock = this.createElement('div', 'wayBlock');
+        this.detail__wrapper = createElement('div', 'detail__wrapper');
+        this.wayBlock = createElement('div', 'wayBlock');
         this.wayBlock.textContent = this.getWay(cardNumber);
-        this.productBlock = this.createElement('div', 'productBlock');
-        this.productBlock__title = this.createElement('span', 'productBlock__title');
+        this.productBlock = createElement('div', 'productBlock');
+        this.productBlock__title = createElement('span', 'productBlock__title');
         this.productBlock__title.textContent = storeData.products[cardNumber - 1].title;
-        this.productBlock__productBlockMainBlock = this.createElement('div', 'productBlock_productBlockMainBlock');
-        this.productBlockMainBlock__pictures = this.createElement('div', 'productBlockMainBlock__pictures');
+        this.productBlock__productBlockMainBlock = createElement('div', 'productBlock_productBlockMainBlock');
+        this.productBlockMainBlock__pictures = createElement('div', 'productBlockMainBlock__pictures');
         this.pic_array = [...storeData.products[cardNumber - 1].images];
         for (let i = 0; i < this.pic_array.length; i++) {
-            this.productBlockMainBlock__pictures_pic = this.createElement(
-                'div',
-                'productBlockMainBlock__pictures_pic' + i
-            );
+            this.productBlockMainBlock__pictures_pic = createElement('div', 'productBlockMainBlock__pictures_pic' + i);
             this.productBlockMainBlock__pictures_pic.classList.add('pictures_pic');
             this.productBlockMainBlock__pictures_pic.style.backgroundImage = `url(${this.pic_array[i]})`;
             this.productBlockMainBlock__pictures_pic.addEventListener(
@@ -50,13 +48,13 @@ export class ViewDetailPage extends View {
             );
             this.productBlockMainBlock__pictures.append(this.productBlockMainBlock__pictures_pic);
         }
-        this.productBlockMainBlock__preview = this.createElement('div', 'productBlockMainBlock__preview');
-        this.productBlockMainBlock__preview_pic = this.createElement('div', 'productBlockMainBlock__preview_pic');
+        this.productBlockMainBlock__preview = createElement('div', 'productBlockMainBlock__preview');
+        this.productBlockMainBlock__preview_pic = createElement('div', 'productBlockMainBlock__preview_pic');
         this.productBlockMainBlock__preview_pic.style.backgroundImage = `url(${this.pic_array[0]})`;
-        this.productBlockMainBlock__info = this.createElement('div', 'productBlockMainBlock__info');
+        this.productBlockMainBlock__info = createElement('div', 'productBlockMainBlock__info');
         this.createInfoFields();
-        this.productBlockMainBlock__price = this.createElement('div', 'productBlockMainBlock__price');
-        this.productBlockMainBlock__price_price = this.createElement('span', 'productBlockMainBlock__price_price');
+        this.productBlockMainBlock__price = createElement('div', 'productBlockMainBlock__price');
+        this.productBlockMainBlock__price_price = createElement('span', 'productBlockMainBlock__price_price');
         this.productBlockMainBlock__price_price.textContent = `$${storeData.products[cardNumber - 1].price}`;
 
         this.productBlockMainBlock__price_buttonAdd = createButton(
@@ -89,20 +87,6 @@ export class ViewDetailPage extends View {
         this.main__wrapper.append(this.detail__wrapper);
     }
 
-    getElement(selector: string) {
-        if (selector !== undefined && selector !== null) {
-            const element = document.querySelector(selector) as HTMLElement;
-            return element;
-        }
-    }
-
-    createElement(tag: string, className?: string) {
-        const element = document.createElement(tag);
-        if (className) element.classList.add(className);
-
-        return element;
-    }
-
     getWay(id = 1) {
         return `STORE >> ${storeData.products[id - 1].category} >> ${storeData.products[id - 1].brand} >> ${
             storeData.products[id - 1].title
@@ -119,13 +103,10 @@ export class ViewDetailPage extends View {
             storeData.products[id - 1].category,
         ];
         for (let i = 0; i < titles.length; i++) {
-            this.productBlockMainBlock__info_card = this.createElement('div', 'productBlockMainBlock__info_card');
-            this.productBlockMainBlock__info_cardTitle = this.createElement(
-                'h5',
-                'productBlockMainBlock__info_cardTitle'
-            );
+            this.productBlockMainBlock__info_card = createElement('div', 'productBlockMainBlock__info_card');
+            this.productBlockMainBlock__info_cardTitle = createElement('h5', 'productBlockMainBlock__info_cardTitle');
             this.productBlockMainBlock__info_cardTitle.textContent = `${titles[i]}:`;
-            this.productBlockMainBlock__info_cardData = this.createElement('span', 'productBlockMainBlock__cardData');
+            this.productBlockMainBlock__info_cardData = createElement('span', 'productBlockMainBlock__cardData');
             this.productBlockMainBlock__info_cardData.textContent = keys[i] as string;
             this.productBlockMainBlock__info_card.append(
                 this.productBlockMainBlock__info_cardTitle,

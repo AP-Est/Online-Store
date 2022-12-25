@@ -1,9 +1,9 @@
-import { ViewMainPage } from 'MainPageView';
+import { MainPageView } from 'MainPageView';
 
 export class ControllerMainPage {
-    view: ViewMainPage;
+    view: MainPageView;
 
-    constructor(view: ViewMainPage) {
+    constructor(view: MainPageView) {
         this.view = view;
         this.view.bindAddDetailAddress(this.handleAddDetailAddress);
     }
