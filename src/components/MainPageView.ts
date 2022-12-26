@@ -95,4 +95,60 @@ export class MainPageView extends View {
             }
         });
     }
+
+    // bindChooseCategory(handler){
+    //     this.category.addEventListener('change', event => {
+    //         if (event.target.type === 'checkbox') {
+    //             const category = ;
+
+    //             handler(category);
+    //         }
+    //     })
+    // }
+
+    // bindChooseBrand(handler){
+    //   this.category.addEventListener('change', event => {
+    //       if (event.target.type === 'checkbox') {
+    //           const brand = ;
+
+    //           handler(brand);
+    //       }
+    //   })
+    // }
+
+    // bindSetPrice(handler){
+    //   this.category.addEventListener('', event => {
+
+    //           handler(parameter);
+
+    //   })
+    // }
+
+    // bindSetStock(handler){
+    //   this.category.addEventListener('', event => {
+
+    //           handler(parameter);
+
+    //   })
+    // }
+
+    displayProductCards(/*productsChanged*/) {
+        //отрисовка карточек продуктов
+    }
+
+    displayFilterCategory(/*products, productsChanged*/) {
+        //отрисовка фильтра Category
+    }
+
+    displayFilterBrands(/*products, productsChanged*/) {
+        //отрисовка фильтра Brands
+    }
+
+    displayFilterPrice(/*products, productsChanged*/) {
+        //отрисовка фильтра Price
+    }
+
+    displayFilterStock(/*products, productsChanged*/) {
+        //отрисовка фильтра Stock
+    }
 }
