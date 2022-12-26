@@ -1,9 +1,9 @@
-import { ViewDetailPage } from 'DetailPageView';
+import { DetailPageView } from 'DetailPageView';
 
 export class ControllerDetailPage {
-    view: ViewDetailPage;
+    view: DetailPageView;
 
-    constructor(view: ViewDetailPage) {
+    constructor(view: DetailPageView) {
         this.view = view;
     }
 }

@@ -1,69 +1,70 @@
 import '../styles/styleMainPage.scss';
 import { storeData } from '../data/data';
 import { View } from './BaseView';
+import createElement from '../modules/createElement';
 //import { ControllerMainPage } from 'MainPageController';
 
-export class ViewMainPage extends View {
+export class MainPageView extends View {
     //app: HTMLElement | undefined;
     filters: HTMLElement;
-    filters__wrapper: HTMLElement;
+    filtersWrapper: HTMLElement;
     goods: HTMLElement;
     top: HTMLElement;
     cards: HTMLElement;
     modelFilter1: HTMLElement;
-    modelFilter1__name: HTMLElement;
-    modelFilter1__main: HTMLElement;
-    modelFilter1__text: HTMLElement;
+    modelFilter1Name: HTMLElement;
+    modelFilter1Main: HTMLElement;
+    modelFilter1Text: HTMLElement;
     modelFilter2: HTMLElement;
-    modelFilter2__name: HTMLElement;
-    modelFilter2__main: HTMLElement;
-    modelFilter2__text: HTMLElement;
+    modelFilter2Name: HTMLElement;
+    modelFilter2Main: HTMLElement;
+    modelFilter2Text: HTMLElement;
     modelFilter3: HTMLElement;
-    modelFilter3__name: HTMLElement;
-    modelFilter3__main: HTMLElement;
-    modelFilter3__text: HTMLElement;
+    modelFilter3Name: HTMLElement;
+    modelFilter3Main: HTMLElement;
+    modelFilter3Text: HTMLElement;
     modelFilter4: HTMLElement;
-    modelFilter4__name: HTMLElement;
-    modelFilter4__main: HTMLElement;
-    modelFilter4__text: HTMLElement;
+    modelFilter4Name: HTMLElement;
+    modelFilter4Main: HTMLElement;
+    modelFilter4Text: HTMLElement;
     cardDiv: Array<HTMLElement>;
 
     constructor() {
         super();
 
-        this.filters = this.createElement('div', 'filters');
-        this.filters__wrapper = this.createElement('div', 'filters__wrapper');
-        this.modelFilter1 = this.createElement('div', 'modelFilter');
-        this.modelFilter1__name = this.createElement('div', 'modelFilter__name');
-        this.modelFilter1__text = this.createElement('p', 'modelFilter__text');
-        this.modelFilter1__text.textContent = 'Category';
-        this.modelFilter1__main = this.createElement('div', 'modelFilter__main');
+        this.filters = createElement('div', 'filters');
+        this.filtersWrapper = createElement('div', 'filters__wrapper');
+        this.modelFilter1 = createElement('div', 'modelFilter');
+        this.modelFilter1Name = createElement('div', 'modelFilter__name');
+        this.modelFilter1Text = createElement('p', 'modelFilter__text');
+        this.modelFilter1Text.textContent = 'Category';
+        this.modelFilter1Main = createElement('div', 'modelFilter__main');
 
-        this.modelFilter2 = this.createElement('div', 'modelFilter');
-        this.modelFilter2__name = this.createElement('div', 'modelFilter__name');
-        this.modelFilter2__text = this.createElement('p', 'modelFilter__text');
-        this.modelFilter2__text.textContent = 'Brand';
-        this.modelFilter2__main = this.createElement('div', 'modelFilter__main');
+        this.modelFilter2 = createElement('div', 'modelFilter');
+        this.modelFilter2Name = createElement('div', 'modelFilter__name');
+        this.modelFilter2Text = createElement('p', 'modelFilter__text');
+        this.modelFilter2Text.textContent = 'Brand';
+        this.modelFilter2Main = createElement('div', 'modelFilter__main');
 
-        this.modelFilter3 = this.createElement('div', 'modelFilter');
-        this.modelFilter3__name = this.createElement('div', 'modelFilter__name');
-        this.modelFilter3__text = this.createElement('p', 'modelFilter__text');
-        this.modelFilter3__text.textContent = 'Price';
-        this.modelFilter3__main = this.createElement('div', 'modelFilter__main');
+        this.modelFilter3 = createElement('div', 'modelFilter');
+        this.modelFilter3Name = createElement('div', 'modelFilter__name');
+        this.modelFilter3Text = createElement('p', 'modelFilter__text');
+        this.modelFilter3Text.textContent = 'Price';
+        this.modelFilter3Main = createElement('div', 'modelFilter__main');
 
-        this.modelFilter4 = this.createElement('div', 'modelFilter');
-        this.modelFilter4__name = this.createElement('div', 'modelFilter__name');
-        this.modelFilter4__text = this.createElement('p', 'modelFilter__text');
-        this.modelFilter4__text.textContent = 'Stock';
-        this.modelFilter4__main = this.createElement('div', 'modelFilter__main');
+        this.modelFilter4 = createElement('div', 'modelFilter');
+        this.modelFilter4Name = createElement('div', 'modelFilter__name');
+        this.modelFilter4Text = createElement('p', 'modelFilter__text');
+        this.modelFilter4Text.textContent = 'Stock';
+        this.modelFilter4Main = createElement('div', 'modelFilter__main');
 
-        this.goods = this.createElement('div', 'goods');
-        this.top = this.createElement('div', 'top');
+        this.goods = createElement('div', 'goods');
+        this.top = createElement('div', 'top');
 
-        this.cards = this.createElement('div', 'cards');
+        this.cards = createElement('div', 'cards');
         this.cardDiv = [];
         for (let i = 0; i < storeData.total; i++) {
-            this.cardDiv[i] = this.createElement('div', 'cardDiv');
+            this.cardDiv[i] = createElement('div', 'cardDiv');
             this.cardDiv[i].style.background = `url(${storeData.products[i].thumbnail})`;
             this.cardDiv[i].style.backgroundSize = 'cover';
             this.cardDiv[i].id = `${i}`;
@@ -71,32 +72,18 @@ export class ViewMainPage extends View {
         }
 
         // собираем страницу
-        this.modelFilter1__name.append(this.modelFilter1__text);
-        this.modelFilter2__name.append(this.modelFilter2__text);
-        this.modelFilter3__name.append(this.modelFilter3__text);
-        this.modelFilter4__name.append(this.modelFilter4__text);
-        this.modelFilter1.append(this.modelFilter1__name, this.modelFilter1__main);
-        this.modelFilter2.append(this.modelFilter2__name, this.modelFilter2__main);
-        this.modelFilter3.append(this.modelFilter3__name, this.modelFilter3__main);
-        this.modelFilter4.append(this.modelFilter4__name, this.modelFilter4__main);
-        this.filters__wrapper.append(this.modelFilter1, this.modelFilter2, this.modelFilter3, this.modelFilter4);
-        this.filters.append(this.filters__wrapper);
+        this.modelFilter1Name.append(this.modelFilter1Text);
+        this.modelFilter2Name.append(this.modelFilter2Text);
+        this.modelFilter3Name.append(this.modelFilter3Text);
+        this.modelFilter4Name.append(this.modelFilter4Text);
+        this.modelFilter1.append(this.modelFilter1Name, this.modelFilter1Main);
+        this.modelFilter2.append(this.modelFilter2Name, this.modelFilter2Main);
+        this.modelFilter3.append(this.modelFilter3Name, this.modelFilter3Main);
+        this.modelFilter4.append(this.modelFilter4Name, this.modelFilter4Main);
+        this.filtersWrapper.append(this.modelFilter1, this.modelFilter2, this.modelFilter3, this.modelFilter4);
+        this.filters.append(this.filtersWrapper);
         this.goods.append(this.top, this.cards);
-        this.main__wrapper.append(this.filters, this.goods);
-    }
-
-    getElement(selector: string) {
-        if (selector !== undefined && selector !== null) {
-            const element = document.querySelector(selector) as HTMLElement;
-            return element;
-        }
-    }
-
-    createElement(tag: string, className?: string) {
-        const element = document.createElement(tag);
-        if (className) element.classList.add(className);
-
-        return element;
+        this.mainWrapper.append(this.filters, this.goods);
     }
 
     bindAddDetailAddress(handler: (cardNumber: number) => void) {
