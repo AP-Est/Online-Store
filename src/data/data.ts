@@ -1,4 +1,24 @@
-export const storeData = {
+export interface IProduct {
+    id: number;
+    title: string;
+    description: string;
+    price: number;
+    discountPercentage: number;
+    rating: number;
+    stock: number;
+    brand: string;
+    category: string;
+    thumbnail: string;
+    images: string[];
+}
+export interface IStoreData {
+    products: IProduct[];
+    total: number;
+    skip: number;
+    limit: number;
+}
+
+export const storeData: IStoreData = {
     products: [
         {
             id: 1,
@@ -94,7 +114,7 @@ export const storeData = {
             discountPercentage: 11.02,
             rating: 4.57,
             stock: 83,
-            brand: 'APPle',
+            brand: 'Apple',
             category: 'laptops',
             thumbnail: 'https://i.dummyjson.com/data/products/6/thumbnail.png',
             images: [
