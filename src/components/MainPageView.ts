@@ -2,6 +2,8 @@ import '../styles/styleMainPage.scss';
 import { storeData } from '../data/data';
 import { View } from './BaseView';
 import createElement from '../modules/createElement';
+import displayFilterCategory from '../modules/displayFilterCategory';
+import displayFilterBrands from '../modules/displayFilterBrands';
 //import { ControllerMainPage } from 'MainPageController';
 
 export class MainPageView extends View {
@@ -12,13 +14,7 @@ export class MainPageView extends View {
     top: HTMLElement;
     cards: HTMLElement;
     modelFilter1: HTMLElement;
-    modelFilter1Name: HTMLElement;
-    modelFilter1Main: HTMLElement;
-    modelFilter1Text: HTMLElement;
     modelFilter2: HTMLElement;
-    modelFilter2Name: HTMLElement;
-    modelFilter2Main: HTMLElement;
-    modelFilter2Text: HTMLElement;
     modelFilter3: HTMLElement;
     modelFilter3Name: HTMLElement;
     modelFilter3Main: HTMLElement;
@@ -34,17 +30,8 @@ export class MainPageView extends View {
 
         this.filters = createElement('div', 'filters');
         this.filtersWrapper = createElement('div', 'filters__wrapper');
-        this.modelFilter1 = createElement('div', 'modelFilter');
-        this.modelFilter1Name = createElement('div', 'modelFilter__name');
-        this.modelFilter1Text = createElement('p', 'modelFilter__text');
-        this.modelFilter1Text.textContent = 'Category';
-        this.modelFilter1Main = createElement('div', 'modelFilter__main');
-
-        this.modelFilter2 = createElement('div', 'modelFilter');
-        this.modelFilter2Name = createElement('div', 'modelFilter__name');
-        this.modelFilter2Text = createElement('p', 'modelFilter__text');
-        this.modelFilter2Text.textContent = 'Brand';
-        this.modelFilter2Main = createElement('div', 'modelFilter__main');
+        this.modelFilter1 = displayFilterCategory() as HTMLElement;
+        this.modelFilter2 = displayFilterBrands() as HTMLElement;
 
         this.modelFilter3 = createElement('div', 'modelFilter');
         this.modelFilter3Name = createElement('div', 'modelFilter__name');
@@ -72,12 +59,8 @@ export class MainPageView extends View {
         }
 
         // собираем страницу
-        this.modelFilter1Name.append(this.modelFilter1Text);
-        this.modelFilter2Name.append(this.modelFilter2Text);
         this.modelFilter3Name.append(this.modelFilter3Text);
         this.modelFilter4Name.append(this.modelFilter4Text);
-        this.modelFilter1.append(this.modelFilter1Name, this.modelFilter1Main);
-        this.modelFilter2.append(this.modelFilter2Name, this.modelFilter2Main);
         this.modelFilter3.append(this.modelFilter3Name, this.modelFilter3Main);
         this.modelFilter4.append(this.modelFilter4Name, this.modelFilter4Main);
         this.filtersWrapper.append(this.modelFilter1, this.modelFilter2, this.modelFilter3, this.modelFilter4);
@@ -136,13 +119,22 @@ export class MainPageView extends View {
         //отрисовка карточек продуктов
     }
 
-    displayFilterCategory(/*products, productsChanged*/) {
-        //отрисовка фильтра Category
-    }
-
-    displayFilterBrands(/*products, productsChanged*/) {
-        //отрисовка фильтра Brands
-    }
+    // displayFilterBrands() {
+    //     const filterBrandsWrapper = createElement('div', 'filterBrands__wrapper');
+    //     const filterBrandsHeader = createElement('div', 'filterBrands__header');
+    //     filterBrandsHeader.innerText = 'Brand';
+    //     const filterBrandsArray = [...storeData.products];
+    //     filterBrandsWrapper.append(filterBrandsHeader);
+    //     for (let i = 0; i < filterBrandsArray.length; i++) {
+    //         const filterBrandsPoint = createElement('span', `filterBrands__${filterBrandsArray[i].brand}`);
+    //         const filterBrandsChBox = document.createElement('input');
+    //         filterBrandsChBox.classList.add(`filterBrandsBox__${filterBrandsArray[i].brand}`);
+    //         filterBrandsChBox.type = 'checkbox';
+    //         filterBrandsPoint.textContent = filterBrandsArray[i].brand;
+    //         filterBrandsWrapper.append(filterBrandsChBox, filterBrandsPoint);
+    //     }
+    //     return filterBrandsWrapper;
+    // }
 
     displayFilterPrice(/*products, productsChanged*/) {
         //отрисовка фильтра Price
