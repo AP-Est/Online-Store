@@ -21,12 +21,12 @@ export interface IStoreData {
 export interface IFilterData {
     categories: string[];
     brands: string[];
-    minPrice: number;
-    maxPrice: number;
-    minStock: number;
-    maxStock: number;
-    search: string[];
-    sort: string[];
+    minPrice: number | null;
+    maxPrice: number | null;
+    minStock: number | null;
+    maxStock: number | null;
+    search: string;
+    sort: string;
 }
 
 export const storeData: IStoreData = {

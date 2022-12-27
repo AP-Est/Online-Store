@@ -9,12 +9,12 @@ export class MainPageModel {
         this.filter = {
             categories: [],
             brands: [],
-            minPrice: NaN,
-            maxPrice: NaN,
-            minStock: NaN,
-            maxStock: NaN,
-            search: [],
-            sort: [],
+            minPrice: null,
+            maxPrice: null,
+            minStock: null,
+            maxStock: null,
+            search: '',
+            sort: '',
         };
     }
 
@@ -80,28 +80,28 @@ export class MainPageModel {
         return productsFiltered;
     }
 
-    filterPrice(products: IProduct[], minPrice: number, maxPrice: number) {
-        if (isNaN(minPrice) && isNaN(maxPrice)) return products;
+    filterPrice(products: IProduct[], minPrice: number | null, maxPrice: number | null) {
+        if (minPrice === null && maxPrice === null) return products;
         const productsFiltered = this.products.filter((cur) => {
-            if (isNaN(minPrice)) {
+            if (minPrice === null && maxPrice !== null) {
                 cur.price <= maxPrice;
-            } else if (isNaN(maxPrice)) {
+            } else if (maxPrice === null && minPrice !== null) {
                 cur.price >= minPrice;
-            } else {
+            } else if (maxPrice !== null && minPrice !== null) {
                 cur.price >= minPrice && cur.price <= maxPrice;
             }
         });
         return productsFiltered;
     }
 
-    filterStock(products: IProduct[], minStock: number, maxStock: number) {
-        if (isNaN(minStock) && isNaN(maxStock)) return products;
+    filterStock(products: IProduct[], minStock: number | null, maxStock: number | null) {
+        if (minStock === null && maxStock === null) return products;
         const productsFiltered = this.products.filter((cur) => {
-            if (isNaN(minStock)) {
+            if (minStock === null && maxStock !== null) {
                 cur.stock <= maxStock;
-            } else if (isNaN(maxStock)) {
+            } else if (maxStock === null && minStock !== null) {
                 cur.stock >= minStock;
-            } else {
+            } else if (maxStock !== null && minStock !== null) {
                 cur.stock >= minStock && cur.stock <= maxStock;
             }
         });
