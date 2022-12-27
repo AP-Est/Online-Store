@@ -9,49 +9,63 @@
 
 .wayBlock {
   text-transform: uppercase;
-  font-size: $bigFontSize;
+  font-size: $fontSizedDynamicBig;
 }
 
 .productBlock {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 80vw;
+    width: 90vw;
     height: 70vh; 
     border-radius: $mainBorderRadius; 
     margin: 20px;
+    border: 1px solid black;
+    overflow: hidden;
 }
 
 .productBlock__title {    
-    color: antiquewhite;
-    width: 80vw;
+    color: rgb(226, 134, 13);
+    width: 90vw;
     background-color: aqua;
     text-align: center;
+    font-size: $fontSizedDynamicBig;
 }
 
 .productBlock_productBlockMainBlock {
     display: flex;
     flex-direction: row;
-    background-color: rgb(33, 61, 61);
+    //background-color: rgb(33, 61, 61);
     width: 100%;
 }
 
 .productBlockMainBlock__pictures {
-    background-color: aqua;
+    //background-color: aqua;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    max-height: 70vh;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .pictures_pic {
-    height: 100px;
-    width: 150px;
+    height: 13vh;
+    width: 15vw;    
     border-radius: $smallBorderRadius;
     margin: 10px;
     background-size: cover;
-    background-position: center;
     cursor: pointer;
 }
+
+img {
+    width: 14vw;
+    height: 100%;
+    border-radius: $smallBorderRadius;    
+    margin-top: 10px;
+    object-fit: cover;
+    background-color: transparent;
+}
+
 
 .productBlockMainBlock__preview {
   display: flex;  
@@ -59,27 +73,36 @@
 
 .productBlockMainBlock__preview_pic {
     border-radius: $smallBorderRadius;
-    height: 200px;
-    width: 350px;
+    width: 30vw;
+    height: 20vh;    
     margin: auto 10px;
     background-size: cover;
     background-position: center;
 }
-
+.productBlockMainBlock__info{
+    display: flex;
+    flex-direction: column;
+    width: 30vw;    
+}
 .productBlockMainBlock__info_card {
     margin: auto 10px;
     margin-top: 15px;
     border-radius: $smallBorderRadius;
-    background-color: aquamarine;
+    //background-color: aquamarine;
     text-align: center;
-    font-size: $bigFontSize;
-
+    font-size: $fontSizedDynamicBig;
+    border: $borderMain;
 }
 .productBlockMainBlock__info_cardTitle {
     margin: 0;
     border-radius: $smallBorderRadius;
     text-align: center;
     background-color: bisque;
+    font-size: $fontSizedDynamicBig;
+}
+
+.productBlockMainBlock__cardData {
+    margin: auto 10px;
 }
 
 .productBlockMainBlock__price {
@@ -91,15 +114,21 @@
 
 .productBlockMainBlock__price_price {
     color: aquamarine;
+    margin-bottom: 1vh;
+    font-size: $bigFontSize;
+    font-family: $mainFontFamily;
 }
 
 .productBlockMainBlock__price_buttonAdd,
 .productBlockMainBlock__price_buttonDel,
 .productBlockMainBlock__price_buttonBuyNow {
-    width: 160px;
-    height: 50px;
-    font-size: $bigFontSize;
+    width: 15vw;
+    height: 5vh;
+    margin-bottom: 1vh;
+    font-size: $fontSizedDynamicBig;
+    font-family: $mainFontFamily;
     background-color: antiquewhite;
+    border-radius: $mainBorderRadius;
     cursor: pointer;
     &:hover {
         background-color: rgb(56, 159, 44);

@@ -3,19 +3,29 @@ import filterArray from './filterArray';
 
 export default function displayFilterBrands() {
     const filterBrandsWrapper = createElement('div', 'filterBrands__wrapper');
+    filterBrandsWrapper.classList.add('filter__wrapper');
     const filterBrandsHeader = createElement('div', 'filterBrands__header');
+    filterBrandsHeader.classList.add('filter__header');
     filterBrandsHeader.innerText = 'Brand';
     const filterBrandsArray = filterArray('brand');
     filterBrandsWrapper.append(filterBrandsHeader);
+    const filterBrandUl = createElement('ul');
     for (let i = 0; i < filterBrandsArray.length; i++) {
-        const brandTitle = filterBrandsArray[i] as string;
-        const t1 = brandTitle.split(' ').join('');
-        const filterBrandsPoint = createElement('span', `filterBrands__${t1}`);
+        const filterBrandLi = createElement('li');
+        const unreadyTitles = filterBrandsArray[i] as string;
+        const brandTitle = unreadyTitles.split(' ').join('');
         const filterBrandsChBox = document.createElement('input');
-        filterBrandsChBox.classList.add(`filterBrandsBox__${t1}`);
+        filterBrandsChBox.classList.add('checkBoxStyle');
+        filterBrandsChBox.classList.add(`filterBrandsBox__${brandTitle}`);
         filterBrandsChBox.type = 'checkbox';
-        filterBrandsPoint.textContent = filterBrandsArray[i] as string;
-        filterBrandsWrapper.append(filterBrandsChBox, filterBrandsPoint);
+        filterBrandsChBox.id = `filterBrandsBox__${brandTitle}`;
+        const filterBrandChBoxLabel = document.createElement('label');
+        filterBrandChBoxLabel.classList.add(`filterBrandsBoxLabel__${brandTitle}`);
+        filterBrandChBoxLabel.htmlFor = `filterBrandsBox__${brandTitle}`;
+        filterBrandChBoxLabel.textContent = filterBrandsArray[i] as string;
+        filterBrandLi.append(filterBrandsChBox, filterBrandChBoxLabel);
+        filterBrandUl.append(filterBrandLi);
     }
+    filterBrandsWrapper.append(filterBrandUl);
     return filterBrandsWrapper;
 }

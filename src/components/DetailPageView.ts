@@ -3,6 +3,7 @@ import { storeData } from '../data/data';
 import { View } from './BaseView';
 import createButton from '../modules/createButton';
 import createElement from '../modules/createElement';
+import pushToLocalStorage from '../utils/pushToLocalStorage';
 
 export class DetailPageView extends View {
     //app: HTMLElement | undefined;
@@ -25,6 +26,8 @@ export class DetailPageView extends View {
     productBlockInfoCard: HTMLElement | undefined;
     productBlockMainBlockInfoCardTitle: HTMLElement | undefined;
     productBlockInfoCardData: HTMLElement | undefined;
+    productBlockPicturesExemplarPic: HTMLImageElement | undefined;
+    productBlockPriceButtonDel: any;
 
     constructor() {
         super();
@@ -39,9 +42,14 @@ export class DetailPageView extends View {
         this.productBlockPictures = createElement('div', 'productBlockMainBlock__pictures');
         this.picArray = [...storeData.products[cardNumber - 1].images];
         for (let i = 0; i < this.picArray.length; i++) {
-            this.productBlockPicturesExemplar = createElement('div', 'productBlockMainBlock__pictures_pic' + i);
+            this.productBlockPicturesExemplar = createElement('container', 'productBlockMainBlock__pictures_pic' + i);
+            this.productBlockPicturesExemplarPic = createElement(
+                'img',
+                'productBlockMainBlock__pictures_pic' + i
+            ) as HTMLImageElement;
+            this.productBlockPicturesExemplarPic.src = `${this.picArray[i]}`;
+            this.productBlockPicturesExemplar.append(this.productBlockPicturesExemplarPic);
             this.productBlockPicturesExemplar.classList.add('pictures_pic');
-            this.productBlockPicturesExemplar.style.backgroundImage = `url(${this.picArray[i]})`;
             this.productBlockPicturesExemplar.addEventListener(
                 'click',
                 () => (this.productBlockPreviewPic.style.backgroundImage = `url(${this.picArray[i]})`)
@@ -57,9 +65,15 @@ export class DetailPageView extends View {
         this.productBlockPriceText = createElement('span', 'productBlockMainBlock__price_price');
         this.productBlockPriceText.textContent = `$${storeData.products[cardNumber - 1].price}`;
 
-        this.productBlockPriceButtonAdd = createButton('add to cart', 'productBlockMainBlock__price_buttonAdd');
-        //this.productBlockPriceButtonDel = this.createButton('drop from cart', 'productBlockMainBlock__price_buttonDel');
-        this.productBlockPriceButtonBuyNow = createButton('buy now', 'productBlockMainBlock__price_buttonBuyNow');
+        this.productBlockPriceButtonAdd = createButton('Add to cart', 'productBlockMainBlock__price_buttonAdd');
+        this.productBlockPriceButtonDel = createButton('Drop from cart', 'productBlockMainBlock__price_buttonDel');
+        this.productBlockPriceButtonAdd.addEventListener('click', () => {
+            pushToLocalStorage(cardNumber);
+            this.productBlockPriceButtonDel.style.display = 'block';
+            this.productBlockPriceButtonAdd.style.display = 'none';
+        });
+        this.productBlockPriceButtonDel.style.display = 'none';
+        this.productBlockPriceButtonBuyNow = createButton('Buy now', 'productBlockMainBlock__price_buttonBuyNow');
 
         // собираем страницу
 
@@ -68,6 +82,7 @@ export class DetailPageView extends View {
         this.productBlockPrice.append(
             this.productBlockPriceText,
             this.productBlockPriceButtonAdd,
+            this.productBlockPriceButtonDel,
             this.productBlockPriceButtonBuyNow
         );
         this.productMainBlock.append(
