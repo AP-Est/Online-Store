@@ -50,14 +50,40 @@ p{
   overflow:auto;
 }
 
+.filtersButton__wrapper {
+  display: flex;
+  justify-content: space-around;
+
+  .filters__button_reset, 
+  .filters__button_copy {
+    width: 7vw;
+    height: 4vh;
+    border-radius: $mainBorderRadius;
+    background-color: #c0af95;
+    margin: 5px;
+    &:hover {
+      background-color: red;
+    }
+  }
+}
+
+
+
 .filter__header {
  background-color: rgb(88, 145, 195);
  text-align: center;
  border-radius: $smallBorderRadius;
 }
 
-
-
+.checkBoxStyle {
+  cursor: grab;
+  &:checked {
+    cursor: grab;
+    height: 1.1rem;
+    width: 1.1rem;
+    accent-color: orange;
+  }
+}
 
 
 
