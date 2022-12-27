@@ -1,10 +1,10 @@
 import '../styles/styleMainPage.scss';
 import { IProduct, IFilterData, storeData } from '../data/data'; //TODO удалить storeData, когда это будет возможно
 import { View } from './BaseView';
-import createElement from '../modules/createElement';
-import displayFilterCategory from '../modules/displayFilterCategory';
-import displayFilterBrands from '../modules/displayFilterBrands';
-import createButton from '../modules/createButton';
+import createElement from '../utils/createElement';
+import displayFilterCategory from '../utils/displayFilterCategory';
+import displayFilterBrands from '../utils/displayFilterBrands';
+import createButton from '../utils/createButton';
 //import { ControllerMainPage } from 'MainPageController';
 
 export class MainPageView extends View {
@@ -28,16 +28,27 @@ export class MainPageView extends View {
     filtersButtonReset: HTMLButtonElement;
     filtersButtonCopy: HTMLButtonElement;
     filtersButtonWrapper: HTMLElement;
+    tempfilter: IFilterData;
 
     constructor() {
         super();
-
+        //TODO: как будет проброс данных по фильтрам - следующий блок нужно убратьб пока можно тестить так
+        this.tempfilter = {
+            categories: ['laptops'],
+            brands: [],
+            minPrice: null,
+            maxPrice: null,
+            minStock: null,
+            maxStock: null,
+            search: '',
+            sort: '',
+        };
         this.filters = createElement('div', 'filters');
         this.filtersWrapper = createElement('div', 'filters__wrapper');
         this.filtersButtonWrapper = createElement('div', 'filtersButton__wrapper');
         this.filtersButtonReset = createButton('Reset', 'filters__button_reset');
         this.filtersButtonCopy = createButton('Copy', 'filters__button_copy');
-        this.modelFilter1 = displayFilterCategory() as HTMLElement;
+        this.modelFilter1 = displayFilterCategory(storeData.products, this.tempfilter) as HTMLElement; // TODo сюда прокинуть продукты и массив с фильтрами категорий
         this.modelFilter2 = displayFilterBrands() as HTMLElement;
 
         this.modelFilter3 = createElement('div', 'modelFilter');

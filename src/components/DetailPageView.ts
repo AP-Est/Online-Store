@@ -1,8 +1,8 @@
 import '../styles/styleDetailPage.scss';
 import { storeData } from '../data/data';
 import { View } from './BaseView';
-import createButton from '../modules/createButton';
-import createElement from '../modules/createElement';
+import createButton from '../utils/createButton';
+import createElement from '../utils/createElement';
 import pushToLocalStorage from '../utils/pushToLocalStorage';
 
 export class DetailPageView extends View {
