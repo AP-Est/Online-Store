@@ -120,15 +120,27 @@ export class MainPageView extends View {
     bindAddCategory(handler: (category: string) => void) {
         // обработчик выбора новой категории
 
-        // this.category.addEventListener('change', event => {
-        //     if (event.target.type === 'checkbox') {
-        //         const category = ;
-
-        //         handler(category);
-        //     }
-        // })
+        this.modelFilter1.addEventListener('change', (event) => {
+            const target = event.target as HTMLElement;
+            if (target.classList.contains('checkBoxStyle')) {
+                const category = target.nextElementSibling?.textContent as string;
+                handler(category);
+            }
+        });
         handler('category');
     }
+    // bindAddCategory(handler: (category: string) => void) {
+    //     // обработчик выбора новой категории
+
+    //     this.category.addEventListener('change', event => {
+    //         if (event.target.type === 'checkbox') {
+    //             const category = ;
+
+    //             handler(category);
+    //         }
+    //     })
+    //     handler('category');
+    // }
 
     bindRemoveBrand(handler: (brand: string) => void) {
         // обработчик удаления бренда
