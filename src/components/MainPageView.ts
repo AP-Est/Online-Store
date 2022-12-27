@@ -4,6 +4,7 @@ import { View } from './BaseView';
 import createElement from '../modules/createElement';
 import displayFilterCategory from '../modules/displayFilterCategory';
 import displayFilterBrands from '../modules/displayFilterBrands';
+import createButton from '../modules/createButton';
 //import { ControllerMainPage } from 'MainPageController';
 
 export class MainPageView extends View {
@@ -24,12 +25,18 @@ export class MainPageView extends View {
     modelFilter4Main: HTMLElement;
     modelFilter4Text: HTMLElement;
     cardDiv: Array<HTMLElement>;
+    filtersButtonReset: HTMLButtonElement;
+    filtersButtonCopy: HTMLButtonElement;
+    filtersButtonWrapper: HTMLElement;
 
     constructor() {
         super();
 
         this.filters = createElement('div', 'filters');
         this.filtersWrapper = createElement('div', 'filters__wrapper');
+        this.filtersButtonWrapper = createElement('div', 'filtersButton__wrapper');
+        this.filtersButtonReset = createButton('Reset', 'filters__button_reset');
+        this.filtersButtonCopy = createButton('Copy', 'filters__button_copy');
         this.modelFilter1 = displayFilterCategory() as HTMLElement;
         this.modelFilter2 = displayFilterBrands() as HTMLElement;
 
@@ -59,11 +66,18 @@ export class MainPageView extends View {
         }
 
         // собираем страницу
+        this.filtersButtonWrapper.append(this.filtersButtonReset, this.filtersButtonCopy);
         this.modelFilter3Name.append(this.modelFilter3Text);
         this.modelFilter4Name.append(this.modelFilter4Text);
         this.modelFilter3.append(this.modelFilter3Name, this.modelFilter3Main);
         this.modelFilter4.append(this.modelFilter4Name, this.modelFilter4Main);
-        this.filtersWrapper.append(this.modelFilter1, this.modelFilter2, this.modelFilter3, this.modelFilter4);
+        this.filtersWrapper.append(
+            this.filtersButtonWrapper,
+            this.modelFilter1,
+            this.modelFilter2,
+            this.modelFilter3,
+            this.modelFilter4
+        );
         this.filters.append(this.filtersWrapper);
         this.goods.append(this.top, this.cards);
         this.mainWrapper.append(this.filters, this.goods);
