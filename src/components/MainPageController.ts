@@ -1,59 +1,63 @@
 import { MainPageView } from 'MainPageView';
+import { MainPageModel } from 'MainPageModel';
+import { IProduct, IFilterData } from '../data/data';
 
 export class ControllerMainPage {
     view: MainPageView;
+    model: MainPageModel;
 
-    constructor(view: MainPageView) {
+    constructor(view: MainPageView, model: MainPageModel) {
         this.view = view;
+        this.model = model;
         this.view.bindAddDetailAddress(this.handleAddDetailAddress);
-        // this.productsChanged(this.model.productsChanged);
-        // this.categoryChanged(this.model.products, this.model.productsChanged);
-        // this.brandChanged(this.model.products, this.model.productsChanged);
-        // this.priceChanged(this.model.products, this.model.productsChanged);
-        // this.stockChanged(this.model.products, this.model.productsChanged);
-        // this.view.bindChooseCategory(this.handleChooseCategory);
-        // this.view.bindChooseBrand(this.handleChooseBrand);
-        // this.view.bindSetPrice(this.handleSetPrice);
-        // this.view.bindSetStock(this.handleSetStock);
+        this.view.bindRemoveCategory(this.handleRemoveCategory);
+        this.view.bindAddCategory(this.handleAddCategory);
+        this.view.bindRemoveBrand(this.handleRemoveBrand);
+        this.view.bindAddBrand(this.handleAddBrand);
+        this.view.bindChangeMinPrice(this.handleChangeMinPrice);
+        this.view.bindChangeMaxPrice(this.handleChangeMaxPrice);
+        this.view.bindChangeMinStock(this.handleChangeMinStock);
+        this.view.bindChangeMaxStock(this.handleChangeMaxStock);
+        this.displayMainPage(this.model.products, this.model.filter, 0, 0); //TODO 0, 0 временно, далее доработать логику и заменить переменными
     }
 
     handleAddDetailAddress = (cardNumber: number) => {
         window.location.hash = `details/${cardNumber + 1}`;
     };
 
-    //   productsChanged = (productsChanged) => {
-    //       this.view.displayProductCards(productsChanged);
-    //   };
+    displayMainPage = (products: IProduct[], filter: IFilterData, totalCost: number, numProducts: number) => {
+        this.view.renderPage(products, this.model.getProductsToShow(products, filter), filter, totalCost, numProducts);
+    };
 
-    //   categoryChanged = (products, productsChanged) => {
-    //     this.view.displayFilterCategory(products, productsChanged);
-    //   };
+    handleRemoveCategory = (category: string) => {
+        this.model.removeCategory(category);
+    };
 
-    //   brandChanged = (products, productsChanged) => {
-    //       this.view.displayFilterBrand(products, productsChanged);
-    //   };
+    handleAddCategory = (category: string) => {
+        this.model.addCategory(category);
+    };
 
-    //   priceChanged = (products, productsChanged) => {
-    //       this.view.displayFilterPrice(products, productsChanged);
-    //   };
+    handleRemoveBrand = (brand: string) => {
+        this.model.removeBrand(brand);
+    };
 
-    //   stockChanged = (products, productsChanged) => {
-    //     this.view.displayFilterStock(products, productsChanged);
-    // };
+    handleAddBrand = (brand: string) => {
+        this.model.addBrand(brand);
+    };
 
-    //   handleChooseCategory = (category) => {
-    //       this.model.filterProducts(category)
-    //   };
+    handleChangeMinPrice = (minPrice: number) => {
+        this.model.changeMinPrice(minPrice);
+    };
 
-    //   handleChooseBrand = (brand) => {
-    //       this.model.filterProducts('',brand)
-    //   };
+    handleChangeMaxPrice = (maxPrice: number) => {
+        this.model.changeMaxPrice(maxPrice);
+    };
 
-    //   handleSetPrice = (parameter) => {
-    //       this.model.filterProducts('', '', parameter)
-    //   };
+    handleChangeMinStock = (minStock: number) => {
+        this.model.changeMinStock(minStock);
+    };
 
-    //   handleSetStock = (parameter) => {
-    //       this.model.filterProducts('', '', NaN, parameter)
-    //   };
+    handleChangeMaxStock = (maxStock: number) => {
+        this.model.changeMaxPrice(maxStock);
+    };
 }

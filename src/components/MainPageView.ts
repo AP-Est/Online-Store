@@ -1,5 +1,5 @@
 import '../styles/styleMainPage.scss';
-import { storeData } from '../data/data';
+import { IProduct, IFilterData, storeData } from '../data/data'; //TODO удалить storeData, когда это будет возможно
 import { View } from './BaseView';
 import createElement from '../modules/createElement';
 import displayFilterCategory from '../modules/displayFilterCategory';
@@ -93,68 +93,134 @@ export class MainPageView extends View {
         });
     }
 
-    // bindChooseCategory(handler){
-    //     this.category.addEventListener('change', event => {
-    //         if (event.target.type === 'checkbox') {
-    //             const category = ;
+    bindRemoveCategory(handler: (category: string) => void) {
+        // обработчик удаления категории
 
-    //             handler(category);
-    //         }
-    //     })
-    // }
+        // this.category.addEventListener('change', event => {
+        //     if (event.target.type === 'checkbox') {
+        //         const category = ;
 
-    // bindChooseBrand(handler){
-    //   this.category.addEventListener('change', event => {
-    //       if (event.target.type === 'checkbox') {
-    //           const brand = ;
-
-    //           handler(brand);
-    //       }
-    //   })
-    // }
-
-    // bindSetPrice(handler){
-    //   this.category.addEventListener('', event => {
-
-    //           handler(parameter);
-
-    //   })
-    // }
-
-    // bindSetStock(handler){
-    //   this.category.addEventListener('', event => {
-
-    //           handler(parameter);
-
-    //   })
-    // }
-
-    displayProductCards(/*productsChanged*/) {
-        //отрисовка карточек продуктов
+        //         handler(category);
+        //     }
+        // })
+        handler('category');
     }
 
-    // displayFilterBrands() {
-    //     const filterBrandsWrapper = createElement('div', 'filterBrands__wrapper');
-    //     const filterBrandsHeader = createElement('div', 'filterBrands__header');
-    //     filterBrandsHeader.innerText = 'Brand';
-    //     const filterBrandsArray = [...storeData.products];
-    //     filterBrandsWrapper.append(filterBrandsHeader);
-    //     for (let i = 0; i < filterBrandsArray.length; i++) {
-    //         const filterBrandsPoint = createElement('span', `filterBrands__${filterBrandsArray[i].brand}`);
-    //         const filterBrandsChBox = document.createElement('input');
-    //         filterBrandsChBox.classList.add(`filterBrandsBox__${filterBrandsArray[i].brand}`);
-    //         filterBrandsChBox.type = 'checkbox';
-    //         filterBrandsPoint.textContent = filterBrandsArray[i].brand;
-    //         filterBrandsWrapper.append(filterBrandsChBox, filterBrandsPoint);
-    //     }
-    //     return filterBrandsWrapper;
-    // }
+    bindAddCategory(handler: (category: string) => void) {
+        // обработчик выбора новой категории
 
-    displayFilterPrice(/*products, productsChanged*/) {
-        //отрисовка фильтра Price
+        // this.category.addEventListener('change', event => {
+        //     if (event.target.type === 'checkbox') {
+        //         const category = ;
+
+        //         handler(category);
+        //     }
+        // })
+        handler('category');
     }
 
-    displayFilterStock(/*products, productsChanged*/) {
-        //отрисовка фильтра Stock
+    bindRemoveBrand(handler: (brand: string) => void) {
+        // обработчик удаления бренда
+
+        // this.category.addEventListener('change', event => {
+        //     if (event.target.type === 'checkbox') {
+        //         const category = ;
+
+        //         handler(category);
+        //     }
+        // })
+        handler('brand');
     }
+
+    bindAddBrand(handler: (brand: string) => void) {
+        // обработчик выбора нового бренда
+
+        // this.category.addEventListener('change', event => {
+        //     if (event.target.type === 'checkbox') {
+        //         const category = ;
+
+        //         handler(category);
+        //     }
+        // })
+        handler('brand');
+    }
+
+    bindChangeMinPrice(handler: (minPrice: number) => void) {
+        // обработчик изменения минимальной цены
+
+        // this.category.addEventListener('change', event => {
+        //     if (event.target.type === 'checkbox') {
+        //         const category = ;
+
+        //         handler(category);
+        //     }
+        // })
+        handler(0);
+    }
+
+    bindChangeMaxPrice(handler: (maxPrice: number) => void) {
+        // обработчик изменения максимальной цены
+
+        // this.category.addEventListener('change', event => {
+        //     if (event.target.type === 'checkbox') {
+        //         const category = ;
+
+        //         handler(category);
+        //     }
+        // })
+        handler(0);
+    }
+
+    bindChangeMinStock(handler: (minStock: number) => void) {
+        // обработчик изменения минимального количества на складе
+
+        // this.category.addEventListener('change', event => {
+        //     if (event.target.type === 'checkbox') {
+        //         const category = ;
+
+        //         handler(category);
+        //     }
+        // })
+        handler(0);
+    }
+
+    bindChangeMaxStock(handler: (maxStock: number) => void) {
+        // обработчик изменения максимального количества на складе
+
+        // this.category.addEventListener('change', event => {
+        //     if (event.target.type === 'checkbox') {
+        //         const category = ;
+
+        //         handler(category);
+        //     }
+        // })
+        handler(0);
+    }
+
+    renderPage(
+        products: IProduct[],
+        productsFiltered: IProduct[],
+        filter: IFilterData,
+        totalCost: number,
+        numProducts: number
+    ) {
+        //отрисовка MainPage
+
+        this.renderHeader(totalCost, numProducts);
+        this.renderFilters(products, filter);
+        this.renderProductCards(productsFiltered);
+        this.renderFooter();
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    renderHeader(totalCost: number, numProducts: number) {}
+
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    renderFilters(products: IProduct[], filter: IFilterData) {}
+
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    renderProductCards(products: IProduct[]) {}
+
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    renderFooter() {}
 }

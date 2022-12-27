@@ -1,4 +1,5 @@
 import { MainPageView } from './components/MainPageView';
+import { MainPageModel } from './components/MainPageModel';
 import { DetailPageView } from './components/DetailPageView';
 import { ControllerMainPage } from './components/MainPageController';
 import { ControllerDetailPage } from './components/DetailPageController';
@@ -6,6 +7,7 @@ import { ControllerDetailPage } from './components/DetailPageController';
 export class App {
     view: MainPageView | DetailPageView | undefined;
     controller: ControllerMainPage | ControllerDetailPage | undefined;
+    model: MainPageModel | undefined;
 
     init() {
         window.addEventListener('hashchange', this.navigate);
@@ -23,7 +25,8 @@ export class App {
                 break;
             default:
                 this.view = new MainPageView();
-                this.controller = new ControllerMainPage(this.view);
+                this.model = new MainPageModel();
+                this.controller = new ControllerMainPage(this.view, this.model);
                 console.log('Main');
                 break;
         }

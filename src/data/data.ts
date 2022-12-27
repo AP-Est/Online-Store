@@ -18,6 +18,17 @@ export interface IStoreData {
     limit: number;
 }
 
+export interface IFilterData {
+    categories: string[];
+    brands: string[];
+    minPrice: number | null;
+    maxPrice: number | null;
+    minStock: number | null;
+    maxStock: number | null;
+    search: string;
+    sort: string;
+}
+
 export const storeData: IStoreData = {
     products: [
         {
