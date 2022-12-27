@@ -9,7 +9,7 @@
 
 .wayBlock {
   text-transform: uppercase;
-  font-size: $bigFontSize;
+  font-size: $fontSizedDynamicBig;
 }
 
 .productBlock {
@@ -20,6 +20,8 @@
     height: 70vh; 
     border-radius: $mainBorderRadius; 
     margin: 20px;
+    border: 1px solid black;
+    overflow: hidden;
 }
 
 .productBlock__title {    
@@ -27,31 +29,42 @@
     width: 90vw;
     background-color: aqua;
     text-align: center;
-    font-size: $bigFontSize;
+    font-size: $fontSizedDynamicBig;
 }
 
 .productBlock_productBlockMainBlock {
     display: flex;
     flex-direction: row;
-    background-color: rgb(33, 61, 61);
+    //background-color: rgb(33, 61, 61);
     width: 100%;
 }
 
 .productBlockMainBlock__pictures {
-    background-color: aqua;
+    //background-color: aqua;
     display: flex;
     flex-direction: column;
+    max-height: 70vh;
+    overflow: auto;
 }
 
 .pictures_pic {
-    height: 10vh;
-    width: 15vw;
+    //height: 10vh;
+    width: 15vw;    
     border-radius: $smallBorderRadius;
     margin: 10px;
     background-size: cover;
-    background-position: center;
     cursor: pointer;
 }
+
+img {
+    width: 15vw;
+    height: 100%;
+    border-radius: $smallBorderRadius;    
+    margin-top: 10px;
+    object-fit: cover;
+    background-color: transparent;
+}
+
 
 .productBlockMainBlock__preview {
   display: flex;  
@@ -68,21 +81,27 @@
 .productBlockMainBlock__info{
     display: flex;
     flex-direction: column;
+    width: 30vw;    
 }
 .productBlockMainBlock__info_card {
     margin: auto 10px;
     margin-top: 15px;
     border-radius: $smallBorderRadius;
-    background-color: aquamarine;
+    //background-color: aquamarine;
     text-align: center;
-    font-size: $mainFontSize;
-
+    font-size: $fontSizedDynamicBig;
+    border: $borderMain;
 }
 .productBlockMainBlock__info_cardTitle {
     margin: 0;
     border-radius: $smallBorderRadius;
     text-align: center;
     background-color: bisque;
+    font-size: $fontSizedDynamicBig;
+}
+
+.productBlockMainBlock__cardData {
+    margin: auto 10px;
 }
 
 .productBlockMainBlock__price {
@@ -105,7 +124,7 @@
     width: 15vw;
     height: 5vh;
     margin-bottom: 1vh;
-    font-size: $mainFontSize;
+    font-size: $fontSizedDynamicBig;
     font-family: $mainFontFamily;
     background-color: antiquewhite;
     border-radius: $mainBorderRadius;

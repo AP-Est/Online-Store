@@ -25,6 +25,7 @@ export class DetailPageView extends View {
     productBlockInfoCard: HTMLElement | undefined;
     productBlockMainBlockInfoCardTitle: HTMLElement | undefined;
     productBlockInfoCardData: HTMLElement | undefined;
+    productBlockPicturesExemplarPic: HTMLImageElement | undefined;
 
     constructor() {
         super();
@@ -39,9 +40,14 @@ export class DetailPageView extends View {
         this.productBlockPictures = createElement('div', 'productBlockMainBlock__pictures');
         this.picArray = [...storeData.products[cardNumber - 1].images];
         for (let i = 0; i < this.picArray.length; i++) {
-            this.productBlockPicturesExemplar = createElement('div', 'productBlockMainBlock__pictures_pic' + i);
+            this.productBlockPicturesExemplar = createElement('container', 'productBlockMainBlock__pictures_pic' + i);
+            this.productBlockPicturesExemplarPic = createElement(
+                'img',
+                'productBlockMainBlock__pictures_pic' + i
+            ) as HTMLImageElement;
+            this.productBlockPicturesExemplarPic.src = `${this.picArray[i]}`;
+            this.productBlockPicturesExemplar.append(this.productBlockPicturesExemplarPic);
             this.productBlockPicturesExemplar.classList.add('pictures_pic');
-            this.productBlockPicturesExemplar.style.backgroundImage = `url(${this.picArray[i]})`;
             this.productBlockPicturesExemplar.addEventListener(
                 'click',
                 () => (this.productBlockPreviewPic.style.backgroundImage = `url(${this.picArray[i]})`)
