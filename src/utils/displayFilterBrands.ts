@@ -1,5 +1,5 @@
 import createElement from './createElement';
-import filterArray from './filterArray';
+//import filterArray from './filterArray';
 import { IFilterData, IProduct } from '../data/data';
 
 export default function displayFilterBrands(products: IProduct[], filter: IFilterData) {
