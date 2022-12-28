@@ -131,20 +131,19 @@ export class MainPageView extends View {
     }
 
     bindAddBrand(handler: (brand: string) => void) {
-        // обработчик удаления бренда
+        // обработчик выбора нового  бренда
 
         this.modelFilter2.addEventListener('change', (event) => {
             const target = event.target as HTMLElement;
             if (target.classList.contains('checkBoxStyle')) {
                 const category = target.nextElementSibling?.textContent as string;
-                console.log(category);
                 handler(category);
             }
         });
         handler('brand');
     }
     bindRemoveBrand(handler: (brand: string) => void) {
-        // обработчик выбора нового бренда
+        // обработчик удаления бренда
 
         // this.category.addEventListener('change', event => {
         //     if (event.target.type === 'checkbox') {
