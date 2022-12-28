@@ -18,7 +18,7 @@ export class DetailPageView extends View {
     productBlockPrice: HTMLElement;
     productBlockPriceText: HTMLElement;
     productBlockPriceButtonAdd: HTMLButtonElement;
-    //productBlockPriceButtonDel: HTMLButtonElement;
+    productBlockPriceButtonDel: HTMLButtonElement;
     productBlockPriceButtonBuyNow: HTMLButtonElement;
     picArray: string[];
     productBlockPicturesExemplar: HTMLElement | undefined;
@@ -27,7 +27,6 @@ export class DetailPageView extends View {
     productBlockMainBlockInfoCardTitle: HTMLElement | undefined;
     productBlockInfoCardData: HTMLElement | undefined;
     productBlockPicturesExemplarPic: HTMLImageElement | undefined;
-    productBlockPriceButtonDel: any;
 
     constructor() {
         super();
