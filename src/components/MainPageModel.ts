@@ -18,10 +18,14 @@ export class MainPageModel {
         };
     }
 
+    bindTodoListChanged(callback: any) {
+        this.displayMainPage = callback;
+    }
+
     removeCategory(category: string) {
         this.filter.categories = this.filter.categories.filter((cur) => cur !== category);
         this.products = this.getProductsToShow(this.products, this.filter);
-        //this.displayMainPage(this.products, this.filter, 0, 0);
+        this.displayMainPage(this.products, this.filter, 0, 0);
     }
 
     addCategory(category: string) {
@@ -119,9 +123,5 @@ export class MainPageModel {
             filter.minStock,
             filter.maxStock
         );
-    }
-
-    bindTodoListChanged(callback: any) {
-        //this.displayMainPage = callback;
     }
 }
