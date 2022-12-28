@@ -18,15 +18,15 @@ export class ControllerMainPage {
         this.view.bindChangeMaxPrice(this.handleChangeMaxPrice);
         this.view.bindChangeMinStock(this.handleChangeMinStock);
         this.view.bindChangeMaxStock(this.handleChangeMaxStock);
-        this.displayMainPage(this.model.products, this.model.filter, 0, 0); //TODO 0, 0 временно, далее доработать логику и заменить переменными
-        this.model.bindTodoListChanged(this.displayMainPage);
+        this.onChangeModel(this.model.products, this.model.filter, 0, 0); //TODO 0, 0 временно, далее доработать логику и заменить переменными
+        this.model.bindChangeModel(this.onChangeModel);
     }
 
     handleAddDetailAddress = (cardNumber: number) => {
         window.location.hash = `details/${cardNumber + 1}`;
     };
 
-    displayMainPage = (products: IProduct[], filter: IFilterData, totalCost: number, numProducts: number) => {
+    onChangeModel = (products: IProduct[], filter: IFilterData, totalCost: number, numProducts: number) => {
         this.view.renderPage(products, this.model.getProductsToShow(products, filter), filter, totalCost, numProducts);
     };
 

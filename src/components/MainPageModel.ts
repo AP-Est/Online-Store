@@ -3,6 +3,7 @@ import { storeData, IProduct, IFilterData } from '../data/data';
 export class MainPageModel {
     products: IProduct[];
     filter: IFilterData;
+    onChangeModel: any;
 
     constructor() {
         this.products = storeData.products;
@@ -18,49 +19,48 @@ export class MainPageModel {
         };
     }
 
-    bindTodoListChanged(callback: any) {
-        this.displayMainPage = callback;
+    bindChangeModel(callback: any) {
+        this.onChangeModel = callback;
     }
 
     removeCategory(category: string) {
         this.filter.categories = this.filter.categories.filter((cur) => cur !== category);
-        this.products = this.getProductsToShow(this.products, this.filter);
-        this.displayMainPage(this.products, this.filter, 0, 0);
+        this.onChangeModel(this.products, this.filter, 0, 0);
     }
 
     addCategory(category: string) {
         this.filter.categories.push(category);
-        this.products = this.getProductsToShow(this.products, this.filter);
+        this.onChangeModel(this.products, this.filter, 0, 0);
     }
 
     removeBrand(brand: string) {
         this.filter.brands = this.filter.brands.filter((cur) => cur !== brand);
-        this.products = this.getProductsToShow(this.products, this.filter);
+        this.onChangeModel(this.products, this.filter, 0, 0);
     }
 
     addBrand(brand: string) {
         this.filter.brands.push(brand);
-        this.products = this.getProductsToShow(this.products, this.filter);
+        this.onChangeModel(this.products, this.filter, 0, 0);
     }
 
     changeMinPrice(minPrice: number) {
         this.filter.minPrice = minPrice;
-        this.products = this.getProductsToShow(this.products, this.filter);
+        this.onChangeModel(this.products, this.filter, 0, 0);
     }
 
     changeMaxPrice(maxPrice: number) {
         this.filter.maxPrice = maxPrice;
-        this.products = this.getProductsToShow(this.products, this.filter);
+        this.onChangeModel(this.products, this.filter, 0, 0);
     }
 
     changeMinStock(minStock: number) {
         this.filter.minStock = minStock;
-        this.products = this.getProductsToShow(this.products, this.filter);
+        this.onChangeModel(this.products, this.filter, 0, 0);
     }
 
     changeMaxStock(maxStock: number) {
         this.filter.maxStock = maxStock;
-        this.products = this.getProductsToShow(this.products, this.filter);
+        this.onChangeModel(this.products, this.filter, 0, 0);
     }
 
     // filter products
