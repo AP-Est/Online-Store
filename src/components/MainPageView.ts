@@ -130,7 +130,7 @@ export class MainPageView extends View {
         handler('category');
     }
 
-    bindRemoveBrand(handler: (brand: string) => void) {
+    bindAddBrand(handler: (brand: string) => void) {
         // обработчик удаления бренда
 
         this.modelFilter2.addEventListener('change', (event) => {
@@ -143,8 +143,7 @@ export class MainPageView extends View {
         });
         handler('brand');
     }
-
-    bindAddBrand(handler: (brand: string) => void) {
+    bindRemoveBrand(handler: (brand: string) => void) {
         // обработчик выбора нового бренда
 
         // this.category.addEventListener('change', event => {
