@@ -1,6 +1,6 @@
 import '../styles/styleBase.scss';
-import getElement from '../modules/getElement';
-import createElement from '../modules/createElement';
+import getElement from '../utils/getElement';
+import createElement from '../utils/createElement';
 export class View {
     app: HTMLElement;
     header: HTMLElement;
