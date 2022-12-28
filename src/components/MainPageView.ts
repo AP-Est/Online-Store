@@ -34,7 +34,7 @@ export class MainPageView extends View {
         super();
         //TODO: как будет проброс данных по фильтрам - следующий блок нужно убратьб пока можно тестить так
         this.tempfilter = {
-            categories: ['laptops'],
+            categories: ['laptops', 'skincare'],
             brands: [],
             minPrice: null,
             maxPrice: null,
@@ -49,6 +49,7 @@ export class MainPageView extends View {
         this.filtersButtonReset = createButton('Reset', 'filters__button_reset');
         this.filtersButtonCopy = createButton('Copy', 'filters__button_copy');
         this.modelFilter1 = displayFilterCategory(storeData.products, this.tempfilter) as HTMLElement; // TODo сюда прокинуть продукты и массив с фильтрами категорий
+        //this.modelFilter1 = this.renderFilters(storeData.products, this.tempfilter) as HTMLElement;
         this.modelFilter2 = displayFilterBrands() as HTMLElement;
 
         this.modelFilter3 = createElement('div', 'modelFilter');
@@ -240,6 +241,9 @@ export class MainPageView extends View {
 
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     renderFilters(products: IProduct[], filter: IFilterData) {}
+    // renderFilters(products: IProduct[], filter: IFilterData) {
+    //     displayFilterCategory(products, filter);
+    // }
 
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     renderProductCards(products: IProduct[]) {}
