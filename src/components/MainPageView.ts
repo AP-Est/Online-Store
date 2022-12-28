@@ -34,8 +34,8 @@ export class MainPageView extends View {
         super();
         //TODO: как будет проброс данных по фильтрам - следующий блок нужно убратьб пока можно тестить так
         this.tempfilter = {
-            categories: ['laptops', 'skincare'],
-            brands: [],
+            categories: ['laptops', 'tops'],
+            brands: ['HP Pavilion'],
             minPrice: null,
             maxPrice: null,
             minStock: null,
@@ -50,7 +50,7 @@ export class MainPageView extends View {
         this.filtersButtonCopy = createButton('Copy', 'filters__button_copy');
         this.modelFilter1 = displayFilterCategory(storeData.products, this.tempfilter) as HTMLElement; // TODo сюда прокинуть продукты и массив с фильтрами категорий
         //this.modelFilter1 = this.renderFilters(storeData.products, this.tempfilter) as HTMLElement;
-        this.modelFilter2 = displayFilterBrands() as HTMLElement;
+        this.modelFilter2 = displayFilterBrands(storeData.products, this.tempfilter) as HTMLElement; // TODo сюда прокинуть продукты и массив с фильтрами категорий
 
         this.modelFilter3 = createElement('div', 'modelFilter');
         this.modelFilter3Name = createElement('div', 'modelFilter__name');
@@ -157,16 +157,13 @@ export class MainPageView extends View {
     }
 
     bindAddBrand(handler: (brand: string) => void) {
-        // обработчик выбора нового бренда
-
-        // this.category.addEventListener('change', event => {
-        //     if (event.target.type === 'checkbox') {
-        //         const category = ;
-
-        //         handler(category);
-        //     }
-        // })
-        handler('brand');
+        this.modelFilter2.addEventListener('change', (event) => {
+            const target = event.target as HTMLElement;
+            if (target.classList.contains('checkBoxStyle')) {
+                const category = target.nextElementSibling?.textContent as string;
+                handler(category);
+            }
+        });
     }
 
     bindChangeMinPrice(handler: (minPrice: number) => void) {
