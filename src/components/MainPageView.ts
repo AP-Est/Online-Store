@@ -230,7 +230,7 @@ export class MainPageView extends View {
     ) {
         //отрисовка MainPage
 
-        //this.modelFilter1 = cteateFilterCategory(storeData.products, this.tempfilter) as HTMLElement; 
+        //this.modelFilter1 = cteateFilterCategory(storeData.products, this.tempfilter) as HTMLElement;
 
         this.renderHeader(totalCost, numProducts);
         this.renderFilters(products, filter);
