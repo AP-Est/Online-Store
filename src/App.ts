@@ -3,10 +3,12 @@ import { MainPageModel } from './components/MainPageModel';
 import { DetailPageView } from './components/DetailPageView';
 import { ControllerMainPage } from './components/MainPageController';
 import { ControllerDetailPage } from './components/DetailPageController';
+import { ControllerCartPage } from './components/CartPageController';
+//import { CartPageView } from './components/CartPageView';
 
 export class App {
-    view: MainPageView | DetailPageView | undefined;
-    controller: ControllerMainPage | ControllerDetailPage | undefined;
+    view: MainPageView | DetailPageView | CartPageView | undefined;
+    controller: ControllerMainPage | ControllerDetailPage | ControllerCartPage | undefined;
     model: MainPageModel | undefined;
 
     init() {
@@ -23,6 +25,11 @@ export class App {
                 this.controller = new ControllerDetailPage(this.view);
                 console.log('Detail');
                 break;
+            // case 'cart':
+            //     this.view = new CartPageView();
+            //     this.controller = new ControllerCartPage(this.view);
+            //     console.log('Cart');
+            //     break;
             default:
                 this.view = new MainPageView();
                 this.model = new MainPageModel();
