@@ -7,6 +7,9 @@ export class ControllerMainPage {
     model: MainPageModel;
 
     constructor(view: MainPageView, model: MainPageModel) {
+        console.log('constructor controller');
+        // console.log(`test ${this.onChangeModel}`);
+        // console.log(this);
         this.view = view;
         this.model = model;
         this.view.bindAddDetailAddress(this.handleAddDetailAddress);
@@ -31,6 +34,8 @@ export class ControllerMainPage {
     };
 
     handleRemoveCategory = (category: string) => {
+        console.log('model:');
+        console.log(this.model);
         this.model.removeCategory(category);
     };
 

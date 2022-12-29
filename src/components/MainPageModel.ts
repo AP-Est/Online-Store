@@ -19,13 +19,20 @@ export class MainPageModel {
         };
     }
 
-    bindChangeModel(callback: any) {
-        this.onChangeModel = callback;
-    }
-
     removeCategory(category: string) {
         this.filter.categories = this.filter.categories.filter((cur) => cur !== category);
+        console.log('removeCategory');
+        console.log(this.onChangeModel);
         this.onChangeModel(this.products, this.filter, 0, 0);
+    }
+
+    bindChangeModel(
+        callback: (products: IProduct[], filter: IFilterData, totalCost: number, numProducts: number) => void
+    ) {
+        //console.log('bindChangeModel');
+        //console.log(callback);
+        this.onChangeModel = callback;
+        //console.log('bindChangeModel');
     }
 
     addCategory(category: string) {

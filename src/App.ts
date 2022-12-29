@@ -19,11 +19,13 @@ export class App {
         console.log(path[0]);
         switch (path[0]) {
             case 'details':
+                console.log('Detail');
                 this.view = new DetailPageView();
                 this.controller = new ControllerDetailPage(this.view);
                 console.log('Detail');
                 break;
             default:
+                console.log('Main');
                 this.view = new MainPageView();
                 this.model = new MainPageModel();
                 this.controller = new ControllerMainPage(this.view, this.model);
