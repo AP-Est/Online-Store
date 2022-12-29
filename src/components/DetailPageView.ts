@@ -4,6 +4,8 @@ import { View } from './BaseView';
 import createButton from '../utils/createButton';
 import createElement from '../utils/createElement';
 import pushToLocalStorage from '../utils/pushToLocalStorage';
+import delFromLocalStorage from '../utils/delFromLocalStorage';
+import checkLocalStorage from '../utils/checkLocalstorage';
 
 export class DetailPageView extends View {
     //app: HTMLElement | undefined;
@@ -72,7 +74,17 @@ export class DetailPageView extends View {
             this.productBlockPriceButtonAdd.style.display = 'none';
         });
         this.productBlockPriceButtonDel.style.display = 'none';
+        this.productBlockPriceButtonDel.addEventListener('click', () => {
+            delFromLocalStorage(cardNumber);
+            this.productBlockPriceButtonDel.style.display = 'none';
+            this.productBlockPriceButtonAdd.style.display = 'block';
+        });
         this.productBlockPriceButtonBuyNow = createButton('Buy now', 'productBlockMainBlock__price_buttonBuyNow');
+
+        if (checkLocalStorage(cardNumber)) {
+            this.productBlockPriceButtonDel.style.display = 'block';
+            this.productBlockPriceButtonAdd.style.display = 'none';
+        }
 
         // собираем страницу
 
