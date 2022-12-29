@@ -49,6 +49,7 @@ export class MainPageView extends View {
         this.filtersButtonReset = createButton('Reset', 'filters__button_reset');
         this.filtersButtonCopy = createButton('Copy', 'filters__button_copy');
         this.modelFilter1 = displayFilterCategory(storeData.products, this.tempfilter) as HTMLElement; // TODo сюда прокинуть продукты и массив с фильтрами категорий
+        //this.modelFilter1 = this.renderFilters(storeData.products, this.tempfilter) as HTMLElement;
         this.modelFilter2 = displayFilterBrands(storeData.products, this.tempfilter) as HTMLElement; // TODo сюда прокинуть продукты и массив с фильтрами категорий
 
         this.modelFilter3 = createElement('div', 'modelFilter');
@@ -129,19 +130,19 @@ export class MainPageView extends View {
         });
         handler('category');
     }
+    // bindAddCategory(handler: (category: string) => void) {
+    //     // обработчик выбора новой категории
 
-    bindAddBrand(handler: (brand: string) => void) {
-        // обработчик выбора нового  бренда
+    //     this.category.addEventListener('change', event => {
+    //         if (event.target.type === 'checkbox') {
+    //             const category = ;
 
-        this.modelFilter2.addEventListener('change', (event) => {
-            const target = event.target as HTMLElement;
-            if (target.classList.contains('checkBoxStyle')) {
-                const category = target.nextElementSibling?.textContent as string;
-                handler(category);
-            }
-        });
-        handler('brand');
-    }
+    //             handler(category);
+    //         }
+    //     })
+    //     handler('category');
+    // }
+
     bindRemoveBrand(handler: (brand: string) => void) {
         // обработчик удаления бренда
 
@@ -153,6 +154,16 @@ export class MainPageView extends View {
         //     }
         // })
         handler('brand');
+    }
+
+    bindAddBrand(handler: (brand: string) => void) {
+        this.modelFilter2.addEventListener('change', (event) => {
+            const target = event.target as HTMLElement;
+            if (target.classList.contains('checkBoxStyle')) {
+                const category = target.nextElementSibling?.textContent as string;
+                handler(category);
+            }
+        });
     }
 
     bindChangeMinPrice(handler: (minPrice: number) => void) {
@@ -216,6 +227,8 @@ export class MainPageView extends View {
     ) {
         //отрисовка MainPage
 
+        //this.modelFilter1 = cteateFilterCategory(storeData.products, this.tempfilter) as HTMLElement;
+
         this.renderHeader(totalCost, numProducts);
         this.renderFilters(products, filter);
         this.renderProductCards(productsFiltered);
@@ -227,6 +240,9 @@ export class MainPageView extends View {
 
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     renderFilters(products: IProduct[], filter: IFilterData) {}
+    // renderFilters(products: IProduct[], filter: IFilterData) {
+    //     displayFilterCategory(products, filter);
+    // }
 
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     renderProductCards(products: IProduct[]) {}
