@@ -25,6 +25,7 @@ export class View {
         this.headerTotalCost = createElement('span', 'header__totalCost');
         this.headerTotalCost.textContent = 'Total cost: # $';
         this.headerCart = createElement('div', 'header__cart');
+        this.headerCart.addEventListener('click', () => (window.location.hash = 'cart/'));
         this.headerCartLink = this.createLinkElement('//link', 'header__cart_link');
         this.headerCartLink.innerHTML = '🛒';
         this.main = createElement('main');
