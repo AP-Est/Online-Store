@@ -1,4 +1,4 @@
-import { CartPageView } from 'cartPageView';
+import { CartPageView } from 'CartPageView';
 
 export class ControllerCartPage {
     view: CartPageView;

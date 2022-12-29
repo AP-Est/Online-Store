@@ -1,10 +1,5 @@
 import { storeData } from '../data/data';
-
-interface ICartLots {
-    id: number;
-    count: number;
-    price: number;
-}
+import { ICartLots } from '../styles/types';
 
 export default function pushToLocalStorage(id: number) {
     const storageObject: ICartLots = {
