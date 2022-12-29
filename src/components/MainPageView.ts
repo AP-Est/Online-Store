@@ -4,6 +4,7 @@ import { View } from './BaseView';
 import createElement from '../utils/createElement';
 import displayFilterCategory from '../utils/displayFilterCategory';
 import displayFilterBrands from '../utils/displayFilterBrands';
+import displaySliderPrice from '../utils/displaySliderPrice';
 import createButton from '../utils/createButton';
 //import { ControllerMainPage } from 'MainPageController';
 
@@ -17,9 +18,9 @@ export class MainPageView extends View {
     modelFilter1: HTMLElement;
     modelFilter2: HTMLElement;
     modelFilter3: HTMLElement;
-    modelFilter3Name: HTMLElement;
-    modelFilter3Main: HTMLElement;
-    modelFilter3Text: HTMLElement;
+    // modelFilter3Name: HTMLElement;
+    // modelFilter3Main: HTMLElement;
+    // modelFilter3Text: HTMLElement;
     modelFilter4: HTMLElement;
     modelFilter4Name: HTMLElement;
     modelFilter4Main: HTMLElement;
@@ -34,8 +35,8 @@ export class MainPageView extends View {
         super();
         //TODO: как будет проброс данных по фильтрам - следующий блок нужно убратьб пока можно тестить так
         this.tempfilter = {
-            categories: ['laptops', 'tops'],
-            brands: ['HP Pavilion'],
+            categories: [],
+            brands: [],
             minPrice: null,
             maxPrice: null,
             minStock: null,
@@ -49,14 +50,13 @@ export class MainPageView extends View {
         this.filtersButtonReset = createButton('Reset', 'filters__button_reset');
         this.filtersButtonCopy = createButton('Copy', 'filters__button_copy');
         this.modelFilter1 = displayFilterCategory(storeData.products, this.tempfilter) as HTMLElement; // TODo сюда прокинуть продукты и массив с фильтрами категорий
-        //this.modelFilter1 = this.renderFilters(storeData.products, this.tempfilter) as HTMLElement;
         this.modelFilter2 = displayFilterBrands(storeData.products, this.tempfilter) as HTMLElement; // TODo сюда прокинуть продукты и массив с фильтрами категорий
 
-        this.modelFilter3 = createElement('div', 'modelFilter');
-        this.modelFilter3Name = createElement('div', 'modelFilter__name');
-        this.modelFilter3Text = createElement('p', 'modelFilter__text');
-        this.modelFilter3Text.textContent = 'Price';
-        this.modelFilter3Main = createElement('div', 'modelFilter__main');
+        this.modelFilter3 = displaySliderPrice(storeData.products, this.tempfilter) as HTMLElement;
+        // this.modelFilter3Name = createElement('div', 'modelFilter__name');
+        // this.modelFilter3Text = createElement('p', 'modelFilter__text');
+        // this.modelFilter3Text.textContent = 'Price';
+        // this.modelFilter3Main = createElement('div', 'modelFilter__main');
 
         this.modelFilter4 = createElement('div', 'modelFilter');
         this.modelFilter4Name = createElement('div', 'modelFilter__name');
@@ -79,9 +79,9 @@ export class MainPageView extends View {
 
         // собираем страницу
         this.filtersButtonWrapper.append(this.filtersButtonReset, this.filtersButtonCopy);
-        this.modelFilter3Name.append(this.modelFilter3Text);
+        //this.modelFilter3Name.append(this.modelFilter3Text);
         this.modelFilter4Name.append(this.modelFilter4Text);
-        this.modelFilter3.append(this.modelFilter3Name, this.modelFilter3Main);
+        //this.modelFilter3.append(this.modelFilter3Name, this.modelFilter3Main);
         this.modelFilter4.append(this.modelFilter4Name, this.modelFilter4Main);
         this.filtersWrapper.append(
             this.filtersButtonWrapper,
@@ -115,6 +115,7 @@ export class MainPageView extends View {
         //         handler(category);
         //     }
         // })
+        console.log(handler);
         handler('category');
     }
 
@@ -128,7 +129,7 @@ export class MainPageView extends View {
                 handler(category);
             }
         });
-        handler('category');
+        //handler('category');
     }
     // bindAddCategory(handler: (category: string) => void) {
     //     // обработчик выбора новой категории
@@ -162,6 +163,7 @@ export class MainPageView extends View {
             if (target.classList.contains('checkBoxStyle')) {
                 const category = target.nextElementSibling?.textContent as string;
                 handler(category);
+                console.log(`bindAddBrand category: ${category}`);
             }
         });
     }
@@ -226,27 +228,12 @@ export class MainPageView extends View {
         numProducts: number
     ) {
         //отрисовка MainPage
-
         //this.modelFilter1 = cteateFilterCategory(storeData.products, this.tempfilter) as HTMLElement;
-
-        this.renderHeader(totalCost, numProducts);
-        this.renderFilters(products, filter);
-        this.renderProductCards(productsFiltered);
-        this.renderFooter();
+        // this.renderHeader(totalCost, numProducts);
+        // this.renderFilters(products, filter);
+        // this.renderProductCards(productsFiltered);
+        // this.renderFooter();
+        this.modelFilter1 = displayFilterCategory(products, filter) as HTMLElement; // TODo сюда прокинуть продукты и массив с фильтрами категорий
+        this.modelFilter2 = displayFilterBrands(products, filter) as HTMLElement;
     }
-
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    renderHeader(totalCost: number, numProducts: number) {}
-
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    renderFilters(products: IProduct[], filter: IFilterData) {}
-    // renderFilters(products: IProduct[], filter: IFilterData) {
-    //     displayFilterCategory(products, filter);
-    // }
-
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    renderProductCards(products: IProduct[]) {}
-
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    renderFooter() {}
 }
