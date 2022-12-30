@@ -40,7 +40,7 @@ export class CartPageView extends View {
     constructor() {
         super();
         NotANull();
-        //let cartArray: ICartLot[] = ()
+        //let cartLots: ICartLot[] = ()
         this.createMainCartWrappers();
         this.createCartProductBlockBodyHeaderElements();
         this.createSummaryCartElements();
@@ -74,8 +74,8 @@ export class CartPageView extends View {
     }
     createCartProductBlockBodyMainElements() {
         this.productBlockBody = createElement('div', 'cartProductBlock__body');
-        const cartArray: ICartLot[] = getCartItems();
-        this.createItemsBlock(cartArray);
+        const cartLots: ICartLot[] = getCartItems();
+        this.createItemsBlock(cartLots);
     }
     bindFlagOfPushIncrement(handler: (productId: number) => void) {
         this.itemCardCountCounterP.addEventListener('click', (event) => {
@@ -97,15 +97,15 @@ export class CartPageView extends View {
     }
 
     displayItemBlock() {
-        let cartArray: ICartLot[] = getCartItems();
+        let cartLots: ICartLot[] = getCartItems();
         this.productBlockBody.remove();
         this.productBlockBody = createElement('div', 'cartProductBlock__body');
-        cartArray = getCartItems();
-        this.createItemsBlock(cartArray);
+        cartLots = getCartItems();
+        this.createItemsBlock(cartLots);
         this.productBlock.append(this.productBlockBody);
     }
-    createItemsBlock(cartArray: ICartLot[]) {
-        cartArray.forEach((el, index) => {
+    createItemsBlock(cartLots: ICartLot[]) {
+        cartLots.forEach((el, index) => {
             if (el != null) {
                 this.cartLotCard = createElement('div', 'cart__lot');
                 const cartItem = this.getDataById(el.id);

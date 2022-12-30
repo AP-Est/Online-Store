@@ -3,11 +3,8 @@ import { IProduct, storeData } from '../data/data';
 import { View } from './BaseView';
 import createButton from '../utils/createButton';
 import createElement from '../utils/createElement';
-import pushToLocalStorage from '../utils/pushToLocalStorage';
 import getCartItems from '../utils/getCartItems';
 import { ICartLot } from '../styles/types';
-import cardItemIncrement from '../utils/cardItemIncrement';
-import cardItemDecrement from '../utils/cardItemDecrement';
 import NotANull from '../utils/notANull';
 
 export class CartPageView extends View {
@@ -37,20 +34,20 @@ export class CartPageView extends View {
     itemCardPicExemplarPic!: HTMLImageElement;
     itemCardDataR!: HTMLElement;
     itemCardDataD!: HTMLElement;
-    //cartArray: ICartLot[] = [];
+    //cartLots: ICartLot[] = [];
     constructor() {
         super();
         NotANull();
-        const cartArray: ICartLot[] = getCartItems();
+        const cartLots: ICartLot[] = getCartItems();
         const product: IProduct[] = storeData.products;
-        this.displayCartPage(cartArray, product);
+        this.displayCartPage(cartLots, product);
     }
     //TODO TEЛO
 
-    displayCartPage(cartArray: ICartLot[], product: IProduct[]) {
+    displayCartPage(cartLots: ICartLot[], product: IProduct[]) {
         this.createMainCartWrappers();
         this.createCartProductBlockBodyHeaderElements();
-        this.createCartProductBlockBodyMainElements(cartArray, product);
+        this.createCartProductBlockBodyMainElements(cartLots, product);
         this.buildCartPage();
     }
     getDataById(id: number, product: IProduct[]) {
@@ -92,22 +89,22 @@ export class CartPageView extends View {
         this.productBlockHeaderTitle = createElement('span', 'cartProductBlock__header_title');
         //TODO сюда добавить плагинацию
     }
-    createCartProductBlockBodyMainElements(cartArray: ICartLot[], product: IProduct[]) {
+    createCartProductBlockBodyMainElements(cartLots: ICartLot[], product: IProduct[]) {
         this.productBlockBody = createElement('div', 'cartProductBlock__body');
-        this.createItemsBlock(cartArray, product);
+        this.createItemsBlock(cartLots, product);
     }
     createSummaryCartElements() {
         this.summaryBlockTitle = createElement('div', 'cartSummaryBlock__title');
         this.summaryBlockBody = createElement('div', 'cartSummaryBlock__body');
     }
-    // displayItemBlock(cartArray: ICartLot[], product: IProduct[]) {
+    // displayItemBlock(cartLots: ICartLot[], product: IProduct[]) {
     //     this.productBlockBody.remove();
     //     this.productBlockBody = createElement('div', 'cartProductBlock__body');
-    //     this.createItemsBlock(cartArray, product);
+    //     this.createItemsBlock(cartLots, product);
     //     this.productBlock.append(this.productBlockBody);
     // }
-    createItemsBlock(cartArray: ICartLot[], product: IProduct[]) {
-        cartArray.forEach((el, index) => {
+    createItemsBlock(cartLots: ICartLot[], product: IProduct[]) {
+        cartLots.forEach((el, index) => {
             if (el != null) {
                 this.cartLotCard = createElement('div', 'cart__lot');
                 const cartItem = this.getDataById(el.id, product);
