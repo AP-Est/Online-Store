@@ -15,7 +15,7 @@ export class ControllerCartPage {
         this.view.bindFlagOfPushDecrement(this.handleCardItemDecrement);
         this.model.bindChangeModel(this.onChangeModel);
 
-        this.onChangeModel(this.model.cartLots, this.model.products);
+        //this.onChangeModel(this.model.cartLots, this.model.products);
     }
 
     handleCardItemIncrement = (productId: number) => {

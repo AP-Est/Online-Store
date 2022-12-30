@@ -107,12 +107,12 @@ export class CartPageView extends View {
     createItemsBlock(cartArray: ICartLot[]) {
         cartArray.forEach((el, index) => {
             if (el != null) {
-                this.cartLot = createElement('div', 'cart__lot');
+                this.cartLotCard = createElement('div', 'cart__lot');
                 const cartItem = this.getDataById(el.id);
                 if (cartItem) {
                     this.createItemCard(cartItem, el.count, index);
                 }
-                this.productBlockBody.append(this.cartLot);
+                this.productBlockBody.append(this.cartLotCard);
             }
         });
     }
@@ -164,6 +164,6 @@ export class CartPageView extends View {
         this.itemCardCountPrice.innerText = `${product.price}$`;
         this.itemCardCount.append(this.itemCardCountStock, this.itemCardCountCounter, this.itemCardCountPrice);
 
-        this.cartLot?.append(this.itemCardNum, this.itemCardPic, this.itemCardData, this.itemCardCount);
+        this.cartLotCard?.append(this.itemCardNum, this.itemCardPic, this.itemCardData, this.itemCardCount);
     }
 }
