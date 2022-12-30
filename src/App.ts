@@ -25,11 +25,11 @@ export class App {
                 console.log('Detail');
                 break;
             default:
-                console.log('Main');
+                //console.log('Main');
                 this.view = new MainPageView();
                 this.model = new MainPageModel();
                 this.controller = new ControllerMainPage(this.view, this.model);
-                console.log('Main');
+                //console.log('Main');
                 break;
         }
     };

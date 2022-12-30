@@ -22,9 +22,9 @@ export class MainPageView extends View {
     // modelFilter3Main: HTMLElement;
     // modelFilter3Text: HTMLElement;
     modelFilter4: HTMLElement;
-    modelFilter4Name: HTMLElement;
-    modelFilter4Main: HTMLElement;
-    modelFilter4Text: HTMLElement;
+    //modelFilter4Name: HTMLElement;
+    //modelFilter4Main: HTMLElement;
+    //modelFilter4Text: HTMLElement;
     cardDiv: Array<HTMLElement>;
     filtersButtonReset: HTMLButtonElement;
     filtersButtonCopy: HTMLButtonElement;
@@ -44,25 +44,19 @@ export class MainPageView extends View {
             search: '',
             sort: '',
         };
+
         this.filters = createElement('div', 'filters');
         this.filtersWrapper = createElement('div', 'filters__wrapper');
         this.filtersButtonWrapper = createElement('div', 'filtersButton__wrapper');
         this.filtersButtonReset = createButton('Reset', 'filters__button_reset');
         this.filtersButtonCopy = createButton('Copy', 'filters__button_copy');
         this.modelFilter1 = displayFilterCategory(storeData.products, this.tempfilter) as HTMLElement; // TODo сюда прокинуть продукты и массив с фильтрами категорий
+        //console.log(filter);
         this.modelFilter2 = displayFilterBrands(storeData.products, this.tempfilter) as HTMLElement; // TODo сюда прокинуть продукты и массив с фильтрами категорий
 
         this.modelFilter3 = displaySliderPrice(storeData.products, this.tempfilter) as HTMLElement;
-        // this.modelFilter3Name = createElement('div', 'modelFilter__name');
-        // this.modelFilter3Text = createElement('p', 'modelFilter__text');
-        // this.modelFilter3Text.textContent = 'Price';
-        // this.modelFilter3Main = createElement('div', 'modelFilter__main');
 
         this.modelFilter4 = createElement('div', 'modelFilter');
-        this.modelFilter4Name = createElement('div', 'modelFilter__name');
-        this.modelFilter4Text = createElement('p', 'modelFilter__text');
-        this.modelFilter4Text.textContent = 'Stock';
-        this.modelFilter4Main = createElement('div', 'modelFilter__main');
 
         this.goods = createElement('div', 'goods');
         this.top = createElement('div', 'top');
@@ -79,10 +73,6 @@ export class MainPageView extends View {
 
         // собираем страницу
         this.filtersButtonWrapper.append(this.filtersButtonReset, this.filtersButtonCopy);
-        //this.modelFilter3Name.append(this.modelFilter3Text);
-        this.modelFilter4Name.append(this.modelFilter4Text);
-        //this.modelFilter3.append(this.modelFilter3Name, this.modelFilter3Main);
-        this.modelFilter4.append(this.modelFilter4Name, this.modelFilter4Main);
         this.filtersWrapper.append(
             this.filtersButtonWrapper,
             this.modelFilter1,
@@ -105,31 +95,36 @@ export class MainPageView extends View {
         });
     }
 
-    bindRemoveCategory(handler: (category: string) => void) {
-        // обработчик удаления категории
-
-        // this.category.addEventListener('change', event => {
-        //     if (event.target.type === 'checkbox') {
-        //         const category = ;
-
-        //         handler(category);
-        //     }
-        // })
-        console.log(handler);
-        handler('category');
-    }
-
     bindAddCategory(handler: (category: string) => void) {
         // обработчик выбора новой категории
 
         this.modelFilter1.addEventListener('change', (event) => {
             const target = event.target as HTMLElement;
-            if (target.classList.contains('checkBoxStyle')) {
+            if (target.classList.contains('checkBoxStyle') && !target.classList.contains('checked')) {
+                console.log('target.classList bindAddCategory', target.classList);
                 const category = target.nextElementSibling?.textContent as string;
                 handler(category);
+                target.classList.add('checked');
+                event.stopPropagation();
+            }
+            //console.log('bindAddCategory modelFilter end:', this.modelFilter1);
+        });
+        // //console.log('bindAddCategory');
+    }
+
+    bindRemoveCategory(handler: (category: string) => void) {
+        //console.log(' bindRemoveCategory this.modelFilter1', this.modelFilter1);
+        this.modelFilter1.addEventListener('change', (event) => {
+            const target = event.target as HTMLInputElement;
+            if (target.classList.contains('checked')) {
+                console.log('bindRemoveCategory');
+                const category = target.nextElementSibling?.textContent as string;
+                handler(category);
+                target.classList.remove('checked');
+                console.log('target.classList bindRemoveCategory', target.classList);
+                event.stopPropagation();
             }
         });
-        //handler('category');
     }
     // bindAddCategory(handler: (category: string) => void) {
     //     // обработчик выбора новой категории
@@ -146,15 +141,13 @@ export class MainPageView extends View {
 
     bindRemoveBrand(handler: (brand: string) => void) {
         // обработчик удаления бренда
-
         // this.category.addEventListener('change', event => {
         //     if (event.target.type === 'checkbox') {
         //         const category = ;
-
         //         handler(category);
         //     }
         // })
-        handler('brand');
+        //handler('brand');
     }
 
     bindAddBrand(handler: (brand: string) => void) {
@@ -163,61 +156,53 @@ export class MainPageView extends View {
             if (target.classList.contains('checkBoxStyle')) {
                 const category = target.nextElementSibling?.textContent as string;
                 handler(category);
-                console.log(`bindAddBrand category: ${category}`);
+                //console.log(`bindAddBrand category: ${category}`);
             }
         });
     }
 
     bindChangeMinPrice(handler: (minPrice: number) => void) {
         // обработчик изменения минимальной цены
-
         // this.category.addEventListener('change', event => {
         //     if (event.target.type === 'checkbox') {
         //         const category = ;
-
         //         handler(category);
         //     }
         // })
-        handler(0);
+        //handler(0);
     }
 
     bindChangeMaxPrice(handler: (maxPrice: number) => void) {
         // обработчик изменения максимальной цены
-
         // this.category.addEventListener('change', event => {
         //     if (event.target.type === 'checkbox') {
         //         const category = ;
-
         //         handler(category);
         //     }
         // })
-        handler(0);
+        //handler(0);
     }
 
     bindChangeMinStock(handler: (minStock: number) => void) {
         // обработчик изменения минимального количества на складе
-
         // this.category.addEventListener('change', event => {
         //     if (event.target.type === 'checkbox') {
         //         const category = ;
-
         //         handler(category);
         //     }
         // })
-        handler(0);
+        //handler(0);
     }
 
     bindChangeMaxStock(handler: (maxStock: number) => void) {
         // обработчик изменения максимального количества на складе
-
         // this.category.addEventListener('change', event => {
         //     if (event.target.type === 'checkbox') {
         //         const category = ;
-
         //         handler(category);
         //     }
         // })
-        handler(0);
+        //handler(0);
     }
 
     renderPage(
@@ -228,12 +213,19 @@ export class MainPageView extends View {
         numProducts: number
     ) {
         //отрисовка MainPage
-        //this.modelFilter1 = cteateFilterCategory(storeData.products, this.tempfilter) as HTMLElement;
-        // this.renderHeader(totalCost, numProducts);
-        // this.renderFilters(products, filter);
-        // this.renderProductCards(productsFiltered);
-        // this.renderFooter();
-        this.modelFilter1 = displayFilterCategory(products, filter) as HTMLElement; // TODo сюда прокинуть продукты и массив с фильтрами категорий
-        this.modelFilter2 = displayFilterBrands(products, filter) as HTMLElement;
+
+        console.log('renderPage');
+
+        const filterCategoryChBox = document.querySelectorAll('.filterCategoryBox');
+        const filterCategoryChBoxLabel = document.querySelectorAll('.filterCategoryBoxLabel');
+        filterCategoryChBox.forEach((item, index) => {
+            // console.log(index);
+            const title = filterCategoryChBoxLabel[index].textContent as string;
+            if (filter.categories.includes(title)) {
+                (filterCategoryChBox[index] as HTMLInputElement).checked = true;
+                filterCategoryChBoxLabel[index].classList.add('checked');
+                //console.log(filterCategoryChBoxLabel);
+            }
+        });
     }
 }

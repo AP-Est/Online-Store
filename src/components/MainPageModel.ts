@@ -6,6 +6,9 @@ export class MainPageModel {
     onChangeModel: any;
 
     constructor() {
+        this.onChangeModel = () => {
+            return undefined;
+        };
         this.products = storeData.products;
         this.filter = {
             categories: [],
@@ -21,23 +24,16 @@ export class MainPageModel {
 
     removeCategory(category: string) {
         this.filter.categories = this.filter.categories.filter((cur) => cur !== category);
-        console.log('removeCategory');
-        console.log(this.onChangeModel);
+        //console.log('removeCategory');
+        //console.log(this.onChangeModel);
         this.onChangeModel(this.products, this.filter, 0, 0);
-    }
-
-    bindChangeModel(
-        callback: (products: IProduct[], filter: IFilterData, totalCost: number, numProducts: number) => void
-    ) {
-        //console.log('bindChangeModel');
-        //console.log(callback);
-        this.onChangeModel = callback;
-        //console.log('bindChangeModel');
+        console.log('remove category filter:', this.filter);
     }
 
     addCategory(category: string) {
         this.filter.categories.push(category);
         this.onChangeModel(this.products, this.filter, 0, 0);
+        console.log('add category filter:', this.filter);
     }
 
     removeBrand(brand: string) {
@@ -130,5 +126,11 @@ export class MainPageModel {
             filter.minStock,
             filter.maxStock
         );
+    }
+
+    bindChangeModel(
+        callback: (products: IProduct[], filter: IFilterData, totalCost: number, numProducts: number) => void
+    ) {
+        this.onChangeModel = callback;
     }
 }

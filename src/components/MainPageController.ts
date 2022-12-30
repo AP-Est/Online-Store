@@ -7,11 +7,13 @@ export class ControllerMainPage {
     model: MainPageModel;
 
     constructor(view: MainPageView, model: MainPageModel) {
-        console.log('constructor controller');
+        //console.log('constructor controller');
         // console.log(`test ${this.onChangeModel}`);
         // console.log(this);
         this.view = view;
         this.model = model;
+        this.onChangeModel(this.model.products, this.model.filter, 0, 0); //TODO 0, 0 временно, далее доработать логику и заменить переменными
+        this.model.bindChangeModel(this.onChangeModel);
         this.view.bindAddDetailAddress(this.handleAddDetailAddress);
         this.view.bindRemoveCategory(this.handleRemoveCategory);
         this.view.bindAddCategory(this.handleAddCategory);
@@ -21,8 +23,6 @@ export class ControllerMainPage {
         this.view.bindChangeMaxPrice(this.handleChangeMaxPrice);
         this.view.bindChangeMinStock(this.handleChangeMinStock);
         this.view.bindChangeMaxStock(this.handleChangeMaxStock);
-        this.onChangeModel(this.model.products, this.model.filter, 0, 0); //TODO 0, 0 временно, далее доработать логику и заменить переменными
-        this.model.bindChangeModel(this.onChangeModel);
     }
 
     handleAddDetailAddress = (cardNumber: number) => {
@@ -34,8 +34,8 @@ export class ControllerMainPage {
     };
 
     handleRemoveCategory = (category: string) => {
-        console.log('model:');
-        console.log(this.model);
+        //console.log('model:');
+        //console.log(this.model);
         this.model.removeCategory(category);
     };
 
