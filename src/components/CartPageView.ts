@@ -42,19 +42,19 @@ export class CartPageView extends View {
         super();
         NotANull();
         const cartArray: ICartLot[] = getCartItems();
-        this.createMainCartWrappers();
-        this.createCartProductBlockBodyHeaderElements();
-        this.createCartProductBlockBodyMainElements(cartArray);
-        // //TODO А тут живет прототип функции отрисовки и обновления данных
-        // this.mainWrapper.addEventListener('click', () => {
-        //     this.displayItemBlock(cartArray);
-        // });
-        //TODO собираем
-        this.buildCartPage();
+        const product: IProduct[] = storeData.products;
+        this.displayCartPage(cartArray, product);
     }
     //TODO TEЛO
-    getDataById(id: number) {
-        return storeData.products.filter((obj) => obj.id === id).shift();
+
+    displayCartPage(cartArray: ICartLot[], product: IProduct[]) {
+        this.createMainCartWrappers();
+        this.createCartProductBlockBodyHeaderElements();
+        this.createCartProductBlockBodyMainElements(cartArray, product);
+        this.buildCartPage();
+    }
+    getDataById(id: number, product: IProduct[]) {
+        return product.filter((obj) => obj.id === id).shift();
     }
 
     bindFlagOfPushIncrement(handler: (productId: number) => void) {
@@ -64,7 +64,6 @@ export class CartPageView extends View {
             if (target.classList.contains('itemCardCount__counterPlus')) {
                 const productId = Number(target.id);
                 handler(productId);
-                //this.displayItemBlock(this.cartArray);
             }
         });
     }
@@ -93,26 +92,25 @@ export class CartPageView extends View {
         this.productBlockHeaderTitle = createElement('span', 'cartProductBlock__header_title');
         //TODO сюда добавить плагинацию
     }
-    createCartProductBlockBodyMainElements(cartArray: ICartLot[]) {
+    createCartProductBlockBodyMainElements(cartArray: ICartLot[], product: IProduct[]) {
         this.productBlockBody = createElement('div', 'cartProductBlock__body');
-        this.createItemsBlock(cartArray);
+        this.createItemsBlock(cartArray, product);
     }
     createSummaryCartElements() {
         this.summaryBlockTitle = createElement('div', 'cartSummaryBlock__title');
         this.summaryBlockBody = createElement('div', 'cartSummaryBlock__body');
     }
-    displayItemBlock(cartArray: ICartLot[]) {
-        this.productBlockBody.remove();
-        this.productBlockBody = createElement('div', 'cartProductBlock__body');
-        cartArray = getCartItems();
-        this.createItemsBlock(cartArray);
-        this.productBlock.append(this.productBlockBody);
-    }
-    createItemsBlock(cartArray: ICartLot[]) {
+    // displayItemBlock(cartArray: ICartLot[], product: IProduct[]) {
+    //     this.productBlockBody.remove();
+    //     this.productBlockBody = createElement('div', 'cartProductBlock__body');
+    //     this.createItemsBlock(cartArray, product);
+    //     this.productBlock.append(this.productBlockBody);
+    // }
+    createItemsBlock(cartArray: ICartLot[], product: IProduct[]) {
         cartArray.forEach((el, index) => {
             if (el != null) {
                 this.cartLot = createElement('div', 'cart__lot');
-                const cartItem = this.getDataById(el.id);
+                const cartItem = this.getDataById(el.id, product);
                 if (cartItem) {
                     this.createItemCard(cartItem, el.count, index);
                 }
@@ -121,40 +119,40 @@ export class CartPageView extends View {
         });
     }
 
-    createItemCard(product: IProduct, count: number, numberID: number) {
+    createItemCard(cartItem: IProduct, count: number, numberID: number) {
         this.itemCardNum = createElement('div', `itemCardNum`);
         this.itemCardNum.innerText = `${numberID + 1}`; //TODO придумать как учесть плагинацию
         this.itemCardPic = createElement('div', `itemCardPic`);
         this.itemCardPic.classList.add('itemCardPic');
         this.itemCardPicExemplar = createElement('container', 'itemCardPic__Exemplar');
         this.itemCardPicExemplarPic = createElement('img', 'itemCardPic__Exemplar_Pic') as HTMLImageElement;
-        this.itemCardPicExemplarPic.src = `${product.thumbnail}`;
+        this.itemCardPicExemplarPic.src = `${cartItem.thumbnail}`;
         this.itemCardPicExemplar.append(this.itemCardPicExemplarPic);
         this.itemCardPic.append(this.itemCardPicExemplar);
 
         this.itemCardData = createElement('div', `itemCardData`);
         this.itemCardDataHead = createElement('h3', `itemCardData__head`);
-        this.itemCardDataHead.innerText = product.title;
+        this.itemCardDataHead.innerText = cartItem.title;
         this.itemCardDataDescr = createElement('h5', `itemCardData__description`);
-        this.itemCardDataDescr.innerText = product.description;
+        this.itemCardDataDescr.innerText = cartItem.description;
         this.itemCardDataR = createElement('span', `itemCardData__r`);
-        this.itemCardDataR.innerText = `Rating: ${product.rating}`;
+        this.itemCardDataR.innerText = `Rating: ${cartItem.rating}`;
         this.itemCardDataD = createElement('span', `itemCardData__d`);
-        this.itemCardDataD.innerText = `Discount: ${product.discountPercentage}%`;
+        this.itemCardDataD.innerText = `Discount: ${cartItem.discountPercentage}%`;
         this.itemCardData.append(this.itemCardDataHead, this.itemCardDataDescr, this.itemCardDataR, this.itemCardDataD);
 
         this.itemCardCount = createElement('div', `itemCardCount`);
         this.itemCardCountStock = createElement('div', `itemCardCount__stock`);
-        this.itemCardCountStock.innerText = `Stock:${product.stock}`;
+        this.itemCardCountStock.innerText = `Stock:${cartItem.stock}`;
         this.itemCardCountCounter = createElement('div', `itemCardCount__counter`);
         this.itemCardCountCounterP = createElement('div', `itemCardCount__counterPlus`);
-        this.itemCardCountCounterP.id = `${product.id}`;
+        this.itemCardCountCounterP.id = `${cartItem.id}`;
         this.itemCardCountCounterP.innerText = `+`;
         //this.itemCardCountCounterP.addEventListener('click', () => cardItemIncrement(product.id));
         this.itemCardCountCounterC = createElement('div', `itemCardCount__counterCount`);
         this.itemCardCountCounterC.innerText = `${count}`;
         this.itemCardCountCounterM = createElement('div', `itemCardCount__counterMinus`);
-        this.itemCardCountCounterM.id = `${product.id}`;
+        this.itemCardCountCounterM.id = `${cartItem.id}`;
         this.itemCardCountCounterM.innerText = `-`;
         //this.itemCardCountCounterM.addEventListener('click', () => cardItemDecrement(product.id));
         this.itemCardCountCounter.append(
@@ -163,7 +161,7 @@ export class CartPageView extends View {
             this.itemCardCountCounterM
         );
         this.itemCardCountPrice = createElement('div', `itemCardCount__price`);
-        this.itemCardCountPrice.innerText = `${product.price}$`;
+        this.itemCardCountPrice.innerText = `${cartItem.price}$`;
         this.itemCardCount.append(this.itemCardCountStock, this.itemCardCountCounter, this.itemCardCountPrice);
 
         this.cartLot?.append(this.itemCardNum, this.itemCardPic, this.itemCardData, this.itemCardCount);

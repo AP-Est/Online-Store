@@ -28,14 +28,14 @@ export class CartPageModel {
         pushToLocalStorage(productId);
     }
     handleCardItemIncrement(productId: number) {
-        this.cartLots.map((obj) => {
+        this.cartLots.forEach((obj) => {
             if (obj.id === productId) {
                 obj.count += 1;
             }
             return obj;
         });
 
-        this.commit(this.cartLots);
+        this.commit(this.cartLots, this.products);
     }
     handleCardItemDecrement(productId: number) {
         cardItemDecrement(productId);
@@ -48,10 +48,8 @@ export class CartPageModel {
         this.onChangeModel = callback;
         console.log('callback =======', callback);
     }
-    commit(cartLots: ICartLot[]) {
-        this.onChangeModel(cartLots);
+    commit(cartLots: ICartLot[], products: IProduct[]) {
+        this.onChangeModel(cartLots, products);
         localStorage.cart = JSON.stringify(cartLots);
     }
-
-    // }
 }
