@@ -19,7 +19,7 @@ export class ControllerMainPage {
         this.view.bindChangeMinStock(this.handleChangeMinStock);
         this.view.bindChangeMaxStock(this.handleChangeMaxStock);
         this.onChangeModel(this.model.products, this.model.filter, 0, 0); //TODO 0, 0 временно, далее доработать логику и заменить переменными
-        this.model.bindChangeModel(this.onChangeModel);
+        // this.model.bindChangeModel(this.onChangeModel);
     }
 
     handleAddDetailAddress = (cardNumber: number) => {

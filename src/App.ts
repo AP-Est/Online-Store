@@ -3,13 +3,13 @@ import { MainPageModel } from './components/MainPageModel';
 import { DetailPageView } from './components/DetailPageView';
 import { ControllerMainPage } from './components/MainPageController';
 import { ControllerDetailPage } from './components/DetailPageController';
-import { ControllerCartPage } from './components/CartPageController';
 import { CartPageView } from './components/CartPageView';
-
+import { CartPageModel } from './components/CartPageModel';
+import { ControllerCartPage } from './components/CartPageController';
 export class App {
     view: MainPageView | DetailPageView | CartPageView | undefined;
     controller: ControllerMainPage | ControllerDetailPage | ControllerCartPage | undefined;
-    model: MainPageModel | undefined;
+    model: MainPageModel | CartPageModel | undefined;
 
     init() {
         window.addEventListener('hashchange', this.navigate);
@@ -26,7 +26,8 @@ export class App {
                 break;
             case 'cart':
                 this.view = new CartPageView();
-                this.controller = new ControllerCartPage(this.view);
+                this.model = new CartPageModel();
+                this.controller = new ControllerCartPage(this.view, this.model);
                 break;
             default:
                 this.view = new MainPageView();
