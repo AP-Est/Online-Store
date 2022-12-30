@@ -1,19 +1,19 @@
 import { IProduct, IStoreData, storeData } from '../data/data';
 import pushToLocalStorage from '../utils/pushToLocalStorage';
 import getCartItems from '../utils/getCartItems';
-import { ICartLots } from '../styles/types';
+import { ICartLot } from '../styles/types';
 import cardItemIncrement from '../utils/cardItemIncrement';
 import cardItemDecrement from '../utils/cardItemDecrement';
 import _notANull from '../utils/notANull';
 export class CartPageModel {
     products: IProduct[];
-    cartData: ICartLots[];
+    cartLots: ICartLot[];
     storeData: IStoreData;
     onChangeModel: any;
 
     constructor() {
         _notANull();
-        this.cartData = JSON.parse(localStorage.cart) || [];
+        this.cartLots = JSON.parse(localStorage.cart) || [];
         this.storeData = storeData;
         this.products = storeData.products;
     }
@@ -28,12 +28,19 @@ export class CartPageModel {
         pushToLocalStorage(productId);
     }
     handleCardItemIncrement(productId: number) {
-        cardItemIncrement(productId);
-        //this.bindUpdateCartBody('cartBody');
+        this.cartLots.map((obj) => {
+            if (obj.id === productId) {
+                obj.count += 1;
+            }
+            return obj;
+        });
+
+        this.commit(this.cartLots);
     }
     handleCardItemDecrement(productId: number) {
         cardItemDecrement(productId);
     }
+
     bindGetCartItems() {
         getCartItems();
     }
@@ -41,7 +48,10 @@ export class CartPageModel {
         this.onChangeModel = callback;
         console.log('callback =======', callback);
     }
-    bindUpdateCartBody(block: string) {
-        this.onChangeModel(block);
+    commit(cartLots: ICartLot[]) {
+        this.onChangeModel(cartLots);
+        localStorage.cart = JSON.stringify(cartLots);
     }
+
+    // }
 }

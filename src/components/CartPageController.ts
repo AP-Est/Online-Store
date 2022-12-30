@@ -1,12 +1,12 @@
 import { IProduct, storeData } from '../data/data';
 import { CartPageView } from 'CartPageView';
 import { CartPageModel } from 'CartPageModel';
-import { ICartLots } from '../styles/types';
+import { ICartLot } from '../styles/types';
 
 export class ControllerCartPage {
     view: CartPageView;
     model: CartPageModel;
-    bindGetCartItems!: ICartLots;
+    bindGetCartItems!: ICartLot;
 
     constructor(view: CartPageView, model: CartPageModel) {
         this.view = view;
@@ -15,7 +15,7 @@ export class ControllerCartPage {
         this.view.bindFlagOfPushDecrement(this.handleCardItemDecrement);
         this.model.bindChangeModel(this.onChangeModel);
 
-        //this.onChangeModel(this.model.cartData);
+        //this.onChangeModel(this.model.cartLots);
     }
 
     handleCardItemIncrement = (productId: number) => {
@@ -24,8 +24,8 @@ export class ControllerCartPage {
     handleCardItemDecrement = (productId: number) => {
         this.model.handleCardItemDecrement(productId);
     };
-    onChangeModel = (cartData: ICartLots[]) => {
-        this.view.displayItemBlock(cartData);
+    onChangeModel = (cartLots: ICartLot[]) => {
+        this.view.displayItemBlock(cartLots);
         console.log();
     };
 }

@@ -5,7 +5,7 @@ import createButton from '../utils/createButton';
 import createElement from '../utils/createElement';
 import pushToLocalStorage from '../utils/pushToLocalStorage';
 import getCartItems from '../utils/getCartItems';
-import { ICartLots } from '../styles/types';
+import { ICartLot } from '../styles/types';
 import cardItemIncrement from '../utils/cardItemIncrement';
 import cardItemDecrement from '../utils/cardItemDecrement';
 import NotANull from '../utils/notANull';
@@ -40,7 +40,7 @@ export class CartPageView extends View {
     constructor() {
         super();
         NotANull();
-        //let cartArray: ICartLots[] = ()
+        //let cartArray: ICartLot[] = ()
         this.createMainCartWrappers();
         this.createCartProductBlockBodyHeaderElements();
         this.createSummaryCartElements();
@@ -74,7 +74,7 @@ export class CartPageView extends View {
     }
     createCartProductBlockBodyMainElements() {
         this.productBlockBody = createElement('div', 'cartProductBlock__body');
-        const cartArray: ICartLots[] = getCartItems();
+        const cartArray: ICartLot[] = getCartItems();
         this.createItemsBlock(cartArray);
     }
     bindFlagOfPushIncrement(handler: (productId: number) => void) {
@@ -97,14 +97,14 @@ export class CartPageView extends View {
     }
 
     displayItemBlock() {
-        let cartArray: ICartLots[] = getCartItems();
+        let cartArray: ICartLot[] = getCartItems();
         this.productBlockBody.remove();
         this.productBlockBody = createElement('div', 'cartProductBlock__body');
         cartArray = getCartItems();
         this.createItemsBlock(cartArray);
         this.productBlock.append(this.productBlockBody);
     }
-    createItemsBlock(cartArray: ICartLots[]) {
+    createItemsBlock(cartArray: ICartLot[]) {
         cartArray.forEach((el, index) => {
             if (el != null) {
                 this.cartLot = createElement('div', 'cart__lot');

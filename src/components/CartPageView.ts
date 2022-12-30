@@ -5,7 +5,7 @@ import createButton from '../utils/createButton';
 import createElement from '../utils/createElement';
 import pushToLocalStorage from '../utils/pushToLocalStorage';
 import getCartItems from '../utils/getCartItems';
-import { ICartLots } from '../styles/types';
+import { ICartLot } from '../styles/types';
 import cardItemIncrement from '../utils/cardItemIncrement';
 import cardItemDecrement from '../utils/cardItemDecrement';
 import NotANull from '../utils/notANull';
@@ -37,11 +37,11 @@ export class CartPageView extends View {
     itemCardPicExemplarPic!: HTMLImageElement;
     itemCardDataR!: HTMLElement;
     itemCardDataD!: HTMLElement;
-    //cartArray: ICartLots[] = [];
+    //cartArray: ICartLot[] = [];
     constructor() {
         super();
         NotANull();
-        const cartArray: ICartLots[] = getCartItems();
+        const cartArray: ICartLot[] = getCartItems();
         this.createMainCartWrappers();
         this.createCartProductBlockBodyHeaderElements();
         this.createCartProductBlockBodyMainElements(cartArray);
@@ -93,7 +93,7 @@ export class CartPageView extends View {
         this.productBlockHeaderTitle = createElement('span', 'cartProductBlock__header_title');
         //TODO сюда добавить плагинацию
     }
-    createCartProductBlockBodyMainElements(cartArray: ICartLots[]) {
+    createCartProductBlockBodyMainElements(cartArray: ICartLot[]) {
         this.productBlockBody = createElement('div', 'cartProductBlock__body');
         this.createItemsBlock(cartArray);
     }
@@ -101,14 +101,14 @@ export class CartPageView extends View {
         this.summaryBlockTitle = createElement('div', 'cartSummaryBlock__title');
         this.summaryBlockBody = createElement('div', 'cartSummaryBlock__body');
     }
-    displayItemBlock(cartArray: ICartLots[]) {
+    displayItemBlock(cartArray: ICartLot[]) {
         this.productBlockBody.remove();
         this.productBlockBody = createElement('div', 'cartProductBlock__body');
         cartArray = getCartItems();
         this.createItemsBlock(cartArray);
         this.productBlock.append(this.productBlockBody);
     }
-    createItemsBlock(cartArray: ICartLots[]) {
+    createItemsBlock(cartArray: ICartLot[]) {
         cartArray.forEach((el, index) => {
             if (el != null) {
                 this.cartLot = createElement('div', 'cart__lot');
