@@ -1,4 +1,4 @@
-import { IProduct, storeData } from '../data/data';
+import { IProduct } from '../data/data';
 import { CartPageView } from 'CartPageView';
 import { CartPageModel } from 'CartPageModel';
 import { ICartLot } from '../styles/types';
@@ -6,7 +6,6 @@ import { ICartLot } from '../styles/types';
 export class ControllerCartPage {
     view: CartPageView;
     model: CartPageModel;
-    bindGetCartItems!: ICartLot;
 
     constructor(view: CartPageView, model: CartPageModel) {
         this.view = view;

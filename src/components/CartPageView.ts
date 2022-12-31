@@ -1,11 +1,12 @@
 import '../styles/styleCartPage.scss';
 import { IProduct, storeData } from '../data/data';
 import { View } from './BaseView';
-import createButton from '../utils/createButton';
+//import createButton from '../utils/createButton';
 import createElement from '../utils/createElement';
 import getCartItems from '../utils/getCartItems';
 import { ICartLot } from '../styles/types';
 import NotANull from '../utils/notANull';
+//import cardItemIncrement from '../utils/cardItemIncrement';
 
 export class CartPageView extends View {
     cartWrapper!: HTMLElement;
@@ -34,6 +35,7 @@ export class CartPageView extends View {
     itemCardPicExemplarPic!: HTMLImageElement;
     itemCardDataR!: HTMLElement;
     itemCardDataD!: HTMLElement;
+    cart!: HTMLElement;
     //cartLots: ICartLot[] = [];
     constructor() {
         super();
@@ -43,39 +45,17 @@ export class CartPageView extends View {
         this.displayCartPage(cartLots, product);
     }
     //TODO TEЛO
-
     displayCartPage(cartLots: ICartLot[], product: IProduct[]) {
         this.createMainCartWrappers();
         this.createCartProductBlockBodyHeaderElements();
         this.createCartProductBlockBodyMainElements(cartLots, product);
         this.buildCartPage();
     }
-    getDataById(id: number, product: IProduct[]) {
-        return product.filter((obj) => obj.id === id).shift();
-    }
 
-    bindFlagOfPushIncrement(handler: (productId: number) => void) {
-        this.itemCardCountCounterP.addEventListener('click', (event) => {
-            const target = event.target as Element;
-            console.log(target);
-            if (target.classList.contains('itemCardCount__counterPlus')) {
-                const productId = Number(target.id);
-                handler(productId);
-            }
-        });
-    }
-    bindFlagOfPushDecrement(handler: (productId: number) => void) {
-        this.itemCardCountCounterM.addEventListener('click', (event) => {
-            const target = event.target as Element;
-            if (target.classList.contains('itemCardCount__counterMinus')) {
-                const productId = Number(target.id);
-                handler(productId);
-            }
-        });
-    }
     buildCartPage() {
         this.productBlock.append(this.productBlockHeader, this.productBlockBody);
         this.cartWrapper.append(this.productBlock, this.summaryBlock);
+        this.mainWrapper.innerHTML = '';
         this.mainWrapper.append(this.cartWrapper);
     }
     createMainCartWrappers() {
@@ -97,19 +77,14 @@ export class CartPageView extends View {
         this.summaryBlockTitle = createElement('div', 'cartSummaryBlock__title');
         this.summaryBlockBody = createElement('div', 'cartSummaryBlock__body');
     }
-    // displayItemBlock(cartLots: ICartLot[], product: IProduct[]) {
-    //     this.productBlockBody.remove();
-    //     this.productBlockBody = createElement('div', 'cartProductBlock__body');
-    //     this.createItemsBlock(cartLots, product);
-    //     this.productBlock.append(this.productBlockBody);
-    // }
+
     createItemsBlock(cartLots: ICartLot[], product: IProduct[]) {
         cartLots.forEach((el, index) => {
             if (el != null) {
                 this.cartLotCard = createElement('div', 'cart__lot');
-                const cartItem = this.getDataById(el.id, product);
-                if (cartItem) {
-                    this.createItemCard(cartItem, el.count, index);
+                const _cartItem = product.filter((obj) => obj.id === el.id).shift();
+                if (_cartItem) {
+                    this.createItemCard(_cartItem, el.count, index);
                 }
                 this.productBlockBody.append(this.cartLotCard);
             }
@@ -145,13 +120,13 @@ export class CartPageView extends View {
         this.itemCardCountCounterP = createElement('div', `itemCardCount__counterPlus`);
         this.itemCardCountCounterP.id = `${cartItem.id}`;
         this.itemCardCountCounterP.innerText = `+`;
-        //this.itemCardCountCounterP.addEventListener('click', () => cardItemIncrement(product.id));
+        //this.itemCardCountCounterP.addEventListener('click', () => cardItemIncrement(cartItem.id));
         this.itemCardCountCounterC = createElement('div', `itemCardCount__counterCount`);
         this.itemCardCountCounterC.innerText = `${count}`;
         this.itemCardCountCounterM = createElement('div', `itemCardCount__counterMinus`);
         this.itemCardCountCounterM.id = `${cartItem.id}`;
         this.itemCardCountCounterM.innerText = `-`;
-        //this.itemCardCountCounterM.addEventListener('click', () => cardItemDecrement(product.id));
+        //this.itemCardCountCounterM.addEventListener('click', () => cardItemDecrement(cartItem.id));
         this.itemCardCountCounter.append(
             this.itemCardCountCounterP,
             this.itemCardCountCounterC,
@@ -162,5 +137,24 @@ export class CartPageView extends View {
         this.itemCardCount.append(this.itemCardCountStock, this.itemCardCountCounter, this.itemCardCountPrice);
 
         this.cartLotCard?.append(this.itemCardNum, this.itemCardPic, this.itemCardData, this.itemCardCount);
+    }
+    bindFlagOfPushIncrement(handler: (productId: number) => void) {
+        this.mainWrapper.addEventListener('click', (event) => {
+            const target = event.target as Element;
+            console.log(target);
+            if (target.classList.contains('itemCardCount__counterPlus')) {
+                const productId = Number(target.id);
+                handler(productId);
+            }
+        });
+    }
+    bindFlagOfPushDecrement(handler: (productId: number) => void) {
+        this.mainWrapper.addEventListener('click', (event) => {
+            const target = event.target as Element;
+            if (target.classList.contains('itemCardCount__counterMinus')) {
+                const productId = Number(target.id);
+                handler(productId);
+            }
+        });
     }
 }
