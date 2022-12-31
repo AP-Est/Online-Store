@@ -22,18 +22,24 @@ export class MainPageModel {
         };
     }
 
-    removeCategory(category: string) {
-        this.filter.categories = this.filter.categories.filter((cur) => cur !== category);
-        //console.log('removeCategory');
-        //console.log(this.onChangeModel);
-        this.onChangeModel(this.products, this.filter, 0, 0);
-        console.log('remove category filter:', this.filter);
-    }
+    // removeCategory(category: string) {
+    //     this.filter.categories = this.filter.categories.filter((cur) => cur !== category);
+    //     //console.log('removeCategory');
+    //     //console.log(this.onChangeModel);
+    //     this.onChangeModel(this.products, this.filter, 0, 0);
+    //     console.log('remove category filter:', this.filter);
+    // }
 
-    addCategory(category: string) {
-        this.filter.categories.push(category);
+    addRemoveCategory(category: string) {
+        if (this.filter.categories.includes(category)) {
+            this.filter.categories = this.filter.categories.filter((cur) => cur !== category);
+            console.log('remove', this.filter.categories);
+        } else {
+            this.filter.categories.push(category);
+            console.log('add', this.filter.categories);
+        }
         this.onChangeModel(this.products, this.filter, 0, 0);
-        console.log('add category filter:', this.filter);
+        //console.log('add category filter:', this.filter);
     }
 
     removeBrand(brand: string) {

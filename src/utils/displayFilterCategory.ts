@@ -29,7 +29,7 @@ export default function displayFilterCategory(products: IProduct[], filter: IFil
         filterCategoryChBoxLabel.htmlFor = `filterCategoryBox__${filterCategoryArray[i]}`;
         filterCategoryChBoxLabel.textContent = title;
         if (filter.categories.includes(title)) {
-            filterCategoryChBox.classList.add('checkedB');
+            //filterCategoryChBox.classList.add('checkedB');
             filterCategoryChBox.checked = true;
             filterCategoryChBoxLabel.classList.add('checked');
         }

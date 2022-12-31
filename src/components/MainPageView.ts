@@ -95,37 +95,35 @@ export class MainPageView extends View {
         });
     }
 
-    bindAddCategory(handler: (category: string) => void) {
+    bindAddRemoveCategory(handler: (category: string) => void) {
         // обработчик выбора новой категории
 
         this.modelFilter1.addEventListener('change', (event) => {
             const target = event.target as HTMLElement;
-            if (target.classList.contains('checkBoxStyle') && !target.classList.contains('checked')) {
-                console.log('target.classList bindAddCategory', target.classList);
+            if (target.classList.contains('checkBoxStyle')) {
+                //console.log('target.classList bindAddCategory', target.classList);
                 const category = target.nextElementSibling?.textContent as string;
                 handler(category);
-                target.classList.add('checked');
-                event.stopPropagation();
             }
             //console.log('bindAddCategory modelFilter end:', this.modelFilter1);
         });
         // //console.log('bindAddCategory');
     }
 
-    bindRemoveCategory(handler: (category: string) => void) {
-        //console.log(' bindRemoveCategory this.modelFilter1', this.modelFilter1);
-        this.modelFilter1.addEventListener('change', (event) => {
-            const target = event.target as HTMLInputElement;
-            if (target.classList.contains('checked')) {
-                console.log('bindRemoveCategory');
-                const category = target.nextElementSibling?.textContent as string;
-                handler(category);
-                target.classList.remove('checked');
-                console.log('target.classList bindRemoveCategory', target.classList);
-                event.stopPropagation();
-            }
-        });
-    }
+    // bindRemoveCategory(handler: (category: string) => void) {
+    //     //console.log(' bindRemoveCategory this.modelFilter1', this.modelFilter1);
+    //     this.modelFilter1.addEventListener('change', (event) => {
+    //         const target = event.target as HTMLInputElement;
+    //         if (target.classList.contains('checked')) {
+    //             console.log('bindRemoveCategory');
+    //             const category = target.nextElementSibling?.textContent as string;
+    //             handler(category);
+    //             target.classList.remove('checked');
+    //             console.log('target.classList bindRemoveCategory', target.classList);
+    //             event.stopPropagation();
+    //         }
+    //     });
+    // }
     // bindAddCategory(handler: (category: string) => void) {
     //     // обработчик выбора новой категории
 
@@ -220,6 +218,8 @@ export class MainPageView extends View {
         const filterCategoryChBoxLabel = document.querySelectorAll('.filterCategoryBoxLabel');
         filterCategoryChBox.forEach((item, index) => {
             // console.log(index);
+            (filterCategoryChBox[index] as HTMLInputElement).checked = false;
+            filterCategoryChBoxLabel[index].classList.remove('checked');
             const title = filterCategoryChBoxLabel[index].textContent as string;
             if (filter.categories.includes(title)) {
                 (filterCategoryChBox[index] as HTMLInputElement).checked = true;

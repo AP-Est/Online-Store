@@ -15,8 +15,8 @@ export class ControllerMainPage {
         this.onChangeModel(this.model.products, this.model.filter, 0, 0); //TODO 0, 0 временно, далее доработать логику и заменить переменными
         this.model.bindChangeModel(this.onChangeModel);
         this.view.bindAddDetailAddress(this.handleAddDetailAddress);
-        this.view.bindRemoveCategory(this.handleRemoveCategory);
-        this.view.bindAddCategory(this.handleAddCategory);
+        //this.view.bindRemoveCategory(this.handleRemoveCategory);
+        this.view.bindAddRemoveCategory(this.handleAddRemoveCategory);
         this.view.bindRemoveBrand(this.handleRemoveBrand);
         this.view.bindAddBrand(this.handleAddBrand);
         this.view.bindChangeMinPrice(this.handleChangeMinPrice);
@@ -33,14 +33,14 @@ export class ControllerMainPage {
         this.view.renderPage(products, this.model.getProductsToShow(products, filter), filter, totalCost, numProducts);
     };
 
-    handleRemoveCategory = (category: string) => {
-        //console.log('model:');
-        //console.log(this.model);
-        this.model.removeCategory(category);
-    };
+    // handleRemoveCategory = (category: string) => {
+    //     //console.log('model:');
+    //     //console.log(this.model);
+    //     this.model.removeCategory(category);
+    // };
 
-    handleAddCategory = (category: string) => {
-        this.model.addCategory(category);
+    handleAddRemoveCategory = (category: string) => {
+        this.model.addRemoveCategory(category);
     };
 
     handleRemoveBrand = (brand: string) => {
