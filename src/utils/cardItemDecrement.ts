@@ -1,8 +1,8 @@
-import { ICartLots } from '../styles/types';
+import { ICartLot } from '../styles/types';
 import delFromLocalStorage from './delFromLocalStorage';
 
 export default function cardItemDecrement(id: number) {
-    const storageArray: ICartLots[] = JSON.parse(localStorage.cart);
+    const storageArray: ICartLot[] = JSON.parse(localStorage.cart);
 
     localStorage.cart = JSON.stringify(
         storageArray

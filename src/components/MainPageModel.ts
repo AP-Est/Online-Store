@@ -18,10 +18,10 @@ export class MainPageModel {
             sort: '',
         };
     }
-
-    bindChangeModel(callback: any) {
-        this.onChangeModel = callback;
-    }
+    //
+    // bindChangeModel(callback: any) {
+    //     this.onChangeModel = callback;
+    // }
 
     removeCategory(category: string) {
         this.filter.categories = this.filter.categories.filter((cur) => cur !== category);
