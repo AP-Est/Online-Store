@@ -1,11 +1,8 @@
 import '../styles/styleCartPage.scss';
-import { IProduct, storeData } from '../data/data';
+import { IProduct, ICartLot } from '../styles/types';
 import { View } from './BaseView';
 //import createButton from '../utils/createButton';
 import createElement from '../utils/createElement';
-import getCartItems from '../utils/getCartItems';
-import { ICartLot } from '../styles/types';
-import NotANull from '../utils/notANull';
 
 export class CartPageView extends View {
     cartWrapper!: HTMLElement;
@@ -34,10 +31,8 @@ export class CartPageView extends View {
     itemCardPicExemplarPic!: HTMLImageElement;
     itemCardDataR!: HTMLElement;
     itemCardDataD!: HTMLElement;
-    cart!: HTMLElement;
     constructor() {
         super();
-        //NotANull();
     }
     //TODO TEЛO
     displayCartPage(cartLots: ICartLot[], product: IProduct[]) {
