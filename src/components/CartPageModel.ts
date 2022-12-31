@@ -16,7 +16,6 @@ export class CartPageModel {
         this.cartLots = JSON.parse(localStorage.cart) || [];
         this.storeData = storeData;
         this.products = storeData.products;
-        console.log(this.cartLots);
     }
     bindPushToLocalStorage(productId: number) {
         pushToLocalStorage(productId);

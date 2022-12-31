@@ -6,7 +6,6 @@ import createElement from '../utils/createElement';
 import getCartItems from '../utils/getCartItems';
 import { ICartLot } from '../styles/types';
 import NotANull from '../utils/notANull';
-//import cardItemIncrement from '../utils/cardItemIncrement';
 
 export class CartPageView extends View {
     cartWrapper!: HTMLElement;
@@ -36,13 +35,9 @@ export class CartPageView extends View {
     itemCardDataR!: HTMLElement;
     itemCardDataD!: HTMLElement;
     cart!: HTMLElement;
-    //cartLots: ICartLot[] = [];
     constructor() {
         super();
-        NotANull();
-        const cartLots: ICartLot[] = getCartItems();
-        const product: IProduct[] = storeData.products;
-        this.displayCartPage(cartLots, product);
+        //NotANull();
     }
     //TODO TEЛO
     displayCartPage(cartLots: ICartLot[], product: IProduct[]) {
@@ -120,13 +115,11 @@ export class CartPageView extends View {
         this.itemCardCountCounterP = createElement('div', `itemCardCount__counterPlus`);
         this.itemCardCountCounterP.id = `${cartItem.id}`;
         this.itemCardCountCounterP.innerText = `+`;
-        //this.itemCardCountCounterP.addEventListener('click', () => cardItemIncrement(cartItem.id));
         this.itemCardCountCounterC = createElement('div', `itemCardCount__counterCount`);
         this.itemCardCountCounterC.innerText = `${count}`;
         this.itemCardCountCounterM = createElement('div', `itemCardCount__counterMinus`);
         this.itemCardCountCounterM.id = `${cartItem.id}`;
         this.itemCardCountCounterM.innerText = `-`;
-        //this.itemCardCountCounterM.addEventListener('click', () => cardItemDecrement(cartItem.id));
         this.itemCardCountCounter.append(
             this.itemCardCountCounterP,
             this.itemCardCountCounterC,
@@ -141,7 +134,6 @@ export class CartPageView extends View {
     bindFlagOfPushIncrement(handler: (productId: number) => void) {
         this.mainWrapper.addEventListener('click', (event) => {
             const target = event.target as Element;
-            console.log(target);
             if (target.classList.contains('itemCardCount__counterPlus')) {
                 const productId = Number(target.id);
                 handler(productId);
