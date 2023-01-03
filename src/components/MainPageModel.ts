@@ -84,8 +84,8 @@ export class MainPageModel {
     }
 
     filterByBrand(products: IProduct[], brands: string[]) {
-        console.log('filterBrand brands', brands);
-        console.log('filterBrand products', products);
+        //console.log('filterBrand brands', brands);
+        //console.log('filterBrand products', products);
         if (brands.length === 0) return products;
         const productsFiltered: IProduct[] = [];
         this.products.map((cur) => {
@@ -96,7 +96,7 @@ export class MainPageModel {
                 }
             }
         });
-        console.log('filterBrand productsFiltered', productsFiltered);
+        //console.log('filterBrand productsFiltered', productsFiltered);
         return productsFiltered;
     }
 

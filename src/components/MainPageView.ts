@@ -102,7 +102,7 @@ export class MainPageView extends View {
         console.log('renderPage');
 
         this.mainWrapper.innerHTML = '';
-        const filters = displayFilter(products, filter);
+        const filters = displayFilter(products, filter, productsFiltered);
         const goods = displayCards(productsFiltered);
 
         this.mainWrapper.append(filters, goods);
