@@ -16,21 +16,59 @@
     margin: 10px;
 }
 
-.cartSummaryBlock {
-    width: 30vw;
-    height: 80vh;
-    background-color: rgb(47, 39, 106);
-    border-radius: $mainBorderRadius;
-    margin: 10px;
-}
-
-
 .cartProductBlock__header {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     background-color: rgb(159, 44, 123);
     height: 7vh;
+    .cartProductBlock__header_title {
+        margin: 10px;
+        font-size: $bigFontSize;
+        font-weight: bold;
+    }
+    .cartProductBlock__plugWrapper {
+        display: flex;
+        align-items: center;
+        margin: 10px;
+
+        .cartProductBlock__plugLimit {
+            margin: 10px;
+
+            .cartProductBlock__plugLimit_input {
+                margin: 10px;
+                //height: 15px;
+                width: 20px;
+            }
+        }
+        .cartProductBlock__plugPage {
+            display: flex;
+            align-items: center;
+
+            .plugPage__wrapper {
+            display: flex;
+            align-items: center;
+
+            .plugPage__minusPage, 
+            .plugPage__plusPage {
+                border-radius: $mainBorderRadius;
+                background-color: rgb(232, 131, 7);
+                margin: 10px;
+                padding: 4px;
+                text-align: center; 
+            }            
+            .plugPage__page {
+                font-weight: bold;
+            }
+            }
+        }
+        
+    }
+    
 }
+
+
+
 
 .cart__lot {
     display: flex;
@@ -88,3 +126,13 @@
     }
 }
 
+
+
+
+.cartSummaryBlock {
+    width: 30vw;
+    height: 80vh;
+    background-color: rgb(47, 39, 106);
+    border-radius: $mainBorderRadius;
+    margin: 10px;
+}

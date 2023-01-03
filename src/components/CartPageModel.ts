@@ -1,22 +1,41 @@
 import { IProduct, IStoreData, storeData } from '../data/data';
 import pushToLocalStorage from '../utils/pushToLocalStorage';
 import getCartItems from '../utils/getCartItems';
-import { ICartLot } from '../styles/types';
-import cardItemIncrement from '../utils/cardItemIncrement';
-import cardItemDecrement from '../utils/cardItemDecrement';
+import { ICartLot, IPlug } from '../styles/types';
 import _notANull from '../utils/notANull';
 export class CartPageModel {
     products: IProduct[];
     cartLots: ICartLot[];
+    cartView: ICartLot[];
     storeData: IStoreData;
     onChangeModel!: CallableFunction;
+    plug: IPlug;
 
     constructor() {
         _notANull();
+        this.plug = {
+            limit: 3,
+            page: 1,
+        };
         this.cartLots = JSON.parse(localStorage.cart) || [];
+        this.cartView = [];
+        this._getCartView(this.plug);
         this.storeData = storeData;
         this.products = storeData.products;
     }
+    bindChangeModel(callback: CallableFunction) {
+        this.onChangeModel = callback;
+    }
+    commit(cartLots: ICartLot[], products: IProduct[]) {
+        localStorage.cart = JSON.stringify(cartLots);
+        this.onChangeModel(this.cartView, products, this.plug);
+    }
+    _getCartView = (plug: IPlug) => {
+        if (this.cartLots.length > plug.limit) {
+            this.cartView = this.cartLots.slice((plug.page - 1) * plug.limit, plug.page * plug.limit);
+        } else this.cartView = this.cartLots;
+    };
+
     bindPushToLocalStorage(productId: number) {
         pushToLocalStorage(productId);
     }
@@ -53,11 +72,26 @@ export class CartPageModel {
     bindGetCartItems() {
         getCartItems();
     }
-    bindChangeModel(callback: CallableFunction) {
-        this.onChangeModel = callback;
+    handlePageIncrement() {
+        if (this.cartLots.length > this.plug.page * this.plug.limit) {
+            this.plug.page += 1;
+            console.log('plus', this.plug.page);
+        }
+        this._getCartView(this.plug);
+        this.commit(this.cartLots, this.products);
     }
-    commit(cartLots: ICartLot[], products: IProduct[]) {
-        this.onChangeModel(cartLots, products);
-        localStorage.cart = JSON.stringify(cartLots);
+
+    handlePageDecrement() {
+        if (this.plug.page > 1) {
+            this.plug.page -= 1;
+            console.log('min', this.plug.page);
+        }
+        this._getCartView(this.plug);
+        this.commit(this.cartLots, this.products);
+    }
+    handleLimitChanged(limit: number) {
+        this.plug.limit = limit;
+        this._getCartView(this.plug);
+        this.commit(this.cartLots, this.products);
     }
 }
