@@ -33,3 +33,8 @@ export interface IFilterData {
     search: string;
     sort: string;
 }
+
+export interface IPlug {
+    limit: number;
+    page: number;
+}
