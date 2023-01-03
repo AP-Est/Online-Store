@@ -146,3 +146,10 @@ p{
   border: 1px solid black;
   border-radius: 10px;
 }
+
+.wrapper__filtersGoods {
+    background-color: rgb(87, 65, 161);
+    font-size: $mainFontSize;
+    border-radius: $mainBorderRadius;
+    display: flex;
+}

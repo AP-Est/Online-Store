@@ -17,8 +17,7 @@ export class ControllerMainPage {
         this.view.bindAddDetailAddress(this.handleAddDetailAddress);
         //this.view.bindRemoveCategory(this.handleRemoveCategory);
         this.view.bindAddRemoveCategory(this.handleAddRemoveCategory);
-        this.view.bindRemoveBrand(this.handleRemoveBrand);
-        this.view.bindAddBrand(this.handleAddBrand);
+        this.view.bindAddRemoveBrand(this.handleAddRemoveBrand);
         this.view.bindChangeMinPrice(this.handleChangeMinPrice);
         this.view.bindChangeMaxPrice(this.handleChangeMaxPrice);
         this.view.bindChangeMinStock(this.handleChangeMinStock);
@@ -33,22 +32,12 @@ export class ControllerMainPage {
         this.view.renderPage(products, this.model.getProductsToShow(products, filter), filter, totalCost, numProducts);
     };
 
-    // handleRemoveCategory = (category: string) => {
-    //     //console.log('model:');
-    //     //console.log(this.model);
-    //     this.model.removeCategory(category);
-    // };
-
     handleAddRemoveCategory = (category: string) => {
         this.model.addRemoveCategory(category);
     };
 
-    handleRemoveBrand = (brand: string) => {
-        this.model.removeBrand(brand);
-    };
-
-    handleAddBrand = (brand: string) => {
-        this.model.addBrand(brand);
+    handleAddRemoveBrand = (brand: string) => {
+        this.model.addRemoveBrand(brand);
     };
 
     handleChangeMinPrice = (minPrice: number) => {

@@ -17,7 +17,7 @@ export default function displayFilterBrands(products: IProduct[], filter: IFilte
         const unreadyTitles = filterBrandsArray[i] as string;
         const brandTitle = unreadyTitles.split(' ').join('');
         const filterBrandsChBox = document.createElement('input');
-        filterBrandsChBox.classList.add('checkBoxStyle');
+        filterBrandsChBox.classList.add('checkBoxStyleBrand');
         filterBrandsChBox.classList.add(`filterBrandsBox__${brandTitle}`);
         filterBrandsChBox.type = 'checkbox';
         filterBrandsChBox.id = `filterBrandsBox__${brandTitle}`;

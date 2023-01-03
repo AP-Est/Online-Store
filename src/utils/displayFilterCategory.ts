@@ -18,7 +18,7 @@ export default function displayFilterCategory(products: IProduct[], filter: IFil
         const title = filterCategoryArray[i] as string;
         const filterCategoryLi = createElement('li');
         const filterCategoryChBox = document.createElement('input');
-        filterCategoryChBox.classList.add('checkBoxStyle');
+        filterCategoryChBox.classList.add('checkBoxStyleCategory');
         filterCategoryChBox.classList.add('filterCategoryBox');
         filterCategoryChBox.classList.add(`filterCategoryBox__${filterCategoryArray[i]}`);
         filterCategoryChBox.type = 'checkbox';
