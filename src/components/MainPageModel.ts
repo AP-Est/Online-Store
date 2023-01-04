@@ -6,6 +6,9 @@ export class MainPageModel {
     onChangeModel: any;
 
     constructor() {
+        this.onChangeModel = () => {
+            return undefined;
+        };
         this.products = storeData.products;
         this.filter = {
             categories: [],
@@ -18,29 +21,29 @@ export class MainPageModel {
             sort: '',
         };
     }
-    //
-    // bindChangeModel(callback: any) {
-    //     this.onChangeModel = callback;
-    // }
 
-    removeCategory(category: string) {
-        this.filter.categories = this.filter.categories.filter((cur) => cur !== category);
+    addRemoveCategory(category: string) {
+        if (this.filter.categories.includes(category)) {
+            this.filter.categories = this.filter.categories.filter((cur) => cur !== category);
+            //console.log('remove', this.filter.categories);
+        } else {
+            this.filter.categories.push(category);
+            //console.log('add', this.filter.categories);
+        }
         this.onChangeModel(this.products, this.filter, 0, 0);
+        //console.log('add category filter:');
     }
 
-    addCategory(category: string) {
-        this.filter.categories.push(category);
+    addRemoveBrand(brand: string) {
+        if (this.filter.brands.includes(brand)) {
+            this.filter.brands = this.filter.brands.filter((cur) => cur !== brand);
+            //console.log('remove', this.filter.categories);
+        } else {
+            this.filter.brands.push(brand);
+            //console.log('add', this.filter.categories);
+        }
         this.onChangeModel(this.products, this.filter, 0, 0);
-    }
-
-    removeBrand(brand: string) {
-        this.filter.brands = this.filter.brands.filter((cur) => cur !== brand);
-        this.onChangeModel(this.products, this.filter, 0, 0);
-    }
-
-    addBrand(brand: string) {
-        this.filter.brands.push(brand);
-        this.onChangeModel(this.products, this.filter, 0, 0);
+        //console.log('add category filter:');
     }
 
     changeMinPrice(minPrice: number) {
@@ -67,21 +70,33 @@ export class MainPageModel {
 
     filterByCategory(products: IProduct[], categories: string[]) {
         if (categories.length === 0) return products;
-        const productsFiltered = this.products.filter((cur) => {
+        const productsFiltered: IProduct[] = [];
+        this.products.map((cur) => {
             for (const currentCategory of categories) {
-                cur.category === currentCategory;
+                if (cur.category === currentCategory) {
+                    // console.log('match');
+                    productsFiltered.push(cur);
+                }
             }
         });
+        //console.log('filterByCategory productsFiltered', productsFiltered);
         return productsFiltered;
     }
 
-    filterBrand(products: IProduct[], brands: string[]) {
+    filterByBrand(products: IProduct[], brands: string[]) {
+        //console.log('filterBrand brands', brands);
+        //console.log('filterBrand products', products);
         if (brands.length === 0) return products;
-        const productsFiltered = this.products.filter((cur) => {
-            for (const currentCategory of brands) {
-                cur.brand === currentCategory;
+        const productsFiltered: IProduct[] = [];
+        this.products.map((cur) => {
+            for (const currentBrand of brands) {
+                if (cur.brand === currentBrand) {
+                    // console.log('match');
+                    productsFiltered.push(cur);
+                }
             }
         });
+        //console.log('filterBrand productsFiltered', productsFiltered);
         return productsFiltered;
     }
 
@@ -114,14 +129,31 @@ export class MainPageModel {
     }
 
     getProductsToShow(products: IProduct[], filter: IFilterData) {
-        return this.filterStock(
-            this.filterPrice(
-                this.filterBrand(this.filterByCategory(products, filter.categories), filter.brands),
-                filter.minPrice,
-                filter.maxPrice
-            ),
-            filter.minStock,
-            filter.maxStock
-        );
+        // return this.filterStock(
+        //     this.filterPrice(
+        //         this.filterBrand(this.filterByCategory(products, filter.categories), filter.brands),
+        //         filter.minPrice,
+        //         filter.maxPrice
+        //     ),
+        //     filter.minStock,
+        //     filter.maxStock
+        // );
+        const productFilteredByCategory: IProduct[] = this.filterByCategory(products, filter.categories);
+        const productFilteredByBrand: IProduct[] = this.filterByBrand(products, filter.brands);
+        const productFiltered: IProduct[] = [];
+        productFilteredByCategory.map((itemCategory) => {
+            productFilteredByBrand.map((itemBrand) => {
+                if (itemBrand === itemCategory) {
+                    productFiltered.push(itemBrand);
+                }
+            });
+        });
+        return productFiltered;
+    }
+
+    bindChangeModel(
+        callback: (products: IProduct[], filter: IFilterData, totalCost: number, numProducts: number) => void
+    ) {
+        this.onChangeModel = callback;
     }
 }

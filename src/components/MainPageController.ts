@@ -7,19 +7,21 @@ export class ControllerMainPage {
     model: MainPageModel;
 
     constructor(view: MainPageView, model: MainPageModel) {
+        //console.log('constructor controller');
+        // console.log(`test ${this.onChangeModel}`);
+        // console.log(this);
         this.view = view;
         this.model = model;
+        this.onChangeModel(this.model.products, this.model.filter, 0, 0); //TODO 0, 0 временно, далее доработать логику и заменить переменными
+        this.model.bindChangeModel(this.onChangeModel);
         this.view.bindAddDetailAddress(this.handleAddDetailAddress);
-        this.view.bindRemoveCategory(this.handleRemoveCategory);
-        this.view.bindAddCategory(this.handleAddCategory);
-        this.view.bindRemoveBrand(this.handleRemoveBrand);
-        this.view.bindAddBrand(this.handleAddBrand);
+        //this.view.bindRemoveCategory(this.handleRemoveCategory);
+        this.view.bindAddRemoveCategory(this.handleAddRemoveCategory);
+        this.view.bindAddRemoveBrand(this.handleAddRemoveBrand);
         this.view.bindChangeMinPrice(this.handleChangeMinPrice);
         this.view.bindChangeMaxPrice(this.handleChangeMaxPrice);
         this.view.bindChangeMinStock(this.handleChangeMinStock);
         this.view.bindChangeMaxStock(this.handleChangeMaxStock);
-        this.onChangeModel(this.model.products, this.model.filter, 0, 0); //TODO 0, 0 временно, далее доработать логику и заменить переменными
-        // this.model.bindChangeModel(this.onChangeModel);
     }
 
     handleAddDetailAddress = (cardNumber: number) => {
@@ -30,20 +32,12 @@ export class ControllerMainPage {
         this.view.renderPage(products, this.model.getProductsToShow(products, filter), filter, totalCost, numProducts);
     };
 
-    handleRemoveCategory = (category: string) => {
-        this.model.removeCategory(category);
+    handleAddRemoveCategory = (category: string) => {
+        this.model.addRemoveCategory(category);
     };
 
-    handleAddCategory = (category: string) => {
-        this.model.addCategory(category);
-    };
-
-    handleRemoveBrand = (brand: string) => {
-        this.model.removeBrand(brand);
-    };
-
-    handleAddBrand = (brand: string) => {
-        this.model.addBrand(brand);
+    handleAddRemoveBrand = (brand: string) => {
+        this.model.addRemoveBrand(brand);
     };
 
     handleChangeMinPrice = (minPrice: number) => {
