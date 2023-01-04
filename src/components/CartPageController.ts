@@ -14,6 +14,7 @@ export class ControllerCartPage {
         this.view.bindFlagOfPageIncrement(this.handleCardPageIncrement);
         this.view.bindFlagOfPageDecrement(this.handleCardPageDecrement);
         this.view.bindLimitChange(this.handleLimitChange);
+        this.view.bindCodeEntrances(this.handleCodeEntrances);
         this.model.bindChangeModel(this.onChangeModel);
 
         this.onChangeModel(this.model.cartView, this.model.products, this.model.plug, this.model.summaryVars);
@@ -35,5 +36,8 @@ export class ControllerCartPage {
 
     handleLimitChange = (limit: number) => {
         this.model.handleLimitChanged(limit);
+    };
+    handleCodeEntrances = (codeValue: string) => {
+        this.model.handleCodeEntrances(codeValue);
     };
 }

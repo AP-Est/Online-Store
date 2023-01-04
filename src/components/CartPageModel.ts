@@ -163,4 +163,20 @@ export class CartPageModel {
         }
         this.commit(this.cartLots, this.products);
     }
+    handleCodeEntrances(codeValue: string) {
+        let check = true;
+        this.summaryVars.codes.map((val) => {
+            if (val.title === codeValue) {
+                check = false;
+            }
+        });
+        if (check == true) {
+            this.AvailableCodes.map((obj) => {
+                if (obj.title === codeValue) {
+                    this.summaryVars.codes.push(obj);
+                }
+            });
+        }
+        this.commit(this.cartLots, this.products);
+    }
 }

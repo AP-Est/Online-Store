@@ -43,7 +43,7 @@ export interface ISumm {
     countItems: number;
     priceTotal: number;
     priceWithCodes: number;
-    codes: ICode[] | [];
+    codes: ICode[];
 }
 
 export interface ICode {

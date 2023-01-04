@@ -222,4 +222,13 @@ export class CartPageView extends View {
             }
         });
     }
+    bindCodeEntrances(handler: (codeValue: string) => void) {
+        this.mainWrapper.addEventListener('change', (event) => {
+            const target = event.target as HTMLInputElement;
+            if (target.classList.contains('cartSummaryBlock__CodeField_input')) {
+                const codeValue = target.value;
+                handler(codeValue);
+            }
+        });
+    }
 }
