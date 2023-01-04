@@ -43,5 +43,11 @@ export interface ISumm {
     countItems: number;
     priceTotal: number;
     priceWithCodes: number;
-    codes: string[];
+    codes: ICode[] | [];
+}
+
+export interface ICode {
+    title: string;
+    description: string;
+    discount: number;
 }

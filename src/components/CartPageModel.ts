@@ -1,7 +1,7 @@
 import { IProduct, IStoreData, storeData } from '../data/data';
 import pushToLocalStorage from '../utils/pushToLocalStorage';
 import getCartItems from '../utils/getCartItems';
-import { ICartLot, IPlug, ISumm } from '../styles/types';
+import { ICartLot, ICode, IPlug, ISumm } from '../styles/types';
 import _notANull from '../utils/notANull';
 export class CartPageModel {
     products: IProduct[];
@@ -11,9 +11,14 @@ export class CartPageModel {
     onChangeModel!: CallableFunction;
     plug: IPlug;
     summaryVars: ISumm;
+    AvailableCodes: ICode[];
 
     constructor() {
         _notANull();
+        this.AvailableCodes = [
+            { title: 'AN', description: 'Andrey`s code', discount: 10 },
+            { title: 'NA', description: 'Nat`s code', discount: 10 },
+        ];
         this.plug = {
             limit: 3,
             page: 1,
@@ -23,7 +28,10 @@ export class CartPageModel {
             countItems: 0,
             priceTotal: 0,
             priceWithCodes: 0,
-            codes: ['AN', 'NA'],
+            codes: [
+                { title: 'AN', description: 'Andrey`s code', discount: 10 },
+                { title: 'NA', description: 'Nat`s code', discount: 10 },
+            ],
         };
         this._getStartNumber(this.plug);
         this.cartLots = JSON.parse(localStorage.cart) || [];
@@ -69,12 +77,18 @@ export class CartPageModel {
             return this.cartLots.reduce((acc, obj) => acc + obj.price * obj.count, 0);
         };
         const priceWithCodes = () => {
-            return this.cartLots.reduce((acc, obj) => (acc + obj.count) * 0.9, 0);
+            return priceTotal() * (100 - this._discountSummary()) * 0.01;
         };
 
         this.summaryVars.countItems = count();
         this.summaryVars.priceTotal = priceTotal();
         this.summaryVars.priceWithCodes = priceWithCodes();
+    };
+    _discountSummary = () => {
+        const arr: ICode[] = this.summaryVars.codes;
+        if (arr.length > 0) {
+            return arr.reduce((acc, obj) => acc + obj.discount, 0);
+        } else return 0;
     };
     // updateURL() {
     //     if (history.pushState) {

@@ -77,10 +77,14 @@ function createCodesBlock(summaryVars: ISumm) {
     const bodyBlockAppliedCodesBody = createElement('div', 'cartAppliedCodes__body');
     const arr = summaryVars.codes;
     arr.map((obj) => {
+        const codeWrapper = createElement('div', 'cartAppliedCodes__code');
+        codeWrapper.classList.add(obj.title);
         const codeApply = createElement('div', 'cartAppliedCodes__body_code');
-        codeApply.textContent = obj;
+        codeApply.textContent = obj.description;
         const button = createButton('DROP', 'cartAppliedCodes__button_drop');
-        bodyBlockAppliedCodesBody.append(codeApply, button);
+        button.classList.add(obj.title);
+        codeWrapper.append(codeApply, button);
+        bodyBlockAppliedCodesBody.append(codeWrapper);
     });
     return bodyBlockAppliedCodesBody;
 }
