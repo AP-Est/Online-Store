@@ -225,9 +225,19 @@ export class CartPageView extends View {
     bindCodeEntrances(handler: (codeValue: string) => void) {
         this.mainWrapper.addEventListener('change', (event) => {
             const target = event.target as HTMLInputElement;
+            console.log(target);
             if (target.classList.contains('cartSummaryBlock__CodeField_input')) {
                 const codeValue = target.value;
                 handler(codeValue);
+            }
+        });
+    }
+    bindCodeDrop(handler: (dropTitle: string) => void) {
+        this.mainWrapper.addEventListener('click', (event) => {
+            const target = event.target as HTMLButtonElement;
+            if (target.classList.contains('cartAppliedCodes__button_drop')) {
+                const dropTitle = target.id;
+                handler(dropTitle);
             }
         });
     }

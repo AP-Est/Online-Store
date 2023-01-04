@@ -179,4 +179,12 @@ export class CartPageModel {
         }
         this.commit(this.cartLots, this.products);
     }
+    HandleCodeDrop(dropTitle: string) {
+        this.summaryVars.codes = this.summaryVars.codes.filter((val) => {
+            if (val.title !== dropTitle) {
+                return val;
+            }
+        });
+        this.commit(this.cartLots, this.products);
+    }
 }

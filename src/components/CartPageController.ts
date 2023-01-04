@@ -15,6 +15,7 @@ export class ControllerCartPage {
         this.view.bindFlagOfPageDecrement(this.handleCardPageDecrement);
         this.view.bindLimitChange(this.handleLimitChange);
         this.view.bindCodeEntrances(this.handleCodeEntrances);
+        this.view.bindCodeDrop(this.HandleCodeDrop);
         this.model.bindChangeModel(this.onChangeModel);
 
         this.onChangeModel(this.model.cartView, this.model.products, this.model.plug, this.model.summaryVars);
@@ -39,5 +40,8 @@ export class ControllerCartPage {
     };
     handleCodeEntrances = (codeValue: string) => {
         this.model.handleCodeEntrances(codeValue);
+    };
+    HandleCodeDrop = (dropTitle: string) => {
+        this.model.HandleCodeDrop(dropTitle);
     };
 }

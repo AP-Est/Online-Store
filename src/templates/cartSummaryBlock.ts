@@ -82,7 +82,7 @@ function createCodesBlock(summaryVars: ISumm) {
         const codeApply = createElement('div', 'cartAppliedCodes__body_code');
         codeApply.textContent = obj.description;
         const button = createButton('DROP', 'cartAppliedCodes__button_drop');
-        button.classList.add(obj.title);
+        button.id = obj.title;
         codeWrapper.append(codeApply, button);
         bodyBlockAppliedCodesBody.append(codeWrapper);
     });
