@@ -18,6 +18,7 @@ export class CartPageModel {
             page: 1,
             startNumberID: 1,
         };
+        this._getStartNumber(this.plug);
         this.cartLots = JSON.parse(localStorage.cart) || [];
         this.cartView = [];
         this._getCartView(this.plug);
@@ -29,6 +30,9 @@ export class CartPageModel {
         this.onChangeModel = callback;
     }
     commit(cartLots: ICartLot[], products: IProduct[]) {
+        this._getStartNumber(this.plug);
+        this._getCartView(this.plug);
+        this._checkEmptyArray();
         localStorage.cart = JSON.stringify(cartLots);
         this.onChangeModel(this.cartView, products, this.plug);
     }
@@ -37,7 +41,18 @@ export class CartPageModel {
             this.cartView = this.cartLots.slice((plug.page - 1) * plug.limit, plug.page * plug.limit);
         } else this.cartView = this.cartLots;
     };
+    _getStartNumber = (plug: IPlug) => {
+        this.plug.startNumberID = plug.page * plug.limit - plug.limit + 1;
+    };
 
+    _checkEmptyArray = () => {
+        if (this.cartLots !== undefined && this.cartLots.length !== 0) {
+            while (this.cartView.length === 0) {
+                this.plug.page -= 1;
+                this._getCartView(this.plug);
+            }
+        }
+    };
     // updateURL() {
     //     if (history.pushState) {
     //         const baseUrl = window.location;
@@ -73,6 +88,9 @@ export class CartPageModel {
             .filter((obj) => {
                 return obj !== '';
             });
+        if (this.cartView.length === 1) {
+            this.plug.page -= 1;
+        }
         this.cartLots = _tempArray as ICartLot[];
         this.commit(this.cartLots, this.products);
     }
@@ -84,7 +102,6 @@ export class CartPageModel {
         if (this.cartLots.length > this.plug.page * this.plug.limit) {
             this.plug.page += 1;
         }
-        this._getCartView(this.plug);
         this.commit(this.cartLots, this.products);
     }
 
@@ -92,12 +109,15 @@ export class CartPageModel {
         if (this.plug.page > 1) {
             this.plug.page -= 1;
         }
-        this._getCartView(this.plug);
         this.commit(this.cartLots, this.products);
     }
     handleLimitChanged(limit: number) {
         this.plug.limit = limit;
-        this._getCartView(this.plug);
+        if (this.cartLots.length <= this.plug.limit) {
+            if (this.plug.page > 1) {
+                this.plug.page -= 1;
+            }
+        }
         this.commit(this.cartLots, this.products);
     }
 }

@@ -48,7 +48,7 @@ export class CartPageView extends View {
     displayCartPage(cartLots: ICartLot[], product: IProduct[], plug: IPlug) {
         this.createMainCartWrappers();
         this.buildCartProductBlockHeader(plug);
-        this.createCartProductBlockBodyMainElements(cartLots, product);
+        this.createCartProductBlockBodyMainElements(cartLots, product, plug);
         this.buildCartPage();
     }
 
@@ -84,6 +84,7 @@ export class CartPageView extends View {
         this.productBlockHeaderPlugLimitInput = createElement('input') as HTMLInputElement;
         this.productBlockHeaderPlugLimitInput.classList.add('cartProductBlock__plugLimit_input');
         this.productBlockHeaderPlugLimitInput.setAttribute('type', 'number');
+        this.productBlockHeaderPlugLimitInput.min = '1';
         this.productBlockHeaderPlugLimitInput.value = `${plug.limit}`;
         this.productBlockHeaderPlugPageChanger = createElement('div', 'cartProductBlock__plugPage');
         this.productBlockHeaderPlugPageChangerTitle = createElement('span', 'cartProductBlock__plugPage_title');
@@ -109,31 +110,31 @@ export class CartPageView extends View {
             this.productBlockHeaderPlugLimitInput
         );
     }
-    createCartProductBlockBodyMainElements(cartLots: ICartLot[], product: IProduct[]) {
+    createCartProductBlockBodyMainElements(cartLots: ICartLot[], product: IProduct[], plug: IPlug) {
         this.productBlockBody = createElement('div', 'cartProductBlock__body');
-        this.createItemsBlock(cartLots, product);
+        this.createItemsBlock(cartLots, product, plug);
     }
     createSummaryCartElements() {
         this.summaryBlockTitle = createElement('div', 'cartSummaryBlock__title');
         this.summaryBlockBody = createElement('div', 'cartSummaryBlock__body');
     }
 
-    createItemsBlock(cartLots: ICartLot[], product: IProduct[]) {
+    createItemsBlock(cartLots: ICartLot[], product: IProduct[], plug: IPlug) {
         cartLots.forEach((el, index) => {
             if (el != null) {
                 this.cartLotCard = createElement('div', 'cart__lot');
                 const _cartItem = product.filter((obj) => obj.id === el.id).shift();
                 if (_cartItem) {
-                    this.createItemCard(_cartItem, el.count, index);
+                    this.createItemCard(_cartItem, el.count, index, plug);
                 }
                 this.productBlockBody.append(this.cartLotCard);
             }
         });
     }
 
-    createItemCard(cartItem: IProduct, count: number, numberID: number) {
+    createItemCard(cartItem: IProduct, count: number, numberID: number, plug: IPlug) {
         this.itemCardNum = createElement('div', `itemCardNum`);
-        this.itemCardNum.innerText = `${numberID + 1}`; //TODO придумать как учесть плагинацию
+        this.itemCardNum.innerText = `${numberID + plug.startNumberID}`; //TODO придумать как учесть плагинацию
         this.itemCardPic = createElement('div', `itemCardPic`);
         this.itemCardPic.classList.add('itemCardPic');
         this.itemCardPicExemplar = createElement('container', 'itemCardPic__Exemplar');
