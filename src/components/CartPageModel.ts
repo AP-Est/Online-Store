@@ -46,6 +46,7 @@ export class CartPageModel {
         this.onChangeModel = callback;
     }
     commit(cartLots: ICartLot[], products: IProduct[]) {
+        this._getSummaryVars();
         this._getStartNumber(this.plug);
         this._getCartView(this.plug);
         this._checkEmptyArray();
