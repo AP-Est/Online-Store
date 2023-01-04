@@ -52,7 +52,7 @@ function createBodyBlockPrice(summaryVars: ISumm) {
 function createBodyBlockAppliedCodes(summaryVars: ISumm) {
     const bodyBlockAppliedCodes = createElement('div', 'cartSummaryBlock__AppliedCodes');
     if (summaryVars.codes.length === 0) {
-        bodyBlockAppliedCodes.classList.add('hideBlock');
+        bodyBlockAppliedCodes.id = 'hideBlock';
     }
     const title = createElement('div', 'cartSummaryBlock__codes_title');
     title.textContent = `Applied Codes`;

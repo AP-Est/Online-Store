@@ -126,7 +126,9 @@
     }
 }
 
-
+#hideBlock{
+    display: none;        
+}
 
 
 .cartSummaryBlock {
@@ -168,6 +170,9 @@
         font-weight: bold;
         color: rgb(127, 127, 25);
     }
+    .wrongPrice{
+        text-decoration: line-through;
+    }
     .cartSummaryBlock__AppliedCodes {
         display: flex;
         flex-direction: column;
@@ -197,6 +202,7 @@
                 }             
             }
         }
+
     }
     .cartSummaryBlock__CodeField {
         .cartSummaryBlock__CodeField_input {
@@ -214,12 +220,4 @@
         }
     }
     
-}
-
-.wrongPrice{
-    text-decoration: line-through;
-}
-.hideBlock{
-    display: none;
-
 }
