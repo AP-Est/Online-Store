@@ -39,3 +39,9 @@ export interface IPlug {
     page: number;
     startNumberID: number;
 }
+export interface ISumm {
+    countItems: number;
+    priceTotal: number;
+    priceWithCodes: number;
+    codes: string[];
+}

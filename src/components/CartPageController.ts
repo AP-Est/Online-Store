@@ -1,6 +1,6 @@
 import { CartPageView } from 'CartPageView';
 import { CartPageModel } from 'CartPageModel';
-import { ICartLot, IProduct, IPlug } from '../styles/types';
+import { ICartLot, IProduct, IPlug, ISumm } from '../styles/types';
 
 export class ControllerCartPage {
     view: CartPageView;
@@ -16,11 +16,11 @@ export class ControllerCartPage {
         this.view.bindLimitChange(this.handleLimitChange);
         this.model.bindChangeModel(this.onChangeModel);
 
-        this.onChangeModel(this.model.cartView, this.model.products, this.model.plug);
+        this.onChangeModel(this.model.cartView, this.model.products, this.model.plug, this.model.summaryVars);
     }
 
-    onChangeModel = (cartLots: ICartLot[], products: IProduct[], plug: IPlug) => {
-        this.view.displayCartPage(cartLots, products, plug);
+    onChangeModel = (cartLots: ICartLot[], products: IProduct[], plug: IPlug, summaryVars: ISumm) => {
+        this.view.displayCartPage(cartLots, products, plug, summaryVars);
     };
 
     handleCardItemIncrement = (productId: number) => {

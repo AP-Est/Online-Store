@@ -1,8 +1,9 @@
 import '../styles/styleCartPage.scss';
-import { IProduct, ICartLot, IPlug } from '../styles/types';
+import { IProduct, ICartLot, IPlug, ISumm } from '../styles/types';
 import { View } from './BaseView';
 //import createButton from '../utils/createButton';
 import createElement from '../utils/createElement';
+import buildSummaryContent from '../templates/cartSummaryBlock';
 
 export class CartPageView extends View {
     cartWrapper!: HTMLElement;
@@ -45,8 +46,8 @@ export class CartPageView extends View {
         super();
     }
     //TODO TEЛO
-    displayCartPage(cartLots: ICartLot[], product: IProduct[], plug: IPlug) {
-        this.createMainCartWrappers();
+    displayCartPage(cartLots: ICartLot[], product: IProduct[], plug: IPlug, summaryVars: ISumm) {
+        this.createMainCartWrappers(summaryVars);
         this.buildCartProductBlockHeader(plug);
         this.createCartProductBlockBodyMainElements(cartLots, product, plug);
         this.buildCartPage();
@@ -62,10 +63,10 @@ export class CartPageView extends View {
         this.createCartProductBlockBodyHeaderElements(plug);
         this.productBlockHeader.append(this.productBlockHeaderTitle, this.productBlockHeaderPlug);
     }
-    createMainCartWrappers() {
+    createMainCartWrappers(summaryVars: ISumm) {
         this.cartWrapper = createElement('div', 'cart__wrapper');
         this.productBlock = createElement('div', 'cartProductBlock');
-        this.summaryBlock = createElement('div', 'cartSummaryBlock');
+        this.summaryBlock = buildSummaryContent(summaryVars);
     }
 
     createCartProductBlockBodyHeaderElements(plug: IPlug) {

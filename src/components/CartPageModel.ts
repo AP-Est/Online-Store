@@ -1,7 +1,7 @@
 import { IProduct, IStoreData, storeData } from '../data/data';
 import pushToLocalStorage from '../utils/pushToLocalStorage';
 import getCartItems from '../utils/getCartItems';
-import { ICartLot, IPlug } from '../styles/types';
+import { ICartLot, IPlug, ISumm } from '../styles/types';
 import _notANull from '../utils/notANull';
 export class CartPageModel {
     products: IProduct[];
@@ -10,6 +10,7 @@ export class CartPageModel {
     storeData: IStoreData;
     onChangeModel!: CallableFunction;
     plug: IPlug;
+    summaryVars: ISumm;
 
     constructor() {
         _notANull();
@@ -18,10 +19,17 @@ export class CartPageModel {
             page: 1,
             startNumberID: 1,
         };
+        this.summaryVars = {
+            countItems: 0,
+            priceTotal: 0,
+            priceWithCodes: 0,
+            codes: ['AN', 'NA'],
+        };
         this._getStartNumber(this.plug);
         this.cartLots = JSON.parse(localStorage.cart) || [];
         this.cartView = [];
         this._getCartView(this.plug);
+        this._getSummaryVars();
         this.storeData = storeData;
         this.products = storeData.products;
         //this.updateURL();
@@ -34,7 +42,7 @@ export class CartPageModel {
         this._getCartView(this.plug);
         this._checkEmptyArray();
         localStorage.cart = JSON.stringify(cartLots);
-        this.onChangeModel(this.cartView, products, this.plug);
+        this.onChangeModel(this.cartView, products, this.plug, this.summaryVars);
     }
     _getCartView = (plug: IPlug) => {
         if (this.cartLots.length > plug.limit) {
@@ -53,6 +61,21 @@ export class CartPageModel {
             }
         }
     };
+    _getSummaryVars = () => {
+        const count = () => {
+            return this.cartLots.reduce((acc, obj) => acc + obj.count, 0);
+        };
+        const priceTotal = () => {
+            return this.cartLots.reduce((acc, obj) => acc + obj.price * obj.count, 0);
+        };
+        const priceWithCodes = () => {
+            return this.cartLots.reduce((acc, obj) => (acc + obj.count) * 0.9, 0);
+        };
+
+        this.summaryVars.countItems = count();
+        this.summaryVars.priceTotal = priceTotal();
+        this.summaryVars.priceWithCodes = priceWithCodes();
+    };
     // updateURL() {
     //     if (history.pushState) {
     //         const baseUrl = window.location;
@@ -64,8 +87,14 @@ export class CartPageModel {
     // }
 
     handleCardItemIncrement(productId: number) {
-        this.cartLots.forEach((obj) => {
+        let maxCount: number;
+        this.products.forEach((obj) => {
             if (obj.id === productId) {
+                maxCount = obj.stock;
+            }
+        });
+        this.cartLots.forEach((obj) => {
+            if (obj.id === productId && obj.count < maxCount) {
                 obj.count += 1;
             }
             return obj;
