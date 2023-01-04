@@ -37,4 +37,5 @@ export interface IFilterData {
 export interface IPlug {
     limit: number;
     page: number;
+    startNumberID: number;
 }

@@ -16,12 +16,14 @@ export class CartPageModel {
         this.plug = {
             limit: 3,
             page: 1,
+            startNumberID: 1,
         };
         this.cartLots = JSON.parse(localStorage.cart) || [];
         this.cartView = [];
         this._getCartView(this.plug);
         this.storeData = storeData;
         this.products = storeData.products;
+        //this.updateURL();
     }
     bindChangeModel(callback: CallableFunction) {
         this.onChangeModel = callback;
@@ -36,11 +38,17 @@ export class CartPageModel {
         } else this.cartView = this.cartLots;
     };
 
-    bindPushToLocalStorage(productId: number) {
-        pushToLocalStorage(productId);
-    }
+    // updateURL() {
+    //     if (history.pushState) {
+    //         const baseUrl = window.location;
+    //         const newUrl = baseUrl + `?limit:${this.plug.limit}&page:${this.plug.page}`;
+    //         history.pushState(null, 'null', newUrl);
+    //     } else {
+    //         console.warn('History API не поддерживается');
+    //     }
+    // }
+
     handleCardItemIncrement(productId: number) {
-        //cardItemIncrement(productId);
         this.cartLots.forEach((obj) => {
             if (obj.id === productId) {
                 obj.count += 1;
@@ -75,7 +83,6 @@ export class CartPageModel {
     handlePageIncrement() {
         if (this.cartLots.length > this.plug.page * this.plug.limit) {
             this.plug.page += 1;
-            console.log('plus', this.plug.page);
         }
         this._getCartView(this.plug);
         this.commit(this.cartLots, this.products);
@@ -84,7 +91,6 @@ export class CartPageModel {
     handlePageDecrement() {
         if (this.plug.page > 1) {
             this.plug.page -= 1;
-            console.log('min', this.plug.page);
         }
         this._getCartView(this.plug);
         this.commit(this.cartLots, this.products);
