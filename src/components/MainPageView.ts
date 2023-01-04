@@ -27,7 +27,8 @@ export class MainPageView extends View {
             if (target.classList.contains('checkBoxStyleCategory')) {
                 //console.log('target.classList bindAddCategory', target.classList);
                 const category = target.nextElementSibling?.textContent as string;
-                handler(category);
+                const categoryWithoutNumbers = category.split(' ')[0];
+                handler(categoryWithoutNumbers);
             }
             //console.log('bindAddCategory modelFilter end:', this.modelFilter1);
         });
@@ -40,8 +41,11 @@ export class MainPageView extends View {
         this.mainWrapper.addEventListener('change', (event) => {
             const target = event.target as HTMLElement;
             if (target.classList.contains('checkBoxStyleBrand')) {
+                //console.log('target.classList bindAddCategory', target.classList);
                 const brand = target.nextElementSibling?.textContent as string;
-                handler(brand);
+                const brandWithoutNumbers = brand.split(' ')[0];
+                //console.log('bindAddRemoveBrand brand', brandWithoutNumbers);
+                handler(brandWithoutNumbers);
             }
         });
     }
