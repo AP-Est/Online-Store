@@ -1,3 +1,4 @@
+@import '/src/styles/styleSliders.scss';
 // * {
 //     outline: 2px solid salmon;
 // }
@@ -128,6 +129,46 @@ p{
   height: 50px;
   border-bottom: 1px solid yellow;
   background: gray;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.sort{
+    // width: 100px;
+    // height: 50px;
+    border: 1px solid yellow;
+    border-radius: 10px;
+}
+
+.sort__select{
+    border-radius: 10px;
+    border: 1px solid yellow;
+    background-color: darkolivegreen;
+    text-align: center;
+}
+
+.found{
+    width: 100px;
+    height: 50px;  
+    display: flex;
+    align-items: center;
+    font-family: $mainFontFamily;
+    font-size: $mainFontSize * 1.2;
+}
+
+.search{
+    // width: 100px;
+    // height: 50px;
+    border: 1px solid yellow;
+    border-radius: 10px;
+}
+
+.search__input{
+    border: 1px solid yellow;
+    border-radius: 10px;
+    background-color: darkolivegreen;
+    text-align: center;
 }
 
 .cards{
@@ -144,4 +185,30 @@ p{
   height: 100px;
   border: 1px solid black;
   border-radius: 10px;
+}
+
+.wrapper__filtersGoods {
+    background-color: rgb(87, 65, 161);
+    font-size: $mainFontSize;
+    border-radius: $mainBorderRadius;
+    display: flex;
+}
+
+.noneVisible{
+    color: gray;
+    opacity: 0.7;
+}
+
+.opacity{
+    opacity: 0.7;
+}
+
+.chBoxLabel{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.filterLi{
+    display: flex;
 }
