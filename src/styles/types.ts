@@ -37,4 +37,17 @@ export interface IFilterData {
 export interface IPlug {
     limit: number;
     page: number;
+    startNumberID: number;
+}
+export interface ISumm {
+    countItems: number;
+    priceTotal: number;
+    priceWithCodes: number;
+    codes: ICode[];
+}
+
+export interface ICode {
+    title: string;
+    description: string;
+    discount: number;
 }

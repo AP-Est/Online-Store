@@ -103,7 +103,7 @@ export class MainPageView extends View {
     ) {
         //отрисовка MainPage
 
-        console.log('renderPage');
+        //console.log('renderPage');
 
         this.mainWrapper.innerHTML = '';
         const filters = displayFilter(products, filter, productsFiltered);
