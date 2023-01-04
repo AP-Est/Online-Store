@@ -46,6 +46,13 @@ export class MainPageModel {
         //console.log('add category filter:');
     }
 
+    addSearch(searchString: string) {
+        this.filter.search = searchString;
+        console.log('addSearch this.filter', this.filter);
+        this.onChangeModel(this.products, this.filter, 0, 0);
+        //console.log('add category filter:');
+    }
+
     changeMinPrice(minPrice: number) {
         this.filter.minPrice = minPrice;
         this.onChangeModel(this.products, this.filter, 0, 0);

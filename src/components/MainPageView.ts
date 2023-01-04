@@ -94,6 +94,18 @@ export class MainPageView extends View {
         //handler(0);
     }
 
+    bindSearch(handler: (searchString: string) => void) {
+        // обработчик выбора новой категории
+
+        this.mainWrapper.addEventListener('input', (event) => {
+            const target = event.target as HTMLInputElement;
+            if (target.classList.contains('search__input')) {
+                const searchString = target.value;
+                handler(searchString);
+            }
+        });
+    }
+
     renderPage(
         products: IProduct[],
         productsFiltered: IProduct[],
@@ -107,7 +119,7 @@ export class MainPageView extends View {
 
         this.mainWrapper.innerHTML = '';
         const filters = displayFilter(products, filter, productsFiltered);
-        const goods = displayCards(productsFiltered);
+        const goods = displayCards(productsFiltered, filter);
 
         this.mainWrapper.append(filters, goods);
     }
