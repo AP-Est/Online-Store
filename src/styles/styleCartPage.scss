@@ -126,7 +126,9 @@
     }
 }
 
-
+#hideBlock{
+    display: none;        
+}
 
 
 .cartSummaryBlock {
@@ -135,4 +137,87 @@
     background-color: rgb(47, 39, 106);
     border-radius: $mainBorderRadius;
     margin: 10px;
+    overflow: hidden;
+    .cartSummaryBlock__title {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        background-color: rgb(159, 44, 123);
+        height: 7vh;    
+        font-size: $bigFontSize;
+        font-weight: bold;
+        .cartSummaryTitle {
+            color: rgb(8, 0, 0);
+            margin: 10px;
+        }
+
+    }
+    .cartSummaryBlock__ProductCount {
+        display: flex;
+        justify-content: space-around;
+        margin: 10px;
+        font-size: $bigFontSize;
+
+    }
+    .cartSummaryBlock__Price {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        margin: 10px;
+        font-size: $mainFontSize;   
+        font-size: $bigFontSize; 
+        font-weight: bold;
+        color: rgb(127, 127, 25);
+    }
+    .wrongPrice{
+        text-decoration: line-through;
+    }
+    .cartSummaryBlock__AppliedCodes {
+        display: flex;
+        flex-direction: column;
+        border: $borderMain;
+        margin: 10px;
+        border-radius: $mainBorderRadius;
+
+        .cartSummaryBlock__codes_title {
+            font-size: $bigFontSize;
+            font-weight: bold;
+            margin: 10px;
+        }
+        .cartAppliedCodes__body {
+            display: flex;
+            flex-direction: column;
+            .cartAppliedCodes__code {
+                display: flex;
+                align-items: center;
+                .cartAppliedCodes__body_code {
+                    margin: 10px; 
+                }
+                .cartAppliedCodes__button_drop {
+                    background-color: aquamarine;
+                    font-weight: bold;
+                    border-radius: $smallBorderRadius;
+                    height: 2vh;
+                }             
+            }
+        }
+
+    }
+    .cartSummaryBlock__CodeField {
+        .cartSummaryBlock__CodeField_input {
+            border: $borderMain;
+            border-radius: $mainBorderRadius;
+            height: 2vh;
+            margin: 10px;
+        }
+    }
+    .cartSummaryBlock__Button {
+        .cartSummaryBlock__Button{
+            border: $borderMain;
+            border-radius: $mainBorderRadius;
+            margin: 10px;
+        }
+    }
+    
 }

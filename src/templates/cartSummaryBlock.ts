@@ -12,7 +12,7 @@ export default function buildSummaryContent(summaryVars: ISumm) {
 
 function createSummaryTitle() {
     const titleMainBlock = createElement('div', 'cartSummaryBlock__title');
-    const titleText = createElement('h2', 'cartSummaryTitle');
+    const titleText = createElement('span', 'cartSummaryTitle');
     titleText.textContent = 'Summary';
     titleMainBlock.append(titleText);
     return titleMainBlock;
@@ -51,6 +51,9 @@ function createBodyBlockPrice(summaryVars: ISumm) {
 
 function createBodyBlockAppliedCodes(summaryVars: ISumm) {
     const bodyBlockAppliedCodes = createElement('div', 'cartSummaryBlock__AppliedCodes');
+    if (summaryVars.codes.length === 0) {
+        bodyBlockAppliedCodes.id = 'hideBlock';
+    }
     const title = createElement('div', 'cartSummaryBlock__codes_title');
     title.textContent = `Applied Codes`;
     const codes = createCodesBlock(summaryVars);
@@ -61,7 +64,6 @@ function createBodyBlockAppliedCodes(summaryVars: ISumm) {
 function createBodyBlockCodeField() {
     const bodyBlockCodeField = createElement('div', 'cartSummaryBlock__CodeField');
     const inputArea = createElement('input', 'cartSummaryBlock__CodeField_input');
-
     bodyBlockCodeField.append(inputArea);
     return bodyBlockCodeField;
 }
