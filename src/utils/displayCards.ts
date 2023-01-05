@@ -1,7 +1,7 @@
 import createElement from './createElement';
-import { IProduct } from '../data/data';
+import { IProduct, IFilterData } from '../data/data';
 
-export default function displayCards(productsFiltered: IProduct[]) {
+export default function displayCards(productsFiltered: IProduct[], filter: IFilterData) {
     const goods = createElement('div', 'goods');
     const top = createElement('div', 'top');
 
@@ -35,7 +35,12 @@ export default function displayCards(productsFiltered: IProduct[]) {
 
     const search = createElement('div', 'search');
     const searchInput = createElement('input', 'search__input') as HTMLInputElement;
+    searchInput.type = 'text';
     searchInput.placeholder = 'Search product';
+    searchInput.value = filter.search;
+    // searchInput.focus();
+    // searchInput.select();
+    //searchInput.setSelectionRange(1, 1);
 
     const cards = createElement('div', 'cards');
     const cardDiv = [];

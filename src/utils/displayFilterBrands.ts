@@ -10,13 +10,14 @@ export default function displayFilterBrands(products: IProduct[], filter: IFilte
     filterBrandsHeader.innerText = 'Brand';
     //const filterBrandsArray = filterArray('brand');
     const filterBrandsArray = Array.from(new Set(products.map((item) => item.brand)));
-    //console.log('displayFilterBrands filter', filter);
+    console.log('displayFilterBrands filter:', filter);
     filterBrandsWrapper.append(filterBrandsHeader);
     const filterBrandUl = createElement('ul');
     for (let i = 0; i < filterBrandsArray.length; i++) {
         const filterBrandLi = createElement('li');
         filterBrandLi.classList.add('filterLi');
         const unreadyTitles = filterBrandsArray[i] as string;
+        //console.log('displayFilterBrands unreadyTitles:', unreadyTitles);
         const brandTitle = unreadyTitles.split(' ').join('');
         const filterBrandsChBox = document.createElement('input');
         filterBrandsChBox.classList.add('checkBoxStyleBrand');
@@ -30,7 +31,7 @@ export default function displayFilterBrands(products: IProduct[], filter: IFilte
         const filterBrandChBoxLabelCount = document.createElement('label');
         const numberAllProducts = products.filter((item) => item.brand === unreadyTitles).length;
         const numberFilteredProducts = productsFiltered.filter((item) => item.brand === unreadyTitles).length;
-        filterBrandChBoxLabelCount.textContent = ` (${numberFilteredProducts}/${numberAllProducts})`;
+        filterBrandChBoxLabelCount.textContent = `  (${numberFilteredProducts}/${numberAllProducts})`;
         filterBrandChBoxLabel.classList.add('opacity');
         //filterBrandChBoxLabel.classList.add(`filterBrandsBoxLabel__${brandTitle}`);
         filterBrandChBoxLabelName.htmlFor = `filterBrandsBox__${brandTitle}`;

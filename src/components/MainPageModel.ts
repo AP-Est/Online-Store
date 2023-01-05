@@ -46,6 +46,19 @@ export class MainPageModel {
         //console.log('add category filter:');
     }
 
+    addSearch(searchString: string) {
+        this.filter.search = searchString;
+        //console.log('addSearch this.filter', this.filter);
+        this.onChangeModel(this.products, this.filter, 0, 0);
+        //console.log('add category filter:');
+    }
+
+    addSort(sortString: string) {
+        this.filter.sort = sortString;
+        console.log('addSort filter:', this.filter);
+        this.onChangeModel(this.products, this.filter, 0, 0);
+    }
+
     changeMinPrice(minPrice: number) {
         this.filter.minPrice = minPrice;
         this.onChangeModel(this.products, this.filter, 0, 0);
@@ -100,6 +113,52 @@ export class MainPageModel {
         return productsFiltered;
     }
 
+    filterBySearch(products: IProduct[], searchString: string) {
+        if (searchString === '') return products;
+        const searchUpper = searchString.toUpperCase();
+        const productsFiltered = products.filter(
+            (item) =>
+                item.title.toUpperCase().includes(searchUpper) ||
+                item.description.toUpperCase().includes(searchUpper) ||
+                String(item.price).toUpperCase().includes(searchUpper) ||
+                String(item.discountPercentage).toUpperCase().includes(searchUpper) ||
+                String(item.rating).toUpperCase().includes(searchUpper) ||
+                String(item.stock).toUpperCase().includes(searchUpper) ||
+                item.brand.toUpperCase().includes(searchUpper) ||
+                item.category.toUpperCase().includes(searchUpper)
+        );
+        return productsFiltered;
+    }
+
+    sorting(products: IProduct[], sortString: string) {
+        if (sortString === '') return products;
+        if (sortString === 'PriceASC') {
+            products.sort((item1, item2) => item1.price - item2.price);
+            console.log('sorting products:', products);
+        }
+        if (sortString === 'PriceDESC') {
+            products.sort((item1, item2) => item2.price - item1.price);
+            console.log('sorting products:', products);
+        }
+        if (sortString === 'RatingASC') {
+            products.sort((item1, item2) => item1.rating - item2.rating);
+            console.log('sorting products:', products);
+        }
+        if (sortString === 'RatingDESC') {
+            products.sort((item1, item2) => item2.rating - item1.rating);
+            console.log('sorting products:', products);
+        }
+        if (sortString === 'DiscountASC') {
+            products.sort((item1, item2) => item1.discountPercentage - item2.discountPercentage);
+            console.log('sorting products:', products);
+        }
+        if (sortString === 'DiscountDESC') {
+            products.sort((item1, item2) => item2.discountPercentage - item1.discountPercentage);
+            console.log('sorting products:', products);
+        }
+        return products;
+    }
+
     filterPrice(products: IProduct[], minPrice: number | null, maxPrice: number | null) {
         if (minPrice === null && maxPrice === null) return products;
         const productsFiltered = this.products.filter((cur) => {
@@ -140,15 +199,21 @@ export class MainPageModel {
         // );
         const productFilteredByCategory: IProduct[] = this.filterByCategory(products, filter.categories);
         const productFilteredByBrand: IProduct[] = this.filterByBrand(products, filter.brands);
+        const productFilteredBySearch: IProduct[] = this.filterBySearch(products, filter.search);
         const productFiltered: IProduct[] = [];
         productFilteredByCategory.map((itemCategory) => {
             productFilteredByBrand.map((itemBrand) => {
                 if (itemBrand === itemCategory) {
-                    productFiltered.push(itemBrand);
+                    productFilteredBySearch.map((itemSearch) => {
+                        if (itemBrand === itemSearch) {
+                            productFiltered.push(itemBrand);
+                        }
+                    });
                 }
             });
         });
-        return productFiltered;
+        //console.log('productFiltered', productFiltered);
+        return this.sorting(productFiltered, filter.sort);
     }
 
     bindChangeModel(

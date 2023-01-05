@@ -31,7 +31,7 @@ export default function displayFilterCategory(products: IProduct[], filter: IFil
         const filterCategoryChBoxLabelCount = document.createElement('label');
         const numberAllProducts = products.filter((item) => item.category === title).length;
         const numberFilteredProducts = productsFiltered.filter((item) => item.category === title).length;
-        filterCategoryChBoxLabelCount.textContent = ` (${numberFilteredProducts}/${numberAllProducts})`;
+        filterCategoryChBoxLabelCount.textContent = `  (${numberFilteredProducts}/${numberAllProducts})`;
         filterCategoryChBoxLabel.classList.add(`filterCategoryBoxLabel`);
         //filterCategoryChBoxLabel.classList.add(`filterCategoryBoxLabel__${filterCategoryArray[i]}`);
         filterCategoryChBoxLabelName.htmlFor = `filterCategoryBox__${filterCategoryArray[i]}`;
