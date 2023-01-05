@@ -38,8 +38,9 @@ export default function displayCards(productsFiltered: IProduct[], filter: IFilt
     searchInput.type = 'text';
     searchInput.placeholder = 'Search product';
     searchInput.value = filter.search;
-    searchInput.focus();
-    searchInput.setSelectionRange(1, 1);
+    // searchInput.focus();
+    // searchInput.select();
+    //searchInput.setSelectionRange(1, 1);
 
     const cards = createElement('div', 'cards');
     const cardDiv = [];

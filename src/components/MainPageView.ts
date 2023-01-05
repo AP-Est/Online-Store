@@ -27,7 +27,7 @@ export class MainPageView extends View {
             if (target.classList.contains('checkBoxStyleCategory')) {
                 //console.log('target.classList bindAddCategory', target.classList);
                 const category = target.nextElementSibling?.textContent as string;
-                const categoryWithoutNumbers = category.split(' ')[0];
+                const categoryWithoutNumbers = category.split('  ')[0];
                 handler(categoryWithoutNumbers);
             }
             //console.log('bindAddCategory modelFilter end:', this.modelFilter1);
@@ -43,7 +43,7 @@ export class MainPageView extends View {
             if (target.classList.contains('checkBoxStyleBrand')) {
                 //console.log('target.classList bindAddCategory', target.classList);
                 const brand = target.nextElementSibling?.textContent as string;
-                const brandWithoutNumbers = brand.split(' ')[0];
+                const brandWithoutNumbers = brand.split('  ')[0];
                 //console.log('bindAddRemoveBrand brand', brandWithoutNumbers);
                 handler(brandWithoutNumbers);
             }
@@ -95,13 +95,26 @@ export class MainPageView extends View {
     }
 
     bindSearch(handler: (searchString: string) => void) {
-        // обработчик выбора новой категории
+        // обработчик поиска
 
         this.mainWrapper.addEventListener('input', (event) => {
             const target = event.target as HTMLInputElement;
             if (target.classList.contains('search__input')) {
                 const searchString = target.value;
                 handler(searchString);
+            }
+        });
+    }
+
+    bindSort(handler: (sortString: string) => void) {
+        // обработчик сортировки
+
+        this.mainWrapper.addEventListener('change', (event) => {
+            const target = event.target as HTMLInputElement;
+            if (target.classList.contains('sort__select')) {
+                const sortString = target.value;
+                console.log('sortString:', sortString);
+                handler(sortString);
             }
         });
     }
@@ -122,5 +135,6 @@ export class MainPageView extends View {
         const goods = displayCards(productsFiltered, filter);
 
         this.mainWrapper.append(filters, goods);
+        (goods.querySelector('.search__input') as HTMLInputElement).focus();
     }
 }
