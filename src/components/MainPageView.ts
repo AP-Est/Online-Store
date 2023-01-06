@@ -125,34 +125,6 @@ export class MainPageView extends View {
         window.addEventListener('load', () => {
             console.log('loadPage window.location.search:', window.location.search);
             const locationSearch = window.location.search;
-            /* if (locationSearch !== '') {
-                let stringCategory = '';
-                let stringBrand = '';
-                let stringSearch = '';
-                let stringSort = '';
-                if (locationSearch.includes('category=')) {
-                    const posCategory = locationSearch.indexOf('category=');
-                    if (locationSearch.includes('brand=')) {
-                        const posBrand = locationSearch.indexOf('brand=');
-                        stringCategory = locationSearch.slice(posCategory + 9, posBrand);
-                        if (locationSearch.includes('search=')) {
-                            const posSearch = locationSearch.indexOf('search=');
-                            stringBrand = locationSearch.slice(posBrand + 6, posSearch);
-                            if (locationSearch.includes('sort=')) {
-                                const posSort = locationSearch.indexOf('sort=');
-                                stringSearch = locationSearch.slice(posSearch + 7, posSort);
-                                stringSort = locationSearch.slice(posSort + 6);
-                            } else {
-                                stringSearch = locationSearch.slice(posSearch + 7);
-                            }
-                        } else {
-                            stringBrand = locationSearch.slice(posBrand + 6);
-                        }
-                    } else {
-                        stringCategory = locationSearch.slice(posCategory + 9);
-                    }
-                    //console.log('stringCategory', stringCategory.split('_'));
-                } */
 
             if (locationSearch !== '') {
                 let stringCategory = '';
