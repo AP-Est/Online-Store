@@ -28,6 +28,7 @@ export class MainPageView extends View {
                 //console.log('target.classList bindAddCategory', target.classList);
                 const category = target.nextElementSibling?.textContent as string;
                 const categoryWithoutNumbers = category.split('  ')[0];
+                console.log('bindAddRemoveCategory categoryWithoutNumbers', categoryWithoutNumbers);
                 handler(categoryWithoutNumbers);
             }
             //console.log('bindAddCategory modelFilter end:', this.modelFilter1);
@@ -119,6 +120,74 @@ export class MainPageView extends View {
         });
     }
 
+    bindLoadPage(handler: (filter: IFilterData) => void) {
+        // обработчик сортировки
+        window.addEventListener('load', () => {
+            console.log('loadPage window.location.search:', window.location.search);
+            const locationSearch = window.location.search;
+
+            if (locationSearch !== '') {
+                let stringCategory = '';
+                let stringBrand = '';
+                let stringSearch = '';
+                let stringSort = '';
+
+                if (locationSearch.includes('category=')) {
+                    const posCategoryStart = locationSearch.indexOf('category=');
+                    if (locationSearch.includes('&', posCategoryStart)) {
+                        const posCategoryEnd = locationSearch.indexOf('&', posCategoryStart);
+                        stringCategory = locationSearch.slice(posCategoryStart + 9, posCategoryEnd);
+                    } else {
+                        stringCategory = locationSearch.slice(posCategoryStart + 9);
+                    }
+                }
+                if (locationSearch.includes('brand=')) {
+                    const posBrandStart = locationSearch.indexOf('brand=');
+                    if (locationSearch.includes('&', posBrandStart)) {
+                        const posCategoryEnd = locationSearch.indexOf('&', posBrandStart);
+                        stringBrand = locationSearch.slice(posBrandStart + 6, posCategoryEnd);
+                    } else {
+                        stringBrand = locationSearch.slice(posBrandStart + 6);
+                    }
+                }
+                if (locationSearch.includes('search=')) {
+                    const posSearchStart = locationSearch.indexOf('search=');
+                    if (locationSearch.includes('&', posSearchStart)) {
+                        const posSearchEnd = locationSearch.indexOf('&', posSearchStart);
+                        stringSearch = locationSearch.slice(posSearchStart + 7, posSearchEnd);
+                    } else {
+                        stringSearch = locationSearch.slice(posSearchStart + 7);
+                    }
+                }
+                if (locationSearch.includes('sort=')) {
+                    const posSortStart = locationSearch.indexOf('sort=');
+                    if (locationSearch.includes('&', posSortStart)) {
+                        const posSortEnd = locationSearch.indexOf('&', posSortStart);
+                        stringSort = locationSearch.slice(posSortStart + 5, posSortEnd);
+                    } else {
+                        stringSort = locationSearch.slice(posSortStart + 5);
+                    }
+                }
+                console.log('stringCategory', stringCategory);
+                console.log('stringBrand', stringBrand);
+                console.log('stringSearch', stringSearch);
+                console.log('stringSort', stringSearch);
+                const filter = {
+                    categories: stringCategory === '' ? [] : stringCategory.split('_'),
+                    brands: stringBrand === '' ? [] : stringBrand.split('_'),
+                    minPrice: null,
+                    maxPrice: null,
+                    minStock: null,
+                    maxStock: null,
+                    search: stringSearch,
+                    sort: stringSort,
+                };
+                handler(filter);
+                console.log('bindLoadPage filter', filter);
+            }
+        });
+    }
+
     renderPage(
         products: IProduct[],
         productsFiltered: IProduct[],
@@ -128,7 +197,7 @@ export class MainPageView extends View {
     ) {
         //отрисовка MainPage
 
-        //console.log('renderPage');
+        console.log('renderPage filter', filter);
 
         this.mainWrapper.innerHTML = '';
         const filters = displayFilter(products, filter, productsFiltered);

@@ -10,7 +10,7 @@ export default function displayFilterBrands(products: IProduct[], filter: IFilte
     filterBrandsHeader.innerText = 'Brand';
     //const filterBrandsArray = filterArray('brand');
     const filterBrandsArray = Array.from(new Set(products.map((item) => item.brand)));
-    console.log('displayFilterBrands filter:', filter);
+    //console.log('displayFilterBrands filter:', filter);
     filterBrandsWrapper.append(filterBrandsHeader);
     const filterBrandUl = createElement('ul');
     for (let i = 0; i < filterBrandsArray.length; i++) {

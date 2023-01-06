@@ -24,6 +24,7 @@ export class ControllerMainPage {
         this.view.bindChangeMaxStock(this.handleChangeMaxStock);
         this.view.bindSearch(this.handleSearch);
         this.view.bindSort(this.handleSort);
+        this.view.bindLoadPage(this.handleLoadPage);
     }
 
     handleAddDetailAddress = (cardNumber: number) => {
@@ -48,6 +49,10 @@ export class ControllerMainPage {
 
     handleSort = (sortString: string) => {
         this.model.addSort(sortString);
+    };
+
+    handleLoadPage = (filter: IFilterData) => {
+        this.model.addFilter(filter);
     };
 
     handleChangeMinPrice = (minPrice: number) => {
