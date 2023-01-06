@@ -40,12 +40,63 @@ ul {
     background-color: rgb(176, 86, 166);
 
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;   
     font-size: $bigFontSize;
     height: 5vh;
 
     border-radius: $mainBorderRadius;
+}
+
+.footer__github{
+    width: 100px;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: $mainBorderRadius;
+
+}
+
+.footer__githubOne{
+    background: url(../source/img/github1.jpg);
+    width: 45%;
+    height: 100%;
+    border-radius: $mainBorderRadius;
+    background-size: contain;
+    background-position: bottom;
+}
+.footer__githubOne:hover{
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.footer__githubTwo{
+    background: url(../source/img/github2.png);
+    width: 45%;
+    height: 100%;
+    border-radius: $mainBorderRadius;
+    background-size: contain;
+    background-position: bottom;
+}
+.footer__githubTwo:hover{
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.footer__school{
+    background: url(../source/img/rs_school_js.png);
+    width: 70px;
+    height: 100%;
+    border-radius: $mainBorderRadius;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.footer__school:hover{
+    cursor: pointer;
+    opacity: 0.7;
 }
 
 .header__logo_link {
