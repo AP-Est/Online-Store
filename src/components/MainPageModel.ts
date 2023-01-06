@@ -4,7 +4,7 @@ import setQueryParameters from '../utils/setQueryParameters';
 export class MainPageModel {
     products: IProduct[];
     filter: IFilterData;
-    onChangeModel: any;
+    onChangeModel: (products: IProduct[], filter: IFilterData, totalCost: number, numProducts: number) => void;
 
     constructor() {
         this.onChangeModel = () => {
