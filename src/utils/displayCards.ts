@@ -10,7 +10,11 @@ export default function displayCards(productsFiltered: IProduct[], filter: IFilt
     sortSelect.name = 'sortProducts';
     const sortOptionTitle = createElement('option', 'sort__option') as HTMLOptionElement;
     sortOptionTitle.value = '';
-    sortOptionTitle.textContent = 'Sort options:';
+    if (filter.sort === '') {
+        sortOptionTitle.textContent = 'Sort options:';
+    } else {
+        sortOptionTitle.textContent = filter.sort;
+    }
     const sortOptionPriceASC = createElement('option', 'sort__option') as HTMLOptionElement;
     sortOptionPriceASC.value = 'PriceASC';
     sortOptionPriceASC.textContent = 'Sort by price ASC';

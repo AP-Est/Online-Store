@@ -1,4 +1,5 @@
 import { storeData, IProduct, IFilterData } from '../data/data';
+import setQueryParameters from '../utils/setQueryParameters';
 
 export class MainPageModel {
     products: IProduct[];
@@ -23,15 +24,20 @@ export class MainPageModel {
     }
 
     addRemoveCategory(category: string) {
+        //const url = new URL(location.href);
+        //location.search = '';
         if (this.filter.categories.includes(category)) {
             this.filter.categories = this.filter.categories.filter((cur) => cur !== category);
-            //console.log('remove', this.filter.categories);
+            //url.searchParams.delete('category');
+            console.log('remove', this.filter.categories);
         } else {
             this.filter.categories.push(category);
-            //console.log('add', this.filter.categories);
+            //url.searchParams.set('category', category);
+            //console.log(' url', url);
         }
         this.onChangeModel(this.products, this.filter, 0, 0);
-        //console.log('add category filter:');
+        setQueryParameters(this.filter);
+        console.log('addRemoveCategory');
     }
 
     addRemoveBrand(brand: string) {
@@ -43,6 +49,7 @@ export class MainPageModel {
             //console.log('add', this.filter.categories);
         }
         this.onChangeModel(this.products, this.filter, 0, 0);
+        setQueryParameters(this.filter);
         //console.log('add category filter:');
     }
 
@@ -50,6 +57,7 @@ export class MainPageModel {
         this.filter.search = searchString;
         //console.log('addSearch this.filter', this.filter);
         this.onChangeModel(this.products, this.filter, 0, 0);
+        setQueryParameters(this.filter);
         //console.log('add category filter:');
     }
 
@@ -57,6 +65,7 @@ export class MainPageModel {
         this.filter.sort = sortString;
         console.log('addSort filter:', this.filter);
         this.onChangeModel(this.products, this.filter, 0, 0);
+        setQueryParameters(this.filter);
     }
 
     changeMinPrice(minPrice: number) {
@@ -76,6 +85,12 @@ export class MainPageModel {
 
     changeMaxStock(maxStock: number) {
         this.filter.maxStock = maxStock;
+        this.onChangeModel(this.products, this.filter, 0, 0);
+    }
+
+    addFilter(filter: IFilterData) {
+        this.filter = filter;
+        // console.log('addFilter filter', filter);
         this.onChangeModel(this.products, this.filter, 0, 0);
     }
 
