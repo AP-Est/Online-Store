@@ -15,6 +15,11 @@ export class View {
     headerCart: HTMLElement;
     headerCartLink: HTMLAnchorElement;
     footerWrapper: HTMLElement;
+    footerGithub: HTMLElement;
+    footerGithubOne: HTMLAnchorElement;
+    footerGithubTwo: HTMLAnchorElement;
+    footerYear: HTMLElement;
+    footerSchool: HTMLAnchorElement;
     constructor() {
         this.app = getElement('body') as HTMLElement;
         this.app.innerHTML = '';
@@ -37,7 +42,15 @@ export class View {
         this.mainWrapper = createElement('div', 'main__wrapper');
         this.footer = createElement('footer');
         this.footerWrapper = createElement('div', 'footer__wrapper');
-        this.footerWrapper.innerHTML = '2022';
+        this.footerGithub = createElement('div', 'footer__github');
+        this.footerGithubOne = createElement('a', 'footer__githubOne') as HTMLAnchorElement;
+        this.footerGithubOne.href = 'https://github.com/AP-Est';
+        this.footerGithubTwo = createElement('a', 'footer__githubTwo') as HTMLAnchorElement;
+        this.footerGithubTwo.href = 'https://github.com/natalliasnv';
+        this.footerYear = createElement('a', 'footer__year');
+        this.footerYear.innerHTML = '2023';
+        this.footerSchool = createElement('a', 'footer__school') as HTMLAnchorElement;
+        this.footerSchool.href = 'https://rs.school/js/';
 
         // собираем страницу
 
@@ -46,6 +59,8 @@ export class View {
         this.headerWrapper.append(this.headerLogo, this.headerTotalCost, this.headerCart);
         this.header.append(this.headerWrapper);
         this.main.append(this.mainWrapper);
+        this.footerGithub.append(this.footerGithubOne, this.footerGithubTwo);
+        this.footerWrapper.append(this.footerGithub, this.footerYear, this.footerSchool);
         this.footer.append(this.footerWrapper);
 
         if (this.app !== undefined) {
