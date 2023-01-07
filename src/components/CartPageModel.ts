@@ -115,10 +115,6 @@ export class CartPageModel {
     };
     private setQueryParameters() {
         const url = new URL(location.href);
-        url.searchParams.delete('category');
-        url.searchParams.delete('brand');
-        url.searchParams.delete('search');
-        url.searchParams.delete('sort');
         url.searchParams.delete('limit');
         url.searchParams.delete('page');
         url.searchParams.set('limit', String(this.plug.limit));
