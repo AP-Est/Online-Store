@@ -57,6 +57,9 @@ export class CartPageView extends View {
             wrapper.style.display = 'flex';
             wrapper.innerHTML = '';
             wrapper.append(buildModalWindow(modalDate));
+        } else {
+            const wrapper = getElement('.wrapper__blind') as HTMLElement;
+            wrapper.style.display = 'none';
         }
     }
 
