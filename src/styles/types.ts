@@ -59,9 +59,9 @@ export interface IModalData {
     phone: string;
     address: string;
     mail: string;
-    cardNumber: number;
+    cardNumber: string;
     cardType: string;
-    cardValid: number;
+    cardValid: string;
     cardCVV: number;
 }
 

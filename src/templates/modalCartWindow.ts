@@ -129,16 +129,24 @@ function createCardModel(modalDate: IModalData) {
     inputAreaTypeOfIcon.src = modalDate.cardType;
     inputAreaTypeOfPayment.append(inputAreaTypeOfIcon);
     const inputAreaNumber = createElement('input', 'personalDataBlock__cardModel_inputCard') as HTMLInputElement;
-    inputAreaNumber.setAttribute('type', 'number');
-    inputAreaNumber.size = 15;
+    inputAreaNumber.setAttribute('type', 'string');
+    inputAreaNumber.size = 19;
+    inputAreaNumber.setAttribute(
+        'oninput',
+        'if (value.length == 4 || value.length == 9 || value.length == 14) value = value + " "; if (value.length>= 20) value = value.slice (0,19)'
+    );
     inputAreaNumber.placeholder = 'Card number';
     inputAreaNumber.value = String(modalDate.cardNumber);
     inputAreaNumberDiv.append(inputAreaTypeOfPayment, inputAreaNumber);
     const secondRow = createElement('div', 'creditCardBlockBody__model');
     const inputAreaValidDiv = createElement('div', 'creditCardBlockBody__div_inputValid');
     const inputAreaValid = createElement('input', 'personalDataBlock__cardModel_inputValid') as HTMLInputElement;
-    inputAreaValid.setAttribute('type', 'number');
-    inputAreaValid.size = 10;
+    inputAreaValid.setAttribute('type', 'string');
+    inputAreaValid.size = 5;
+    inputAreaValid.setAttribute(
+        'oninput',
+        'if (value.length == 2) value = value + "/"; if (value.length>= 6) value = value.slice (0,5)'
+    );
     inputAreaValid.placeholder = 'Valid Thru';
     inputAreaValid.value = String(modalDate.cardValid);
     inputAreaValidDiv.append(inputAreaValid);

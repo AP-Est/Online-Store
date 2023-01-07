@@ -48,10 +48,10 @@ export class CartPageModel {
             phone: '',
             address: '',
             mail: '',
-            cardNumber: NaN,
+            cardNumber: '',
             cardType:
                 'https://i.guim.co.uk/img/media/b73cc57cb1d46ae742efd06b6c58805e8600d482/16_0_2443_1466/master/2443.jpg?width=700&quality=85&auto=format&fit=max&s=fb1dca6cdd4589cd9ef2fc941935de71',
-            cardValid: NaN,
+            cardValid: '',
             cardCVV: NaN,
         };
         this._getStartNumber(this.plug);
@@ -219,7 +219,7 @@ export class CartPageModel {
     }
     //todo
     handleName(value: string) {
-        const letters = /^[A-Za-z\s]+$/;
+        const letters = /^[A-Za-z]+\s[A-Za-z]+$/;
         this.modalDate.name = value;
         if (letters.test(value)) {
             this.modalDate.error.name = false;
@@ -229,7 +229,7 @@ export class CartPageModel {
         this.commit(this.cartLots, this.products);
     }
     handlePhone(value: string) {
-        const numbers = /^[+0-9()\s]+$/;
+        const numbers = /[+]+[0-9]{9,}/;
         this.modalDate.phone = value;
         if (numbers.test(value)) {
             this.modalDate.error.phone = false;
@@ -239,7 +239,7 @@ export class CartPageModel {
         this.commit(this.cartLots, this.products);
     }
     handleAddress(value: string) {
-        const letters = /^[0-9a-zA-Z\s,.]+$/;
+        const letters = /[0-9a-zA-Z,.]+\s[0-9a-zA-Z,.]+\s[0-9a-zA-Z,.]+$/;
         this.modalDate.address = value;
         if (letters.test(value)) {
             this.modalDate.error.address = false;
@@ -259,8 +259,8 @@ export class CartPageModel {
         this.commit(this.cartLots, this.products);
     }
     handleCardNumber(value: string) {
-        const letters = /\d{4}([-]|)\d{4}([-]|)\d{4}([-]|)\d{4}/;
-        this.modalDate.cardNumber = +value;
+        const letters = /\d{4}([-]|\s|)\d{4}([-]|\s|)\d{4}([-]|\s|)\d{4}/;
+        this.modalDate.cardNumber = value;
         switch (value[0]) {
             case '4':
                 this.modalDate.cardType = 'https://cdn.visa.com/v2/assets/images/logos/visa/blue/logo.png';
@@ -288,18 +288,18 @@ export class CartPageModel {
         this.commit(this.cartLots, this.products);
     }
     handleCardValid(value: string) {
-        const letters = /^[0-9]+$/;
-        this.modalDate.cardValid = +value;
+        const letters = /(\d{1}|[1-2]{1}[0-9]{1})[/]\d{2}/;
+        this.modalDate.cardValid = value;
         if (letters.test(value)) {
             this.modalDate.error.cardValid = false;
         } else {
-            this.modalDate.error.cardNumber = true;
+            this.modalDate.error.cardValid = true;
         }
         this.commit(this.cartLots, this.products);
     }
     handleCardCVV(value: string) {
-        const letters = /^[0-9]+$/;
-        this.modalDate.cardCVV = +value;
+        const letters = /[0-9]{3}/;
+        this.modalDate.cardCVV = Number(value);
         if (letters.test(value)) {
             this.modalDate.error.cardCVV = false;
         } else {
