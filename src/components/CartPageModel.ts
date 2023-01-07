@@ -324,8 +324,12 @@ export class CartPageModel {
             this.modalDate.cardValid !== '' &&
             !Number.isNaN(this.modalDate.cardCVV)
         ) {
-            throw alert('Done');
             //todo очистить корзину и перекинуть на главную
+            //Не раскомменчивать до желания потереть корзину
+            //this.cartLots = [];
+            //localStorage.cart = JSON.stringify(cartLots);
+            window.location.hash = '';
+            throw alert('Done');
         } else {
             if (this.modalDate.name == '') this.modalDate.error.name = true;
             if (this.modalDate.phone == '') this.modalDate.error.phone = true;
