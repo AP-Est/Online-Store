@@ -35,12 +35,22 @@ export class CartPageModel {
         };
         this.modalDate = {
             state: false,
+            error: {
+                name: false,
+                phone: false,
+                address: false,
+                mail: false,
+                cardNumber: false,
+                cardValid: false,
+                cardCVV: false,
+            },
             name: '',
             phone: '',
             address: '',
             mail: '',
             cardNumber: NaN,
-            cardType: '',
+            cardType:
+                'https://i.guim.co.uk/img/media/b73cc57cb1d46ae742efd06b6c58805e8600d482/16_0_2443_1466/master/2443.jpg?width=700&quality=85&auto=format&fit=max&s=fb1dca6cdd4589cd9ef2fc941935de71',
             cardValid: NaN,
             cardCVV: NaN,
         };
@@ -210,87 +220,90 @@ export class CartPageModel {
     //todo
     handleName(value: string) {
         const letters = /^[A-Za-z\s]+$/;
+        this.modalDate.name = value;
         if (letters.test(value)) {
-            this.modalDate.name = value;
+            this.modalDate.error.name = false;
         } else {
-            this.modalDate.name = 'error';
-            console.log('error');
+            this.modalDate.error.name = true;
         }
         this.commit(this.cartLots, this.products);
     }
     handlePhone(value: string) {
         const numbers = /^[+0-9()\s]+$/;
+        this.modalDate.phone = value;
         if (numbers.test(value)) {
-            this.modalDate.phone = value;
+            this.modalDate.error.phone = false;
         } else {
-            this.modalDate.phone = 'error';
-            console.log('error', value);
+            this.modalDate.error.phone = true;
         }
         this.commit(this.cartLots, this.products);
     }
     handleAddress(value: string) {
         const letters = /^[0-9a-zA-Z\s,.]+$/;
+        this.modalDate.address = value;
         if (letters.test(value)) {
-            this.modalDate.address = value;
+            this.modalDate.error.address = false;
         } else {
-            this.modalDate.address = 'error';
-            console.log('error');
+            this.modalDate.error.address = true;
         }
         this.commit(this.cartLots, this.products);
     }
     handleMail(value: string) {
         const letters = /^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3})+$/;
+        this.modalDate.mail = value;
         if (letters.test(value)) {
-            this.modalDate.mail = value;
+            this.modalDate.error.mail = false;
         } else {
-            this.modalDate.mail = 'error';
-            console.log('error');
+            this.modalDate.error.mail = true;
         }
         this.commit(this.cartLots, this.products);
     }
     handleCardNumber(value: string) {
         const letters = /\d{4}([-]|)\d{4}([-]|)\d{4}([-]|)\d{4}/;
+        this.modalDate.cardNumber = +value;
+        switch (value[0]) {
+            case '4':
+                this.modalDate.cardType = 'https://cdn.visa.com/v2/assets/images/logos/visa/blue/logo.png';
+                break;
+            case '5':
+                this.modalDate.cardType =
+                    'https://www.mastercard.hu/content/dam/public/mastercardcom/eu/hu/images/mc-logo-52.svg';
+                break;
+            case '6':
+                this.modalDate.cardType = 'https://m.unionpayintl.com/imp_file/global/wap/en/static/images/logo.png';
+                break;
+            case '3':
+                this.modalDate.cardType =
+                    'https://www.aexp-static.com/cdaas/one/statics/axp-static-assets/1.8.0/package/dist/img/logos/dls-logo-stack.svg';
+                break;
+            default:
+                this.modalDate.cardType =
+                    'https://i.guim.co.uk/img/media/b73cc57cb1d46ae742efd06b6c58805e8600d482/16_0_2443_1466/master/2443.jpg?width=700&quality=85&auto=format&fit=max&s=fb1dca6cdd4589cd9ef2fc941935de71';
+        }
         if (letters.test(value)) {
-            this.modalDate.cardNumber = +value;
-            switch (value[0]) {
-                case '4':
-                    this.modalDate.cardType = '../sources/icons/card/visa.png';
-                    break;
-                case '5':
-                    this.modalDate.cardType = '../sources/icons/card/mastercard.png';
-                    break;
-                case '3':
-                    this.modalDate.cardType = '../sources/icons/card/american-express.png';
-                    break;
-                case '1':
-                    this.modalDate.cardType = '../sources/icons/card/paypal.png';
-                    break;
-                default:
-                    this.modalDate.cardType = '../sources/icons/card/unistream.png';
-            }
+            this.modalDate.error.cardNumber = false;
         } else {
-            this.modalDate.cardNumber = 0;
-            console.log('error');
+            this.modalDate.error.cardNumber = true;
         }
         this.commit(this.cartLots, this.products);
     }
     handleCardValid(value: string) {
         const letters = /^[0-9]+$/;
+        this.modalDate.cardValid = +value;
         if (letters.test(value)) {
-            this.modalDate.cardValid = +value;
+            this.modalDate.error.cardValid = false;
         } else {
-            this.modalDate.cardValid = 0;
-            console.log('error');
+            this.modalDate.error.cardNumber = true;
         }
         this.commit(this.cartLots, this.products);
     }
     handleCardCVV(value: string) {
         const letters = /^[0-9]+$/;
+        this.modalDate.cardCVV = +value;
         if (letters.test(value)) {
-            this.modalDate.cardCVV = +value;
+            this.modalDate.error.cardCVV = false;
         } else {
-            this.modalDate.cardCVV = 0;
-            console.log('error');
+            this.modalDate.error.cardCVV = true;
         }
         this.commit(this.cartLots, this.products);
     }
