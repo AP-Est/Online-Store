@@ -1,6 +1,6 @@
 import { CartPageView } from 'CartPageView';
 import { CartPageModel } from 'CartPageModel';
-import { ICartLot, IProduct, IPlug, ISumm } from '../styles/types';
+import { ICartLot, IProduct, IPlug, ISumm, IModalData } from '../styles/types';
 
 export class ControllerCartPage {
     view: CartPageView;
@@ -15,14 +15,27 @@ export class ControllerCartPage {
         this.view.bindFlagOfPageDecrement(this.handleCardPageDecrement);
         this.view.bindLimitChange(this.handleLimitChange);
         this.view.bindCodeEntrances(this.handleCodeEntrances);
-        this.view.bindCodeDrop(this.HandleCodeDrop);
+        this.view.bindCodeDrop(this.handleCodeDrop);
+        this.view.bindOpenModalWindow(this.handleOpenModalWindow);
+        this.view.bindCloseModalWindow(this.handleCloseModalWindow);
         this.model.bindChangeModel(this.onChangeModel);
 
-        this.onChangeModel(this.model.cartView, this.model.products, this.model.plug, this.model.summaryVars);
+        this.onChangeModel(
+            this.model.cartView,
+            this.model.products,
+            this.model.plug,
+            this.model.summaryVars,
+            this.model.modalDate
+        );
     }
-
-    onChangeModel = (cartLots: ICartLot[], products: IProduct[], plug: IPlug, summaryVars: ISumm) => {
-        this.view.displayCartPage(cartLots, products, plug, summaryVars);
+    onChangeModel = (
+        cartLots: ICartLot[],
+        products: IProduct[],
+        plug: IPlug,
+        summaryVars: ISumm,
+        modalDate: IModalData
+    ) => {
+        this.view.displayCartPage(cartLots, products, plug, summaryVars, modalDate);
     };
 
     handleCardItemIncrement = (productId: number) => {
@@ -41,7 +54,9 @@ export class ControllerCartPage {
     handleCodeEntrances = (codeValue: string) => {
         this.model.handleCodeEntrances(codeValue);
     };
-    HandleCodeDrop = (dropTitle: string) => {
-        this.model.HandleCodeDrop(dropTitle);
+    handleCodeDrop = (dropTitle: string) => {
+        this.model.handleCodeDrop(dropTitle);
     };
+    handleOpenModalWindow = () => this.model.handleOpenModalWindow();
+    handleCloseModalWindow = () => this.model.handleCloseModalWindow();
 }

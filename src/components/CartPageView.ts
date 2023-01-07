@@ -1,9 +1,11 @@
 import '../styles/styleCartPage.scss';
-import { IProduct, ICartLot, IPlug, ISumm } from '../styles/types';
+import { IProduct, ICartLot, IPlug, ISumm, IModalData } from '../styles/types';
 import { View } from './BaseView';
 //import createButton from '../utils/createButton';
 import createElement from '../utils/createElement';
 import buildSummaryContent from '../templates/cartSummaryBlock';
+import getElement from '../utils/getElement';
+import buildModalWindow from '../templates/modalCartwindow';
 
 export class CartPageView extends View {
     cartWrapper!: HTMLElement;
@@ -46,11 +48,17 @@ export class CartPageView extends View {
         super();
     }
     //TODO TEЛO
-    displayCartPage(cartLots: ICartLot[], product: IProduct[], plug: IPlug, summaryVars: ISumm) {
+    displayCartPage(cartLots: ICartLot[], product: IProduct[], plug: IPlug, summaryVars: ISumm, modalDate: IModalData) {
         this.createMainCartWrappers(summaryVars);
         this.buildCartProductBlockHeader(plug);
         this.createCartProductBlockBodyMainElements(cartLots, product, plug);
         this.buildCartPage();
+        if (modalDate.state == true) {
+            const wrapper = getElement('.wrapper__blind') as HTMLElement;
+            wrapper.style.display = 'flex';
+            wrapper.innerHTML = '';
+            wrapper.append(buildModalWindow());
+        }
     }
 
     buildCartPage() {
@@ -76,7 +84,6 @@ export class CartPageView extends View {
         this.productBlockHeaderTitle.innerText = 'Cart Products';
         this.productBlockHeaderPlug = createElement('form', 'cartProductBlock__plugWrapper');
         this.productBlockHeaderPlug.append(this.productBlockHeaderPlugLimit, this.productBlockHeaderPlugPageChanger);
-        //TODO сюда добавить плагинацию
     }
     createCartProductBlockBodyHeaderPlug(plug: IPlug) {
         this.productBlockHeaderPlugLimit = createElement('div', 'cartProductBlock__plugLimit');
@@ -238,6 +245,25 @@ export class CartPageView extends View {
             if (target.classList.contains('cartAppliedCodes__button_drop')) {
                 const dropTitle = target.id;
                 handler(dropTitle);
+            }
+        });
+    }
+    //TODO кнопка перехода к модалке
+    bindOpenModalWindow(handler: () => void) {
+        this.baseWrapper.addEventListener('click', (event) => {
+            const target = event.target as HTMLButtonElement;
+            if (target.classList.contains('cartSummaryBlock__Button')) {
+                target.style.display = 'flex';
+                handler();
+            }
+        });
+    }
+    bindCloseModalWindow(handler: () => void) {
+        this.baseWrapper.addEventListener('click', (event) => {
+            const target = event.target as HTMLButtonElement;
+            if (target.classList.contains('wrapper__blind')) {
+                target.style.display = 'none';
+                handler();
             }
         });
     }

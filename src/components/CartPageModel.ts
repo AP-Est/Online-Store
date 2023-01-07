@@ -1,7 +1,7 @@
 import { IProduct, IStoreData, storeData } from '../data/data';
 import pushToLocalStorage from '../utils/pushToLocalStorage';
 import getCartItems from '../utils/getCartItems';
-import { ICartLot, ICode, IPlug, ISumm } from '../styles/types';
+import { ICartLot, ICode, IModalData, IPlug, ISumm } from '../styles/types';
 import _notANull from '../utils/notANull';
 export class CartPageModel {
     products: IProduct[];
@@ -12,6 +12,7 @@ export class CartPageModel {
     plug: IPlug;
     summaryVars: ISumm;
     AvailableCodes: ICode[];
+    modalDate: IModalData;
 
     constructor() {
         _notANull();
@@ -33,6 +34,17 @@ export class CartPageModel {
                 { title: 'NA', description: 'Nat`s code', discount: 10 },
             ],
         };
+        this.modalDate = {
+            state: false,
+            name: '',
+            phone: '',
+            address: '',
+            mail: '',
+            cardNumber: NaN,
+            cardImg: '',
+            cardValid: NaN,
+            cardCVV: NaN,
+        };
         this._getStartNumber(this.plug);
         this.cartLots = JSON.parse(localStorage.cart) || [];
         this.cartView = [];
@@ -51,7 +63,7 @@ export class CartPageModel {
         this._getCartView(this.plug);
         this._checkEmptyArray();
         localStorage.cart = JSON.stringify(cartLots);
-        this.onChangeModel(this.cartView, products, this.plug, this.summaryVars);
+        this.onChangeModel(this.cartView, products, this.plug, this.summaryVars, this.modalDate);
     }
     _getCartView = (plug: IPlug) => {
         if (this.cartLots.length > plug.limit) {
@@ -180,12 +192,20 @@ export class CartPageModel {
         }
         this.commit(this.cartLots, this.products);
     }
-    HandleCodeDrop(dropTitle: string) {
+    handleCodeDrop(dropTitle: string) {
         this.summaryVars.codes = this.summaryVars.codes.filter((val) => {
             if (val.title !== dropTitle) {
                 return val;
             }
         });
+        this.commit(this.cartLots, this.products);
+    }
+    handleOpenModalWindow() {
+        this.modalDate.state = true;
+        this.commit(this.cartLots, this.products);
+    }
+    handleCloseModalWindow() {
+        this.modalDate.state = false;
         this.commit(this.cartLots, this.products);
     }
 }
