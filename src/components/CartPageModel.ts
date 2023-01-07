@@ -61,12 +61,13 @@ export class CartPageModel {
         this._getSummaryVars();
         this.storeData = storeData;
         this.products = storeData.products;
-        //this.updateURL();
+        this.getQueryParameters();
+        this.clearQueryParameters();
     }
     bindChangeModel(callback: CallableFunction) {
         this.onChangeModel = callback;
     }
-    commit(cartLots: ICartLot[], products: IProduct[]) {
+    private commit(cartLots: ICartLot[], products: IProduct[]) {
         this._getSummaryVars();
         this._getStartNumber(this.plug);
         this._getCartView(this.plug);
@@ -74,16 +75,16 @@ export class CartPageModel {
         localStorage.cart = JSON.stringify(cartLots);
         this.onChangeModel(this.cartView, products, this.plug, this.summaryVars, this.modalDate);
     }
-    _getCartView = (plug: IPlug) => {
+    private _getCartView = (plug: IPlug) => {
         if (this.cartLots.length > plug.limit) {
             this.cartView = this.cartLots.slice((plug.page - 1) * plug.limit, plug.page * plug.limit);
         } else this.cartView = this.cartLots;
     };
-    _getStartNumber = (plug: IPlug) => {
+    private _getStartNumber = (plug: IPlug) => {
         this.plug.startNumberID = plug.page * plug.limit - plug.limit + 1;
     };
 
-    _checkEmptyArray = () => {
+    private _checkEmptyArray = () => {
         if (this.cartLots !== undefined && this.cartLots.length !== 0) {
             while (this.cartView.length === 0) {
                 this.plug.page -= 1;
@@ -91,7 +92,7 @@ export class CartPageModel {
             }
         }
     };
-    _getSummaryVars = () => {
+    private _getSummaryVars = () => {
         const count = () => {
             return this.cartLots.reduce((acc, obj) => acc + obj.count, 0);
         };
@@ -106,21 +107,39 @@ export class CartPageModel {
         this.summaryVars.priceTotal = priceTotal();
         this.summaryVars.priceWithCodes = +priceWithCodes();
     };
-    _discountSummary = () => {
+    private _discountSummary = () => {
         const arr: ICode[] = this.summaryVars.codes;
         if (arr.length > 0) {
             return arr.reduce((acc, obj) => acc + obj.discount, 0);
         } else return 0;
     };
-    // updateURL() {
-    //     if (history.pushState) {
-    //         const baseUrl = window.location;
-    //         const newUrl = baseUrl + `?limit:${this.plug.limit}&page:${this.plug.page}`;
-    //         history.pushState(null, 'null', newUrl);
-    //     } else {
-    //         console.warn('History API не поддерживается');
-    //     }
-    // }
+    private setQueryParameters() {
+        const url = new URL(location.href);
+        url.searchParams.delete('category');
+        url.searchParams.delete('brand');
+        url.searchParams.delete('search');
+        url.searchParams.delete('sort');
+        url.searchParams.delete('limit');
+        url.searchParams.delete('page');
+        url.searchParams.set('limit', String(this.plug.limit));
+        url.searchParams.set('page', String(this.plug.page));
+        history.pushState(null, '', url);
+    }
+    private clearQueryParameters() {
+        const url = new URL(location.href);
+        url.searchParams.delete('category');
+        url.searchParams.delete('brand');
+        url.searchParams.delete('search');
+        url.searchParams.delete('sort');
+        url.searchParams.delete('limit');
+        url.searchParams.delete('page');
+        history.pushState(null, '', url);
+    }
+    private getQueryParameters() {
+        const url = new URL(location.href);
+        this.plug.limit = Number(url.searchParams.get('limit'));
+        this.plug.page = Number(url.searchParams.get('page'));
+    }
 
     handleCardItemIncrement(productId: number) {
         let maxCount: number;
@@ -167,6 +186,7 @@ export class CartPageModel {
         if (this.cartLots.length > this.plug.page * this.plug.limit) {
             this.plug.page += 1;
         }
+        this.setQueryParameters();
         this.commit(this.cartLots, this.products);
     }
 
@@ -174,6 +194,7 @@ export class CartPageModel {
         if (this.plug.page > 1) {
             this.plug.page -= 1;
         }
+        this.setQueryParameters();
         this.commit(this.cartLots, this.products);
     }
     handleLimitChanged(limit: number) {
@@ -183,6 +204,7 @@ export class CartPageModel {
                 this.plug.page -= 1;
             }
         }
+        this.setQueryParameters();
         this.commit(this.cartLots, this.products);
     }
     handleCodeEntrances(codeValue: string) {
