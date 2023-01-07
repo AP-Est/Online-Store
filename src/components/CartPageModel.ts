@@ -315,10 +315,25 @@ export class CartPageModel {
             this.modalDate.error.mail !== true &&
             this.modalDate.error.cardNumber !== true &&
             this.modalDate.error.cardValid !== true &&
-            this.modalDate.error.cardCVV !== true
+            this.modalDate.error.cardCVV !== true &&
+            this.modalDate.name !== '' &&
+            this.modalDate.phone !== '' &&
+            this.modalDate.address !== '' &&
+            this.modalDate.mail !== '' &&
+            this.modalDate.cardNumber !== '' &&
+            this.modalDate.cardValid !== '' &&
+            !Number.isNaN(this.modalDate.cardCVV)
         ) {
             throw alert('Done');
             //todo очистить корзину и перекинуть на главную
+        } else {
+            if (this.modalDate.name == '') this.modalDate.error.name = true;
+            if (this.modalDate.phone == '') this.modalDate.error.phone = true;
+            if (this.modalDate.address == '') this.modalDate.error.address = true;
+            if (this.modalDate.mail == '') this.modalDate.error.mail = true;
+            if (this.modalDate.cardNumber == '') this.modalDate.error.cardNumber = true;
+            if (this.modalDate.cardValid == '') this.modalDate.error.cardValid = true;
+            if (Number.isNaN(this.modalDate.cardCVV)) this.modalDate.error.cardCVV = true;
         }
         this.commit(this.cartLots, this.products);
     }
