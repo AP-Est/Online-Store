@@ -27,11 +27,18 @@
 
 .cartModalWindow__personalDataBlock {
     .personalInput {
-        width: 45vw;
+        max-width: 45vw;
+        width: 30vw;
         height: 3vh;
         border-radius: $mainBorderRadius;
         margin: 5px;
         text-align: center;
+    }
+    .personalDataBlock_error {
+        color: red;
+        font-size: $mainFontSize;
+        font-weight: bold;
+        width: 10vw;
     }
 
 }
@@ -60,12 +67,13 @@
         justify-content: center;
         margin: 10px;
         .creditCardBlockBody__div_inputCard {
-            &::before {
-                content: 'IMG ';
-                width: 48px;
-                height: 32px;
-                //background-image: url('../source/icon/card/unistream.png');
-                color: gold;
+            display: flex;
+            .creditCardBlockBody__cardModel_icon {
+                .cardModel__icon {
+                    width: 48px;
+                    height: 32px;
+                    object-fit: contain;
+                }
             }
         }
         .creditCardBlockBody__model{
@@ -104,6 +112,13 @@
         .personalDataBlock__cardModel_inputCard{
             width: 30vw;
         }
+
+    }
+    .cardError {
+    color: red;
+    font-weight: bold;
+    font-size: $mainFontSize;
+    margin: 10px;
     }
 }
 

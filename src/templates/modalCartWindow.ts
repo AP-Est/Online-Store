@@ -45,7 +45,9 @@ function createNameField(modalDate: IModalData) {
     inputArea.value = modalDate.name;
     const error = createElement('span', 'personalDataBlock_error');
     error.textContent = 'Error';
-    error.style.display = 'none';
+    if (modalDate.error.name === false) {
+        error.style.display = 'none';
+    }
     nameField.append(inputArea, error);
     return nameField;
 }
@@ -59,7 +61,9 @@ function createPhoneField(modalDate: IModalData) {
     inputArea.value = modalDate.phone;
     const error = createElement('span', 'personalDataBlock_error');
     error.textContent = 'Error';
-    error.style.display = 'none';
+    if (modalDate.error.phone === false) {
+        error.style.display = 'none';
+    }
     phoneField.append(inputArea, error);
     return phoneField;
 }
@@ -73,7 +77,9 @@ function createDeliveryField(modalDate: IModalData) {
     inputArea.value = modalDate.address;
     const error = createElement('span', 'personalDataBlock_error');
     error.textContent = 'Error';
-    error.style.display = 'none';
+    if (modalDate.error.address === false) {
+        error.style.display = 'none';
+    }
     deliveryField.append(inputArea, error);
     return deliveryField;
 }
@@ -87,7 +93,9 @@ function createMailField(modalDate: IModalData) {
     inputArea.value = modalDate.mail;
     const error = createElement('span', 'personalDataBlock_error');
     error.textContent = 'Error';
-    error.style.display = 'none';
+    if (modalDate.error.mail === false) {
+        error.style.display = 'none';
+    }
     mailField.append(inputArea, error);
     return mailField;
 }
@@ -96,7 +104,8 @@ function createCartModalCreditCardBlock(modalDate: IModalData) {
     const cartModalCreditCardBlock = createElement('div', 'cartModalWindow__creditCardBlock');
     const creditCardTitle = createCreditCardBlockTitle();
     const creditCardBody = createCartModalCreditCardBlockBody(modalDate);
-    cartModalCreditCardBlock.append(creditCardTitle, creditCardBody);
+    const cardErrors = createCartModalCreditCardBlockErrors(modalDate);
+    cartModalCreditCardBlock.append(creditCardTitle, creditCardBody, cardErrors);
     return cartModalCreditCardBlock;
 }
 function createCreditCardBlockTitle() {
@@ -109,19 +118,22 @@ function createCreditCardBlockTitle() {
 function createCartModalCreditCardBlockBody(modalDate: IModalData) {
     const createCartModalCreditCardBlockBody = createElement('div', 'creditCardBlockBody__wrapper');
     const cardModel = createCardModel(modalDate);
-    const cardErrors = createCartModalCreditCardBlockErrors(modalDate);
-    createCartModalCreditCardBlockBody.append(cardModel, cardErrors);
+    createCartModalCreditCardBlockBody.append(cardModel);
     return createCartModalCreditCardBlockBody;
 }
 function createCardModel(modalDate: IModalData) {
     const createCardModel = createElement('form', 'creditCardBlockBody__model');
     const inputAreaNumberDiv = createElement('div', 'creditCardBlockBody__div_inputCard');
+    const inputAreaTypeOfPayment = createElement('container', 'creditCardBlockBody__cardModel_icon');
+    const inputAreaTypeOfIcon = createElement('img', 'cardModel__icon') as HTMLImageElement;
+    inputAreaTypeOfIcon.src = modalDate.cardType;
+    inputAreaTypeOfPayment.append(inputAreaTypeOfIcon);
     const inputAreaNumber = createElement('input', 'personalDataBlock__cardModel_inputCard') as HTMLInputElement;
     inputAreaNumber.setAttribute('type', 'number');
     inputAreaNumber.size = 15;
     inputAreaNumber.placeholder = 'Card number';
     inputAreaNumber.value = String(modalDate.cardNumber);
-    inputAreaNumberDiv.append(inputAreaNumber);
+    inputAreaNumberDiv.append(inputAreaTypeOfPayment, inputAreaNumber);
     const secondRow = createElement('div', 'creditCardBlockBody__model');
     const inputAreaValidDiv = createElement('div', 'creditCardBlockBody__div_inputValid');
     const inputAreaValid = createElement('input', 'personalDataBlock__cardModel_inputValid') as HTMLInputElement;
@@ -140,11 +152,26 @@ function createCardModel(modalDate: IModalData) {
     createCardModel.append(inputAreaNumberDiv, secondRow);
     return createCardModel;
 }
+
 function createCartModalCreditCardBlockErrors(modalDate: IModalData) {
     const createCartModalCreditCardBlockErrors = createElement('div', 'creditCardBlockBody__Errors');
-    createCartModalCreditCardBlockErrors.style.display = 'none';
-    //TODO тут нужно ловить ошибки
-    //createCartModalCreditCardBlockErrors.append(cardModel);
+    if (modalDate.error.cardNumber === true || modalDate.error.cardValid === true || modalDate.error.cardCVV === true) {
+        if (modalDate.error.cardNumber === true) {
+            const cardNumberError = createElement('div', 'cardError');
+            cardNumberError.textContent = 'Card number - error';
+            createCartModalCreditCardBlockErrors.append(cardNumberError);
+        }
+        if (modalDate.error.cardValid === true) {
+            const cardValidError = createElement('div', 'cardError');
+            cardValidError.textContent = 'Card valid thru - error';
+            createCartModalCreditCardBlockErrors.append(cardValidError);
+        }
+        if (modalDate.error.cardCVV === true) {
+            const cardCVVError = createElement('div', 'cardError');
+            cardCVVError.textContent = 'Card CVV - error';
+            createCartModalCreditCardBlockErrors.append(cardCVVError);
+        }
+    }
     return createCartModalCreditCardBlockErrors;
 }
 
