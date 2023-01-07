@@ -11,6 +11,7 @@ export class MainPageModel {
             return undefined;
         };
         this.products = storeData.products;
+        const locationSearch = window.location.search.replace('?', '').split('&');
         this.filter = {
             categories: [],
             brands: [],
@@ -21,6 +22,20 @@ export class MainPageModel {
             search: '',
             sort: '',
         };
+        locationSearch.map((item) => {
+            if (item.split('=')[0] === 'category') {
+                this.filter.categories = item.split('=')[1].split('_');
+            }
+            if (item.split('=')[0] === 'brand') {
+                this.filter.brands = item.split('=')[1].split('_');
+            }
+            if (item.split('=')[0] === 'search') {
+                this.filter.search = item.split('=')[1];
+            }
+            if (item.split('=')[0] === 'sort') {
+                this.filter.sort = item.split('=')[1];
+            }
+        });
     }
 
     addRemoveCategory(category: string) {
@@ -88,11 +103,11 @@ export class MainPageModel {
         this.onChangeModel(this.products, this.filter, 0, 0);
     }
 
-    addFilter(filter: IFilterData) {
-        this.filter = filter;
-        // console.log('addFilter filter', filter);
-        this.onChangeModel(this.products, this.filter, 0, 0);
-    }
+    // addFilter(filter: IFilterData) {
+    //     this.filter = filter;
+    //     // console.log('addFilter filter', filter);
+    //     this.onChangeModel(this.products, this.filter, 0, 0);
+    // }
 
     // filter products
 
