@@ -329,6 +329,7 @@ export class CartPageModel {
             //this.cartLots = [];
             //localStorage.cart = JSON.stringify(cartLots);
             window.location.hash = '';
+            this.modalDate.state = false;
             throw alert('Done');
         } else {
             if (this.modalDate.name == '') this.modalDate.error.name = true;
