@@ -103,16 +103,31 @@ ul {
     font-size: $bigFontSize;
     
     text-shadow: 0 0 10px rgb(184 24 24), 0 0 20px red, 0 0 30px red, 0 0 40px rgb(85, 55, 178);
-    &::before {
-        color:rgb(22, 237, 86);
-        font-size: $bigFontSize;
-        content: "🛍 "
-    }
+    // &::before {
+    //     color:rgb(22, 237, 86);
+    //     //font-size: 0.5rem;
+    //     content: '';
+    //     display: block;
+    //     width: 15px;
+    //     height: 15px;
+    //     background: black;
+    //     position: absolute;
+    // }
 
+}
+
+.header__cart {
+    width: 55px;
+    height: 55px;
+    background: url(../source/img/cart.png);
+    background-size: contain;
 }
 
 .header__cart_link {
     font-size: $bigFontSize;
+    display: block;
+    width: 100%;
+    height: 100%;
 }
 
 .header__totalCost{
