@@ -4,13 +4,14 @@ import setQueryParameters from '../utils/setQueryParameters';
 export class MainPageModel {
     products: IProduct[];
     filter: IFilterData;
-    onChangeModel: any;
+    onChangeModel: (products: IProduct[], filter: IFilterData, totalCost: number, numProducts: number) => void;
 
     constructor() {
         this.onChangeModel = () => {
             return undefined;
         };
         this.products = storeData.products;
+        const locationSearch = window.location.search.replace('?', '').split('&');
         this.filter = {
             categories: [],
             brands: [],
@@ -21,6 +22,23 @@ export class MainPageModel {
             search: '',
             sort: '',
         };
+        locationSearch.map((item) => {
+            const [filterKey, filterValue] = item.split('=');
+            switch (filterKey) {
+                case 'category':
+                    this.filter.categories = filterValue.split('_');
+                    break;
+                case 'brand':
+                    this.filter.brands = filterValue.split('_');
+                    break;
+                case 'search':
+                    this.filter.search = filterValue;
+                    break;
+                case 'sort':
+                    this.filter.sort = filterValue;
+                    break;
+            }
+        });
     }
 
     addRemoveCategory(category: string) {
@@ -88,11 +106,11 @@ export class MainPageModel {
         this.onChangeModel(this.products, this.filter, 0, 0);
     }
 
-    addFilter(filter: IFilterData) {
-        this.filter = filter;
-        // console.log('addFilter filter', filter);
-        this.onChangeModel(this.products, this.filter, 0, 0);
-    }
+    // addFilter(filter: IFilterData) {
+    //     this.filter = filter;
+    //     // console.log('addFilter filter', filter);
+    //     this.onChangeModel(this.products, this.filter, 0, 0);
+    // }
 
     // filter products
 

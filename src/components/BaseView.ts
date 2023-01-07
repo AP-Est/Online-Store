@@ -17,6 +17,11 @@ export class View {
     footerWrapper: HTMLElement;
     baseWrapper: HTMLElement;
     wrapperBlind: HTMLElement;
+    footerGithub: HTMLElement;
+    footerGithubOne: HTMLAnchorElement;
+    footerGithubTwo: HTMLAnchorElement;
+    footerYear: HTMLElement;
+    footerSchool: HTMLAnchorElement;
     constructor() {
         this.app = getElement('body') as HTMLElement;
         this.app.innerHTML = '';
@@ -36,12 +41,20 @@ export class View {
         this.headerCart = createElement('div', 'header__cart');
         this.headerCart.addEventListener('click', () => (window.location.hash = 'cart/'));
         this.headerCartLink = this.createLinkElement('#cart', 'header__cart_link');
-        this.headerCartLink.innerHTML = '🛒';
+        //this.headerCartLink.innerHTML = '🛒';
         this.main = createElement('main');
         this.mainWrapper = createElement('div', 'main__wrapper');
         this.footer = createElement('footer');
         this.footerWrapper = createElement('div', 'footer__wrapper');
-        this.footerWrapper.innerHTML = '2022';
+        this.footerGithub = createElement('div', 'footer__github');
+        this.footerGithubOne = createElement('a', 'footer__githubOne') as HTMLAnchorElement;
+        this.footerGithubOne.href = 'https://github.com/AP-Est';
+        this.footerGithubTwo = createElement('a', 'footer__githubTwo') as HTMLAnchorElement;
+        this.footerGithubTwo.href = 'https://github.com/natalliasnv';
+        this.footerYear = createElement('a', 'footer__year');
+        this.footerYear.innerHTML = '2023';
+        this.footerSchool = createElement('a', 'footer__school') as HTMLAnchorElement;
+        this.footerSchool.href = 'https://rs.school/js/';
 
         // собираем страницу
 
@@ -50,6 +63,8 @@ export class View {
         this.headerWrapper.append(this.headerLogo, this.headerTotalCost, this.headerCart);
         this.header.append(this.headerWrapper);
         this.main.append(this.mainWrapper);
+        this.footerGithub.append(this.footerGithubOne, this.footerGithubTwo);
+        this.footerWrapper.append(this.footerGithub, this.footerYear, this.footerSchool);
         this.footer.append(this.footerWrapper);
         this.baseWrapper.append(this.wrapperBlind, this.header, this.main, this.footer);
         if (this.app !== undefined) {
