@@ -51,3 +51,26 @@ export interface ICode {
     description: string;
     discount: number;
 }
+
+export interface IModalData {
+    state: boolean;
+    error: IError;
+    name: string;
+    phone: string;
+    address: string;
+    mail: string;
+    cardNumber: number;
+    cardType: string;
+    cardValid: number;
+    cardCVV: number;
+}
+
+interface IError {
+    name: boolean;
+    phone: boolean;
+    address: boolean;
+    mail: boolean;
+    cardNumber: boolean;
+    cardValid: boolean;
+    cardCVV: boolean;
+}
