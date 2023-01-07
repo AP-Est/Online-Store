@@ -29,8 +29,8 @@ export class CartPageModel {
             priceTotal: 0,
             priceWithCodes: 0,
             codes: [
-                { title: 'AN', description: 'Andrey`s code', discount: 10 },
-                { title: 'NA', description: 'Nat`s code', discount: 10 },
+                { title: 'AN', description: 'Andrey`s code - 10% - ', discount: 10 },
+                { title: 'NA', description: 'Nat`s    code - 10% - ', discount: 10 },
             ],
         };
         this.modalDate = {
