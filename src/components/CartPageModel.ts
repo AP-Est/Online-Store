@@ -1,5 +1,4 @@
 import { IProduct, IStoreData, storeData } from '../data/data';
-import pushToLocalStorage from '../utils/pushToLocalStorage';
 import getCartItems from '../utils/getCartItems';
 import { ICartLot, ICode, IModalData, IPlug, ISumm } from '../styles/types';
 import _notANull from '../utils/notANull';
@@ -41,7 +40,7 @@ export class CartPageModel {
             address: '',
             mail: '',
             cardNumber: NaN,
-            cardImg: '',
+            cardType: '',
             cardValid: NaN,
             cardCVV: NaN,
         };
@@ -90,12 +89,12 @@ export class CartPageModel {
             return this.cartLots.reduce((acc, obj) => acc + obj.price * obj.count, 0);
         };
         const priceWithCodes = () => {
-            return priceTotal() * (100 - this._discountSummary()) * 0.01;
+            return (priceTotal() * (100 - this._discountSummary()) * 0.01).toFixed(2);
         };
 
         this.summaryVars.countItems = count();
         this.summaryVars.priceTotal = priceTotal();
-        this.summaryVars.priceWithCodes = priceWithCodes();
+        this.summaryVars.priceWithCodes = +priceWithCodes();
     };
     _discountSummary = () => {
         const arr: ICode[] = this.summaryVars.codes;
@@ -206,6 +205,96 @@ export class CartPageModel {
     }
     handleCloseModalWindow() {
         this.modalDate.state = false;
+        this.commit(this.cartLots, this.products);
+    }
+    //todo
+    handleName(value: string) {
+        const letters = /^[A-Za-z\s]+$/;
+        if (letters.test(value)) {
+            this.modalDate.name = value;
+        } else {
+            this.modalDate.name = 'error';
+            console.log('error');
+        }
+        this.commit(this.cartLots, this.products);
+    }
+    handlePhone(value: string) {
+        const numbers = /^[+0-9()\s]+$/;
+        if (numbers.test(value)) {
+            this.modalDate.phone = value;
+        } else {
+            this.modalDate.phone = 'error';
+            console.log('error', value);
+        }
+        this.commit(this.cartLots, this.products);
+    }
+    handleAddress(value: string) {
+        const letters = /^[0-9a-zA-Z\s,.]+$/;
+        if (letters.test(value)) {
+            this.modalDate.address = value;
+        } else {
+            this.modalDate.address = 'error';
+            console.log('error');
+        }
+        this.commit(this.cartLots, this.products);
+    }
+    handleMail(value: string) {
+        const letters = /^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3})+$/;
+        if (letters.test(value)) {
+            this.modalDate.mail = value;
+        } else {
+            this.modalDate.mail = 'error';
+            console.log('error');
+        }
+        this.commit(this.cartLots, this.products);
+    }
+    handleCardNumber(value: string) {
+        const letters = /\d{4}([-]|)\d{4}([-]|)\d{4}([-]|)\d{4}/;
+        if (letters.test(value)) {
+            this.modalDate.cardNumber = +value;
+            switch (value[0]) {
+                case '4':
+                    this.modalDate.cardType = '../sources/icons/card/visa.png';
+                    break;
+                case '5':
+                    this.modalDate.cardType = '../sources/icons/card/mastercard.png';
+                    break;
+                case '3':
+                    this.modalDate.cardType = '../sources/icons/card/american-express.png';
+                    break;
+                case '1':
+                    this.modalDate.cardType = '../sources/icons/card/paypal.png';
+                    break;
+                default:
+                    this.modalDate.cardType = '../sources/icons/card/unistream.png';
+            }
+        } else {
+            this.modalDate.cardNumber = 0;
+            console.log('error');
+        }
+        this.commit(this.cartLots, this.products);
+    }
+    handleCardValid(value: string) {
+        const letters = /^[0-9]+$/;
+        if (letters.test(value)) {
+            this.modalDate.cardValid = +value;
+        } else {
+            this.modalDate.cardValid = 0;
+            console.log('error');
+        }
+        this.commit(this.cartLots, this.products);
+    }
+    handleCardCVV(value: string) {
+        const letters = /^[0-9]+$/;
+        if (letters.test(value)) {
+            this.modalDate.cardCVV = +value;
+        } else {
+            this.modalDate.cardCVV = 0;
+            console.log('error');
+        }
+        this.commit(this.cartLots, this.products);
+    }
+    handleConfirmButton() {
         this.commit(this.cartLots, this.products);
     }
 }

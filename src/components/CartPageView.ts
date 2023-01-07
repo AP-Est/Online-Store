@@ -1,11 +1,10 @@
 import '../styles/styleCartPage.scss';
 import { IProduct, ICartLot, IPlug, ISumm, IModalData } from '../styles/types';
 import { View } from './BaseView';
-//import createButton from '../utils/createButton';
 import createElement from '../utils/createElement';
 import buildSummaryContent from '../templates/cartSummaryBlock';
 import getElement from '../utils/getElement';
-import buildModalWindow from '../templates/modalCartwindow';
+import buildModalWindow from '../templates/modalCartWindow';
 
 export class CartPageView extends View {
     cartWrapper!: HTMLElement;
@@ -57,7 +56,7 @@ export class CartPageView extends View {
             const wrapper = getElement('.wrapper__blind') as HTMLElement;
             wrapper.style.display = 'flex';
             wrapper.innerHTML = '';
-            wrapper.append(buildModalWindow());
+            wrapper.append(buildModalWindow(modalDate));
         }
     }
 
@@ -232,7 +231,6 @@ export class CartPageView extends View {
     bindCodeEntrances(handler: (codeValue: string) => void) {
         this.mainWrapper.addEventListener('change', (event) => {
             const target = event.target as HTMLInputElement;
-            console.log(target);
             if (target.classList.contains('cartSummaryBlock__CodeField_input')) {
                 const codeValue = target.value;
                 handler(codeValue);
@@ -248,12 +246,10 @@ export class CartPageView extends View {
             }
         });
     }
-    //TODO кнопка перехода к модалке
     bindOpenModalWindow(handler: () => void) {
         this.baseWrapper.addEventListener('click', (event) => {
             const target = event.target as HTMLButtonElement;
             if (target.classList.contains('cartSummaryBlock__Button')) {
-                target.style.display = 'flex';
                 handler();
             }
         });
@@ -262,7 +258,78 @@ export class CartPageView extends View {
         this.baseWrapper.addEventListener('click', (event) => {
             const target = event.target as HTMLButtonElement;
             if (target.classList.contains('wrapper__blind')) {
-                target.style.display = 'none';
+                handler();
+            }
+        });
+    }
+    //TODO wrapper control
+    bindName(handler: (value: string) => void) {
+        this.baseWrapper.addEventListener('change', (event) => {
+            const target = event.target as HTMLInputElement;
+            if (target.classList.contains('personalDataBlock__nameField_input')) {
+                const value = target.value;
+                handler(value);
+            }
+        });
+    }
+    bindPhone(handler: (value: string) => void) {
+        this.baseWrapper.addEventListener('change', (event) => {
+            const target = event.target as HTMLInputElement;
+            if (target.classList.contains('personalDataBlock__phoneField_input')) {
+                const value = target.value;
+                handler(value);
+            }
+        });
+    }
+    bindAddress(handler: (value: string) => void) {
+        this.baseWrapper.addEventListener('change', (event) => {
+            const target = event.target as HTMLInputElement;
+            if (target.classList.contains('personalDataBlock__deliveryField_input')) {
+                const value = target.value;
+                handler(value);
+            }
+        });
+    }
+    bindMail(handler: (value: string) => void) {
+        this.baseWrapper.addEventListener('change', (event) => {
+            const target = event.target as HTMLInputElement;
+            if (target.classList.contains('personalDataBlock__mailField_input')) {
+                const value = target.value;
+                handler(value);
+            }
+        });
+    }
+    bindCardNumber(handler: (value: string) => void) {
+        this.baseWrapper.addEventListener('change', (event) => {
+            const target = event.target as HTMLInputElement;
+            if (target.classList.contains('personalDataBlock__cardModel_inputCard')) {
+                const value = target.value;
+                handler(value);
+            }
+        });
+    }
+    bindCardValid(handler: (value: string) => void) {
+        this.baseWrapper.addEventListener('change', (event) => {
+            const target = event.target as HTMLInputElement;
+            if (target.classList.contains('personalDataBlock__cardModel_inputValid')) {
+                const value = target.value;
+                handler(value);
+            }
+        });
+    }
+    bindCardCVV(handler: (value: string) => void) {
+        this.baseWrapper.addEventListener('change', (event) => {
+            const target = event.target as HTMLInputElement;
+            if (target.classList.contains('personalDataBlock__cardModel_inputCVV')) {
+                const value = target.value;
+                handler(value);
+            }
+        });
+    }
+    bindConfirmButton(handler: () => void) {
+        this.baseWrapper.addEventListener('click', (event) => {
+            const target = event.target as HTMLButtonElement;
+            if (target.classList.contains('cartModalBlock__button_confirm')) {
                 handler();
             }
         });

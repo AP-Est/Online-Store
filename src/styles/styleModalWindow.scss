@@ -62,6 +62,9 @@
         .creditCardBlockBody__div_inputCard {
             &::before {
                 content: 'IMG ';
+                width: 48px;
+                height: 32px;
+                //background-image: url('../source/icon/card/unistream.png');
                 color: gold;
             }
         }

@@ -1,19 +1,20 @@
 import createButton from '../utils/createButton';
 import createElement from '../utils/createElement';
 import '../styles/styleModalWindow.scss';
+import { IModalData } from '../styles/types';
 
-export default function buildModalWindow() {
+export default function buildModalWindow(modalDate: IModalData) {
     const cartModalWindow = createElement('div', 'cartModalWindow');
-    const dataBlock = createModalPersonalDataBlock();
-    const cardBlock = createCartModalCreditCardBlock();
+    const dataBlock = createModalPersonalDataBlock(modalDate);
+    const cardBlock = createCartModalCreditCardBlock(modalDate);
     const confirmButton = createCartModalConfirmButton();
     cartModalWindow.append(dataBlock, cardBlock, confirmButton);
     return cartModalWindow;
 }
-function createModalPersonalDataBlock() {
+function createModalPersonalDataBlock(modalDate: IModalData) {
     const cartModalPersonalDataBlock = createElement('div', 'cartModalWindow__personalDataBlock');
     const titleText = createPersonalDataBlockTitle();
-    const fields = createPersonalDataBlockFieldsBlock();
+    const fields = createPersonalDataBlockFieldsBlock(modalDate);
     cartModalPersonalDataBlock.append(titleText, fields);
     return cartModalPersonalDataBlock;
 }
@@ -24,53 +25,66 @@ function createPersonalDataBlockTitle() {
     personalDataBlockTitle.append(titleText);
     return personalDataBlockTitle;
 }
-function createPersonalDataBlockFieldsBlock() {
+function createPersonalDataBlockFieldsBlock(modalDate: IModalData) {
     const personalDataBlockFieldsBlock = createElement('div', 'cartModalWindow__personalDataBlock');
-    const nameField = createNameField();
-    const phoneField = createPhoneField();
-    const deliveryField = createDeliveryField();
-    const mailField = createMailField();
+    const nameField = createNameField(modalDate);
+    const phoneField = createPhoneField(modalDate);
+    const deliveryField = createDeliveryField(modalDate);
+    const mailField = createMailField(modalDate);
     personalDataBlockFieldsBlock.append(nameField, phoneField, deliveryField, mailField);
     return personalDataBlockFieldsBlock;
 }
-function createNameField() {
+
+function createNameField(modalDate: IModalData) {
     const nameField = createElement('form', 'personalDataBlock__nameField');
     const inputArea = createElement('input', 'personalDataBlock__nameField_input') as HTMLInputElement;
     inputArea.classList.add('personalInput');
     inputArea.placeholder = 'Name';
+    inputArea.type = 'text';
+    inputArea.size = 30;
+    inputArea.value = modalDate.name;
     const error = createElement('span', 'personalDataBlock_error');
     error.textContent = 'Error';
     error.style.display = 'none';
     nameField.append(inputArea, error);
     return nameField;
 }
-function createPhoneField() {
+function createPhoneField(modalDate: IModalData) {
     const phoneField = createElement('form', 'personalDataBlock__phoneField');
     const inputArea = createElement('input', 'personalDataBlock__phoneField_input') as HTMLInputElement;
     inputArea.classList.add('personalInput');
     inputArea.placeholder = 'Phone number';
+    inputArea.type = 'text';
+    inputArea.size = 12;
+    inputArea.value = modalDate.phone;
     const error = createElement('span', 'personalDataBlock_error');
     error.textContent = 'Error';
     error.style.display = 'none';
     phoneField.append(inputArea, error);
     return phoneField;
 }
-function createDeliveryField() {
+function createDeliveryField(modalDate: IModalData) {
     const deliveryField = createElement('div', 'personalDataBlock__deliveryField');
     const inputArea = createElement('input', 'personalDataBlock__deliveryField_input') as HTMLInputElement;
     inputArea.classList.add('personalInput');
     inputArea.placeholder = 'Delivery address';
+    inputArea.type = 'text';
+    inputArea.size = 40;
+    inputArea.value = modalDate.address;
     const error = createElement('span', 'personalDataBlock_error');
     error.textContent = 'Error';
     error.style.display = 'none';
     deliveryField.append(inputArea, error);
     return deliveryField;
 }
-function createMailField() {
+function createMailField(modalDate: IModalData) {
     const mailField = createElement('form', 'personalDataBlock__mailField');
     const inputArea = createElement('input', 'personalDataBlock__mailField_input') as HTMLInputElement;
     inputArea.classList.add('personalInput');
     inputArea.placeholder = 'E-mail';
+    inputArea.type = 'text';
+    inputArea.size = 20;
+    inputArea.value = modalDate.mail;
     const error = createElement('span', 'personalDataBlock_error');
     error.textContent = 'Error';
     error.style.display = 'none';
@@ -78,10 +92,10 @@ function createMailField() {
     return mailField;
 }
 
-function createCartModalCreditCardBlock() {
+function createCartModalCreditCardBlock(modalDate: IModalData) {
     const cartModalCreditCardBlock = createElement('div', 'cartModalWindow__creditCardBlock');
     const creditCardTitle = createCreditCardBlockTitle();
-    const creditCardBody = createCartModalCreditCardBlockBody();
+    const creditCardBody = createCartModalCreditCardBlockBody(modalDate);
     cartModalCreditCardBlock.append(creditCardTitle, creditCardBody);
     return cartModalCreditCardBlock;
 }
@@ -92,33 +106,41 @@ function createCreditCardBlockTitle() {
     createCreditCardBlockTitle.append(titleText);
     return createCreditCardBlockTitle;
 }
-function createCartModalCreditCardBlockBody() {
+function createCartModalCreditCardBlockBody(modalDate: IModalData) {
     const createCartModalCreditCardBlockBody = createElement('div', 'creditCardBlockBody__wrapper');
-    const cardModel = createCardModel();
-    const cardErrors = createCartModalCreditCardBlockErrors();
+    const cardModel = createCardModel(modalDate);
+    const cardErrors = createCartModalCreditCardBlockErrors(modalDate);
     createCartModalCreditCardBlockBody.append(cardModel, cardErrors);
     return createCartModalCreditCardBlockBody;
 }
-function createCardModel() {
+function createCardModel(modalDate: IModalData) {
     const createCardModel = createElement('form', 'creditCardBlockBody__model');
     const inputAreaNumberDiv = createElement('div', 'creditCardBlockBody__div_inputCard');
     const inputAreaNumber = createElement('input', 'personalDataBlock__cardModel_inputCard') as HTMLInputElement;
+    inputAreaNumber.setAttribute('type', 'number');
+    inputAreaNumber.size = 15;
     inputAreaNumber.placeholder = 'Card number';
+    inputAreaNumber.value = String(modalDate.cardNumber);
     inputAreaNumberDiv.append(inputAreaNumber);
     const secondRow = createElement('div', 'creditCardBlockBody__model');
     const inputAreaValidDiv = createElement('div', 'creditCardBlockBody__div_inputValid');
     const inputAreaValid = createElement('input', 'personalDataBlock__cardModel_inputValid') as HTMLInputElement;
+    inputAreaValid.setAttribute('type', 'number');
+    inputAreaValid.size = 10;
     inputAreaValid.placeholder = 'Valid Thru';
+    inputAreaValid.value = String(modalDate.cardValid);
     inputAreaValidDiv.append(inputAreaValid);
     const inputAreaCVVDiv = createElement('div', 'creditCardBlockBody__div_inputCVV');
     const inputAreaCVV = createElement('input', 'personalDataBlock__cardModel_inputCVV') as HTMLInputElement;
+    inputAreaCVV.setAttribute('type', 'password');
+    inputAreaCVV.size = 3;
     inputAreaCVV.placeholder = 'Code';
     inputAreaCVVDiv.append(inputAreaCVV);
     secondRow.append(inputAreaValidDiv, inputAreaCVVDiv);
     createCardModel.append(inputAreaNumberDiv, secondRow);
     return createCardModel;
 }
-function createCartModalCreditCardBlockErrors() {
+function createCartModalCreditCardBlockErrors(modalDate: IModalData) {
     const createCartModalCreditCardBlockErrors = createElement('div', 'creditCardBlockBody__Errors');
     createCartModalCreditCardBlockErrors.style.display = 'none';
     //TODO тут нужно ловить ошибки

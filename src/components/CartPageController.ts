@@ -18,6 +18,16 @@ export class ControllerCartPage {
         this.view.bindCodeDrop(this.handleCodeDrop);
         this.view.bindOpenModalWindow(this.handleOpenModalWindow);
         this.view.bindCloseModalWindow(this.handleCloseModalWindow);
+
+        this.view.bindName(this.handleName);
+        this.view.bindPhone(this.handlePhone);
+        this.view.bindAddress(this.handleAddress);
+        this.view.bindMail(this.handleMail);
+        this.view.bindCardNumber(this.handleCardNumber);
+        this.view.bindCardValid(this.handleCardValid);
+        this.view.bindCardCVV(this.handleCardCVV);
+        this.view.bindConfirmButton(this.handleConfirmButton);
+
         this.model.bindChangeModel(this.onChangeModel);
 
         this.onChangeModel(
@@ -59,4 +69,13 @@ export class ControllerCartPage {
     };
     handleOpenModalWindow = () => this.model.handleOpenModalWindow();
     handleCloseModalWindow = () => this.model.handleCloseModalWindow();
+
+    handleName = (value: string) => this.model.handleName(value);
+    handlePhone = (value: string) => this.model.handlePhone(value);
+    handleAddress = (value: string) => this.model.handleAddress(value);
+    handleMail = (value: string) => this.model.handleMail(value);
+    handleCardNumber = (value: string) => this.model.handleCardNumber(value);
+    handleCardValid = (value: string) => this.model.handleCardValid(value);
+    handleCardCVV = (value: string) => this.model.handleCardCVV(value);
+    handleConfirmButton = () => this.model.handleConfirmButton();
 }

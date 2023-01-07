@@ -74,7 +74,6 @@ function createBodyBlockCodeField() {
 function createBodyBlockButton() {
     const bodyBlockButton = createElement('div', 'cartSummaryBlock__Button');
     const button = createButton('BUY NOW', 'cartSummaryBlock__Button');
-    //button.addEventListener('click', () => showModal());
     bodyBlockButton.append(button);
     return bodyBlockButton;
 }
