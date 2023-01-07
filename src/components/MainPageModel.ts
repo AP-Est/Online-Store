@@ -23,17 +23,20 @@ export class MainPageModel {
             sort: '',
         };
         locationSearch.map((item) => {
-            if (item.split('=')[0] === 'category') {
-                this.filter.categories = item.split('=')[1].split('_');
-            }
-            if (item.split('=')[0] === 'brand') {
-                this.filter.brands = item.split('=')[1].split('_');
-            }
-            if (item.split('=')[0] === 'search') {
-                this.filter.search = item.split('=')[1];
-            }
-            if (item.split('=')[0] === 'sort') {
-                this.filter.sort = item.split('=')[1];
+            const [filterKey, filterValue] = item.split('=');
+            switch (filterKey) {
+                case 'category':
+                    this.filter.categories = filterValue.split('_');
+                    break;
+                case 'brand':
+                    this.filter.brands = filterValue.split('_');
+                    break;
+                case 'search':
+                    this.filter.search = filterValue;
+                    break;
+                case 'sort':
+                    this.filter.sort = filterValue;
+                    break;
             }
         });
     }

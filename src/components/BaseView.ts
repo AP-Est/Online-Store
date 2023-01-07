@@ -37,7 +37,7 @@ export class View {
         this.headerCart = createElement('div', 'header__cart');
         this.headerCart.addEventListener('click', () => (window.location.hash = 'cart/'));
         this.headerCartLink = this.createLinkElement('#cart', 'header__cart_link');
-        this.headerCartLink.innerHTML = '🛒';
+        //this.headerCartLink.innerHTML = '🛒';
         this.main = createElement('main');
         this.mainWrapper = createElement('div', 'main__wrapper');
         this.footer = createElement('footer');
