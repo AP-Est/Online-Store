@@ -249,7 +249,7 @@ export class CartPageModel {
         this.commit(this.cartLots, this.products);
     }
     handleMail(value: string) {
-        const letters = /^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3})+$/;
+        const letters = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/;
         this.modalDate.mail = value;
         if (letters.test(value)) {
             this.modalDate.error.mail = false;
@@ -308,6 +308,18 @@ export class CartPageModel {
         this.commit(this.cartLots, this.products);
     }
     handleConfirmButton() {
+        if (
+            this.modalDate.error.name !== true &&
+            this.modalDate.error.phone !== true &&
+            this.modalDate.error.address !== true &&
+            this.modalDate.error.mail !== true &&
+            this.modalDate.error.cardNumber !== true &&
+            this.modalDate.error.cardValid !== true &&
+            this.modalDate.error.cardCVV !== true
+        ) {
+            throw alert('Done');
+            //todo очистить корзину и перекинуть на главную
+        }
         this.commit(this.cartLots, this.products);
     }
 }
