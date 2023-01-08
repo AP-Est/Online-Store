@@ -15,6 +15,7 @@ export class ControllerMainPage {
         this.onChangeModel(this.model.products, this.model.filter, 0, 0); //TODO 0, 0 временно, далее доработать логику и заменить переменными
         this.model.bindChangeModel(this.onChangeModel);
         this.view.bindAddDetailAddress(this.handleAddDetailAddress);
+        this.view.bindAddToRemoveFromCart(this.handleAddToRemoveFromCart);
         //this.view.bindRemoveCategory(this.handleRemoveCategory);
         this.view.bindAddRemoveCategory(this.handleAddRemoveCategory);
         this.view.bindAddRemoveBrand(this.handleAddRemoveBrand);
@@ -27,6 +28,10 @@ export class ControllerMainPage {
 
     handleAddDetailAddress = (cardNumber: number) => {
         window.location.hash = `details/${cardNumber + 1}`;
+    };
+
+    handleAddToRemoveFromCart = (cardNumber: number) => {
+        this.model.addToRemoveFromCart(cardNumber + 1);
     };
 
     onChangeModel = (products: IProduct[], filter: IFilterData, totalCost: number, numProducts: number) => {
