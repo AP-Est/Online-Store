@@ -154,4 +154,13 @@ export class DetailPageView extends View {
             }
         });
     }
+    bindFastBuy(handler: (itemId: number) => void) {
+        this.app.addEventListener('click', (event) => {
+            const target = event.target as HTMLButtonElement;
+            if (target.classList.contains('productBlockMainBlock__price_buttonBuyNow')) {
+                const itemId = this.cardNumber;
+                handler(itemId);
+            }
+        });
+    }
 }

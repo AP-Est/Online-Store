@@ -10,6 +10,7 @@ export class DetailPageController {
 
         this.view.bindPushToLocalStorage(this.handlePushToLocalStorage);
         this.view.bindDropFromLocalStorage(this.handleDropFromLocalStorage);
+        this.view.bindFastBuy(this.handleFastBuy);
         this.model.bindChangeModel(this.onChangeModel);
 
         this.onChangeModel(this.model.storeData);
@@ -21,4 +22,5 @@ export class DetailPageController {
 
     handlePushToLocalStorage = (itemId: number) => this.model.handlePushToLocalStorage(itemId);
     handleDropFromLocalStorage = (itemId: number) => this.model.handleDropFromLocalStorage(itemId);
+    handleFastBuy = (itemId: number) => this.model.handleFastBuy(itemId);
 }

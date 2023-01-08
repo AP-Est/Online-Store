@@ -1,5 +1,6 @@
 import { storeData } from '../data/data';
 import { ICartLot, IProduct, IStoreData } from '../styles/types';
+import { externalShowModal } from './CartPageView';
 
 export class DetailPageModel {
     cartLots: ICartLot[];
@@ -18,8 +19,7 @@ export class DetailPageModel {
     private commit() {
         this.onChangeModel(this.storeData);
     }
-
-    handlePushToLocalStorage(itemId: number) {
+    private addProduct(itemId: number) {
         const storageObject: ICartLot = {
             id: itemId,
             count: 1,
@@ -33,11 +33,19 @@ export class DetailPageModel {
             storageArray.push(storageObject);
             localStorage.cart = JSON.stringify(storageArray);
         }
+    }
+    handlePushToLocalStorage(itemId: number) {
+        this.addProduct(itemId);
         this.commit();
     }
     handleDropFromLocalStorage(itemId: number) {
         const storageArray: ICartLot[] = JSON.parse(localStorage.cart);
         localStorage.cart = JSON.stringify(storageArray.filter((obj) => obj.id !== itemId));
         this.commit();
+    }
+    handleFastBuy(itemId: number) {
+        this.addProduct(itemId);
+        window.location.hash = 'cart/';
+        //externalShowModal();
     }
 }
