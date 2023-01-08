@@ -155,6 +155,7 @@ function createCardModel(modalDate: IModalData) {
     inputAreaCVV.setAttribute('type', 'password');
     inputAreaCVV.size = 3;
     inputAreaCVV.placeholder = 'Code';
+    inputAreaCVV.setAttribute('oninput', 'if (value.length>= 4) value = value.slice (0,3)');
     inputAreaCVVDiv.append(inputAreaCVV);
     secondRow.append(inputAreaValidDiv, inputAreaCVVDiv);
     createCardModel.append(inputAreaNumberDiv, secondRow);

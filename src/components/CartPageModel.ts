@@ -239,7 +239,7 @@ export class CartPageModel {
     }
     //todo
     handleName(value: string) {
-        const letters = /^[A-Za-z]+\s[A-Za-z]+$/;
+        const letters = /^[A-Za-z]+\s[A-Za-z]*\w/;
         this.modalDate.name = value;
         if (letters.test(value)) {
             this.modalDate.error.name = false;
@@ -308,7 +308,7 @@ export class CartPageModel {
         this.commit(this.cartLots, this.products);
     }
     handleCardValid(value: string) {
-        const letters = /(\d{1}|[1-2]{1}[0-9]{1})[/]\d{2}/;
+        const letters = /^([1-9]{1}|[0-2]{1}[0-9]{1})[/]\d{2}$/;
         this.modalDate.cardValid = value;
         if (letters.test(value)) {
             this.modalDate.error.cardValid = false;
