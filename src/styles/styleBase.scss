@@ -74,8 +74,8 @@ ul {
     width: 45%;
     height: 100%;
     border-radius: $mainBorderRadius;
-    background-size: contain;
-    background-position: bottom;
+    background-size: cover;
+    background-position: center;
     background-repeat: no-repeat;
 }
 .footer__githubOne:hover{
@@ -88,8 +88,8 @@ ul {
     width: 45%;
     height: 100%;
     border-radius: $mainBorderRadius;
-    background-size: contain;
-    background-position: bottom;
+    background-size: cover;
+    background-position: center;
     background-repeat: no-repeat;
 }
 .footer__githubTwo:hover{
