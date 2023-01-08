@@ -127,14 +127,16 @@ export class CartPageModel {
         url.searchParams.delete('brand');
         url.searchParams.delete('search');
         url.searchParams.delete('sort');
+        url.searchParams.delete('minPrice');
+        url.searchParams.delete('maxPrice');
         url.searchParams.delete('limit');
         url.searchParams.delete('page');
         history.pushState(null, '', url);
     }
     private getQueryParameters() {
         const url = new URL(location.href);
-        this.plug.limit = Number(url.searchParams.get('limit'));
-        this.plug.page = Number(url.searchParams.get('page'));
+        this.plug.limit = Number(url.searchParams.get('limit')) || 3;
+        this.plug.page = Number(url.searchParams.get('page')) || 1;
     }
 
     handleCardItemIncrement(productId: number) {
