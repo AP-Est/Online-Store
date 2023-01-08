@@ -65,6 +65,11 @@ input[type="range"] {
     z-index: 1;
 }
 
+#fromSliderStock {
+    height: 0;
+    z-index: 1;
+}
+
 .price{
     font-family: $mainFontFamily;
     font-size: $mainFontSize * 1.3;

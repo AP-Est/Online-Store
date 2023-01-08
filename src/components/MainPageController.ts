@@ -19,8 +19,7 @@ export class ControllerMainPage {
         this.view.bindAddRemoveCategory(this.handleAddRemoveCategory);
         this.view.bindAddRemoveBrand(this.handleAddRemoveBrand);
         this.view.bindChangeMinMaxPrice(this.handleChangeMinMaxPrice);
-        this.view.bindChangeMinStock(this.handleChangeMinStock);
-        this.view.bindChangeMaxStock(this.handleChangeMaxStock);
+        this.view.bindChangeMinMaxStock(this.handleChangeMinMaxStock);
         this.view.bindSearch(this.handleSearch);
         this.view.bindSort(this.handleSort);
         //this.view.bindLoadPage(this.handleLoadPage);
@@ -58,11 +57,7 @@ export class ControllerMainPage {
         this.model.changeMinMaxPrice(priceOne, priceTwo);
     };
 
-    handleChangeMinStock = (minStock: number) => {
-        this.model.changeMinStock(minStock);
-    };
-
-    handleChangeMaxStock = (maxStock: number) => {
-        this.model.changeMaxStock(maxStock);
+    handleChangeMinMaxStock = (stockOne: number, stockTwo: number) => {
+        this.model.changeMinMaxStock(stockOne, stockTwo);
     };
 }
