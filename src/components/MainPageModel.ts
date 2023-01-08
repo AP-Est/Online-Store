@@ -1,5 +1,8 @@
 import { storeData, IProduct, IFilterData } from '../data/data';
 import setQueryParameters from '../utils/setQueryParameters';
+import pushToLocalStorage from '../utils/pushToLocalStorage';
+import delFromLocalStorage from '../utils/delFromLocalStorage';
+import checkLocalStorage from '../utils/checkLocalstorage';
 
 export class MainPageModel {
     products: IProduct[];
@@ -69,6 +72,15 @@ export class MainPageModel {
                     break;
             }
         });
+    }
+
+    addToRemoveFromCart(cardNumber: number) {
+        if (checkLocalStorage(cardNumber)) {
+            delFromLocalStorage(cardNumber);
+        } else {
+            pushToLocalStorage(cardNumber);
+        }
+        this.onChangeModel(this.products, this.filter, 0, 0);
     }
 
     addRemoveCategory(category: string) {

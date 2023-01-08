@@ -12,8 +12,20 @@ export class MainPageView extends View {
     bindAddDetailAddress(handler: (cardNumber: number) => void) {
         this.mainWrapper.addEventListener('click', (event) => {
             const target = event.target as Element;
-            if (target.classList.contains('cardDiv')) {
+            if (target.classList.contains('cardDiv__details')) {
                 const cardNumber = Number(target.id);
+                //console.log('bindAddDetailAddress target.nextElementSibling:', target.id);
+                handler(cardNumber);
+            }
+        });
+    }
+
+    bindAddToRemoveFromCart(handler: (cardNumber: number) => void) {
+        this.mainWrapper.addEventListener('click', (event) => {
+            const target = event.target as Element;
+            if (target.classList.contains('cardDiv__cart')) {
+                const cardNumber = Number(target.id);
+                //console.log('bindAddDetailAddress target.nextElementSibling:', target.id);
                 handler(cardNumber);
             }
         });
