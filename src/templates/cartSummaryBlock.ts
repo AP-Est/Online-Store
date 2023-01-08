@@ -24,7 +24,9 @@ function createSummaryBody(summaryVars: ISumm) {
     const applyCodes = createBodyBlockAppliedCodes(summaryVars);
     const field = createBodyBlockCodeField();
     const button = createBodyBlockButton();
-    bodyMainBlock.append(count, price, applyCodes, field, button);
+    const text = createElement('div', 'cartSummaryBlock__codes_text');
+    text.textContent = 'Test codes: "AN" and "NA"';
+    bodyMainBlock.append(count, price, applyCodes, text, field, button);
     return bodyMainBlock;
 }
 
@@ -63,7 +65,8 @@ function createBodyBlockAppliedCodes(summaryVars: ISumm) {
 
 function createBodyBlockCodeField() {
     const bodyBlockCodeField = createElement('div', 'cartSummaryBlock__CodeField');
-    const inputArea = createElement('input', 'cartSummaryBlock__CodeField_input');
+    const inputArea = createElement('input', 'cartSummaryBlock__CodeField_input') as HTMLInputElement;
+    inputArea.placeholder = 'Enter promo code';
     bodyBlockCodeField.append(inputArea);
     return bodyBlockCodeField;
 }
@@ -90,3 +93,9 @@ function createCodesBlock(summaryVars: ISumm) {
     });
     return bodyBlockAppliedCodesBody;
 }
+
+// function showModal() {
+//     const wrapper = getElement('.wrapper__blind') as HTMLElement;
+//     wrapper.style.display = 'block';
+//     //wrapper.append(buildModalWindow());
+// }

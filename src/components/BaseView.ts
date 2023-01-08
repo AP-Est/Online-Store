@@ -15,6 +15,8 @@ export class View {
     headerCart: HTMLElement;
     headerCartLink: HTMLAnchorElement;
     footerWrapper: HTMLElement;
+    baseWrapper: HTMLElement;
+    wrapperBlind: HTMLElement;
     footerGithub: HTMLElement;
     footerGithubOne: HTMLAnchorElement;
     footerGithubTwo: HTMLAnchorElement;
@@ -23,6 +25,8 @@ export class View {
     constructor() {
         this.app = getElement('body') as HTMLElement;
         this.app.innerHTML = '';
+        this.baseWrapper = createElement('div', 'base__wrapper');
+        this.wrapperBlind = createElement('div', 'wrapper__blind');
         this.header = createElement('header', 'header');
         this.headerWrapper = createElement('div', 'header__wrapper');
         this.headerLogo = createElement('div', 'header__logo');
@@ -62,11 +66,12 @@ export class View {
         this.footerGithub.append(this.footerGithubOne, this.footerGithubTwo);
         this.footerWrapper.append(this.footerGithub, this.footerYear, this.footerSchool);
         this.footer.append(this.footerWrapper);
-
+        this.baseWrapper.append(this.wrapperBlind, this.header, this.main, this.footer);
         if (this.app !== undefined) {
-            this.app.append(this.header, this.main, this.footer);
+            this.app.append(this.baseWrapper);
         }
     }
+
     createLinkElement(link: string, className?: string) {
         const element = document.createElement('a');
         element.href = link;
