@@ -21,8 +21,8 @@ export interface IStoreData {
 export interface IFilterData {
     categories: string[];
     brands: string[];
-    minPrice: number | null;
-    maxPrice: number | null;
+    minPrice: number;
+    maxPrice: number;
     minStock: number | null;
     maxStock: number | null;
     search: string;
