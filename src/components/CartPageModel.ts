@@ -1,5 +1,4 @@
 import { IProduct, IStoreData, storeData } from '../data/data';
-import getCartItems from '../utils/getCartItems';
 import { ICartLot, ICode, IModalData, IPlug, ISumm } from '../styles/types';
 import _notANull from '../utils/notANull';
 export class CartPageModel {
@@ -177,9 +176,6 @@ export class CartPageModel {
         this.commit(this.cartLots, this.products);
     }
 
-    bindGetCartItems() {
-        getCartItems();
-    }
     handlePageIncrement() {
         if (this.cartLots.length > this.plug.page * this.plug.limit) {
             this.plug.page += 1;

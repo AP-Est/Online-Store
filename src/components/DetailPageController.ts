@@ -1,9 +1,24 @@
 import { DetailPageView } from 'DetailPageView';
-
-export class ControllerDetailPage {
+import { IStoreData } from '../styles/types';
+import { DetailPageModel } from './DetailPageModel';
+export class DetailPageController {
     view: DetailPageView;
-
-    constructor(view: DetailPageView) {
+    model: DetailPageModel;
+    constructor(view: DetailPageView, model: DetailPageModel) {
         this.view = view;
+        this.model = model;
+
+        this.view.bindPushToLocalStorage(this.handlePushToLocalStorage);
+        this.view.bindDropFromLocalStorage(this.handleDropFromLocalStorage);
+        this.model.bindChangeModel(this.onChangeModel);
+
+        this.onChangeModel(this.model.storeData);
     }
+
+    onChangeModel = (storeData: IStoreData) => {
+        this.view.displayDetailPage(storeData);
+    };
+
+    handlePushToLocalStorage = (itemId: number) => this.model.handlePushToLocalStorage(itemId);
+    handleDropFromLocalStorage = (itemId: number) => this.model.handleDropFromLocalStorage(itemId);
 }
