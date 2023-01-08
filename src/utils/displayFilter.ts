@@ -4,6 +4,7 @@ import displayFilterCategory from './displayFilterCategory';
 import displayFilterBrands from './displayFilterBrands';
 import displaySliderPrice from './displaySliderPrice';
 import createButton from './createButton';
+import displaySliderStock from './displaySliderStock';
 
 export default function displayFilter(products: IProduct[], filter: IFilterData, productsFiltered: IProduct[]) {
     const filters = createElement('div', 'filters');
@@ -11,13 +12,19 @@ export default function displayFilter(products: IProduct[], filter: IFilterData,
     const filtersButtonWrapper = createElement('div', 'filtersButton__wrapper');
     const filtersButtonReset = createButton('Reset', 'filters__button_reset');
     const filtersButtonCopy = createButton('Copy', 'filters__button_copy');
-    const modelFilter1 = displayFilterCategory(products, filter, productsFiltered) as HTMLElement; // TODo сюда прокинуть продукты и массив с фильтрами категорий
-    const modelFilter2 = displayFilterBrands(products, filter, productsFiltered) as HTMLElement; // TODo сюда прокинуть продукты и массив с фильтрами категорий
-    const modelFilter3 = displaySliderPrice(products, filter) as HTMLElement;
-    const modelFilter4 = createElement('div', 'modelFilter');
+    const modelFilterCategory = displayFilterCategory(products, filter, productsFiltered) as HTMLElement; // TODo сюда прокинуть продукты и массив с фильтрами категорий
+    const modelFilterBrands = displayFilterBrands(products, filter, productsFiltered) as HTMLElement; // TODo сюда прокинуть продукты и массив с фильтрами категорий
+    const modelFilterPrice = displaySliderPrice(products, filter) as HTMLElement;
+    const modelFilterStock = displaySliderStock(products, filter) as HTMLElement;
 
     filtersButtonWrapper.append(filtersButtonReset, filtersButtonCopy);
-    filtersWrapper.append(filtersButtonWrapper, modelFilter1, modelFilter2, modelFilter3, modelFilter4);
+    filtersWrapper.append(
+        filtersButtonWrapper,
+        modelFilterCategory,
+        modelFilterBrands,
+        modelFilterPrice,
+        modelFilterStock
+    );
     filters.append(filtersWrapper);
 
     return filters;

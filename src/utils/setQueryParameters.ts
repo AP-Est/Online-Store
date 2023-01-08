@@ -11,6 +11,8 @@ export default function setQueryParameters(filter: IFilterData) {
     url.searchParams.delete('sort');
     url.searchParams.delete('minPrice');
     url.searchParams.delete('maxPrice');
+    url.searchParams.delete('minStock');
+    url.searchParams.delete('maxStock');
     let string = '';
     filter.categories.map((item) => {
         if (item !== '') {
@@ -56,6 +58,8 @@ export default function setQueryParameters(filter: IFilterData) {
     }
     url.searchParams.set('minPrice', String(filter.minPrice));
     url.searchParams.set('maxPrice', String(filter.maxPrice));
+    url.searchParams.set('minStock', String(filter.minStock));
+    url.searchParams.set('maxStock', String(filter.maxStock));
     // console.log('setQueryParameters url:', url);
     history.pushState(null, '', url);
 }

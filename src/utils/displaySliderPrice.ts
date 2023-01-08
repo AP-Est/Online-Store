@@ -68,37 +68,7 @@ export default function displaySliderPrice(products: IProduct[], filter: IFilter
     return filterPriceWrapper;
 }
 
-function controlFromSlider(fromSlider: HTMLInputElement, toSlider: HTMLInputElement, fromInput: HTMLInputElement) {
-    const [from, to] = getParsed(fromSlider, toSlider);
-    fillSlider(fromSlider, toSlider, '#C6C6C6', '#25daa5', toSlider);
-    if (from > to) {
-        fromSlider.value = String(to);
-        fromInput.value = String(to);
-    } else {
-        fromInput.value = String(from);
-    }
-}
-
-// function controlToSlider(fromSlider: HTMLInputElement, toSlider: HTMLInputElement, toInput: HTMLInputElement) {
-//     const [from, to] = getParsed(fromSlider, toSlider);
-//     fillSlider(fromSlider, toSlider, '#C6C6C6', '#25daa5', toSlider);
-//     setToggleAccessible(toSlider, toSlider);
-//     if (from <= to) {
-//         toSlider.value = String(to);
-//         toInput.value = String(to);
-//     } else {
-//         toInput.value = String(from);
-//         toSlider.value = String(from);
-//     }
-// }
-
-function getParsed(currentFrom: HTMLInputElement, currentTo: HTMLInputElement) {
-    const from = parseInt(currentFrom.value, 10);
-    const to = parseInt(currentTo.value, 10);
-    return [from, to];
-}
-
-function fillSlider(
+export function fillSlider(
     from: HTMLInputElement,
     to: HTMLInputElement,
     sliderColor: string,
@@ -118,7 +88,7 @@ function fillSlider(
         ${sliderColor} 100%)`;
 }
 
-function setToggleAccessible(currentTarget: HTMLInputElement, toSlider: HTMLInputElement) {
+export function setToggleAccessible(currentTarget: HTMLInputElement, toSlider: HTMLInputElement) {
     console.log('setToggleAccessible toSlider', toSlider);
     if (Number(currentTarget.value) <= 0) {
         toSlider.style.zIndex = '2';

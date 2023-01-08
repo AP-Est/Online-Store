@@ -23,8 +23,8 @@ export interface IFilterData {
     brands: string[];
     minPrice: number;
     maxPrice: number;
-    minStock: number | null;
-    maxStock: number | null;
+    minStock: number;
+    maxStock: number;
     search: string;
     sort: string;
 }

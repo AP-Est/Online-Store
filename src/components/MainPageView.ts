@@ -54,10 +54,10 @@ export class MainPageView extends View {
     bindChangeMinMaxPrice(handler: (priceOne: number, priceTwo: number) => void) {
         // обработчик изменения минимальной цены
         this.mainWrapper.addEventListener('change', (event) => {
-            console.log('bindChangeMinPrice event', event);
+            //console.log('bindChangeMinPrice event', event);
             const target = event.target as HTMLElement;
             if (target.id === 'fromSlider' || target.id === 'toSlider') {
-                console.log('bindChangeMinPrice second');
+                //console.log('bindChangeMinPrice second');
                 const fromSlider = document.querySelector('#fromSlider') as HTMLInputElement;
                 const toSlider = document.querySelector('#toSlider') as HTMLInputElement;
                 handler(Number(fromSlider.value), Number(toSlider.value));
@@ -65,26 +65,18 @@ export class MainPageView extends View {
         });
     }
 
-    bindChangeMinStock(handler: (minStock: number) => void) {
-        // обработчик изменения минимального количества на складе
-        // this.category.addEventListener('change', event => {
-        //     if (event.target.type === 'checkbox') {
-        //         const category = ;
-        //         handler(category);
-        //     }
-        // })
-        //handler(0);
-    }
-
-    bindChangeMaxStock(handler: (maxStock: number) => void) {
-        // обработчик изменения максимального количества на складе
-        // this.category.addEventListener('change', event => {
-        //     if (event.target.type === 'checkbox') {
-        //         const category = ;
-        //         handler(category);
-        //     }
-        // })
-        //handler(0);
+    bindChangeMinMaxStock(handler: (stockOne: number, stockTwo: number) => void) {
+        // обработчик изменения минимальной цены
+        this.mainWrapper.addEventListener('change', (event) => {
+            //console.log('bindChangeMinPrice event', event);
+            const target = event.target as HTMLElement;
+            if (target.id === 'fromSliderStock' || target.id === 'toSliderStock') {
+                //console.log('bindChangeMinPrice second');
+                const fromSliderStock = document.querySelector('#fromSliderStock') as HTMLInputElement;
+                const toSliderStock = document.querySelector('#toSliderStock') as HTMLInputElement;
+                handler(Number(fromSliderStock.value), Number(toSliderStock.value));
+            }
+        });
     }
 
     bindSearch(handler: (searchString: string) => void) {
