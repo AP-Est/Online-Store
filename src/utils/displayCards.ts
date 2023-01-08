@@ -47,6 +47,14 @@ export default function displayCards(productsFiltered: IProduct[], filter: IFilt
     //searchInput.setSelectionRange(1, 1);
 
     const cards = createElement('div', 'cards');
+
+    if (productsFiltered.length === 0) {
+        const cardsTextNoProducts = createElement('div', 'cards__noproducts');
+        cardsTextNoProducts.textContent = 'No products found';
+        cards.append(cardsTextNoProducts);
+        cards.classList.add('displayBlock');
+    }
+
     const cardDiv = [];
     for (let i = 0; i < productsFiltered.length; i++) {
         cardDiv[i] = createElement('div', 'cardDiv');

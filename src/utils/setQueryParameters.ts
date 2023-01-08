@@ -9,6 +9,8 @@ export default function setQueryParameters(filter: IFilterData) {
     url.searchParams.delete('brand');
     url.searchParams.delete('search');
     url.searchParams.delete('sort');
+    url.searchParams.delete('minPrice');
+    url.searchParams.delete('maxPrice');
     let string = '';
     filter.categories.map((item) => {
         if (item !== '') {
@@ -52,6 +54,8 @@ export default function setQueryParameters(filter: IFilterData) {
     } else {
         url.searchParams.delete('sort');
     }
+    url.searchParams.set('minPrice', String(filter.minPrice));
+    url.searchParams.set('maxPrice', String(filter.maxPrice));
     // console.log('setQueryParameters url:', url);
     history.pushState(null, '', url);
 }

@@ -51,26 +51,18 @@ export class MainPageView extends View {
         });
     }
 
-    bindChangeMinPrice(handler: (minPrice: number) => void) {
+    bindChangeMinMaxPrice(handler: (priceOne: number, priceTwo: number) => void) {
         // обработчик изменения минимальной цены
-        // this.category.addEventListener('change', event => {
-        //     if (event.target.type === 'checkbox') {
-        //         const category = ;
-        //         handler(category);
-        //     }
-        // })
-        //handler(0);
-    }
-
-    bindChangeMaxPrice(handler: (maxPrice: number) => void) {
-        // обработчик изменения максимальной цены
-        // this.category.addEventListener('change', event => {
-        //     if (event.target.type === 'checkbox') {
-        //         const category = ;
-        //         handler(category);
-        //     }
-        // })
-        //handler(0);
+        this.mainWrapper.addEventListener('change', (event) => {
+            console.log('bindChangeMinPrice event', event);
+            const target = event.target as HTMLElement;
+            if (target.id === 'fromSlider' || target.id === 'toSlider') {
+                console.log('bindChangeMinPrice second');
+                const fromSlider = document.querySelector('#fromSlider') as HTMLInputElement;
+                const toSlider = document.querySelector('#toSlider') as HTMLInputElement;
+                handler(Number(fromSlider.value), Number(toSlider.value));
+            }
+        });
     }
 
     bindChangeMinStock(handler: (minStock: number) => void) {
@@ -134,6 +126,7 @@ export class MainPageView extends View {
         this.mainWrapper.innerHTML = '';
         const filters = displayFilter(products, filter, productsFiltered);
         const goods = displayCards(productsFiltered, filter);
+        console.log('renderPage productsFiltered', productsFiltered);
 
         this.mainWrapper.append(filters, goods);
         (goods.querySelector('.search__input') as HTMLInputElement).focus();

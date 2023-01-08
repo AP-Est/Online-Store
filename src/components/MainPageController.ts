@@ -18,8 +18,7 @@ export class ControllerMainPage {
         //this.view.bindRemoveCategory(this.handleRemoveCategory);
         this.view.bindAddRemoveCategory(this.handleAddRemoveCategory);
         this.view.bindAddRemoveBrand(this.handleAddRemoveBrand);
-        this.view.bindChangeMinPrice(this.handleChangeMinPrice);
-        this.view.bindChangeMaxPrice(this.handleChangeMaxPrice);
+        this.view.bindChangeMinMaxPrice(this.handleChangeMinMaxPrice);
         this.view.bindChangeMinStock(this.handleChangeMinStock);
         this.view.bindChangeMaxStock(this.handleChangeMaxStock);
         this.view.bindSearch(this.handleSearch);
@@ -55,12 +54,8 @@ export class ControllerMainPage {
     //     this.model.addFilter(filter);
     // };
 
-    handleChangeMinPrice = (minPrice: number) => {
-        this.model.changeMinPrice(minPrice);
-    };
-
-    handleChangeMaxPrice = (maxPrice: number) => {
-        this.model.changeMaxPrice(maxPrice);
+    handleChangeMinMaxPrice = (priceOne: number, priceTwo: number) => {
+        this.model.changeMinMaxPrice(priceOne, priceTwo);
     };
 
     handleChangeMinStock = (minStock: number) => {
@@ -68,6 +63,6 @@ export class ControllerMainPage {
     };
 
     handleChangeMaxStock = (maxStock: number) => {
-        this.model.changeMaxPrice(maxStock);
+        this.model.changeMaxStock(maxStock);
     };
 }

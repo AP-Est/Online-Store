@@ -212,3 +212,14 @@ p{
 .filterLi{
     display: flex;
 }
+
+.cards__noproducts{
+    font-family: $mainFontFamily;
+    font-size: $bigFontSize;
+    text-align: center;
+    margin-top: 100px;
+}
+
+.displayBlock{
+    display: block;
+}

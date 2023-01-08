@@ -5,6 +5,8 @@ export class MainPageModel {
     products: IProduct[];
     filter: IFilterData;
     onChangeModel: (products: IProduct[], filter: IFilterData, totalCost: number, numProducts: number) => void;
+    minPriceProducts: number;
+    maxPriceProducts: number;
 
     constructor() {
         this.onChangeModel = () => {
@@ -12,11 +14,19 @@ export class MainPageModel {
         };
         this.products = storeData.products;
         const locationSearch = window.location.search.replace('?', '').split('&');
+        this.minPriceProducts = this.products.reduce((acc: number, date: IProduct) => {
+            return date.price < acc ? date.price : acc;
+        }, this.products[0].price);
+        this.maxPriceProducts = this.products.reduce((acc: number, date: IProduct) => {
+            return date.price > acc ? date.price : acc;
+        }, this.products[0].price);
+        //console.log('MainPageModel minPriceProducts:', minPriceProducts);
+        //console.log('MainPageModel maxPriceProducts:', maxPriceProducts);
         this.filter = {
             categories: [],
             brands: [],
-            minPrice: null,
-            maxPrice: null,
+            minPrice: this.minPriceProducts,
+            maxPrice: this.maxPriceProducts,
             minStock: null,
             maxStock: null,
             search: '',
@@ -36,6 +46,12 @@ export class MainPageModel {
                     break;
                 case 'sort':
                     this.filter.sort = filterValue;
+                    break;
+                case 'minPrice':
+                    this.filter.minPrice = Number(filterValue);
+                    break;
+                case 'maxPrice':
+                    this.filter.maxPrice = Number(filterValue);
                     break;
             }
         });
@@ -86,14 +102,18 @@ export class MainPageModel {
         setQueryParameters(this.filter);
     }
 
-    changeMinPrice(minPrice: number) {
-        this.filter.minPrice = minPrice;
+    changeMinMaxPrice(priceOne: number, priceTwo: number) {
+        console.log('changeMinMaxPrice priceOne', priceOne);
+        console.log('changeMinMaxPrice priceTwo', priceTwo);
+        if (priceOne <= priceTwo) {
+            this.filter.minPrice = priceOne;
+            this.filter.maxPrice = priceTwo;
+        } else {
+            this.filter.minPrice = priceTwo;
+            this.filter.maxPrice = priceOne;
+        }
         this.onChangeModel(this.products, this.filter, 0, 0);
-    }
-
-    changeMaxPrice(maxPrice: number) {
-        this.filter.maxPrice = maxPrice;
-        this.onChangeModel(this.products, this.filter, 0, 0);
+        setQueryParameters(this.filter);
     }
 
     changeMinStock(minStock: number) {
@@ -192,17 +212,15 @@ export class MainPageModel {
         return products;
     }
 
-    filterPrice(products: IProduct[], minPrice: number | null, maxPrice: number | null) {
-        if (minPrice === null && maxPrice === null) return products;
+    filterPrice(products: IProduct[], minPrice: number, maxPrice: number) {
+        if (minPrice === this.minPriceProducts && maxPrice === this.maxPriceProducts) return products;
         const productsFiltered = this.products.filter((cur) => {
-            if (minPrice === null && maxPrice !== null) {
-                cur.price <= maxPrice;
-            } else if (maxPrice === null && minPrice !== null) {
-                cur.price >= minPrice;
-            } else if (maxPrice !== null && minPrice !== null) {
-                cur.price >= minPrice && cur.price <= maxPrice;
-            }
+            return cur.price >= minPrice && cur.price <= maxPrice;
         });
+        // console.log('filterPrice productsFiltered', productsFiltered);
+        // console.log('filterPrice minPrice', minPrice);
+        // console.log('filterPrice maxPrice', maxPrice);
+        // console.log('filterPrice products', products);
         return productsFiltered;
     }
 
@@ -246,7 +264,7 @@ export class MainPageModel {
             });
         });
         //console.log('productFiltered', productFiltered);
-        return this.sorting(productFiltered, filter.sort);
+        return this.sorting(this.filterPrice(productFiltered, filter.minPrice, filter.maxPrice), filter.sort);
     }
 
     bindChangeModel(
