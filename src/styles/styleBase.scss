@@ -76,6 +76,7 @@ ul {
     border-radius: $mainBorderRadius;
     background-size: contain;
     background-position: bottom;
+    background-repeat: no-repeat;
 }
 .footer__githubOne:hover{
     cursor: pointer;
@@ -89,6 +90,7 @@ ul {
     border-radius: $mainBorderRadius;
     background-size: contain;
     background-position: bottom;
+    background-repeat: no-repeat;
 }
 .footer__githubTwo:hover{
     cursor: pointer;
@@ -131,6 +133,7 @@ ul {
     height: 55px;
     background: url(../source/img/cart.png);
     background-size: contain;
+    background-repeat: no-repeat;
 }
 
 .header__cart_link {

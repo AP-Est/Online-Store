@@ -1,5 +1,7 @@
 import createElement from './createElement';
+import createButton from './createButton';
 import { IProduct, IFilterData } from '../data/data';
+import checkLocalStorage from './checkLocalstorage';
 
 export default function displayCards(productsFiltered: IProduct[], filter: IFilterData) {
     const goods = createElement('div', 'goods');
@@ -56,13 +58,31 @@ export default function displayCards(productsFiltered: IProduct[], filter: IFilt
     }
 
     const cardDiv = [];
+    const cardButtonCart = [];
+    const cardButtonDetails = [];
+    const cardDivName = [];
     for (let i = 0; i < productsFiltered.length; i++) {
         cardDiv[i] = createElement('div', 'cardDiv');
         cardDiv[i].style.background = `url(${productsFiltered[i].thumbnail})`;
-        cardDiv[i].style.backgroundSize = 'cover';
+        cardDiv[i].style.backgroundSize = 'contain';
+        cardDiv[i].style.backgroundRepeat = 'round';
         cardDiv[i].id = `${i}`;
+        cardDivName[i] = createElement('div', 'cardDiv__Name');
+        cardDivName[i].textContent = productsFiltered[i].title;
+        if (checkLocalStorage(i + 1)) {
+            cardButtonCart[i] = createButton('DROP FROM CART', 'cardDiv__cart');
+            cardButtonCart[i].id = `${i}`;
+        } else {
+            cardButtonCart[i] = createButton('ADD TO CART', 'cardDiv__cart');
+            cardButtonCart[i].id = `${i}`;
+        }
+        cardButtonDetails[i] = createButton('DETAILS', 'cardDiv__details');
+        cardButtonDetails[i].id = `${i}`;
+        cardDiv[i].append(cardDivName[i], cardButtonCart[i], cardButtonDetails[i]);
         cards.append(cardDiv[i]);
     }
+
+    console.log('checkLocalStorage(0)', checkLocalStorage(0));
 
     search.append(searchInput);
     sortSelect.append(

@@ -182,9 +182,48 @@ p{
 
 .cardDiv{
   width: 100%;
-  height: 100px;
+  height: 150px;
   border: 1px solid black;
   border-radius: 10px;
+  position: relative;
+  border: $borderMain;
+  border-radius: $smallBorderRadius;
+}
+
+.cardDiv__Name{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    border: $borderMain;
+    background-color: #583e3e;
+    border-top-left-radius: $smallBorderRadius;
+    border-top-right-radius: $smallBorderRadius;
+    padding: 2px 0;
+}
+
+.cardDiv__cart{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border: $borderMain;
+    background-color: #583e3e;
+    border-radius: $smallBorderRadius;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    width: 55%;
+}
+
+.cardDiv__details{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border: $borderMain;
+    background-color: #583e3e;
+    border-radius: $smallBorderRadius;
+    margin-bottom: 5px;
+    margin-right: 5px;
 }
 
 .wrapper__filtersGoods {
