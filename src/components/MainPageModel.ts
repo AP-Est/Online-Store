@@ -7,6 +7,8 @@ export class MainPageModel {
     onChangeModel: (products: IProduct[], filter: IFilterData, totalCost: number, numProducts: number) => void;
     minPriceProducts: number;
     maxPriceProducts: number;
+    minStockProducts: number;
+    maxStockProducts: number;
 
     constructor() {
         this.onChangeModel = () => {
@@ -20,6 +22,12 @@ export class MainPageModel {
         this.maxPriceProducts = this.products.reduce((acc: number, date: IProduct) => {
             return date.price > acc ? date.price : acc;
         }, this.products[0].price);
+        this.minStockProducts = this.products.reduce((acc: number, date: IProduct) => {
+            return date.stock < acc ? date.stock : acc;
+        }, this.products[0].price);
+        this.maxStockProducts = this.products.reduce((acc: number, date: IProduct) => {
+            return date.stock > acc ? date.stock : acc;
+        }, this.products[0].price);
         //console.log('MainPageModel minPriceProducts:', minPriceProducts);
         //console.log('MainPageModel maxPriceProducts:', maxPriceProducts);
         this.filter = {
@@ -27,8 +35,8 @@ export class MainPageModel {
             brands: [],
             minPrice: this.minPriceProducts,
             maxPrice: this.maxPriceProducts,
-            minStock: null,
-            maxStock: null,
+            minStock: this.minStockProducts,
+            maxStock: this.maxStockProducts,
             search: '',
             sort: '',
         };
@@ -52,6 +60,12 @@ export class MainPageModel {
                     break;
                 case 'maxPrice':
                     this.filter.maxPrice = Number(filterValue);
+                    break;
+                case 'minStock':
+                    this.filter.minStock = Number(filterValue);
+                    break;
+                case 'maxStock':
+                    this.filter.maxStock = Number(filterValue);
                     break;
             }
         });
@@ -103,8 +117,8 @@ export class MainPageModel {
     }
 
     changeMinMaxPrice(priceOne: number, priceTwo: number) {
-        console.log('changeMinMaxPrice priceOne', priceOne);
-        console.log('changeMinMaxPrice priceTwo', priceTwo);
+        //console.log('changeMinMaxPrice priceOne', priceOne);
+        //console.log('changeMinMaxPrice priceTwo', priceTwo);
         if (priceOne <= priceTwo) {
             this.filter.minPrice = priceOne;
             this.filter.maxPrice = priceTwo;
@@ -113,17 +127,23 @@ export class MainPageModel {
             this.filter.maxPrice = priceOne;
         }
         this.onChangeModel(this.products, this.filter, 0, 0);
+        console.log('changeMinMaxPrice this.filter', this.filter);
         setQueryParameters(this.filter);
     }
 
-    changeMinStock(minStock: number) {
-        this.filter.minStock = minStock;
+    changeMinMaxStock(stockOne: number, stockTwo: number) {
+        // console.log('changeMinMaxPrice priceOne', priceOne);
+        //console.log('changeMinMaxPrice priceTwo', priceTwo);
+        if (stockOne <= stockTwo) {
+            this.filter.minStock = stockOne;
+            this.filter.maxStock = stockTwo;
+        } else {
+            this.filter.minStock = stockTwo;
+            this.filter.maxStock = stockOne;
+        }
         this.onChangeModel(this.products, this.filter, 0, 0);
-    }
-
-    changeMaxStock(maxStock: number) {
-        this.filter.maxStock = maxStock;
-        this.onChangeModel(this.products, this.filter, 0, 0);
+        console.log('changeMinMaxStock this.filter', this.filter);
+        setQueryParameters(this.filter);
     }
 
     // addFilter(filter: IFilterData) {
@@ -224,16 +244,10 @@ export class MainPageModel {
         return productsFiltered;
     }
 
-    filterStock(products: IProduct[], minStock: number | null, maxStock: number | null) {
-        if (minStock === null && maxStock === null) return products;
+    filterStock(products: IProduct[], minPrice: number, maxPrice: number) {
+        if (minPrice === this.minStockProducts && maxPrice === this.maxStockProducts) return products;
         const productsFiltered = this.products.filter((cur) => {
-            if (minStock === null && maxStock !== null) {
-                cur.stock <= maxStock;
-            } else if (maxStock === null && minStock !== null) {
-                cur.stock >= minStock;
-            } else if (maxStock !== null && minStock !== null) {
-                cur.stock >= minStock && cur.stock <= maxStock;
-            }
+            return cur.stock >= minPrice && cur.stock <= maxPrice;
         });
         return productsFiltered;
     }
@@ -251,20 +265,38 @@ export class MainPageModel {
         const productFilteredByCategory: IProduct[] = this.filterByCategory(products, filter.categories);
         const productFilteredByBrand: IProduct[] = this.filterByBrand(products, filter.brands);
         const productFilteredBySearch: IProduct[] = this.filterBySearch(products, filter.search);
+        const productFilteredByPrice: IProduct[] = this.filterPrice(products, filter.minPrice, filter.maxPrice);
+        const productFilteredByStock: IProduct[] = this.filterStock(products, filter.minStock, filter.maxStock);
         const productFiltered: IProduct[] = [];
         productFilteredByCategory.map((itemCategory) => {
             productFilteredByBrand.map((itemBrand) => {
                 if (itemBrand === itemCategory) {
                     productFilteredBySearch.map((itemSearch) => {
                         if (itemBrand === itemSearch) {
-                            productFiltered.push(itemBrand);
+                            productFilteredByPrice.map((itemPrice) => {
+                                if (itemSearch === itemPrice) {
+                                    productFilteredByStock.map((itemStock) => {
+                                        if (itemStock === itemPrice) {
+                                            productFiltered.push(itemStock);
+                                        }
+                                    });
+                                }
+                            });
                         }
                     });
                 }
             });
         });
         //console.log('productFiltered', productFiltered);
-        return this.sorting(this.filterPrice(productFiltered, filter.minPrice, filter.maxPrice), filter.sort);
+        // return this.sorting(
+        //     this.filterStock(
+        //         this.filterPrice(productFiltered, filter.minPrice, filter.maxPrice),
+        //         filter.minStock,
+        //         filter.maxStock
+        //     ),
+        //     filter.sort
+        // );
+        return this.sorting(productFiltered, filter.sort);
     }
 
     bindChangeModel(
