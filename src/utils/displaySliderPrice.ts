@@ -99,7 +99,6 @@ export function fillSlider(
 }
 
 export function setToggleAccessible(currentTarget: HTMLInputElement, toSlider: HTMLInputElement) {
-    console.log('setToggleAccessible toSlider', toSlider);
     if (Number(currentTarget.value) <= 0) {
         toSlider.style.zIndex = '2';
     } else {
