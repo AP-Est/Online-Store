@@ -74,7 +74,7 @@ export default function displayCards(products: IProduct[], filter: IFilterData, 
     for (let i = 0; i < productsFiltered.length; i++) {
         cardDiv[i] = createElement('div', 'cardDiv');
         cardDiv[i].style.background = `url(${productsFiltered[i].thumbnail})`;
-        cardDiv[i].style.backgroundSize = 'contain';
+        cardDiv[i].style.backgroundSize = 'cover';
         cardDiv[i].style.backgroundRepeat = 'round';
         cardDiv[i].id = `${i}`;
         cardDivName[i] = createElement('div', 'cardDiv__Name');
