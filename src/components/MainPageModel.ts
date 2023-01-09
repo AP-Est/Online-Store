@@ -83,6 +83,21 @@ export class MainPageModel {
         this.onChangeModel(this.products, this.filter, 0, 0);
     }
 
+    resetFilters() {
+        this.filter = {
+            categories: [],
+            brands: [],
+            minPrice: this.minPriceProducts,
+            maxPrice: this.maxPriceProducts,
+            minStock: this.minStockProducts,
+            maxStock: this.maxStockProducts,
+            search: '',
+            sort: '',
+        };
+        this.onChangeModel(this.products, this.filter, 0, 0);
+        setQueryParameters(this.filter);
+    }
+
     addRemoveCategory(category: string) {
         //const url = new URL(location.href);
         //location.search = '';
