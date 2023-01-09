@@ -38,6 +38,7 @@ export class View {
         this.headerWrapper = createElement('div', 'header__wrapper');
         this.headerLogo = createElement('div', 'header__logo');
         this.headerLogoLink = this.createLinkElement('#', 'header__logo_link');
+        this.headerLogoLink.pathname = '/';
         this.headerLogoLink.innerHTML = 'Online-Store';
         this.headerTotalCost = createElement('span', 'header__totalCost');
         this.headerTotalCost.textContent = `Total cost: ${totalCost} $`;
@@ -47,6 +48,7 @@ export class View {
         this.headerCartText.textContent = `${cartCount}`;
         this.headerCart.addEventListener('click', () => (window.location.hash = 'cart/'));
         this.headerCartLink = this.createLinkElement('#cart', 'header__cart_link');
+        this.headerCartLink.pathname = '/';
         this.app.addEventListener(
             'click',
             () => (this.headerTotalCost.textContent = `Total cost: ${getTotallyPrice()} $`)
