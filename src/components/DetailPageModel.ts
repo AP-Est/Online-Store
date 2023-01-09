@@ -1,5 +1,6 @@
 import { storeData } from '../data/data';
 import { ICartLot, IProduct, IStoreData } from '../styles/types';
+import checkLocalStorage from '../utils/checkLocalstorage';
 import { externalShowModal } from './CartPageView';
 
 export class DetailPageModel {
@@ -51,7 +52,9 @@ export class DetailPageModel {
         this.commit();
     }
     handleFastBuy(itemId: number) {
-        this.addProduct(itemId);
+        if (checkLocalStorage(itemId) === false) {
+            this.addProduct(itemId);
+        }
         this.addModalFlag();
         window.location.hash = 'cart/';
     }
