@@ -42,6 +42,7 @@ export class MainPageModel {
             maxStock: this.maxStockProducts,
             search: '',
             sort: '',
+            view: 'small',
         };
         locationSearch.map((item) => {
             const [filterKey, filterValue] = item.split('=');
@@ -70,6 +71,9 @@ export class MainPageModel {
                 case 'maxStock':
                     this.filter.maxStock = Number(filterValue);
                     break;
+                case 'view':
+                    this.filter.view = filterValue;
+                    break;
             }
         });
     }
@@ -93,6 +97,7 @@ export class MainPageModel {
             maxStock: this.maxStockProducts,
             search: '',
             sort: '',
+            view: 'small',
         };
         this.onChangeModel(this.products, this.filter, 0, 0);
         setQueryParameters(this.filter);
@@ -139,6 +144,12 @@ export class MainPageModel {
     addSort(sortString: string) {
         this.filter.sort = sortString;
         console.log('addSort filter:', this.filter);
+        this.onChangeModel(this.products, this.filter, 0, 0);
+        setQueryParameters(this.filter);
+    }
+
+    addSetView(stringView: string) {
+        this.filter.view = stringView;
         this.onChangeModel(this.products, this.filter, 0, 0);
         setQueryParameters(this.filter);
     }

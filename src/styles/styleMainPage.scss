@@ -182,16 +182,24 @@ p{
 
 .cards{
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
   gap: 10px;
   width: 100%;
   height: auto;
   padding: 10px;
 }
 
+.cards__small{
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 150px;
+}
+
+.cards__large{
+    grid-template-columns: repeat(6, 1fr);
+    grid-auto-rows: 100px;
+}
+
 .cardDiv{
   width: 100%;
-  height: 150px;
   border: 1px solid black;
   border-radius: 10px;
   position: relative;
@@ -277,4 +285,57 @@ p{
 
 .displayBlock{
     display: block;
+}
+
+.view{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90px;
+}
+
+.view__common{
+    width: 40px;
+    height: 40px;
+    background-color: black;
+    border: $borderMain;
+    border-radius: $smallBorderRadius;
+}
+
+.view__small{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    justify-items: center;
+    align-items: center;
+}
+
+.view__large{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    justify-items: center;
+    align-items: center; 
+}
+
+.view__dedicated{
+    border: 4px groove orange;
+}
+
+.view__smallElement{
+    width: 6px;
+    height: 6px;
+    background-color: $mainBorderColor;
+    border-radius: $smallBorderRadius;
+}
+
+.view__largeElement{
+    width: 4px;
+    height: 4px;
+    background-color: $mainBorderColor;
+    border-radius: $smallBorderRadius;
+}
+
+.fontSizeSmall{
+    font-size: 0.6rem;
 }

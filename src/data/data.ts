@@ -27,6 +27,7 @@ export interface IFilterData {
     maxStock: number;
     search: string;
     sort: string;
+    view: string;
 }
 
 export const storeData: IStoreData = {
