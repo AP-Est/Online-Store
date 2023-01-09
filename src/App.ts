@@ -8,8 +8,6 @@ import { CartPageModel } from './components/CartPageModel';
 import { ControllerCartPage } from './components/CartPageController';
 import { DetailPageModel } from './components/DetailPageModel';
 import { Page404View } from './components/Page404View';
-import { Page404Model } from './components/Page404Model';
-import { Controller404Page } from './components/Page404Controller';
 export class App {
     view: MainPageView | Page404View | DetailPageView | CartPageView | undefined;
     controller: ControllerMainPage | DetailPageController | ControllerCartPage | undefined;

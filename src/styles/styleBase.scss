@@ -1,7 +1,4 @@
 @import 'vars';
-// * {
-//   outline: 1px solid black;  
-// }
 html{
     height: 100%;
 }
@@ -9,8 +6,7 @@ html{
 body {
     background: linear-gradient(90deg,rgb(215, 218, 227) 16%,rgb(44, 44, 104) 54%,rgb(53, 55, 55) 100%); 
     font-family: $mainFontFamily;  
-    font-size: $mainFontSize;  
-    //height: 100%;   
+    font-size: $mainFontSize;    
 }
 
 ul {
@@ -62,7 +58,6 @@ footer {
     justify-content: center;
     margin-top: 10px;
     background: rgb(0, 0, 0, 0.3);
-    //border: $borderMain;
     border-radius: 300%;
     padding: 10px;
 }

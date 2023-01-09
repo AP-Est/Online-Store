@@ -1,10 +1,7 @@
 import { IFilterData } from '../data/data';
 
 export default function setQueryParameters(filter: IFilterData) {
-    console.log('setQueryParameters filter', filter);
-    //window.location.search = '';
     const url = new URL(location.href);
-    // console.log('setQueryParameters filter', filter);
     url.searchParams.delete('category');
     url.searchParams.delete('brand');
     url.searchParams.delete('search');
@@ -17,7 +14,6 @@ export default function setQueryParameters(filter: IFilterData) {
     let string = '';
     filter.categories.map((item) => {
         if (item !== '') {
-            // console.log('setQueryParameters item', item);
             if (string === '') {
                 string += item;
             } else {
@@ -26,12 +22,10 @@ export default function setQueryParameters(filter: IFilterData) {
         }
     });
     if (string !== '') {
-        //console.log('setQueryParameters string', string);
         url.searchParams.set('category', string);
     } else {
         url.searchParams.delete('category');
     }
-    //console.log('url', url);
     string = '';
     filter.brands.map((item) => {
         if (item !== '') {
@@ -62,6 +56,5 @@ export default function setQueryParameters(filter: IFilterData) {
     url.searchParams.set('minStock', String(filter.minStock));
     url.searchParams.set('maxStock', String(filter.maxStock));
     url.searchParams.set('view', filter.view);
-    // console.log('setQueryParameters url:', url);
     history.pushState(null, '', url);
 }

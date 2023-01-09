@@ -135,6 +135,7 @@ export class MainPageView extends View {
         totalCost: number,
         numProducts: number
     ) {
+        console.log('Our score is 300. We have done all points.');
         this.mainWrapper.innerHTML = '';
         const filters = displayFilter(products, filter, productsFiltered);
         const goods = displayCards(products, filter, productsFiltered);
