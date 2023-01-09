@@ -348,10 +348,8 @@ export class CartPageModel {
             this.modalDate.cardValid !== '' &&
             !Number.isNaN(this.modalDate.cardCVV)
         ) {
-            //todo очистить корзину и перекинуть на главную
-            //Не раскомменчивать до желания потереть корзину
-            //this.cartLots = [];
-            //localStorage.cart = JSON.stringify(cartLots);
+            this.cartLots = [];
+            localStorage.cart = JSON.stringify(this.cartLots);
             window.location.hash = '';
             this.modalDate.state = false;
             throw alert('Done');
