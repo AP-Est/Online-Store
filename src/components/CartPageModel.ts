@@ -11,6 +11,7 @@ export class CartPageModel {
     summaryVars: ISumm;
     AvailableCodes: ICode[];
     modalDate: IModalData;
+    modalOn: string;
 
     constructor() {
         _notANull();
@@ -53,6 +54,8 @@ export class CartPageModel {
             cardValid: '',
             cardCVV: NaN,
         };
+        this.modalOn = localStorage.modalOn;
+        this.checkModalOn();
         this._getStartNumber(this.plug);
         this.cartLots = JSON.parse(localStorage.cart) || [];
         this.cartView = [];
@@ -137,7 +140,12 @@ export class CartPageModel {
         this.plug.limit = Number(url.searchParams.get('limit')) || 3;
         this.plug.page = Number(url.searchParams.get('page')) || 1;
     }
-
+    private checkModalOn() {
+        if (this.modalOn && this.modalOn == 'true') {
+            localStorage.modalOn = 'false';
+            this.modalDate.state = true;
+        }
+    }
     handleCardItemIncrement(productId: number) {
         let maxCount: number;
         this.products.forEach((obj) => {

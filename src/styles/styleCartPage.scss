@@ -97,6 +97,11 @@
     width: 34vw;
     align-items: center;
     margin: 10px;
+    .itemCardData__rd{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
 }
 .itemCardCount {
     display: flex;

@@ -19,6 +19,13 @@ export class DetailPageModel {
     private commit() {
         this.onChangeModel(this.storeData);
     }
+    private addModalFlag() {
+        if (!localStorage.getItem('modalOn')) {
+            localStorage.setItem('modalOn', 'true');
+        } else {
+            localStorage.modalOn = 'true';
+        }
+    }
     private addProduct(itemId: number) {
         const storageObject: ICartLot = {
             id: itemId,
@@ -45,7 +52,7 @@ export class DetailPageModel {
     }
     handleFastBuy(itemId: number) {
         this.addProduct(itemId);
+        this.addModalFlag();
         window.location.hash = 'cart/';
-        //externalShowModal();
     }
 }
