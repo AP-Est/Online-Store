@@ -45,7 +45,7 @@ function createBodyBlockPrice(summaryVars: ISumm) {
     if (summaryVars.priceTotal !== summaryVars.priceWithCodes) {
         const priceWithCodes = createElement('div', 'cartSummaryBlock__Price_withCodes');
         priceTotal.classList.add('wrongPrice');
-        priceWithCodes.textContent = `Total2: $${summaryVars.priceWithCodes}`;
+        priceWithCodes.textContent = `Discount: $${summaryVars.priceWithCodes}`;
         bodyBlockPrice.append(priceTotal, priceWithCodes);
     } else bodyBlockPrice.append(priceTotal);
     return bodyBlockPrice;

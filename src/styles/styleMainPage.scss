@@ -18,18 +18,18 @@ p{
 .filters{
   width: 1/6*100%;
   height: 50%;
-  border: 1px solid yellow;
+  border: $borderMain;
   border-radius: 10px;
-  background: #6a4b4b;
+  //background: #6a4b4b;
 }
 
 .goods{
   width: 5/6*100%;
   //height: 50%;
-  border: 1px solid yellow;
+  border: $borderMain;
   border-radius: 10px;
   overflow: hidden;
-  background: #583e3e;
+  //background: #583e3e;
 }
 
 .filters__wrapper{
@@ -58,12 +58,13 @@ p{
   .filters__button_reset, 
   .filters__button_copy {
     width: 7vw;
-    height: 4vh;
+    height: 3vh;
+    font-size: $mainFontSize;
     border-radius: $mainBorderRadius;
     background-color: #c0af95;
     margin: 5px;
     &:hover {
-      background-color: red;
+      background-color: rgb(87, 161, 151);
     }
   }
 }
@@ -109,7 +110,7 @@ p{
   width: 100%;
   height: 40%;
   border-bottom: 1px solid yellow;
-  background: gray;
+  //background: gray;
 }
 
 .modelFilter__main{
@@ -127,8 +128,8 @@ p{
 .top{
   width: 100%;
   height: 50px;
-  border-bottom: 1px solid yellow;
-  background: gray;
+  border-bottom: $borderMain;
+  background: rgb(117, 117, 130, 0.3);
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -137,15 +138,17 @@ p{
 .sort{
     // width: 100px;
     // height: 50px;
-    border: 1px solid yellow;
+    border: $borderMain;
     border-radius: 10px;
 }
 
 .sort__select{
     border-radius: 10px;
-    border: 1px solid yellow;
-    background-color: darkolivegreen;
+    border: $borderMain;
+    background-color: rgb(128, 128, 128, 0.8);
     text-align: center;
+    height: 3vh;
+    width: 15vw;
 }
 
 .found{
@@ -154,21 +157,27 @@ p{
     display: flex;
     align-items: center;
     font-family: $mainFontFamily;
-    font-size: $mainFontSize * 1.2;
+    font-size: $bigFontSize * 0.8;
+    font-weight: bold;
+    color: $goldColor;
 }
 
 .search{
     // width: 100px;
     // height: 50px;
-    border: 1px solid yellow;
+    border: $borderMain;
     border-radius: 10px;
 }
 
 .search__input{
-    border: 1px solid yellow;
+    border: $borderMain;
     border-radius: 10px;
-    background-color: darkolivegreen;
+    //background-color: rgb(128, 128, 128, 0.8);
     text-align: center;
+    height: 3vh;
+    width: 15vw;
+    color: black;
+    
 }
 
 .cards{
@@ -188,6 +197,7 @@ p{
   position: relative;
   border: $borderMain;
   border-radius: $smallBorderRadius;
+  background-repeat: no-repeat;
 }
 
 .cardDiv__Name{
@@ -197,7 +207,7 @@ p{
     right: 0;
     text-align: center;
     border: $borderMain;
-    background-color: #583e3e;
+    background-color: $mainTitleColor;
     border-top-left-radius: $smallBorderRadius;
     border-top-right-radius: $smallBorderRadius;
     padding: 2px 0;
@@ -208,11 +218,14 @@ p{
     bottom: 0;
     left: 0;
     border: $borderMain;
-    background-color: #583e3e;
+    background-color: rgb(128, 128, 128, 0.8);
     border-radius: $smallBorderRadius;
     margin-bottom: 5px;
     margin-left: 5px;
     width: 55%;
+    &:hover {
+      background-color: rgba(80, 128, 128, 0.8);
+    }
 }
 
 .cardDiv__details{
@@ -220,14 +233,17 @@ p{
     bottom: 0;
     right: 0;
     border: $borderMain;
-    background-color: #583e3e;
+    background-color: rgb(128, 128, 128, 0.8);
     border-radius: $smallBorderRadius;
     margin-bottom: 5px;
     margin-right: 5px;
+    &:hover {
+      background-color: rgba(80, 128, 128, 0.8);
+    }
 }
 
 .wrapper__filtersGoods {
-    background-color: rgb(87, 65, 161);
+    //background-color: rgb(87, 65, 161);
     font-size: $mainFontSize;
     border-radius: $mainBorderRadius;
     display: flex;
