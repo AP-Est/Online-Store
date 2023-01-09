@@ -38,7 +38,6 @@ export class MainPageView extends View {
                 setTimeout(() => {
                     (styleButtonCopy as HTMLElement).textContent = 'Copy';
                 }, 1000);
-                //handler();
             }
         });
     }
@@ -66,22 +65,17 @@ export class MainPageView extends View {
     }
 
     bindAddRemoveCategory(handler: (category: string) => void) {
-        // обработчик выбора новой категории
-
         this.mainWrapper.addEventListener('change', (event) => {
             const target = event.target as HTMLElement;
             if (target.classList.contains('checkBoxStyleCategory')) {
                 const category = target.nextElementSibling?.textContent as string;
                 const categoryWithoutNumbers = category.split('  ')[0];
-                console.log('bindAddRemoveCategory categoryWithoutNumbers', categoryWithoutNumbers);
                 handler(categoryWithoutNumbers);
             }
         });
     }
 
     bindAddRemoveBrand(handler: (brand: string) => void) {
-        // обработчик выбора нового бренда
-
         this.mainWrapper.addEventListener('change', (event) => {
             const target = event.target as HTMLElement;
             if (target.classList.contains('checkBoxStyleBrand')) {
@@ -93,7 +87,6 @@ export class MainPageView extends View {
     }
 
     bindChangeMinMaxPrice(handler: (priceOne: number, priceTwo: number) => void) {
-        // обработчик изменения минимальной цены
         this.mainWrapper.addEventListener('change', (event) => {
             const target = event.target as HTMLElement;
             if (target.id === 'fromSlider' || target.id === 'toSlider') {
@@ -105,7 +98,6 @@ export class MainPageView extends View {
     }
 
     bindChangeMinMaxStock(handler: (stockOne: number, stockTwo: number) => void) {
-        // обработчик изменения минимальной цены
         this.mainWrapper.addEventListener('change', (event) => {
             const target = event.target as HTMLElement;
             if (target.id === 'fromSliderStock' || target.id === 'toSliderStock') {
@@ -117,8 +109,6 @@ export class MainPageView extends View {
     }
 
     bindSearch(handler: (searchString: string) => void) {
-        // обработчик поиска
-
         this.mainWrapper.addEventListener('input', (event) => {
             const target = event.target as HTMLInputElement;
             if (target.classList.contains('search__input')) {
@@ -129,8 +119,6 @@ export class MainPageView extends View {
     }
 
     bindSort(handler: (sortString: string) => void) {
-        // обработчик сортировки
-
         this.mainWrapper.addEventListener('change', (event) => {
             const target = event.target as HTMLInputElement;
             if (target.classList.contains('sort__select')) {
@@ -147,8 +135,6 @@ export class MainPageView extends View {
         totalCost: number,
         numProducts: number
     ) {
-        //отрисовка MainPage
-
         this.mainWrapper.innerHTML = '';
         const filters = displayFilter(products, filter, productsFiltered);
         const goods = displayCards(products, filter, productsFiltered);
