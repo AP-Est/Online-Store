@@ -65,6 +65,7 @@
                 margin: 10px;
                 padding: 4px;
                 text-align: center; 
+                cursor: pointer;
             }            
             .plugPage__page {
                 font-weight: bold;
@@ -110,7 +111,6 @@
         .itemCardPic__Exemplar_Pic {
             width: 100%;
             object-fit: contain;
-            
         }
     }
   
@@ -148,6 +148,7 @@
             margin: 10px;
             padding: 5px;
             text-align: center;
+            cursor: pointer;
         }
 
 
@@ -234,6 +235,7 @@
                     font-weight: bold;
                     border-radius: $smallBorderRadius;
                     height: 2vh;
+                    cursor: pointer;
                 }             
             }
         }
@@ -270,6 +272,7 @@
             background-color: $mainTitleColor;
             font-size: larger;
             font-weight: bold;
+            cursor: pointer;
             &:hover {
                 background-color: $goldColor;
             }
