@@ -14,6 +14,8 @@ export class ControllerMainPage {
         this.model = model;
         this.onChangeModel(this.model.products, this.model.filter, 0, 0); //TODO 0, 0 временно, далее доработать логику и заменить переменными
         this.model.bindChangeModel(this.onChangeModel);
+        this.view.bindResetFilters(this.handleResetFilters);
+        this.view.bindCopyAddress();
         this.view.bindAddDetailAddress(this.handleAddDetailAddress);
         this.view.bindAddToRemoveFromCart(this.handleAddToRemoveFromCart);
         //this.view.bindRemoveCategory(this.handleRemoveCategory);
@@ -28,6 +30,10 @@ export class ControllerMainPage {
 
     handleAddDetailAddress = (cardNumber: number) => {
         window.location.hash = `details/${cardNumber + 1}`;
+    };
+
+    handleResetFilters = () => {
+        this.model.resetFilters();
     };
 
     handleAddToRemoveFromCart = (cardNumber: number) => {

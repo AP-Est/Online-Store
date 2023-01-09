@@ -20,6 +20,30 @@ export class MainPageView extends View {
         });
     }
 
+    bindResetFilters(handler: () => void) {
+        this.mainWrapper.addEventListener('click', (event) => {
+            const target = event.target as Element;
+            if (target.classList.contains('filters__button_reset')) {
+                handler();
+            }
+        });
+    }
+
+    bindCopyAddress() {
+        this.mainWrapper.addEventListener('click', (event) => {
+            const target = event.target as Element;
+            if (target.classList.contains('filters__button_copy')) {
+                navigator.clipboard.writeText(window.location.href);
+                const styleButtonCopy = document.querySelector('.filters__button_copy');
+                (styleButtonCopy as HTMLElement).textContent = 'Copied!';
+                setTimeout(() => {
+                    (styleButtonCopy as HTMLElement).textContent = 'Copy';
+                }, 1000);
+                //handler();
+            }
+        });
+    }
+
     bindAddToRemoveFromCart(handler: (cardNumber: number) => void) {
         this.mainWrapper.addEventListener('click', (event) => {
             const target = event.target as Element;
