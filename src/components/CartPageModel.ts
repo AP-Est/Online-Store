@@ -131,6 +131,8 @@ export class CartPageModel {
         url.searchParams.delete('sort');
         url.searchParams.delete('minPrice');
         url.searchParams.delete('maxPrice');
+        url.searchParams.delete('minStock');
+        url.searchParams.delete('maxStock');
         url.searchParams.delete('limit');
         url.searchParams.delete('page');
         history.pushState(null, '', url);
