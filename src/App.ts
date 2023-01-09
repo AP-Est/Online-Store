@@ -32,6 +32,8 @@ export class App {
         console.log('isCartPage', isCartPage);
         const isMainPage = pathHashes[0] === '' && pathname === '/';
         console.log('isMainPage', isMainPage);
+        console.log('pathname', pathname);
+        console.log('pathHashes[0]', pathHashes[0]);
         if (isDetailPage) {
             this.view = new DetailPageView();
             this.model = new DetailPageModel();
