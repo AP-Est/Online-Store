@@ -14,7 +14,6 @@ export class MainPageView extends View {
             const target = event.target as Element;
             if (target.classList.contains('cardDiv__details')) {
                 const cardNumber = Number(target.id);
-                //console.log('bindAddDetailAddress target.nextElementSibling:', target.id);
                 handler(cardNumber);
             }
         });
@@ -49,7 +48,6 @@ export class MainPageView extends View {
             const target = event.target as Element;
             if (target.classList.contains('cardDiv__cart')) {
                 const cardNumber = Number(target.id);
-                //console.log('bindAddDetailAddress target.nextElementSibling:', target.id);
                 handler(cardNumber);
             }
         });
@@ -58,14 +56,11 @@ export class MainPageView extends View {
     bindSetView(handler: (stringView: string) => void) {
         this.mainWrapper.addEventListener('click', (event) => {
             const target = event.target as Element;
-            console.log('bindSetView target', target);
             if (target.classList.contains('view__small') || target.classList.contains('view__smallElement')) {
                 handler('small');
-                console.log('bindSetView view__small');
             }
             if (target.classList.contains('view__large') || target.classList.contains('view__largeElement')) {
                 handler('large');
-                console.log('bindSetView view__large');
             }
         });
     }
