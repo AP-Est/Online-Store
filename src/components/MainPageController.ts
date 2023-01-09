@@ -18,6 +18,7 @@ export class ControllerMainPage {
         this.view.bindCopyAddress();
         this.view.bindAddDetailAddress(this.handleAddDetailAddress);
         this.view.bindAddToRemoveFromCart(this.handleAddToRemoveFromCart);
+        this.view.bindSetView(this.handleSetView);
         //this.view.bindRemoveCategory(this.handleRemoveCategory);
         this.view.bindAddRemoveCategory(this.handleAddRemoveCategory);
         this.view.bindAddRemoveBrand(this.handleAddRemoveBrand);
@@ -38,6 +39,10 @@ export class ControllerMainPage {
 
     handleAddToRemoveFromCart = (cardNumber: number) => {
         this.model.addToRemoveFromCart(cardNumber + 1);
+    };
+
+    handleSetView = (stringView: string) => {
+        this.model.addSetView(stringView);
     };
 
     onChangeModel = (products: IProduct[], filter: IFilterData, totalCost: number, numProducts: number) => {

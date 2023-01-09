@@ -133,16 +133,19 @@ ul {
     align-items: center;
     flex-direction: row-reverse;
     justify-content: center;
-    width: 55px;
-    height: 55px;
+    width: 70px;
+    height: 70px;
     background: url(../source/img/cart.png);
     background-size: contain;
     text-align: center;
     .header__cart_text {
         position:absolute;
-        color: rgb(0, 0, 0);
-        font-weight: bold;
-
+        background-color: rgb(0, 0, 0);
+        //font-weight: bold;
+        color: $mainBorderColor;
+        border: $borderMain;
+        border-radius: 20px;
+        width: 40px;
     }
     background-repeat: no-repeat;
 }
