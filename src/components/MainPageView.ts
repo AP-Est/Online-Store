@@ -128,13 +128,7 @@ export class MainPageView extends View {
         });
     }
 
-    renderPage(
-        products: IProduct[],
-        productsFiltered: IProduct[],
-        filter: IFilterData,
-        totalCost: number,
-        numProducts: number
-    ) {
+    renderPage(products: IProduct[], productsFiltered: IProduct[], filter: IFilterData) {
         console.log('Our score is 300. We have done all points.');
         this.mainWrapper.innerHTML = '';
         const filters = displayFilter(products, filter, productsFiltered);

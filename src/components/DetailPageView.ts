@@ -8,7 +8,6 @@ import getTotallyPrice from '../utils/getTotallyPrice';
 import getTotallyCartCount from '../utils/getTotallyCartCount';
 
 export class DetailPageView extends View {
-    //app: HTMLElement | undefined;
     wayBlock!: HTMLElement;
     productBlock!: HTMLElement;
     detailWrapper!: HTMLElement;

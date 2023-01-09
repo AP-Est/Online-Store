@@ -45,7 +45,6 @@ export default function displaySliderPrice(products: IProduct[], filter: IFilter
     toSlider.min = String(minPriceProducts);
     toSlider.max = String(maxPriceProducts);
     toSlider.value = String(maxPriceFilteredProducts);
-
     const formControl = createElement('div', 'form_control');
     const minPrice = createElement('input') as HTMLInputElement;
     minPrice.id = 'fromInput';

@@ -9,7 +9,7 @@ export class ControllerMainPage {
     constructor(view: MainPageView, model: MainPageModel) {
         this.view = view;
         this.model = model;
-        this.onChangeModel(this.model.products, this.model.filter, 0, 0); //TODO 0, 0 временно, далее доработать логику и заменить переменными
+        this.onChangeModel(this.model.products, this.model.filter);
         this.model.bindChangeModel(this.onChangeModel);
         this.view.bindResetFilters(this.handleResetFilters);
         this.view.bindCopyAddress();
@@ -40,8 +40,8 @@ export class ControllerMainPage {
         this.model.addSetView(stringView);
     };
 
-    onChangeModel = (products: IProduct[], filter: IFilterData, totalCost: number, numProducts: number) => {
-        this.view.renderPage(products, this.model.getProductsToShow(products, filter), filter, totalCost, numProducts);
+    onChangeModel = (products: IProduct[], filter: IFilterData) => {
+        this.view.renderPage(products, this.model.getProductsToShow(products, filter), filter);
     };
 
     handleAddRemoveCategory = (category: string) => {

@@ -241,7 +241,6 @@ export class CartPageModel {
         this.modalDate.state = false;
         this.commit(this.cartLots, this.products);
     }
-    //todo
     handleName(value: string) {
         const letters = /^[A-Za-z]+\s[A-Za-z]*\w/;
         this.modalDate.name = value;

@@ -10,7 +10,6 @@ export default function displaySliderStock(products: IProduct[], filter: IFilter
     filterPriceHeader.innerText = 'Stock';
     filterPriceWrapper.append(filterPriceHeader);
 
-    //slider
     const rangeContainer = createElement('div', 'range_container');
 
     const minStockProducts = products.reduce((acc: number, date: IProduct) => {
@@ -48,7 +47,6 @@ export default function displaySliderStock(products: IProduct[], filter: IFilter
     toSlider.max = String(maxStockProducts);
     toSlider.value = String(maxStockFilteredProducts);
 
-    //numbers
     const formControl = createElement('div', 'form_control');
     const minPrice = createElement('input') as HTMLInputElement;
     minPrice.id = 'fromInput';

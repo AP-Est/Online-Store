@@ -1,8 +1,6 @@
 import { storeData } from '../data/data';
 import { ICartLot, IProduct, IStoreData } from '../styles/types';
 import checkLocalStorage from '../utils/checkLocalstorage';
-import { externalShowModal } from './CartPageView';
-
 export class DetailPageModel {
     cartLots: ICartLot[];
     storeData!: IStoreData;

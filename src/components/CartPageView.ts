@@ -46,7 +46,6 @@ export class CartPageView extends View {
     constructor() {
         super();
     }
-    //TODO TEЛO
     displayCartPage(cartLots: ICartLot[], product: IProduct[], plug: IPlug, summaryVars: ISumm, modalDate: IModalData) {
         this.createMainCartWrappers(summaryVars);
         this.buildCartProductBlockHeader(plug);
@@ -277,7 +276,6 @@ export class CartPageView extends View {
             }
         });
     }
-    //TODO wrapper control
     bindName(handler: (value: string) => void) {
         this.baseWrapper.addEventListener('change', (event) => {
             const target = event.target as HTMLInputElement;
