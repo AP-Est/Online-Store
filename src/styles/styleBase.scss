@@ -153,6 +153,9 @@ ul {
     width: 100%;
     height: 100%;
 }
+.header__cart_link:hover {
+    cursor: pointer;
+}
 
 .header__totalCost{
   font-size: $bigFontSize;
