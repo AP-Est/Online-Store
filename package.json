@@ -1,5 +1,5 @@
 {
-    "name": "WebpackTemplate",
+    "name": "Online-Store",
     "version": "1.0.0",
     "description": "",
     "main": "webpack.base.config.js",
@@ -13,7 +13,9 @@
         "url": ""
     },
     "keywords": [],
-    "author": "Andrey Est",
+    "contributors": [
+        {"name":"Andrey Piarouski","email":"EstSkif@gmail.com","url":"https://andreyp.pythonanywhere.com/"},
+        {"name":"Natasha","email":"#","url":"#"}],
     "license": "ISC",
     "homepage": "https://andreyp.pythonanywhere.com/",
     "devDependencies": {

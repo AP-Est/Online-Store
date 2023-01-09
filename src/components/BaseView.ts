@@ -2,27 +2,34 @@ import '../styles/styleBase.scss';
 import getElement from '../utils/getElement';
 import createElement from '../utils/createElement';
 import getTotallyPrice from '../utils/getTotallyPrice';
+import getTotallyCartCount from '../utils/getTotallyCartCount';
 export class View {
-    app: HTMLElement;
-    header: HTMLElement;
-    main: HTMLElement;
-    footer: HTMLElement;
-    headerWrapper: HTMLElement;
-    headerLogo: HTMLElement;
-    headerLogoLink: HTMLAnchorElement;
-    headerTotalCost: HTMLElement;
-    mainWrapper: HTMLElement;
-    headerCart: HTMLElement;
-    headerCartLink: HTMLAnchorElement;
-    footerWrapper: HTMLElement;
-    baseWrapper: HTMLElement;
-    wrapperBlind: HTMLElement;
-    footerGithub: HTMLElement;
-    footerGithubOne: HTMLAnchorElement;
-    footerGithubTwo: HTMLAnchorElement;
-    footerYear: HTMLElement;
-    footerSchool: HTMLAnchorElement;
+    app!: HTMLElement;
+    header!: HTMLElement;
+    main!: HTMLElement;
+    footer!: HTMLElement;
+    headerWrapper!: HTMLElement;
+    headerLogo!: HTMLElement;
+    headerLogoLink!: HTMLAnchorElement;
+    headerTotalCost!: HTMLElement;
+    mainWrapper!: HTMLElement;
+    headerCart!: HTMLElement;
+    headerCartLink!: HTMLAnchorElement;
+    footerWrapper!: HTMLElement;
+    baseWrapper!: HTMLElement;
+    wrapperBlind!: HTMLElement;
+    footerGithub!: HTMLElement;
+    footerGithubOne!: HTMLAnchorElement;
+    footerGithubTwo!: HTMLAnchorElement;
+    footerYear!: HTMLElement;
+    footerSchool!: HTMLAnchorElement;
+    headerCartText!: HTMLElement;
     constructor() {
+        const totalCost = String(getTotallyPrice());
+        const cartCount = String(getTotallyCartCount());
+        this.displayBasePage(totalCost, cartCount);
+    }
+    displayBasePage(totalCost: string, cartCount: string) {
         this.app = getElement('body') as HTMLElement;
         this.app.innerHTML = '';
         this.baseWrapper = createElement('div', 'base__wrapper');
@@ -33,14 +40,18 @@ export class View {
         this.headerLogoLink = this.createLinkElement('#', 'header__logo_link');
         this.headerLogoLink.innerHTML = 'Online-Store';
         this.headerTotalCost = createElement('span', 'header__totalCost');
+        this.headerTotalCost.textContent = `Total cost: ${totalCost} $`;
+        this.headerCart = createElement('div', 'header__cart');
+        this.headerCartText = createElement('span', 'header__cart_text');
+        this.headerCart.append(this.headerCartText);
+        this.headerCartText.textContent = `${cartCount}`;
+        this.headerCart.addEventListener('click', () => (window.location.hash = 'cart/'));
+        this.headerCartLink = this.createLinkElement('#cart', 'header__cart_link');
         this.app.addEventListener(
             'click',
             () => (this.headerTotalCost.textContent = `Total cost: ${getTotallyPrice()} $`)
         );
-        this.headerTotalCost.textContent = `Total cost: ${getTotallyPrice()} $`;
-        this.headerCart = createElement('div', 'header__cart');
-        this.headerCart.addEventListener('click', () => (window.location.hash = 'cart/'));
-        this.headerCartLink = this.createLinkElement('#cart', 'header__cart_link');
+        this.app.addEventListener('click', () => (this.headerCartText.innerText = `${getTotallyCartCount()}`));
         //this.headerCartLink.innerHTML = '🛒';
         this.main = createElement('main');
         this.mainWrapper = createElement('div', 'main__wrapper');
@@ -56,8 +67,6 @@ export class View {
         this.footerSchool = createElement('a', 'footer__school') as HTMLAnchorElement;
         this.footerSchool.href = 'https://rs.school/js/';
 
-        // собираем страницу
-
         this.headerLogo.append(this.headerLogoLink);
         this.headerCart.append(this.headerCartLink);
         this.headerWrapper.append(this.headerLogo, this.headerTotalCost, this.headerCart);
@@ -71,12 +80,19 @@ export class View {
             this.app.append(this.baseWrapper);
         }
     }
-
     createLinkElement(link: string, className?: string) {
         const element = document.createElement('a');
         element.href = link;
         element.classList.add('link');
         if (className) element.classList.add(className);
         return element;
+    }
+    bindUpdateData(handler: () => void) {
+        this.app.addEventListener('click', (event) => {
+            const target = event.target as HTMLElement;
+            if (target.classList.contains('wrapper__blind')) {
+                handler();
+            }
+        });
     }
 }

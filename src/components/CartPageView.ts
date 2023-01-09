@@ -338,3 +338,7 @@ export class CartPageView extends View {
         });
     }
 }
+export function externalShowModal() {
+    const button = getElement('.cartSummaryBlock__Button') as HTMLButtonElement;
+    button.click();
+}
