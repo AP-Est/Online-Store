@@ -12,8 +12,8 @@
   font-size: $fontSizedDynamicBig;
   font-weight: bold;
   color: $goldColor;
-  margin-bottom: 20px;
-  margin-top: 20px;
+  margin-bottom: 10px;
+  margin-top: 10px;
 }
 
 .productBlock {
@@ -97,13 +97,14 @@ img {
     background-repeat: no-repeat;
 }
 .productBlockMainBlock__info{
-    display: flex;
+    //display: flex;
     flex-direction: column;
-    width: 30vw;    
+    width: 30vw;
+    overflow: auto;    
 }
 .productBlockMainBlock__info_card {
     margin: auto 10px;
-    margin-top: 15px;
+    margin-top: 20px;
     border-radius: $smallBorderRadius;
     text-align: center;
     font-size: $fontSizedDynamicBig;
@@ -133,7 +134,7 @@ img {
 .productBlockMainBlock__price_price {
     color: $goldColor;
     margin-bottom: 1vh;
-    font-size: $bigFontSize;
+    font-size: $fontSizedDynamicBig*1.5;
     font-family: $mainFontFamily;
 }
 
@@ -144,11 +145,12 @@ img {
     height: 5vh;
     margin-bottom: 1vh;
     font-size: $fontSizedDynamicBig;
+    font-weight: bold;
     font-family: $mainFontFamily;
-    background-color: antiquewhite;
+    background-color: $mainTitleColor;
     border-radius: $mainBorderRadius;
     cursor: pointer;
     &:hover {
-        background-color: rgb(56, 159, 44);
+        background-color: rgb(149, 159, 148);
     }
 }
