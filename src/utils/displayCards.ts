@@ -44,12 +44,22 @@ export default function displayCards(productsFiltered: IProduct[], filter: IFilt
     searchInput.type = 'text';
     searchInput.placeholder = 'Search product';
     searchInput.value = filter.search;
-    // searchInput.focus();
-    // searchInput.select();
-    //searchInput.setSelectionRange(1, 1);
+
+    const view = createElement('div', 'view');
+    const viewSmall = createElement('div', 'view__small');
+    viewSmall.classList.add('view__common');
+    for (let i = 0; i < 16; i++) {
+        const viewSmallElement = createElement('div', 'view__smallElement');
+        viewSmall.append(viewSmallElement);
+    }
+    const viewLarge = createElement('div', 'view__large');
+    viewLarge.classList.add('view__common');
+    for (let i = 0; i < 36; i++) {
+        const viewLargeElement = createElement('div', 'view__largeElement');
+        viewLarge.append(viewLargeElement);
+    }
 
     const cards = createElement('div', 'cards');
-
     if (productsFiltered.length === 0) {
         const cardsTextNoProducts = createElement('div', 'cards__noproducts');
         cardsTextNoProducts.textContent = 'No products found';
@@ -69,6 +79,12 @@ export default function displayCards(productsFiltered: IProduct[], filter: IFilt
         cardDiv[i].id = `${i}`;
         cardDivName[i] = createElement('div', 'cardDiv__Name');
         cardDivName[i].textContent = productsFiltered[i].title;
+        if (filter.view === 'small') {
+            cardDivName[i].classList.remove('fontSizeSmall');
+        }
+        if (filter.view === 'large') {
+            cardDivName[i].classList.add('fontSizeSmall');
+        }
         if (checkLocalStorage(i + 1)) {
             cardButtonCart[i] = createButton('DROP FROM CART', 'cardDiv__cart');
             cardButtonCart[i].id = `${i}`;
@@ -76,14 +92,37 @@ export default function displayCards(productsFiltered: IProduct[], filter: IFilt
             cardButtonCart[i] = createButton('ADD TO CART', 'cardDiv__cart');
             cardButtonCart[i].id = `${i}`;
         }
+        if (filter.view === 'small') {
+            cardButtonCart[i].classList.remove('fontSizeSmall');
+        }
+        if (filter.view === 'large') {
+            cardButtonCart[i].classList.add('fontSizeSmall');
+        }
         cardButtonDetails[i] = createButton('DETAILS', 'cardDiv__details');
         cardButtonDetails[i].id = `${i}`;
+        if (filter.view === 'small') {
+            cardButtonDetails[i].classList.remove('fontSizeSmall');
+        }
+        if (filter.view === 'large') {
+            cardButtonDetails[i].classList.add('fontSizeSmall');
+        }
         cardDiv[i].append(cardDivName[i], cardButtonCart[i], cardButtonDetails[i]);
         cards.append(cardDiv[i]);
     }
 
-    //console.log('checkLocalStorage(0)', checkLocalStorage(0));
+    // slyles according the view
+    if (filter.view === 'small') {
+        cards.classList.add('cards__small');
+        viewSmall.classList.add('view__dedicated');
+        viewLarge.classList.remove('view__dedicated');
+    }
+    if (filter.view === 'large') {
+        cards.classList.add('cards__large');
+        viewLarge.classList.add('view__dedicated');
+        viewSmall.classList.remove('view__dedicated');
+    }
 
+    view.append(viewSmall, viewLarge);
     search.append(searchInput);
     sortSelect.append(
         sortOptionTitle,
@@ -95,7 +134,7 @@ export default function displayCards(productsFiltered: IProduct[], filter: IFilt
         sortOptionDiscountDESC
     );
     sort.append(sortSelect);
-    top.append(sort, found, search);
+    top.append(sort, found, search, view);
     goods.append(top, cards);
 
     return goods;
