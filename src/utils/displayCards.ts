@@ -82,7 +82,7 @@ export default function displayCards(productsFiltered: IProduct[], filter: IFilt
         cards.append(cardDiv[i]);
     }
 
-    console.log('checkLocalStorage(0)', checkLocalStorage(0));
+    //console.log('checkLocalStorage(0)', checkLocalStorage(0));
 
     search.append(searchInput);
     sortSelect.append(
