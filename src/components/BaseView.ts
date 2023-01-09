@@ -38,9 +38,9 @@ export class View {
         this.headerWrapper = createElement('div', 'header__wrapper');
         this.headerLogo = createElement('div', 'header__logo');
         this.headerLogo.addEventListener('click', () => (window.location.hash = ''));
-        this.headerLogoLink = this.createLinkElement('#', 'header__logo_link');
-        this.headerLogoLink.pathname = '/';
-        this.headerLogoLink.innerHTML = 'Online-Store';
+        //this.headerLogoLink = this.createLinkElement('#', 'header__logo_link');
+        //this.headerLogoLink.pathname = '/';
+        this.headerLogo.innerHTML = 'Online-Store';
         this.headerTotalCost = createElement('span', 'header__totalCost');
         this.headerTotalCost.textContent = `Total cost: ${totalCost} $`;
         this.headerCart = createElement('div', 'header__cart');
