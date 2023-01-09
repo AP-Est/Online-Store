@@ -352,7 +352,7 @@ export class CartPageModel {
             localStorage.cart = JSON.stringify(this.cartLots);
             window.location.hash = '';
             this.modalDate.state = false;
-            throw alert('Done');
+            throw alert('Purchase completed successfully!');
         } else {
             if (this.modalDate.name == '') this.modalDate.error.name = true;
             if (this.modalDate.phone == '') this.modalDate.error.phone = true;
