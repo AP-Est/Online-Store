@@ -25,15 +25,15 @@ export class App {
         const pathNames = window.location.pathname;
         console.log('pathHashes', pathHashes);
         console.log('pathNames', pathNames);
-        if (pathHashes[0] === '#details' && pathNames === '/') {
+        if (pathHashes[0] === '#details' && pathNames === '/Online-Store/') {
             this.view = new DetailPageView();
             this.model = new DetailPageModel();
             this.controller = new DetailPageController(this.view, this.model);
-        } else if (pathHashes[0] === '#cart' && pathNames === '/') {
+        } else if (pathHashes[0] === '#cart' && pathNames === '/Online-Store/') {
             this.view = new CartPageView();
             this.model = new CartPageModel();
             this.controller = new ControllerCartPage(this.view, this.model);
-        } else if (pathHashes[0] === '' && pathNames === '/') {
+        } else if (pathHashes[0] === '' && pathNames === '/Online-Store/') {
             this.view = new MainPageView();
             this.model = new MainPageModel();
             this.controller = new ControllerMainPage(this.view, this.model);
