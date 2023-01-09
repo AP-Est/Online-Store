@@ -92,7 +92,8 @@ p{
  border-radius: $smallBorderRadius;
 }
 
-.checkBoxStyleCategory {
+.checkBoxStyleCategory,
+.checkBoxStyleBrand {
   cursor: grab;
   &:checked {
     cursor: grab;
