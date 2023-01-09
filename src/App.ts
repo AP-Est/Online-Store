@@ -22,12 +22,16 @@ export class App {
 
     navigate = () => {
         const pathHashes = window.location.hash.split('/');
+        console.log('pathHashes', pathHashes);
         const { pathname } = window.location;
+        console.log('pathname', pathname);
         pathname.replace('/Online-Store', '');
         const isDetailPage = pathHashes[0] === '#details' && pathname === '/';
+        console.log('isDetailPage', isDetailPage);
         const isCartPage = pathHashes[0] === '#cart' && pathname === '/';
+        console.log('isCartPage', isCartPage);
         const isMainPage = pathHashes[0] === '' && pathname === '/';
-        console.log(pathHashes);
+        console.log('isMainPage', isMainPage);
         if (isDetailPage) {
             this.view = new DetailPageView();
             this.model = new DetailPageModel();
