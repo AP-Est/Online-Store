@@ -1,7 +1,7 @@
 import createElement from './createElement';
 import { IFilterData, IProduct } from '../data/data';
 
-export default function displaySliderPrice(products: IProduct[], filter: IFilterData) {
+export default function displaySliderPrice(products: IProduct[], filter: IFilterData, productsFiltered: IProduct[]) {
     const filterPriceWrapper = createElement('div', 'filterBrands__wrapper');
     filterPriceWrapper.classList.add('filter__wrapper');
     const filterPriceHeader = createElement('div', 'filterBrands__header');
@@ -19,19 +19,33 @@ export default function displaySliderPrice(products: IProduct[], filter: IFilter
         return date.price > acc ? date.price : acc;
     }, products[0].price);
 
+    let minPriceFilteredProducts = 0;
+    let maxPriceFilteredProducts = 0;
+    if (productsFiltered.length !== 0) {
+        minPriceFilteredProducts = productsFiltered.reduce((acc: number, date: IProduct) => {
+            return date.price < acc ? date.price : acc;
+        }, productsFiltered[0].price);
+        maxPriceFilteredProducts = productsFiltered.reduce((acc: number, date: IProduct) => {
+            return date.price > acc ? date.price : acc;
+        }, productsFiltered[0].price);
+    } else {
+        minPriceFilteredProducts = minPriceProducts;
+        maxPriceFilteredProducts = maxPriceProducts;
+    }
+
     const slidersControl = createElement('div', 'sliders_control');
     const fromSlider = createElement('input') as HTMLInputElement;
     fromSlider.id = 'fromSlider';
     fromSlider.type = 'range';
     fromSlider.min = String(minPriceProducts);
     fromSlider.max = String(maxPriceProducts);
-    fromSlider.value = String(filter.minPrice);
+    fromSlider.value = String(minPriceFilteredProducts);
     const toSlider = createElement('input') as HTMLInputElement;
     toSlider.id = 'toSlider';
     toSlider.type = 'range';
     toSlider.min = String(minPriceProducts);
     toSlider.max = String(maxPriceProducts);
-    toSlider.value = String(filter.maxPrice);
+    toSlider.value = String(maxPriceFilteredProducts);
     //console.log('fromSlider.min', fromSlider.min);
     //console.log('fromSlider.max', fromSlider.max);
     //console.log('fromSlider.value', fromSlider.value);
@@ -46,16 +60,23 @@ export default function displaySliderPrice(products: IProduct[], filter: IFilter
     minPrice.type = 'number';
     minPrice.min = String(minPriceProducts);
     minPrice.max = String(maxPriceProducts);
-    minPrice.value = String(filter.minPrice);
 
     const maxPrice = createElement('input') as HTMLInputElement;
     maxPrice.id = 'toInput';
     maxPrice.type = 'number';
     maxPrice.min = String(minPriceProducts);
     maxPrice.max = String(maxPriceProducts);
-    maxPrice.value = String(filter.maxPrice);
     //console.log('maxPrice.value', maxPrice.value);
     //console.log();
+
+    if (productsFiltered.length !== 0) {
+        minPrice.value = String(minPriceFilteredProducts);
+        maxPrice.value = String(maxPriceFilteredProducts);
+    } else {
+        minPrice.value = '0';
+        maxPrice.value = '0';
+        maxPrice.style.width = '20%';
+    }
 
     formControl.append(minPrice, maxPrice);
     filterPriceWrapper.append(rangeContainer);
