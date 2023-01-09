@@ -21,36 +21,27 @@ export class App {
     }
 
     navigate = () => {
-        const path = window.location.hash.split('/');
-        console.log(path);
-        //console.log(path[0]);
-        switch (path[0]) {
-            case '#details':
-                if (Number(path[1]) && 0 < Number(path[1]) && Number(path[1]) < 101) {
-                    this.view = new DetailPageView();
-                    this.model = new DetailPageModel();
-                    this.controller = new DetailPageController(this.view, this.model);
-                } else {
-                    this.view = new Page404View();
-                }
-                break;
-            case '#cart':
-                if (!path[1]) {
-                    this.view = new CartPageView();
-                    this.model = new CartPageModel();
-                    this.controller = new ControllerCartPage(this.view, this.model);
-                } else {
-                    this.view = new Page404View();
-                }
-                break;
-            case '':
-                this.view = new MainPageView();
-                this.model = new MainPageModel();
-                this.controller = new ControllerMainPage(this.view, this.model);
-                break;
-            default:
-                this.view = new Page404View();
-                break;
+        const pathHashes = window.location.hash.split('/');
+        const { pathname } = window.location;
+        pathname.replace('/Online-Store', '');
+        const isDetailPage = pathHashes[0] === '#details' && pathname === '/';
+        const isCartPage = pathHashes[0] === '#cart' && pathname === '/';
+        const isMainPage = pathHashes[0] === '' && pathname === '/';
+        console.log(pathHashes);
+        if (isDetailPage) {
+            this.view = new DetailPageView();
+            this.model = new DetailPageModel();
+            this.controller = new DetailPageController(this.view, this.model);
+        } else if (isCartPage) {
+            this.view = new CartPageView();
+            this.model = new CartPageModel();
+            this.controller = new ControllerCartPage(this.view, this.model);
+        } else if (isMainPage) {
+            this.view = new MainPageView();
+            this.model = new MainPageModel();
+            this.controller = new ControllerMainPage(this.view, this.model);
+        } else {
+            this.view = new Page404View();
         }
     };
 }
