@@ -28,10 +28,7 @@ export class CartPageModel {
             countItems: 0,
             priceTotal: 0,
             priceWithCodes: 0,
-            codes: [
-                { title: 'AN', description: 'Andrey`s code - 10% - ', discount: 10 },
-                { title: 'NA', description: 'Nat`s    code - 10% - ', discount: 10 },
-            ],
+            codes: [{ title: 'AN', description: 'Andrey`s code - 10% - ', discount: 10 }],
         };
         this.modalDate = {
             state: false,
@@ -131,6 +128,8 @@ export class CartPageModel {
         url.searchParams.delete('sort');
         url.searchParams.delete('minPrice');
         url.searchParams.delete('maxPrice');
+        url.searchParams.delete('minStock');
+        url.searchParams.delete('maxStock');
         url.searchParams.delete('limit');
         url.searchParams.delete('page');
         history.pushState(null, '', url);
@@ -352,7 +351,7 @@ export class CartPageModel {
             localStorage.cart = JSON.stringify(this.cartLots);
             window.location.hash = '';
             this.modalDate.state = false;
-            throw alert('Done');
+            throw alert('Purchase completed successfully!');
         } else {
             if (this.modalDate.name == '') this.modalDate.error.name = true;
             if (this.modalDate.phone == '') this.modalDate.error.phone = true;

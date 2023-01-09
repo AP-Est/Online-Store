@@ -56,6 +56,11 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 10px;
+    background: rgb(0, 0, 0, 0.3);
+    //border: $borderMain;
+    border-radius: 300%;
+    padding: 10px;
 }
 .footer__wrapper {
 
@@ -70,6 +75,10 @@ footer {
     border-radius: $mainBorderRadius;
 }
 
+.footer__year {
+    font-size: $bigFontSize;
+    font-weight: bold;
+}
 .footer__github{
     width: 100px;
     height: 100%;
@@ -154,11 +163,11 @@ footer {
     .header__cart_text {
         position:absolute;
         background-color: rgb(0, 0, 0);
-        //font-weight: bold;
         color: $mainBorderColor;
         border: $borderMain;
         border-radius: 20px;
         width: 40px;
+        cursor: pointer;
     }
     background-repeat: no-repeat;
 }

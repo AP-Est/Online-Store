@@ -18,6 +18,7 @@ p{
 .filters{
   width: 1/6*100%;
   height: 50%;
+  height: 82vh;
   border: $borderMain;
   border-radius: 10px;
   //background: #6a4b4b;
@@ -25,7 +26,7 @@ p{
 
 .goods{
   width: 5/6*100%;
-  //height: 50%;
+  height: 82vh;
   border: $borderMain;
   border-radius: 10px;
   overflow: hidden;
@@ -48,7 +49,20 @@ p{
   margin: 10px;
   padding: 5px;
   max-height: 20vh;
-  overflow:auto;
+  overflow-y:auto;
+  overflow-x:hidden;
+  &::-webkit-scrollbar {
+    width: 6px;
+    color: rgb(201, 191, 191);
+  }
+  &::-webkit-scrollbar-track {
+    background: rgb(217, 210, 210);       
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: blue;   
+    border-radius: 20px;       
+    border: 3px solid rgb(207, 199, 185);  
+  }
 }
 
 .filtersButton__wrapper {
@@ -63,6 +77,7 @@ p{
     border-radius: $mainBorderRadius;
     background-color: #c0af95;
     margin: 5px;
+    cursor: pointer;
     &:hover {
       background-color: rgb(87, 161, 151);
     }
@@ -149,6 +164,7 @@ p{
     text-align: center;
     height: 3vh;
     width: 15vw;
+    cursor: pointer;
 }
 
 .found{
@@ -231,6 +247,7 @@ p{
     margin-bottom: 5px;
     margin-left: 5px;
     width: 55%;
+    cursor: pointer;
     &:hover {
       background-color: rgba(80, 128, 128, 0.8);
     }
@@ -245,6 +262,7 @@ p{
     border-radius: $smallBorderRadius;
     margin-bottom: 5px;
     margin-right: 5px;
+    cursor: pointer;
     &:hover {
       background-color: rgba(80, 128, 128, 0.8);
     }
@@ -300,6 +318,7 @@ p{
     background-color: black;
     border: $borderMain;
     border-radius: $smallBorderRadius;
+    
 }
 
 .view__small{
@@ -308,6 +327,7 @@ p{
     grid-template-rows: repeat(4, 1fr);
     justify-items: center;
     align-items: center;
+    
 }
 
 .view__large{
