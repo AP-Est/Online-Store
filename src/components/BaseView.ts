@@ -37,6 +37,7 @@ export class View {
         this.header = createElement('header', 'header');
         this.headerWrapper = createElement('div', 'header__wrapper');
         this.headerLogo = createElement('div', 'header__logo');
+        this.headerLogo.addEventListener('click', () => (window.location.hash = ''));
         this.headerLogoLink = this.createLinkElement('#', 'header__logo_link');
         this.headerLogoLink.pathname = '/';
         this.headerLogoLink.innerHTML = 'Online-Store';
@@ -47,7 +48,7 @@ export class View {
         this.headerCart.append(this.headerCartText);
         this.headerCartText.textContent = `${cartCount}`;
         this.headerCart.addEventListener('click', () => (window.location.hash = 'cart/'));
-        this.headerCartLink = this.createLinkElement('#cart', 'header__cart_link');
+        //this.headerCartLink = this.createLinkElement('/Online-Store/#cart', 'header__cart_link');
         this.headerCartLink.pathname = '/';
         this.app.addEventListener(
             'click',
@@ -69,8 +70,8 @@ export class View {
         this.footerSchool = createElement('a', 'footer__school') as HTMLAnchorElement;
         this.footerSchool.href = 'https://rs.school/js/';
 
-        this.headerLogo.append(this.headerLogoLink);
-        this.headerCart.append(this.headerCartLink);
+        // this.headerLogo.append(this.headerLogoLink);
+        // this.headerCart.append(this.headerCartLink);
         this.headerWrapper.append(this.headerLogo, this.headerTotalCost, this.headerCart);
         this.header.append(this.headerWrapper);
         this.main.append(this.mainWrapper);
