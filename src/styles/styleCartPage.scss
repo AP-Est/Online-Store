@@ -33,6 +33,7 @@
     height: 7vh;
     .cartProductBlock__header_title {
         margin: 10px;
+        margin-left: 2vw;
         font-size: $bigFontSize;
         font-weight: bold;
     }
@@ -101,16 +102,16 @@
 }
 .itemCardPic {
     width: 14vw;
-    max-height: 14vh;
+    height: 10vh;
     object-fit: contain;
-    overflow: hidden;
+    //overflow: hidden;
     margin: 10px;
     .itemCardPic__Exemplar {
         width: 100%;
         object-fit: contain;
         .itemCardPic__Exemplar_Pic {
             width: 100%;
-            object-fit: contain;
+            //object-fit: contain;
         }
     }
   
