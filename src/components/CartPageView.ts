@@ -158,11 +158,13 @@ export class CartPageView extends View {
         this.itemCardDataHead.innerText = cartItem.title;
         this.itemCardDataDescr = createElement('h5', `itemCardData__description`);
         this.itemCardDataDescr.innerText = cartItem.description;
+        this.itemCardDataRD = createElement('div', `itemCardData__rd`);
         this.itemCardDataR = createElement('span', `itemCardData__r`);
         this.itemCardDataR.innerText = `Rating: ${cartItem.rating}`;
         this.itemCardDataD = createElement('span', `itemCardData__d`);
         this.itemCardDataD.innerText = `Discount: ${cartItem.discountPercentage}%`;
-        this.itemCardData.append(this.itemCardDataHead, this.itemCardDataDescr, this.itemCardDataR, this.itemCardDataD);
+        this.itemCardDataRD.append(this.itemCardDataR, this.itemCardDataD);
+        this.itemCardData.append(this.itemCardDataHead, this.itemCardDataDescr, this.itemCardDataRD);
 
         this.itemCardCount = createElement('div', `itemCardCount`);
         this.itemCardCountStock = createElement('div', `itemCardCount__stock`);
