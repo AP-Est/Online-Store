@@ -49,7 +49,7 @@ export class View {
         this.headerCartText.textContent = `${cartCount}`;
         this.headerCart.addEventListener('click', () => (window.location.hash = 'cart/'));
         //this.headerCartLink = this.createLinkElement('/Online-Store/#cart', 'header__cart_link');
-        this.headerCartLink.pathname = '/';
+        //this.headerCartLink.pathname = '/';
         this.app.addEventListener(
             'click',
             () => (this.headerTotalCost.textContent = `Total cost: ${getTotallyPrice()} $`)
