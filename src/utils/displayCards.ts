@@ -3,7 +3,7 @@ import createButton from './createButton';
 import { IProduct, IFilterData } from '../data/data';
 import checkLocalStorage from './checkLocalstorage';
 
-export default function displayCards(productsFiltered: IProduct[], filter: IFilterData) {
+export default function displayCards(products: IProduct[], filter: IFilterData, productsFiltered: IProduct[]) {
     const goods = createElement('div', 'goods');
     const top = createElement('div', 'top');
 
@@ -68,8 +68,8 @@ export default function displayCards(productsFiltered: IProduct[], filter: IFilt
     }
 
     const cardDiv = [];
-    const cardButtonCart = [];
-    const cardButtonDetails = [];
+    const cardButtonCart: HTMLElement[] = [];
+    const cardButtonDetails: HTMLElement[] = [];
     const cardDivName = [];
     for (let i = 0; i < productsFiltered.length; i++) {
         cardDiv[i] = createElement('div', 'cardDiv');
@@ -85,13 +85,21 @@ export default function displayCards(productsFiltered: IProduct[], filter: IFilt
         if (filter.view === 'large') {
             cardDivName[i].classList.add('fontSizeSmall');
         }
-        if (checkLocalStorage(i + 1)) {
+
+        let idOfProduct = 0;
+        products.map((item) => {
+            if (productsFiltered[i].title === item.title) {
+                idOfProduct = item.id - 1;
+            }
+        });
+
+        if (checkLocalStorage(idOfProduct + 1)) {
             cardButtonCart[i] = createButton('DROP FROM CART', 'cardDiv__cart');
-            cardButtonCart[i].id = `${i}`;
         } else {
             cardButtonCart[i] = createButton('ADD TO CART', 'cardDiv__cart');
-            cardButtonCart[i].id = `${i}`;
         }
+        cardButtonCart[i].id = `${idOfProduct}`;
+
         if (filter.view === 'small') {
             cardButtonCart[i].classList.remove('fontSizeSmall');
         }
@@ -99,7 +107,8 @@ export default function displayCards(productsFiltered: IProduct[], filter: IFilt
             cardButtonCart[i].classList.add('fontSizeSmall');
         }
         cardButtonDetails[i] = createButton('DETAILS', 'cardDiv__details');
-        cardButtonDetails[i].id = `${i}`;
+        cardButtonDetails[i].id = `${idOfProduct}`;
+
         if (filter.view === 'small') {
             cardButtonDetails[i].classList.remove('fontSizeSmall');
         }

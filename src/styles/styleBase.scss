@@ -2,11 +2,15 @@
 // * {
 //   outline: 1px solid black;  
 // }
+html{
+    height: 100%;
+}
 
 body {
     background-color: chartreuse; 
     font-family: $mainFontFamily;  
-    font-size: $mainFontSize;     
+    font-size: $mainFontSize;  
+    height: 100%;   
 }
 
 ul {
