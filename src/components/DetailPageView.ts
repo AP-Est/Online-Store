@@ -67,6 +67,12 @@ export class DetailPageView extends View {
     }
     createDetailPage(storeData: IStoreData) {
         const cardNumber = Number(window.location.hash.slice(1).split('/')[1]);
+        const pageExist = storeData.products.filter((item) => {
+            return item.id === cardNumber;
+        });
+        if (!pageExist) {
+            window.location.hash = `/page404`;
+        }
         this.cardNumber = cardNumber;
         const detailWrapper = createElement('div', 'detail__wrapper');
         this.wayBlock = createElement('div', 'wayBlock');
