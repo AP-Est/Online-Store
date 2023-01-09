@@ -128,13 +128,7 @@ export class MainPageView extends View {
         });
     }
 
-    renderPage(
-        products: IProduct[],
-        productsFiltered: IProduct[],
-        filter: IFilterData,
-        totalCost: number,
-        numProducts: number
-    ) {
+    renderPage(products: IProduct[], productsFiltered: IProduct[], filter: IFilterData) {
         this.mainWrapper.innerHTML = '';
         const filters = displayFilter(products, filter, productsFiltered);
         const goods = displayCards(products, filter, productsFiltered);

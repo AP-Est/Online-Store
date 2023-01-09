@@ -30,6 +30,5 @@ export class BaseModel {
     }
     handleUpdateData() {
         this.commit();
-        console.log('ddddddddddddddddddd');
     }
 }

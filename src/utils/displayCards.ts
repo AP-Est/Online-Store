@@ -119,7 +119,6 @@ export default function displayCards(products: IProduct[], filter: IFilterData, 
         cards.append(cardDiv[i]);
     }
 
-    // slyles according the view
     if (filter.view === 'small') {
         cards.classList.add('cards__small');
         viewSmall.classList.add('view__dedicated');
