@@ -31,8 +31,6 @@ export class MainPageModel {
         this.maxStockProducts = this.products.reduce((acc: number, date: IProduct) => {
             return date.stock > acc ? date.stock : acc;
         }, this.products[0].price);
-        //console.log('MainPageModel minPriceProducts:', minPriceProducts);
-        //console.log('MainPageModel maxPriceProducts:', maxPriceProducts);
         this.filter = {
             categories: [],
             brands: [],
@@ -104,46 +102,33 @@ export class MainPageModel {
     }
 
     addRemoveCategory(category: string) {
-        //const url = new URL(location.href);
-        //location.search = '';
         if (this.filter.categories.includes(category)) {
             this.filter.categories = this.filter.categories.filter((cur) => cur !== category);
-            //url.searchParams.delete('category');
-            console.log('remove', this.filter.categories);
         } else {
             this.filter.categories.push(category);
-            //url.searchParams.set('category', category);
-            //console.log(' url', url);
         }
         this.onChangeModel(this.products, this.filter, 0, 0);
         setQueryParameters(this.filter);
-        console.log('addRemoveCategory');
     }
 
     addRemoveBrand(brand: string) {
         if (this.filter.brands.includes(brand)) {
             this.filter.brands = this.filter.brands.filter((cur) => cur !== brand);
-            //console.log('remove', this.filter.categories);
         } else {
             this.filter.brands.push(brand);
-            //console.log('add', this.filter.categories);
         }
         this.onChangeModel(this.products, this.filter, 0, 0);
         setQueryParameters(this.filter);
-        //console.log('add category filter:');
     }
 
     addSearch(searchString: string) {
         this.filter.search = searchString;
-        //console.log('addSearch this.filter', this.filter);
         this.onChangeModel(this.products, this.filter, 0, 0);
         setQueryParameters(this.filter);
-        //console.log('add category filter:');
     }
 
     addSort(sortString: string) {
         this.filter.sort = sortString;
-        console.log('addSort filter:', this.filter);
         this.onChangeModel(this.products, this.filter, 0, 0);
         setQueryParameters(this.filter);
     }
@@ -155,8 +140,6 @@ export class MainPageModel {
     }
 
     changeMinMaxPrice(priceOne: number, priceTwo: number) {
-        //console.log('changeMinMaxPrice priceOne', priceOne);
-        //console.log('changeMinMaxPrice priceTwo', priceTwo);
         if (priceOne <= priceTwo) {
             this.filter.minPrice = priceOne;
             this.filter.maxPrice = priceTwo;
@@ -165,13 +148,10 @@ export class MainPageModel {
             this.filter.maxPrice = priceOne;
         }
         this.onChangeModel(this.products, this.filter, 0, 0);
-        console.log('changeMinMaxPrice this.filter', this.filter);
         setQueryParameters(this.filter);
     }
 
     changeMinMaxStock(stockOne: number, stockTwo: number) {
-        // console.log('changeMinMaxPrice priceOne', priceOne);
-        //console.log('changeMinMaxPrice priceTwo', priceTwo);
         if (stockOne <= stockTwo) {
             this.filter.minStock = stockOne;
             this.filter.maxStock = stockTwo;
@@ -180,17 +160,8 @@ export class MainPageModel {
             this.filter.maxStock = stockOne;
         }
         this.onChangeModel(this.products, this.filter, 0, 0);
-        console.log('changeMinMaxStock this.filter', this.filter);
         setQueryParameters(this.filter);
     }
-
-    // addFilter(filter: IFilterData) {
-    //     this.filter = filter;
-    //     // console.log('addFilter filter', filter);
-    //     this.onChangeModel(this.products, this.filter, 0, 0);
-    // }
-
-    // filter products
 
     filterByCategory(products: IProduct[], categories: string[]) {
         if (categories.length === 0) return products;
@@ -198,29 +169,23 @@ export class MainPageModel {
         this.products.map((cur) => {
             for (const currentCategory of categories) {
                 if (cur.category === currentCategory) {
-                    // console.log('match');
                     productsFiltered.push(cur);
                 }
             }
         });
-        //console.log('filterByCategory productsFiltered', productsFiltered);
         return productsFiltered;
     }
 
     filterByBrand(products: IProduct[], brands: string[]) {
-        //console.log('filterBrand brands', brands);
-        //console.log('filterBrand products', products);
         if (brands.length === 0) return products;
         const productsFiltered: IProduct[] = [];
         this.products.map((cur) => {
             for (const currentBrand of brands) {
                 if (cur.brand === currentBrand) {
-                    // console.log('match');
                     productsFiltered.push(cur);
                 }
             }
         });
-        //console.log('filterBrand productsFiltered', productsFiltered);
         return productsFiltered;
     }
 
@@ -245,27 +210,21 @@ export class MainPageModel {
         if (sortString === '') return products;
         if (sortString === 'PriceASC') {
             products.sort((item1, item2) => item1.price - item2.price);
-            console.log('sorting products:', products);
         }
         if (sortString === 'PriceDESC') {
             products.sort((item1, item2) => item2.price - item1.price);
-            console.log('sorting products:', products);
         }
         if (sortString === 'RatingASC') {
             products.sort((item1, item2) => item1.rating - item2.rating);
-            console.log('sorting products:', products);
         }
         if (sortString === 'RatingDESC') {
             products.sort((item1, item2) => item2.rating - item1.rating);
-            console.log('sorting products:', products);
         }
         if (sortString === 'DiscountASC') {
             products.sort((item1, item2) => item1.discountPercentage - item2.discountPercentage);
-            console.log('sorting products:', products);
         }
         if (sortString === 'DiscountDESC') {
             products.sort((item1, item2) => item2.discountPercentage - item1.discountPercentage);
-            console.log('sorting products:', products);
         }
         return products;
     }
@@ -275,10 +234,6 @@ export class MainPageModel {
         const productsFiltered = this.products.filter((cur) => {
             return cur.price >= minPrice && cur.price <= maxPrice;
         });
-        // console.log('filterPrice productsFiltered', productsFiltered);
-        // console.log('filterPrice minPrice', minPrice);
-        // console.log('filterPrice maxPrice', maxPrice);
-        // console.log('filterPrice products', products);
         return productsFiltered;
     }
 
@@ -291,15 +246,6 @@ export class MainPageModel {
     }
 
     getProductsToShow(products: IProduct[], filter: IFilterData) {
-        // return this.filterStock(
-        //     this.filterPrice(
-        //         this.filterBrand(this.filterByCategory(products, filter.categories), filter.brands),
-        //         filter.minPrice,
-        //         filter.maxPrice
-        //     ),
-        //     filter.minStock,
-        //     filter.maxStock
-        // );
         const productFilteredByCategory: IProduct[] = this.filterByCategory(products, filter.categories);
         const productFilteredByBrand: IProduct[] = this.filterByBrand(products, filter.brands);
         const productFilteredBySearch: IProduct[] = this.filterBySearch(products, filter.search);
@@ -325,15 +271,6 @@ export class MainPageModel {
                 }
             });
         });
-        //console.log('productFiltered', productFiltered);
-        // return this.sorting(
-        //     this.filterStock(
-        //         this.filterPrice(productFiltered, filter.minPrice, filter.maxPrice),
-        //         filter.minStock,
-        //         filter.maxStock
-        //     ),
-        //     filter.sort
-        // );
         return this.sorting(productFiltered, filter.sort);
     }
 

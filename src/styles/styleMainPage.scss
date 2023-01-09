@@ -1,7 +1,4 @@
 @import '/src/styles/styleSliders.scss';
-// * {
-//     outline: 2px solid salmon;
-// }
 * {
   box-sizing: border-box;
 }
@@ -10,18 +7,12 @@ p{
   margin: 0;
 }
 
-// body {
-//   display: flex;
-//   height: 100vh;
-// }
-
 .filters{
   width: 1/6*100%;
   height: 50%;
   height: 82vh;
   border: $borderMain;
   border-radius: 10px;
-  //background: #6a4b4b;
 }
 
 .goods{
@@ -30,7 +21,6 @@ p{
   border: $borderMain;
   border-radius: 10px;
   overflow: auto;
-  //background: #583e3e;
 }
 
 .filters__wrapper{
@@ -152,8 +142,6 @@ p{
 }
 
 .sort{
-    // width: 100px;
-    // height: 50px;
     border: $borderMain;
     border-radius: 10px;
 }
@@ -180,8 +168,6 @@ p{
 }
 
 .search{
-    // width: 100px;
-    // height: 50px;
     border: $borderMain;
     border-radius: 10px;
 }
@@ -189,7 +175,6 @@ p{
 .search__input{
     border: $borderMain;
     border-radius: 10px;
-    //background-color: rgb(128, 128, 128, 0.8);
     text-align: center;
     height: 3vh;
     width: 15vw;
@@ -272,7 +257,6 @@ p{
 }
 
 .wrapper__filtersGoods {
-    //background-color: rgb(87, 65, 161);
     font-size: $mainFontSize;
     border-radius: $mainBorderRadius;
     display: flex;

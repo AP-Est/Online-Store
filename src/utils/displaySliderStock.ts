@@ -61,8 +61,6 @@ export default function displaySliderStock(products: IProduct[], filter: IFilter
     maxPrice.type = 'number';
     maxPrice.min = String(minStockProducts);
     maxPrice.max = String(maxStockProducts);
-    //console.log('maxPrice.value', maxPrice.value);
-    //console.log();
 
     if (productsFiltered.length !== 0) {
         minPrice.value = String(minStockFilteredProducts);

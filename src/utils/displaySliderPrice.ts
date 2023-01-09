@@ -9,7 +9,6 @@ export default function displaySliderPrice(products: IProduct[], filter: IFilter
     filterPriceHeader.innerText = 'Price $';
     filterPriceWrapper.append(filterPriceHeader);
 
-    //slider
     const rangeContainer = createElement('div', 'range_container');
 
     const minPriceProducts = products.reduce((acc: number, date: IProduct) => {
@@ -46,14 +45,7 @@ export default function displaySliderPrice(products: IProduct[], filter: IFilter
     toSlider.min = String(minPriceProducts);
     toSlider.max = String(maxPriceProducts);
     toSlider.value = String(maxPriceFilteredProducts);
-    //console.log('fromSlider.min', fromSlider.min);
-    //console.log('fromSlider.max', fromSlider.max);
-    //console.log('fromSlider.value', fromSlider.value);
-    //console.log('toSlider.value', toSlider.value);
-    //console.log('filter.maxPrice', filter.maxPrice);
-    //console.log('maxPriceProducts', maxPriceProducts);
 
-    //numbers
     const formControl = createElement('div', 'form_control');
     const minPrice = createElement('input') as HTMLInputElement;
     minPrice.id = 'fromInput';
@@ -66,8 +58,6 @@ export default function displaySliderPrice(products: IProduct[], filter: IFilter
     maxPrice.type = 'number';
     maxPrice.min = String(minPriceProducts);
     maxPrice.max = String(maxPriceProducts);
-    //console.log('maxPrice.value', maxPrice.value);
-    //console.log();
 
     if (productsFiltered.length !== 0) {
         minPrice.value = String(minPriceFilteredProducts);
@@ -110,7 +100,6 @@ export function fillSlider(
 }
 
 export function setToggleAccessible(currentTarget: HTMLInputElement, toSlider: HTMLInputElement) {
-    console.log('setToggleAccessible toSlider', toSlider);
     if (Number(currentTarget.value) <= 0) {
         toSlider.style.zIndex = '2';
     } else {

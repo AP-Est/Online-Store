@@ -24,7 +24,6 @@
     height: 70vh; 
     border-radius: $mainBorderRadius; 
     margin: 20px;
-    //border: 1px solid black;
     overflow: hidden;
 }
 
@@ -97,7 +96,6 @@ img {
     background-repeat: no-repeat;
 }
 .productBlockMainBlock__info{
-    //display: flex;
     flex-direction: column;
     width: 30vw;
     overflow: auto;    
