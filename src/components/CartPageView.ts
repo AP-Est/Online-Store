@@ -51,7 +51,7 @@ export class CartPageView extends View {
         this.createMainCartWrappers(summaryVars);
         this.buildCartProductBlockHeader(plug);
         this.createCartProductBlockBodyMainElements(cartLots, product, plug);
-        this.buildCartPage();
+        this.buildCartPage(summaryVars);
         if (modalDate.state == true) {
             const wrapper = getElement('.wrapper__blind') as HTMLElement;
             wrapper.style.display = 'flex';
@@ -63,8 +63,13 @@ export class CartPageView extends View {
         }
     }
 
-    buildCartPage() {
-        this.productBlock.append(this.productBlockHeader, this.productBlockBody);
+    buildCartPage(summaryVars: ISumm) {
+        if (summaryVars.countItems === 0) {
+            const empty = this.createEmptyProductBlock();
+            this.productBlock.append(this.productBlockHeader, empty);
+        } else {
+            this.productBlock.append(this.productBlockHeader, this.productBlockBody);
+        }
         this.cartWrapper.append(this.productBlock, this.summaryBlock);
         this.mainWrapper.innerHTML = '';
         this.mainWrapper.append(this.cartWrapper);
@@ -77,6 +82,11 @@ export class CartPageView extends View {
         this.cartWrapper = createElement('div', 'cart__wrapper');
         this.productBlock = createElement('div', 'cartProductBlock');
         this.summaryBlock = buildSummaryContent(summaryVars);
+    }
+    createEmptyProductBlock() {
+        const emptyBlock = createElement('div', 'cartProductBlock__empty');
+        emptyBlock.textContent = 'Cart is empty';
+        return emptyBlock;
     }
 
     createCartProductBlockBodyHeaderElements(plug: IPlug) {
@@ -144,7 +154,7 @@ export class CartPageView extends View {
 
     createItemCard(cartItem: IProduct, count: number, numberID: number, plug: IPlug) {
         this.itemCardNum = createElement('div', `itemCardNum`);
-        this.itemCardNum.innerText = `${numberID + plug.startNumberID}`; //TODO придумать как учесть плагинацию
+        this.itemCardNum.innerText = `${numberID + plug.startNumberID}`;
         this.itemCardPic = createElement('div', `itemCardPic`);
         this.itemCardPic.classList.add('itemCardPic');
         this.itemCardPicExemplar = createElement('container', 'itemCardPic__Exemplar');
