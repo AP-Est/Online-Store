@@ -22,18 +22,15 @@ export class App {
 
     navigate = () => {
         const pathHashes = window.location.hash.split('/');
-        const pathNames = window.location.pathname;
-        console.log('pathHashes', pathHashes);
-        console.log('pathNames', pathNames);
-        if (pathHashes[0] === '#details' && pathNames === '/Online-Store/') {
+        if (pathHashes[0] === '#details') {
             this.view = new DetailPageView();
             this.model = new DetailPageModel();
             this.controller = new DetailPageController(this.view, this.model);
-        } else if (pathHashes[0] === '#cart' && pathNames === '/Online-Store/') {
+        } else if (pathHashes[0] === '#cart') {
             this.view = new CartPageView();
             this.model = new CartPageModel();
             this.controller = new ControllerCartPage(this.view, this.model);
-        } else if (pathHashes[0] === '' && pathNames === '/Online-Store/') {
+        } else if (pathHashes[0] === '') {
             this.view = new MainPageView();
             this.model = new MainPageModel();
             this.controller = new ControllerMainPage(this.view, this.model);
