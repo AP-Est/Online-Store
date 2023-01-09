@@ -7,8 +7,8 @@
 
 .cartModalWindow {
     background-color: rgb(33, 26, 57);
-    width: 50vw;
-    height: 60vh;
+    width: 35vw;
+    height: 50vh;
     overflow: auto;
     border-radius: $mainBorderRadius;
     padding: 10px;
@@ -22,12 +22,13 @@
         font-size: $mainFontSize;
         font-weight: bold;
         color: gold;
+        margin: 20px;
     }
 }
 
 .cartModalWindow__personalDataBlock {
     .personalInput {
-        max-width: 45vw;
+        max-width: 35vw;
         width: 30vw;
         height: 3vh;
         border-radius: $mainBorderRadius;
@@ -57,7 +58,7 @@
     .cartModalWindow__creditCardBlock_title {
         font-size: $mainFontSize;
         font-weight: bold;
-        margin: 10px;
+        margin: 20px;
         color: gold;
     }
     .creditCardBlockBody__model {
@@ -110,7 +111,7 @@
             height: 3vh;
         }
         .personalDataBlock__cardModel_inputCard{
-            width: 30vw;
+            width: 20vw;
         }
 
     }
@@ -126,18 +127,20 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 10px;
+    margin: 20px;
     .cartModalBlock__button_confirm{
-        background-color: rgb(81, 22, 34);
+        background-color: $mainTitleColor;
         color: gold;
         width: 20vw;
-        height: 4vw;
+        height: 3vw;
         border-radius: $mainBorderRadius;
-
+        font-size: large;
+        font-weight: bold;
         &:hover{
-            background-color: rgb(28, 55, 193);
-        }
-        
+        background-color: rgb(28, 55, 193);
+        } 
     }
+
+          
     
 }

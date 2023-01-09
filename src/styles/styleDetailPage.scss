@@ -10,6 +10,10 @@
 .wayBlock {
   text-transform: uppercase;
   font-size: $fontSizedDynamicBig;
+  font-weight: bold;
+  color: $goldColor;
+  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 .productBlock {
@@ -20,27 +24,27 @@
     height: 70vh; 
     border-radius: $mainBorderRadius; 
     margin: 20px;
-    border: 1px solid black;
+    //border: 1px solid black;
     overflow: hidden;
 }
 
 .productBlock__title {    
     color: rgb(226, 134, 13);
     width: 90vw;
-    background-color: aqua;
+    background-color: $mainTitleColor;
     text-align: center;
     font-size: $fontSizedDynamicBig;
+    font-weight: bold;
+    margin-bottom: 20px;
 }
 
 .productBlock_productBlockMainBlock {
     display: flex;
     flex-direction: row;
-    //background-color: rgb(33, 61, 61);
     width: 100%;
 }
 
 .productBlockMainBlock__pictures {
-    //background-color: aqua;
     display: flex;
     flex-direction: column;
     max-height: 70vh;
@@ -53,7 +57,7 @@
     width: 15vw;    
     border-radius: $smallBorderRadius;
     margin: 10px;
-    background-size: cover;
+    background-size: contain;
     cursor: pointer;
 }
 
@@ -76,7 +80,7 @@ img {
     width: 30vw;
     height: 20vh;    
     margin: auto 10px;
-    background-size: cover;
+    background-size: contain;
     background-position: center;
 }
 .productBlockMainBlock__info{
@@ -88,10 +92,10 @@ img {
     margin: auto 10px;
     margin-top: 15px;
     border-radius: $smallBorderRadius;
-    //background-color: aquamarine;
     text-align: center;
     font-size: $fontSizedDynamicBig;
     border: $borderMain;
+    background-color: rgb(1, 1, 1, 0.4);
 }
 .productBlockMainBlock__info_cardTitle {
     margin: 0;
@@ -103,6 +107,7 @@ img {
 
 .productBlockMainBlock__cardData {
     margin: auto 10px;
+    color: $goldColor;
 }
 
 .productBlockMainBlock__price {
@@ -113,7 +118,7 @@ img {
 }
 
 .productBlockMainBlock__price_price {
-    color: aquamarine;
+    color: $goldColor;
     margin-bottom: 1vh;
     font-size: $bigFontSize;
     font-family: $mainFontFamily;
