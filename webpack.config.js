@@ -57,6 +57,7 @@ const baseConfig = {
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, './src/index.html'),
             filename: 'index.html',
+            title: 'Online-Store',
         }),
         new CleanWebpackPlugin(),
         new EslintPlugin({ extensions: 'ts' }),

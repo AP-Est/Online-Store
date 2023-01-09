@@ -93,9 +93,3 @@ function createCodesBlock(summaryVars: ISumm) {
     });
     return bodyBlockAppliedCodesBody;
 }
-
-// function showModal() {
-//     const wrapper = getElement('.wrapper__blind') as HTMLElement;
-//     wrapper.style.display = 'block';
-//     //wrapper.append(buildModalWindow());
-// }

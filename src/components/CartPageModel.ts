@@ -1,5 +1,4 @@
 import { IProduct, IStoreData, storeData } from '../data/data';
-import getCartItems from '../utils/getCartItems';
 import { ICartLot, ICode, IModalData, IPlug, ISumm } from '../styles/types';
 import _notANull from '../utils/notANull';
 export class CartPageModel {
@@ -127,14 +126,16 @@ export class CartPageModel {
         url.searchParams.delete('brand');
         url.searchParams.delete('search');
         url.searchParams.delete('sort');
+        url.searchParams.delete('minPrice');
+        url.searchParams.delete('maxPrice');
         url.searchParams.delete('limit');
         url.searchParams.delete('page');
         history.pushState(null, '', url);
     }
     private getQueryParameters() {
         const url = new URL(location.href);
-        this.plug.limit = Number(url.searchParams.get('limit'));
-        this.plug.page = Number(url.searchParams.get('page'));
+        this.plug.limit = Number(url.searchParams.get('limit')) || 3;
+        this.plug.page = Number(url.searchParams.get('page')) || 1;
     }
 
     handleCardItemIncrement(productId: number) {
@@ -175,9 +176,6 @@ export class CartPageModel {
         this.commit(this.cartLots, this.products);
     }
 
-    bindGetCartItems() {
-        getCartItems();
-    }
     handlePageIncrement() {
         if (this.cartLots.length > this.plug.page * this.plug.limit) {
             this.plug.page += 1;
@@ -237,7 +235,7 @@ export class CartPageModel {
     }
     //todo
     handleName(value: string) {
-        const letters = /^[A-Za-z]+\s[A-Za-z]+$/;
+        const letters = /^[A-Za-z]+\s[A-Za-z]*\w/;
         this.modalDate.name = value;
         if (letters.test(value)) {
             this.modalDate.error.name = false;
@@ -306,7 +304,7 @@ export class CartPageModel {
         this.commit(this.cartLots, this.products);
     }
     handleCardValid(value: string) {
-        const letters = /(\d{1}|[1-2]{1}[0-9]{1})[/]\d{2}/;
+        const letters = /^([1-9]{1}|[0-2]{1}[0-9]{1})[/]\d{2}$/;
         this.modalDate.cardValid = value;
         if (letters.test(value)) {
             this.modalDate.error.cardValid = false;
