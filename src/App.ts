@@ -23,7 +23,8 @@ export class App {
     navigate = () => {
         const pathHashes = window.location.hash.split('/');
         const pathNames = window.location.pathname;
-        console.log(pathHashes);
+        console.log('pathHashes', pathHashes);
+        console.log('pathNames', pathNames);
         if (pathHashes[0] === '#details' && pathNames === '/') {
             this.view = new DetailPageView();
             this.model = new DetailPageModel();
