@@ -14,8 +14,8 @@ export default function displayFilter(products: IProduct[], filter: IFilterData,
     const filtersButtonCopy = createButton('Copy', 'filters__button_copy');
     const modelFilterCategory = displayFilterCategory(products, filter, productsFiltered) as HTMLElement; // TODo сюда прокинуть продукты и массив с фильтрами категорий
     const modelFilterBrands = displayFilterBrands(products, filter, productsFiltered) as HTMLElement; // TODo сюда прокинуть продукты и массив с фильтрами категорий
-    const modelFilterPrice = displaySliderPrice(products, filter) as HTMLElement;
-    const modelFilterStock = displaySliderStock(products, filter) as HTMLElement;
+    const modelFilterPrice = displaySliderPrice(products, filter, productsFiltered) as HTMLElement;
+    const modelFilterStock = displaySliderStock(products, filter, productsFiltered) as HTMLElement;
 
     filtersButtonWrapper.append(filtersButtonReset, filtersButtonCopy);
     filtersWrapper.append(
