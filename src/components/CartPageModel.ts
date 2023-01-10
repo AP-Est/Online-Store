@@ -177,9 +177,6 @@ export class CartPageModel {
             .filter((obj) => {
                 return obj !== '';
             });
-        if (this.cartView.length === 1) {
-            this.plug.page -= 1;
-        }
         this.cartLots = _tempArray as ICartLot[];
         this.commit(this.cartLots, this.products);
     }
