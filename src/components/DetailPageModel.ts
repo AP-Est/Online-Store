@@ -8,6 +8,10 @@ export class DetailPageModel {
     onChangeModel!: CallableFunction;
 
     constructor() {
+        if (!localStorage.getItem('cart')) {
+            const storageArray: ICartLot[] = [];
+            localStorage.setItem('cart', JSON.stringify(storageArray));
+        }
         this.cartLots = JSON.parse(localStorage.cart) || [];
         this.storeData = storeData;
     }
