@@ -53,6 +53,7 @@ export class CartPageModel {
         };
         this.modalOn = localStorage.modalOn;
         this.checkModalOn();
+        this.getQueryParameters();
         this._getStartNumber(this.plug);
         this.cartLots = JSON.parse(localStorage.cart) || [];
         this.cartView = [];
@@ -60,7 +61,6 @@ export class CartPageModel {
         this._getSummaryVars();
         this.storeData = storeData;
         this.products = storeData.products;
-        this.getQueryParameters();
         this.clearQueryParameters();
     }
     bindChangeModel(callback: CallableFunction) {
@@ -85,8 +85,10 @@ export class CartPageModel {
 
     private _checkEmptyArray = () => {
         if (this.cartLots !== undefined && this.cartLots.length !== 0) {
-            while (this.cartView.length === 0) {
-                this.plug.page -= 1;
+            if (this.cartLots.length < this.plug.page * this.plug.limit) {
+                if (this.cartLots.length / this.plug.limit >= 1) {
+                    this.plug.page = Math.ceil(this.cartLots.length / this.plug.limit);
+                } else this.plug.page = 1;
                 this._getCartView(this.plug);
             }
         }
@@ -131,8 +133,6 @@ export class CartPageModel {
         url.searchParams.delete('minStock');
         url.searchParams.delete('maxStock');
         url.searchParams.delete('view');
-        url.searchParams.delete('limit');
-        url.searchParams.delete('page');
         history.pushState(null, '', url);
     }
     private getQueryParameters() {
@@ -203,7 +203,7 @@ export class CartPageModel {
         this.plug.limit = limit;
         if (this.cartLots.length <= this.plug.limit) {
             if (this.plug.page > 1) {
-                this.plug.page -= 1;
+                this._checkEmptyArray();
             }
         }
         this.setQueryParameters();
@@ -242,7 +242,7 @@ export class CartPageModel {
         this.commit(this.cartLots, this.products);
     }
     handleName(value: string) {
-        const letters = /^[A-Za-z]+\s[A-Za-z]*\w/;
+        const letters = /^[A-Za-z]{3,}\s[A-Za-z]{3,}\w*/;
         this.modalDate.name = value;
         if (letters.test(value)) {
             this.modalDate.error.name = false;
@@ -262,7 +262,7 @@ export class CartPageModel {
         this.commit(this.cartLots, this.products);
     }
     handleAddress(value: string) {
-        const letters = /[0-9a-zA-Z,.]+\s[0-9a-zA-Z,.]+\s[0-9a-zA-Z,.]+$/;
+        const letters = /^[0-9a-zA-Z,.]{5,}\s[0-9a-zA-Z,.]{5,}\s[0-9a-zA-Z,.]{5,}$/;
         this.modalDate.address = value;
         if (letters.test(value)) {
             this.modalDate.error.address = false;
@@ -272,7 +272,7 @@ export class CartPageModel {
         this.commit(this.cartLots, this.products);
     }
     handleMail(value: string) {
-        const letters = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/;
+        const letters = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*[.](\w{2,3})$/;
         this.modalDate.mail = value;
         if (letters.test(value)) {
             this.modalDate.error.mail = false;
@@ -311,7 +311,7 @@ export class CartPageModel {
         this.commit(this.cartLots, this.products);
     }
     handleCardValid(value: string) {
-        const letters = /^([1-9]{1}|[0-2]{1}[0-9]{1})[/]\d{2}$/;
+        const letters = /^([1]{1}[0-2]{1}|[0]{1}[1-9]{1})[/]\d{2}$/;
         this.modalDate.cardValid = value;
         if (letters.test(value)) {
             this.modalDate.error.cardValid = false;
