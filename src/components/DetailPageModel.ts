@@ -1,6 +1,7 @@
 import { storeData } from '../data/data';
 import { ICartLot, IProduct, IStoreData } from '../styles/types';
 import checkLocalStorage from '../utils/checkLocalstorage';
+import StorageCheckerForWeb from '../utils/storageCheckerForWeb';
 export class DetailPageModel {
     cartLots: ICartLot[];
     storeData!: IStoreData;
@@ -12,7 +13,8 @@ export class DetailPageModel {
             const storageArray: ICartLot[] = [];
             localStorage.setItem('cart', JSON.stringify(storageArray));
         }
-        this.cartLots = JSON.parse(localStorage.cart) || [];
+        StorageCheckerForWeb();
+        this.cartLots = JSON.parse(localStorage.cart);
         this.storeData = storeData;
     }
 
@@ -40,8 +42,10 @@ export class DetailPageModel {
             localStorage.setItem('cart', JSON.stringify(storageArray));
         } else {
             const storageArray: ICartLot[] = JSON.parse(localStorage.cart);
-            storageArray.push(storageObject);
-            localStorage.cart = JSON.stringify(storageArray);
+            if (checkLocalStorage(itemId) === false) {
+                storageArray.push(storageObject);
+                localStorage.cart = JSON.stringify(storageArray);
+            }
         }
     }
     handlePushToLocalStorage(itemId: number) {
