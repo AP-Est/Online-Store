@@ -105,7 +105,7 @@ export class DetailPageView extends View {
         this.productBlockPreviewPic = createElement('div', 'productBlockMainBlock__preview_pic');
         this.productBlockPreviewPic.style.backgroundImage = `url(${this.picArray[0]})`;
         this.productBlockInfo = createElement('div', 'productBlockMainBlock__info');
-        this.createInfoFields(storeData);
+        this.createInfoFields(storeData, cardNumber);
         this.productBlockPrice = createElement('div', 'productBlockMainBlock__price');
         this.productBlockPriceText = createElement('span', 'productBlockMainBlock__price_price');
         this.productBlockPriceText.textContent = `$${storeData.products[cardNumber - 1].price}`;
