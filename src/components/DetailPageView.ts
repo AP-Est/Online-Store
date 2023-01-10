@@ -91,6 +91,7 @@ export class DetailPageView extends View {
                 'img',
                 'productBlockMainBlock__pictures_pic' + i
             ) as HTMLImageElement;
+            this.productBlockPicturesExemplarPic.classList.add('productBlockMainBlock__pictures_pic');
             this.productBlockPicturesExemplarPic.src = `${this.picArray[i]}`;
             this.productBlockPicturesExemplar.append(this.productBlockPicturesExemplarPic);
             this.productBlockPicturesExemplar.classList.add('pictures_pic');

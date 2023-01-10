@@ -207,7 +207,6 @@ export const storeData: IStoreData = {
             thumbnail: 'https://i.dummyjson.com/data/products/10/thumbnail.jpeg',
             images: [
                 'https://i.dummyjson.com/data/products/10/1.jpg',
-                'https://i.dummyjson.com/data/products/10/2.jpg',
                 'https://i.dummyjson.com/data/products/10/3.jpg',
                 'https://i.dummyjson.com/data/products/10/thumbnail.jpeg',
             ],
@@ -226,7 +225,6 @@ export const storeData: IStoreData = {
             images: [
                 'https://i.dummyjson.com/data/products/11/1.jpg',
                 'https://i.dummyjson.com/data/products/11/2.jpg',
-                'https://i.dummyjson.com/data/products/11/3.jpg',
                 'https://i.dummyjson.com/data/products/11/thumbnail.jpg',
             ],
         },
@@ -398,8 +396,6 @@ export const storeData: IStoreData = {
             thumbnail: 'https://i.dummyjson.com/data/products/20/thumbnail.jpg',
             images: [
                 'https://i.dummyjson.com/data/products/20/1.jpg',
-                'https://i.dummyjson.com/data/products/20/2.jpg',
-                'https://i.dummyjson.com/data/products/20/3.jpg',
                 'https://i.dummyjson.com/data/products/20/4.jpg',
                 'https://i.dummyjson.com/data/products/20/thumbnail.jpg',
             ],
@@ -418,7 +414,6 @@ export const storeData: IStoreData = {
             images: [
                 'https://i.dummyjson.com/data/products/21/1.png',
                 'https://i.dummyjson.com/data/products/21/2.jpg',
-                'https://i.dummyjson.com/data/products/21/3.jpg',
             ],
         },
         {
@@ -453,7 +448,6 @@ export const storeData: IStoreData = {
                 'https://i.dummyjson.com/data/products/23/1.jpg',
                 'https://i.dummyjson.com/data/products/23/2.jpg',
                 'https://i.dummyjson.com/data/products/23/3.jpg',
-                'https://i.dummyjson.com/data/products/23/4.jpg',
                 'https://i.dummyjson.com/data/products/23/thumbnail.jpg',
             ],
         },
@@ -471,7 +465,6 @@ export const storeData: IStoreData = {
             thumbnail: 'https://i.dummyjson.com/data/products/24/thumbnail.jpg',
             images: [
                 'https://i.dummyjson.com/data/products/24/1.jpg',
-                'https://i.dummyjson.com/data/products/24/2.jpg',
                 'https://i.dummyjson.com/data/products/24/3.jpg',
                 'https://i.dummyjson.com/data/products/24/4.jpg',
                 'https://i.dummyjson.com/data/products/24/thumbnail.jpg',
