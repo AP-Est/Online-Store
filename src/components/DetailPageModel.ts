@@ -43,7 +43,6 @@ export class DetailPageModel {
         } else {
             const storageArray: ICartLot[] = JSON.parse(localStorage.cart);
             if (checkLocalStorage(itemId) === false) {
-                console.log('storageArray', storageArray);
                 storageArray.push(storageObject);
                 localStorage.cart = JSON.stringify(storageArray);
             }
