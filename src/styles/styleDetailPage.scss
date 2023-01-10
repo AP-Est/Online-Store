@@ -89,9 +89,9 @@ img {
 .productBlockMainBlock__preview_pic {
     border-radius: $smallBorderRadius;
     width: 30vw;
-    height: 20vh;    
+    height: 30vh;    
     margin: auto 10px;
-    background-size: contain;
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 }
@@ -151,4 +151,8 @@ img {
     &:hover {
         background-color: rgb(149, 159, 148);
     }
+}
+
+.productBlockMainBlock__pictures_pic{
+    object-fit: revert;
 }
