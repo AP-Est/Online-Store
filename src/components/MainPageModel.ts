@@ -27,10 +27,10 @@ export class MainPageModel {
         }, this.products[0].price);
         this.minStockProducts = this.products.reduce((acc: number, date: IProduct) => {
             return date.stock < acc ? date.stock : acc;
-        }, this.products[0].price);
+        }, this.products[0].stock);
         this.maxStockProducts = this.products.reduce((acc: number, date: IProduct) => {
             return date.stock > acc ? date.stock : acc;
-        }, this.products[0].price);
+        }, this.products[0].stock);
         this.filter = {
             categories: [],
             brands: [],
