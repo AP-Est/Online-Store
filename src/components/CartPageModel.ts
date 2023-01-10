@@ -311,7 +311,7 @@ export class CartPageModel {
         this.commit(this.cartLots, this.products);
     }
     handleCardValid(value: string) {
-        const letters = /^([1]{1}[0-2]{1}|[0]{1}[1-9]{1})[/]\d{2}$/;
+        const letters = /^([1]{1}[0-2]{1}|[0]{1}[1-9]{1})[/]([3-9]{1}[0-9]{1}|[2]{1}[3-9]{1})$/;
         this.modalDate.cardValid = value;
         if (letters.test(value)) {
             this.modalDate.error.cardValid = false;
