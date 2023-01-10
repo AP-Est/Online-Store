@@ -40,8 +40,10 @@ export class DetailPageModel {
             localStorage.setItem('cart', JSON.stringify(storageArray));
         } else {
             const storageArray: ICartLot[] = JSON.parse(localStorage.cart);
-            storageArray.push(storageObject);
-            localStorage.cart = JSON.stringify(storageArray);
+            if (checkLocalStorage(itemId) === false) {
+                storageArray.push(storageObject);
+                localStorage.cart = JSON.stringify(storageArray);
+            }
         }
     }
     handlePushToLocalStorage(itemId: number) {
