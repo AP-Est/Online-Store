@@ -67,23 +67,23 @@ export default function displayCards(products: IProduct[], filter: IFilterData, 
         cards.classList.add('displayBlock');
     }
 
-    const cardDiv = [];
-    const cardButtonCart: HTMLElement[] = [];
-    const cardButtonDetails: HTMLElement[] = [];
-    const cardDivName = [];
+    const cardsDiv = [];
+    const cardsButtonCart: HTMLElement[] = [];
+    const cardsButtonDetails: HTMLElement[] = [];
+    const cardsDivName = [];
     for (let i = 0; i < productsFiltered.length; i++) {
-        cardDiv[i] = createElement('div', 'cardDiv');
-        cardDiv[i].style.background = `url(${productsFiltered[i].thumbnail})`;
-        cardDiv[i].style.backgroundSize = 'cover';
-        cardDiv[i].style.backgroundRepeat = 'round';
-        cardDiv[i].id = `${i}`;
-        cardDivName[i] = createElement('div', 'cardDiv__Name');
-        cardDivName[i].textContent = productsFiltered[i].title;
+        cardsDiv[i] = createElement('div', 'cardsDiv');
+        cardsDiv[i].style.background = `url(${productsFiltered[i].thumbnail})`;
+        cardsDiv[i].style.backgroundSize = 'cover';
+        cardsDiv[i].style.backgroundRepeat = 'round';
+        cardsDiv[i].id = `${i}`;
+        cardsDivName[i] = createElement('div', 'cardDiv__Name');
+        cardsDivName[i].textContent = productsFiltered[i].title;
         if (filter.view === 'small') {
-            cardDivName[i].classList.remove('fontSizeSmall');
+            cardsDivName[i].classList.remove('fontSizeSmall');
         }
         if (filter.view === 'large') {
-            cardDivName[i].classList.add('fontSizeSmall');
+            cardsDivName[i].classList.add('fontSizeSmall');
         }
 
         let idOfProduct = 0;
@@ -94,29 +94,29 @@ export default function displayCards(products: IProduct[], filter: IFilterData, 
         });
 
         if (checkLocalStorage(idOfProduct + 1)) {
-            cardButtonCart[i] = createButton('DROP FROM CART', 'cardDiv__cart');
+            cardsButtonCart[i] = createButton('DROP FROM CART', 'cardDiv__cart');
         } else {
-            cardButtonCart[i] = createButton('ADD TO CART', 'cardDiv__cart');
+            cardsButtonCart[i] = createButton('ADD TO CART', 'cardDiv__cart');
         }
-        cardButtonCart[i].id = `${idOfProduct}`;
+        cardsButtonCart[i].id = `${idOfProduct}`;
 
         if (filter.view === 'small') {
-            cardButtonCart[i].classList.remove('fontSizeSmall');
+            cardsButtonCart[i].classList.remove('fontSizeSmall');
         }
         if (filter.view === 'large') {
-            cardButtonCart[i].classList.add('fontSizeSmall');
+            cardsButtonCart[i].classList.add('fontSizeSmall');
         }
-        cardButtonDetails[i] = createButton('DETAILS', 'cardDiv__details');
-        cardButtonDetails[i].id = `${idOfProduct}`;
+        cardsButtonDetails[i] = createButton('DETAILS', 'cardDiv__details');
+        cardsButtonDetails[i].id = `${idOfProduct}`;
 
         if (filter.view === 'small') {
-            cardButtonDetails[i].classList.remove('fontSizeSmall');
+            cardsButtonDetails[i].classList.remove('fontSizeSmall');
         }
         if (filter.view === 'large') {
-            cardButtonDetails[i].classList.add('fontSizeSmall');
+            cardsButtonDetails[i].classList.add('fontSizeSmall');
         }
-        cardDiv[i].append(cardDivName[i], cardButtonCart[i], cardButtonDetails[i]);
-        cards.append(cardDiv[i]);
+        cardsDiv[i].append(cardsDivName[i], cardsButtonCart[i], cardsButtonDetails[i]);
+        cards.append(cardsDiv[i]);
     }
 
     if (filter.view === 'small') {
