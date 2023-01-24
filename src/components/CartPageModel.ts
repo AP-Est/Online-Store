@@ -147,8 +147,10 @@ export class CartPageModel {
     }
     private getQueryParameters() {
         const url = new URL(location.href);
-        this.pagination.limit = Number(url.searchParams.get('limit')) || 3;
-        this.pagination.page = Number(url.searchParams.get('page')) || 1;
+        const limitStartVar = 3;
+        const pageStartVar = 1;
+        this.pagination.limit = Number(url.searchParams.get('limit')) || limitStartVar;
+        this.pagination.page = Number(url.searchParams.get('page')) || pageStartVar;
     }
     private checkModalOn() {
         if (this.modalOn && this.modalOn == 'true') {
