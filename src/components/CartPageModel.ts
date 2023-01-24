@@ -19,10 +19,13 @@ export class CartPageModel {
             { title: 'AN', description: 'Andrey`s code', discount: 10 },
             { title: 'NA', description: 'Nat`s code', discount: 10 },
         ];
+        const pageStartVar = 1;
+        const limitStartVar = 3;
+        const startNumberIDStartVar = 1;
         this.pagination = {
-            limit: 3,
-            page: 1,
-            startNumberID: 1,
+            limit: limitStartVar,
+            page: pageStartVar,
+            startNumberID: startNumberIDStartVar,
         };
         this.summaryVars = {
             countItems: 0,
