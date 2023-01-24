@@ -53,7 +53,6 @@ export class CartPageModel {
         };
         this.modalOn = localStorage.modalOn;
         this.checkModalOn();
-        this.getQueryParameters();
         this._getStartNumber(this.plug);
         this.cartLots = JSON.parse(localStorage.cart) || [];
         this.cartView = [];
@@ -61,6 +60,7 @@ export class CartPageModel {
         this._getSummaryVars();
         this.storeData = storeData;
         this.products = storeData.products;
+        this.getQueryParameters();
         this.clearQueryParameters();
     }
     bindChangeModel(callback: CallableFunction) {
@@ -75,6 +75,7 @@ export class CartPageModel {
         this.onChangeModel(this.cartView, products, this.plug, this.summaryVars, this.modalDate);
     }
     private _getCartView = (plug: IPlug) => {
+        this._getStartNumber(plug);
         if (this.cartLots.length > plug.limit) {
             this.cartView = this.cartLots.slice((plug.page - 1) * plug.limit, plug.page * plug.limit);
         } else this.cartView = this.cartLots;
@@ -90,6 +91,7 @@ export class CartPageModel {
                     this.plug.page = Math.ceil(this.cartLots.length / this.plug.limit);
                 } else this.plug.page = 1;
                 this._getCartView(this.plug);
+                this.setQueryParameters();
             }
         }
     };
@@ -177,9 +179,6 @@ export class CartPageModel {
             .filter((obj) => {
                 return obj !== '';
             });
-        if (this.cartView.length === 1) {
-            this.plug.page -= 1;
-        }
         this.cartLots = _tempArray as ICartLot[];
         this.commit(this.cartLots, this.products);
     }
@@ -252,7 +251,7 @@ export class CartPageModel {
         this.commit(this.cartLots, this.products);
     }
     handlePhone(value: string) {
-        const numbers = /[+]+[0-9]{9,}/;
+        const numbers = /^[+]+[0-9]{9,}/;
         this.modalDate.phone = value;
         if (numbers.test(value)) {
             this.modalDate.error.phone = false;
@@ -262,7 +261,7 @@ export class CartPageModel {
         this.commit(this.cartLots, this.products);
     }
     handleAddress(value: string) {
-        const letters = /^[0-9a-zA-Z,.]{5,}\s[0-9a-zA-Z,.]{5,}\s[0-9a-zA-Z,.]{5,}$/;
+        const letters = /^[0-9a-zA-Z,.]{5,}\s[0-9a-zA-Z,.]{5,}\s[0-9a-zA-Z,.]{5,}/;
         this.modalDate.address = value;
         if (letters.test(value)) {
             this.modalDate.error.address = false;

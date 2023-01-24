@@ -226,12 +226,13 @@ p{
     position: absolute;
     bottom: 0.3vh;
     left: 0.4vw;
+    font-size: $fontSizedDynamicMain;
     border: $borderMain;
     background-color: rgb(128, 128, 128, 0.8);
     border-radius: $smallBorderRadius;
     margin-bottom: 5px;
     margin-left: 5px;
-    height: 3vh;
+    height: $fontSizedDynamicBig*1.5;
     width: 55%;
     cursor: pointer;
     &:hover {
@@ -243,13 +244,14 @@ p{
     position: absolute;
     bottom: 0.3vh;
     right: 0.4vw;
+    font-size: $fontSizedDynamicMain;
     border: $borderMain;
     background-color: rgb(128, 128, 128, 0.8);
     border-radius: $smallBorderRadius;
     margin-bottom: 5px;
     margin-right: 5px;
     cursor: pointer;
-    height: 3vh;
+    height: $fontSizedDynamicBig*1.5;
     &:hover {
       background-color: rgba(80, 128, 128, 0.8);
     }
