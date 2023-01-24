@@ -293,18 +293,22 @@ export class CartPageModel {
     handleCardNumber(value: string) {
         const letters = /\d{4}([-]|\s|)\d{4}([-]|\s|)\d{4}([-]|\s|)\d{4}/;
         this.modalData.cardNumber = value;
+        const visa = '4';
+        const mastercard = '5';
+        const unipay = '6';
+        const axp = '3';
         switch (value[0]) {
-            case '4':
+            case visa:
                 this.modalData.cardType = 'https://cdn.visa.com/v2/assets/images/logos/visa/blue/logo.png';
                 break;
-            case '5':
+            case mastercard:
                 this.modalData.cardType =
                     'https://www.mastercard.hu/content/dam/public/mastercardcom/eu/hu/images/mc-logo-52.svg';
                 break;
-            case '6':
+            case unipay:
                 this.modalData.cardType = 'https://m.unionpayintl.com/imp_file/global/wap/en/static/images/logo.png';
                 break;
-            case '3':
+            case axp:
                 this.modalData.cardType =
                     'https://www.aexp-static.com/cdaas/one/statics/axp-static-assets/1.8.0/package/dist/img/logos/dls-logo-stack.svg';
                 break;
