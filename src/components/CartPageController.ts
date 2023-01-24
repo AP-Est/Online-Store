@@ -33,7 +33,7 @@ export class ControllerCartPage {
         this.onChangeModel(
             this.model.cartView,
             this.model.products,
-            this.model.plug,
+            this.model.pagination,
             this.model.summaryVars,
             this.model.modalDate
         );
@@ -41,11 +41,11 @@ export class ControllerCartPage {
     onChangeModel = (
         cartLots: ICartLot[],
         products: IProduct[],
-        plug: IPlug,
+        pagination: IPlug,
         summaryVars: ISumm,
         modalDate: IModalData
     ) => {
-        this.view.displayCartPage(cartLots, products, plug, summaryVars, modalDate);
+        this.view.displayCartPage(cartLots, products, pagination, summaryVars, modalDate);
     };
 
     handleCardItemIncrement = (productId: number) => {

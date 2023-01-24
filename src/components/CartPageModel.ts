@@ -7,7 +7,7 @@ export class CartPageModel {
     cartView: ICartLot[];
     storeData: IStoreData;
     onChangeModel!: CallableFunction;
-    plug: IPlug;
+    pagination: IPlug;
     summaryVars: ISumm;
     AvailableCodes: ICode[];
     modalDate: IModalData;
@@ -19,7 +19,7 @@ export class CartPageModel {
             { title: 'AN', description: 'Andrey`s code', discount: 10 },
             { title: 'NA', description: 'Nat`s code', discount: 10 },
         ];
-        this.plug = {
+        this.pagination = {
             limit: 3,
             page: 1,
             startNumberID: 1,
@@ -53,10 +53,10 @@ export class CartPageModel {
         };
         this.modalOn = localStorage.modalOn;
         this.checkModalOn();
-        this._getStartNumber(this.plug);
+        this._getStartNumber(this.pagination);
         this.cartLots = JSON.parse(localStorage.cart) || [];
         this.cartView = [];
-        this._getCartView(this.plug);
+        this._getCartView(this.pagination);
         this._getSummaryVars();
         this.storeData = storeData;
         this.products = storeData.products;
@@ -68,29 +68,29 @@ export class CartPageModel {
     }
     private commit(cartLots: ICartLot[], products: IProduct[]) {
         this._getSummaryVars();
-        this._getStartNumber(this.plug);
-        this._getCartView(this.plug);
+        this._getStartNumber(this.pagination);
+        this._getCartView(this.pagination);
         this._checkEmptyArray();
         localStorage.cart = JSON.stringify(cartLots);
-        this.onChangeModel(this.cartView, products, this.plug, this.summaryVars, this.modalDate);
+        this.onChangeModel(this.cartView, products, this.pagination, this.summaryVars, this.modalDate);
     }
-    private _getCartView = (plug: IPlug) => {
-        this._getStartNumber(plug);
-        if (this.cartLots.length > plug.limit) {
-            this.cartView = this.cartLots.slice((plug.page - 1) * plug.limit, plug.page * plug.limit);
+    private _getCartView = (pagination: IPlug) => {
+        this._getStartNumber(pagination);
+        if (this.cartLots.length > pagination.limit) {
+            this.cartView = this.cartLots.slice((pagination.page - 1) * pagination.limit, pagination.page * pagination.limit);
         } else this.cartView = this.cartLots;
     };
-    private _getStartNumber = (plug: IPlug) => {
-        this.plug.startNumberID = plug.page * plug.limit - plug.limit + 1;
+    private _getStartNumber = (pagination: IPlug) => {
+        this.pagination.startNumberID = pagination.page * pagination.limit - pagination.limit + 1;
     };
 
     private _checkEmptyArray = () => {
         if (this.cartLots !== undefined && this.cartLots.length !== 0) {
-            if (this.cartLots.length < this.plug.page * this.plug.limit) {
-                if (this.cartLots.length / this.plug.limit >= 1) {
-                    this.plug.page = Math.ceil(this.cartLots.length / this.plug.limit);
-                } else this.plug.page = 1;
-                this._getCartView(this.plug);
+            if (this.cartLots.length < this.pagination.page * this.pagination.limit) {
+                if (this.cartLots.length / this.pagination.limit >= 1) {
+                    this.pagination.page = Math.ceil(this.cartLots.length / this.pagination.limit);
+                } else this.pagination.page = 1;
+                this._getCartView(this.pagination);
                 this.setQueryParameters();
             }
         }
@@ -120,8 +120,8 @@ export class CartPageModel {
         const url = new URL(location.href);
         url.searchParams.delete('limit');
         url.searchParams.delete('page');
-        url.searchParams.set('limit', String(this.plug.limit));
-        url.searchParams.set('page', String(this.plug.page));
+        url.searchParams.set('limit', String(this.pagination.limit));
+        url.searchParams.set('page', String(this.pagination.page));
         history.pushState(null, '', url);
     }
     private clearQueryParameters() {
@@ -139,8 +139,8 @@ export class CartPageModel {
     }
     private getQueryParameters() {
         const url = new URL(location.href);
-        this.plug.limit = Number(url.searchParams.get('limit')) || 3;
-        this.plug.page = Number(url.searchParams.get('page')) || 1;
+        this.pagination.limit = Number(url.searchParams.get('limit')) || 3;
+        this.pagination.page = Number(url.searchParams.get('page')) || 1;
     }
     private checkModalOn() {
         if (this.modalOn && this.modalOn == 'true') {
@@ -184,24 +184,24 @@ export class CartPageModel {
     }
 
     handlePageIncrement() {
-        if (this.cartLots.length > this.plug.page * this.plug.limit) {
-            this.plug.page += 1;
+        if (this.cartLots.length > this.pagination.page * this.pagination.limit) {
+            this.pagination.page += 1;
         }
         this.setQueryParameters();
         this.commit(this.cartLots, this.products);
     }
 
     handlePageDecrement() {
-        if (this.plug.page > 1) {
-            this.plug.page -= 1;
+        if (this.pagination.page > 1) {
+            this.pagination.page -= 1;
         }
         this.setQueryParameters();
         this.commit(this.cartLots, this.products);
     }
     handleLimitChanged(limit: number) {
-        this.plug.limit = limit;
-        if (this.cartLots.length <= this.plug.limit) {
-            if (this.plug.page > 1) {
+        this.pagination.limit = limit;
+        if (this.cartLots.length <= this.pagination.limit) {
+            if (this.pagination.page > 1) {
                 this._checkEmptyArray();
             }
         }
