@@ -46,12 +46,18 @@ export class CartPageView extends View {
     constructor() {
         super();
     }
-    displayCartPage(cartLots: ICartLot[], product: IProduct[], pagination: IPlug, summaryVars: ISumm, modalData: IModalData) {
+    displayCartPage(
+        cartLots: ICartLot[],
+        product: IProduct[],
+        pagination: IPlug,
+        summaryVars: ISumm,
+        modalData: IModalData
+    ) {
         this.createMainCartWrappers(summaryVars);
         this.buildCartProductBlockHeader(pagination);
         this.createCartProductBlockBodyMainElements(cartLots, product, pagination);
         this.buildCartPage(summaryVars);
-        if (modalData.state == true) {
+        if (modalData.state) {
             const wrapper = getElement('.wrapper__blind') as HTMLElement;
             wrapper.style.display = 'flex';
             wrapper.innerHTML = '';
