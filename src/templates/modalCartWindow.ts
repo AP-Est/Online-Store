@@ -45,7 +45,7 @@ function createNameField(modalData: IModalData) {
     inputArea.value = modalData.name;
     const error = createElement('span', 'personalDataBlock_error');
     error.textContent = 'Error';
-    if (modalData.error.name === false) {
+    if (!modalData.error.name) {
         error.style.display = 'none';
     }
     nameField.append(inputArea, error);
@@ -61,7 +61,7 @@ function createPhoneField(modalData: IModalData) {
     inputArea.value = modalData.phone;
     const error = createElement('span', 'personalDataBlock_error');
     error.textContent = 'Error';
-    if (modalData.error.phone === false) {
+    if (!modalData.error.phone) {
         error.style.display = 'none';
     }
     phoneField.append(inputArea, error);
@@ -77,7 +77,7 @@ function createDeliveryField(modalData: IModalData) {
     inputArea.value = modalData.address;
     const error = createElement('span', 'personalDataBlock_error');
     error.textContent = 'Error';
-    if (modalData.error.address === false) {
+    if (!modalData.error.address) {
         error.style.display = 'none';
     }
     deliveryField.append(inputArea, error);
@@ -164,18 +164,18 @@ function createCardModel(modalData: IModalData) {
 
 function createCartModalCreditCardBlockErrors(modalData: IModalData) {
     const createCartModalCreditCardBlockErrors = createElement('div', 'creditCardBlockBody__Errors');
-    if (modalData.error.cardNumber === true || modalData.error.cardValid === true || modalData.error.cardCVV === true) {
-        if (modalData.error.cardNumber === true) {
+    if (modalData.error.cardNumber || modalData.error.cardValid || modalData.error.cardCVV) {
+        if (modalData.error.cardNumber) {
             const cardNumberError = createElement('div', 'cardError');
             cardNumberError.textContent = 'Card number - error';
             createCartModalCreditCardBlockErrors.append(cardNumberError);
         }
-        if (modalData.error.cardValid === true) {
+        if (modalData.error.cardValid) {
             const cardValidError = createElement('div', 'cardError');
             cardValidError.textContent = 'Card valid thru - error';
             createCartModalCreditCardBlockErrors.append(cardValidError);
         }
-        if (modalData.error.cardCVV === true) {
+        if (modalData.error.cardCVV) {
             const cardCVVError = createElement('div', 'cardError');
             cardCVVError.textContent = 'Card CVV - error';
             createCartModalCreditCardBlockErrors.append(cardCVVError);
