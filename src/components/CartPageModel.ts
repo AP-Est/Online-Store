@@ -1,6 +1,6 @@
 import { IProduct, IStoreData, storeData } from '../data/data';
 import { ICartLot, ICode, IModalData, IPlug, ISumm } from '../styles/types';
-import _notANull from '../utils/notANull';
+import checkToNull from '../utils/notANull';
 export class CartPageModel {
     products: IProduct[];
     cartLots: ICartLot[];
@@ -14,7 +14,7 @@ export class CartPageModel {
     modalOn: string;
 
     constructor() {
-        _notANull();
+        checkToNull();
         this.AvailableCodes = [
             { title: 'AN', description: 'Andrey`s code', discount: 10 },
             { title: 'NA', description: 'Nat`s code', discount: 10 },
@@ -77,7 +77,10 @@ export class CartPageModel {
     private _getCartView = (pagination: IPlug) => {
         this._getStartNumber(pagination);
         if (this.cartLots.length > pagination.limit) {
-            this.cartView = this.cartLots.slice((pagination.page - 1) * pagination.limit, pagination.page * pagination.limit);
+            this.cartView = this.cartLots.slice(
+                (pagination.page - 1) * pagination.limit,
+                pagination.page * pagination.limit
+            );
         } else this.cartView = this.cartLots;
     };
     private _getStartNumber = (pagination: IPlug) => {
