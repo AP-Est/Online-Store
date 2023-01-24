@@ -1,5 +1,5 @@
-import { IProduct, IStoreData, storeData } from '../data/data';
-import { ICartLot, ICode, IModalData, IPlug, ISumm } from '../styles/types';
+import { storeData } from '../data/data';
+import { ICartLot, ICode, IModalData, IPlug, IProduct, IStoreData, ISumm } from '../styles/types';
 import checkToNull from '../utils/notANull';
 export class CartPageModel {
     products: IProduct[];

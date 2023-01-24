@@ -1,7 +1,7 @@
 import createElement from './createElement';
 import createButton from './createButton';
-import { IProduct, IFilterData } from '../data/data';
 import checkLocalStorage from './checkLocalstorage';
+import { IFilterData, IProduct } from '../styles/types';
 
 export default function displayCards(products: IProduct[], filter: IFilterData, productsFiltered: IProduct[]) {
     const goods = createElement('div', 'goods');
