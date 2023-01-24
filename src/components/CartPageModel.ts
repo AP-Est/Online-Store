@@ -29,8 +29,8 @@ export class CartPageModel {
         };
         this.summaryVars = {
             countItems: 0,
-            priceTotal: 0,
-            priceWithCodes: 0,
+            getPriceTotal: 0,
+            getPriceWithCodes: 0,
             codes: [{ title: 'AN', description: 'Andrey`s code - 10% - ', discount: 10 }],
         };
         this.modalData = {
@@ -105,16 +105,18 @@ export class CartPageModel {
         const count = () => {
             return this.cartLots.reduce((acc, obj) => acc + obj.count, 0);
         };
-        const priceTotal = () => {
+        const getPriceTotal = () => {
             return this.cartLots.reduce((acc, obj) => acc + obj.price * obj.count, 0);
         };
-        const priceWithCodes = () => {
-            return (priceTotal() * (100 - this._discountSummary()) * 0.01).toFixed(2);
+        const getPriceWithCodes = () => {
+            const fullPercent = 100;
+            const onePercent = 0.01;
+            return (getPriceTotal() * (fullPercent - this._discountSummary()) * onePercent).toFixed(2);
         };
 
         this.summaryVars.countItems = count();
-        this.summaryVars.priceTotal = priceTotal();
-        this.summaryVars.priceWithCodes = +priceWithCodes();
+        this.summaryVars.getPriceTotal = getPriceTotal();
+        this.summaryVars.getPriceWithCodes = +getPriceWithCodes();
     };
     private _discountSummary = () => {
         const arr: ICode[] = this.summaryVars.codes;

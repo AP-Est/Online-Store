@@ -41,8 +41,8 @@ export interface IPlug {
 }
 export interface ISumm {
     countItems: number;
-    priceTotal: number;
-    priceWithCodes: number;
+    getPriceTotal: number;
+    getPriceWithCodes: number;
     codes: ICode[];
 }
 

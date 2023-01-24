@@ -16,10 +16,10 @@ export class BaseModel {
         const getCount = () => {
             return this.cartLots.reduce((acc, obj) => acc + obj.count, 0);
         };
-        const priceTotal = () => {
+        const getPriceTotal = () => {
             return this.cartLots.reduce((acc, obj) => acc + obj.price * obj.count, 0);
         };
-        this.totalCost = String(priceTotal());
+        this.totalCost = String(getPriceTotal());
         this.cartCount = String(getCount());
     }
     bindChangeModel(callback: CallableFunction) {
