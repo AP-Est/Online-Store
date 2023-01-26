@@ -14,8 +14,16 @@
     },
     "keywords": [],
     "contributors": [
-        {"name":"Andrey Piarouski","email":"EstSkif@gmail.com","url":"https://andreyp.pythonanywhere.com/"},
-        {"name":"Siniak Natallia","email":"natalia.vasilevna.s@gmail.com"}],
+        {
+            "name": "Andrey Piarouski",
+            "email": "EstSkif@gmail.com",
+            "url": "https://andreyp.pythonanywhere.com/"
+        },
+        {
+            "name": "Siniak Natallia",
+            "email": "natalia.vasilevna.s@gmail.com"
+        }
+    ],
     "license": "ISC",
     "homepage": "https://andreyp.pythonanywhere.com/",
     "devDependencies": {
@@ -43,8 +51,5 @@
         "webpack-cli": "^4.5.0",
         "webpack-dev-server": "^3.11.2",
         "webpack-merge": "^5.7.3"
-    },
-    "dependencies": {
-        "history-event": "^0.0.3"
     }
 }
