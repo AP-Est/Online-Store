@@ -1,7 +1,7 @@
 import createElement from './createElement';
 import { IFilterData, IProduct } from '../types/types';
 
-export default function displaySliderPrice(products: IProduct[], filter: IFilterData, productsFiltered: IProduct[]) {
+export default function createSliderPrice(products: IProduct[], filter: IFilterData, productsFiltered: IProduct[]) {
     const filterPriceWrapper = createElement('div', 'filterBrands__wrapper');
     filterPriceWrapper.classList.add('filter__wrapper');
     const filterPriceHeader = createElement('div', 'filterBrands__header');
