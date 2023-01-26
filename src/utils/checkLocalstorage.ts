@@ -1,4 +1,4 @@
-import { ICartLot } from '../styles/types';
+import { ICartLot } from '../types/types';
 
 export default function checkLocalStorage(id: number): boolean {
     if (localStorage.cart && localStorage.cart != null) {

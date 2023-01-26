@@ -1,4 +1,4 @@
-import { ISumm } from '../styles/types';
+import { ISumm } from '../types/types';
 import createButton from '../utils/createButton';
 import createElement from '../utils/createElement';
 

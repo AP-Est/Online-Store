@@ -1,4 +1,4 @@
-import { IStoreData } from '../styles/types';
+import { IStoreData } from '../types/types';
 
 export const storeData: IStoreData = {
     products: [

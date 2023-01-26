@@ -1,5 +1,5 @@
 import '../styles/styleCartPage.scss';
-import { IProduct, ICartLot, IPlug, ISumm, IModalData } from '../styles/types';
+import { IProduct, ICartLot, IPlug, ISumm, IModalData } from '../types/types';
 import { View } from './BaseView';
 import createElement from '../utils/createElement';
 import buildSummaryContent from '../templates/cartSummaryBlock';

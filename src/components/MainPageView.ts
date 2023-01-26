@@ -1,5 +1,5 @@
 import '../styles/styleMainPage.scss';
-import { IProduct, IFilterData } from '../data/data';
+import { IProduct, IFilterData } from '../types/types';
 import { View } from './BaseView';
 import displayFilter from '../utils/displayFilter';
 import displayCards from '../utils/displayCards';

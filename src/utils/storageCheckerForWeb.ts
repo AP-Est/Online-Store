@@ -1,4 +1,4 @@
-import { ICartLot } from '../styles/types';
+import { ICartLot } from '../types/types';
 
 export default function StorageCheckerForWeb() {
     const storageArray: ICartLot[] = JSON.parse(localStorage.cart);

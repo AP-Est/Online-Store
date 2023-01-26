@@ -1,4 +1,4 @@
-import { IFilterData } from '../data/data';
+import { IFilterData } from '../types/types';
 
 export default function setQueryParameters(filter: IFilterData) {
     const url = new URL(location.href);

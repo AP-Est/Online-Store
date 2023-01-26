@@ -1,4 +1,4 @@
-import { ICartLot } from '../styles/types';
+import { ICartLot } from '../types/types';
 import delFromLocalStorage from './delFromLocalStorage';
 
 export default function cardItemDecrement(id: number) {

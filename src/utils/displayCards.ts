@@ -1,7 +1,7 @@
 import createElement from './createElement';
 import createButton from './createButton';
 import checkLocalStorage from './checkLocalstorage';
-import { IFilterData, IProduct } from '../styles/types';
+import { IFilterData, IProduct } from '../types/types';
 
 export default function displayCards(products: IProduct[], filter: IFilterData, productsFiltered: IProduct[]) {
     const goods = createElement('div', 'goods');
@@ -93,11 +93,8 @@ export default function displayCards(products: IProduct[], filter: IFilterData, 
             }
         });
 
-        if (checkLocalStorage(idOfProduct + 1)) {
-            cardsButtonCart[i] = createButton('DROP FROM CART', 'cardDiv__cart');
-        } else {
-            cardsButtonCart[i] = createButton('ADD TO CART', 'cardDiv__cart');
-        }
+        const buttonName = checkLocalStorage(idOfProduct + 1) ? 'DROP FROM CART' : 'ADD TO CART';
+        cardsButtonCart[i] = createButton(buttonName, 'cardDiv__cart');
         cardsButtonCart[i].id = `${idOfProduct}`;
 
         if (filter.view === 'small') {

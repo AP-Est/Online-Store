@@ -1,5 +1,5 @@
 import { storeData } from '../data/data';
-import { ICartLot } from '../styles/types';
+import { ICartLot } from '../types/types';
 
 export default function pushToLocalStorage(id: number) {
     const storageObject: ICartLot = {

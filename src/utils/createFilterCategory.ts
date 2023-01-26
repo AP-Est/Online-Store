@@ -1,7 +1,7 @@
 import createElement from './createElement';
-import { IFilterData, IProduct } from '../data/data';
+import { IFilterData, IProduct } from '../types/types';
 
-export default function displayFilterCategory(products: IProduct[], filter: IFilterData, productsFiltered: IProduct[]) {
+export default function createFilterCategory(products: IProduct[], filter: IFilterData, productsFiltered: IProduct[]) {
     const filterCategoryWrapper = createElement('div', 'filterCategory__wrapper');
     filterCategoryWrapper.classList.add('filter__wrapper');
     const filterCategoryHeader = createElement('div', 'filterCategory__header');

@@ -1,8 +1,8 @@
 import createElement from './createElement';
-import { IFilterData, IProduct } from '../data/data';
-import { fillSlider, setToggleAccessible } from './displaySliderPrice';
+import { IFilterData, IProduct } from '../types/types';
+import { fillSlider, setToggleAccessible } from './createSliderPrice';
 
-export default function displaySliderStock(products: IProduct[], filter: IFilterData, productsFiltered: IProduct[]) {
+export default function createSliderStock(products: IProduct[], filter: IFilterData, productsFiltered: IProduct[]) {
     const filterPriceWrapper = createElement('div', 'filterBrands__wrapper');
     filterPriceWrapper.classList.add('filter__wrapper');
     const filterPriceHeader = createElement('div', 'filterBrands__header');

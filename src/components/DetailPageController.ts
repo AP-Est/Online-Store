@@ -1,5 +1,5 @@
 import { DetailPageView } from 'DetailPageView';
-import { IStoreData } from '../styles/types';
+import { IStoreData } from '../types/types';
 import { DetailPageModel } from './DetailPageModel';
 export class DetailPageController {
     view: DetailPageView;

@@ -1,7 +1,7 @@
 import createButton from '../utils/createButton';
 import createElement from '../utils/createElement';
 import '../styles/styleModalWindow.scss';
-import { IModalData } from '../styles/types';
+import { IModalData } from '../types/types';
 
 export default function buildModalWindow(modalData: IModalData) {
     const cartModalWindow = createElement('div', 'cartModalWindow');

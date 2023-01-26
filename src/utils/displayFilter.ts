@@ -1,10 +1,10 @@
 import createElement from './createElement';
-import { IFilterData, IProduct } from '../data/data';
-import displayFilterCategory from './displayFilterCategory';
-import displayFilterBrands from './displayFilterBrands';
-import displaySliderPrice from './displaySliderPrice';
+import { IFilterData, IProduct } from '../types/types';
+import createFilterCategory from './createFilterCategory';
+import createFilterBrands from './createFilterBrands';
+import createSliderPrice from './createSliderPrice';
 import createButton from './createButton';
-import displaySliderStock from './displaySliderStock';
+import createSliderStock from './createSliderStock';
 
 export default function displayFilter(products: IProduct[], filter: IFilterData, productsFiltered: IProduct[]) {
     const filters = createElement('div', 'filters');
@@ -12,10 +12,10 @@ export default function displayFilter(products: IProduct[], filter: IFilterData,
     const filtersButtonWrapper = createElement('div', 'filtersButton__wrapper');
     const filtersButtonReset = createButton('Reset', 'filters__button_reset');
     const filtersButtonCopy = createButton('Copy', 'filters__button_copy');
-    const modelFilterCategory = displayFilterCategory(products, filter, productsFiltered) as HTMLElement;
-    const modelFilterBrands = displayFilterBrands(products, filter, productsFiltered) as HTMLElement;
-    const modelFilterPrice = displaySliderPrice(products, filter, productsFiltered) as HTMLElement;
-    const modelFilterStock = displaySliderStock(products, filter, productsFiltered) as HTMLElement;
+    const modelFilterCategory = createFilterCategory(products, filter, productsFiltered) as HTMLElement;
+    const modelFilterBrands = createFilterBrands(products, filter, productsFiltered) as HTMLElement;
+    const modelFilterPrice = createSliderPrice(products, filter, productsFiltered) as HTMLElement;
+    const modelFilterStock = createSliderStock(products, filter, productsFiltered) as HTMLElement;
 
     filtersButtonWrapper.append(filtersButtonReset, filtersButtonCopy);
     filtersWrapper.append(

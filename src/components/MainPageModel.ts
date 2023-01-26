@@ -1,4 +1,5 @@
-import { storeData, IProduct, IFilterData } from '../data/data';
+import { IProduct, IFilterData } from '../types/types';
+import { storeData } from '../data/data';
 import setQueryParameters from '../utils/setQueryParameters';
 import pushToLocalStorage from '../utils/pushToLocalStorage';
 import delFromLocalStorage from '../utils/delFromLocalStorage';
@@ -165,28 +166,12 @@ export class MainPageModel {
 
     filterByCategory(products: IProduct[], categories: string[]) {
         if (categories.length === 0) return products;
-        const productsFiltered: IProduct[] = [];
-        this.products.map((cur) => {
-            for (const currentCategory of categories) {
-                if (cur.category === currentCategory) {
-                    productsFiltered.push(cur);
-                }
-            }
-        });
-        return productsFiltered;
+        return products.filter((product) => categories.includes(product.category));
     }
 
     filterByBrand(products: IProduct[], brands: string[]) {
         if (brands.length === 0) return products;
-        const productsFiltered: IProduct[] = [];
-        this.products.map((cur) => {
-            for (const currentBrand of brands) {
-                if (cur.brand === currentBrand) {
-                    productsFiltered.push(cur);
-                }
-            }
-        });
-        return productsFiltered;
+        return products.filter((product) => brands.includes(product.brand));
     }
 
     filterBySearch(products: IProduct[], searchString: string) {
@@ -231,7 +216,7 @@ export class MainPageModel {
 
     filterPrice(products: IProduct[], minPrice: number, maxPrice: number) {
         if (minPrice === this.minPriceProducts && maxPrice === this.maxPriceProducts) return products;
-        const productsFiltered = this.products.filter((cur) => {
+        const productsFiltered = products.filter((cur) => {
             return cur.price >= minPrice && cur.price <= maxPrice;
         });
         return productsFiltered;
@@ -239,7 +224,7 @@ export class MainPageModel {
 
     filterStock(products: IProduct[], minPrice: number, maxPrice: number) {
         if (minPrice === this.minStockProducts && maxPrice === this.maxStockProducts) return products;
-        const productsFiltered = this.products.filter((cur) => {
+        const productsFiltered = products.filter((cur) => {
             return cur.stock >= minPrice && cur.stock <= maxPrice;
         });
         return productsFiltered;
@@ -247,31 +232,20 @@ export class MainPageModel {
 
     getProductsToShow(products: IProduct[], filter: IFilterData) {
         const productFilteredByCategory: IProduct[] = this.filterByCategory(products, filter.categories);
-        const productFilteredByBrand: IProduct[] = this.filterByBrand(products, filter.brands);
-        const productFilteredBySearch: IProduct[] = this.filterBySearch(products, filter.search);
-        const productFilteredByPrice: IProduct[] = this.filterPrice(products, filter.minPrice, filter.maxPrice);
-        const productFilteredByStock: IProduct[] = this.filterStock(products, filter.minStock, filter.maxStock);
-        const productFiltered: IProduct[] = [];
-        productFilteredByCategory.map((itemCategory) => {
-            productFilteredByBrand.map((itemBrand) => {
-                if (itemBrand === itemCategory) {
-                    productFilteredBySearch.map((itemSearch) => {
-                        if (itemBrand === itemSearch) {
-                            productFilteredByPrice.map((itemPrice) => {
-                                if (itemSearch === itemPrice) {
-                                    productFilteredByStock.map((itemStock) => {
-                                        if (itemStock === itemPrice) {
-                                            productFiltered.push(itemStock);
-                                        }
-                                    });
-                                }
-                            });
-                        }
-                    });
-                }
-            });
-        });
-        return this.sorting(productFiltered, filter.sort);
+        const productFilteredByBrand: IProduct[] = this.filterByBrand(productFilteredByCategory, filter.brands);
+        const productFilteredBySearch: IProduct[] = this.filterBySearch(productFilteredByBrand, filter.search);
+        const productFilteredByPrice: IProduct[] = this.filterPrice(
+            productFilteredBySearch,
+            filter.minPrice,
+            filter.maxPrice
+        );
+        const productFilteredByStock: IProduct[] = this.filterStock(
+            productFilteredByPrice,
+            filter.minStock,
+            filter.maxStock
+        );
+
+        return this.sorting(productFilteredByStock, filter.sort);
     }
 
     bindChangeModel(
