@@ -25,7 +25,6 @@
         }
     ],
     "license": "ISC",
-    "homepage": "https://andreyp.pythonanywhere.com/",
     "devDependencies": {
         "@typescript-eslint/eslint-plugin": "^5.46.0",
         "@typescript-eslint/parser": "^5.46.0",
