@@ -46,16 +46,22 @@ export class CartPageView extends View {
     constructor() {
         super();
     }
-    displayCartPage(cartLots: ICartLot[], product: IProduct[], plug: IPlug, summaryVars: ISumm, modalDate: IModalData) {
+    displayCartPage(
+        cartLots: ICartLot[],
+        product: IProduct[],
+        pagination: IPlug,
+        summaryVars: ISumm,
+        modalData: IModalData
+    ) {
         this.createMainCartWrappers(summaryVars);
-        this.buildCartProductBlockHeader(plug);
-        this.createCartProductBlockBodyMainElements(cartLots, product, plug);
+        this.buildCartProductBlockHeader(pagination);
+        this.createCartProductBlockBodyMainElements(cartLots, product, pagination);
         this.buildCartPage(summaryVars);
-        if (modalDate.state == true) {
+        if (modalData.state) {
             const wrapper = getElement('.wrapper__blind') as HTMLElement;
             wrapper.style.display = 'flex';
             wrapper.innerHTML = '';
-            wrapper.append(buildModalWindow(modalDate));
+            wrapper.append(buildModalWindow(modalData));
         } else {
             const wrapper = getElement('.wrapper__blind') as HTMLElement;
             wrapper.style.display = 'none';
@@ -73,8 +79,8 @@ export class CartPageView extends View {
         this.mainWrapper.innerHTML = '';
         this.mainWrapper.append(this.cartWrapper);
     }
-    buildCartProductBlockHeader(plug: IPlug) {
-        this.createCartProductBlockBodyHeaderElements(plug);
+    buildCartProductBlockHeader(pagination: IPlug) {
+        this.createCartProductBlockBodyHeaderElements(pagination);
         this.productBlockHeader.append(this.productBlockHeaderTitle, this.productBlockHeaderPlug);
     }
     createMainCartWrappers(summaryVars: ISumm) {
@@ -88,15 +94,15 @@ export class CartPageView extends View {
         return emptyBlock;
     }
 
-    createCartProductBlockBodyHeaderElements(plug: IPlug) {
-        this.createCartProductBlockBodyHeaderPlug(plug);
+    createCartProductBlockBodyHeaderElements(pagination: IPlug) {
+        this.createCartProductBlockBodyHeaderPlug(pagination);
         this.productBlockHeader = createElement('div', 'cartProductBlock__header');
         this.productBlockHeaderTitle = createElement('span', 'cartProductBlock__header_title');
         this.productBlockHeaderTitle.innerText = 'Cart Products';
         this.productBlockHeaderPlug = createElement('form', 'cartProductBlock__plugWrapper');
         this.productBlockHeaderPlug.append(this.productBlockHeaderPlugLimit, this.productBlockHeaderPlugPageChanger);
     }
-    createCartProductBlockBodyHeaderPlug(plug: IPlug) {
+    createCartProductBlockBodyHeaderPlug(pagination: IPlug) {
         this.productBlockHeaderPlugLimit = createElement('div', 'cartProductBlock__plugLimit');
         this.productBlockHeaderPlugLimitTitle = createElement('span', 'cartProductBlock__plugLimit_title');
         this.productBlockHeaderPlugLimitTitle.innerText = 'Limit:';
@@ -104,7 +110,7 @@ export class CartPageView extends View {
         this.productBlockHeaderPlugLimitInput.classList.add('cartProductBlock__plugLimit_input');
         this.productBlockHeaderPlugLimitInput.setAttribute('type', 'number');
         this.productBlockHeaderPlugLimitInput.min = '1';
-        this.productBlockHeaderPlugLimitInput.value = `${plug.limit}`;
+        this.productBlockHeaderPlugLimitInput.value = `${pagination.limit}`;
         this.productBlockHeaderPlugPageChanger = createElement('div', 'cartProductBlock__plugPage');
         this.productBlockHeaderPlugPageChangerTitle = createElement('span', 'cartProductBlock__plugPage_title');
         this.productBlockHeaderPlugPageChangerTitle.innerText = 'Page:';
@@ -112,7 +118,7 @@ export class CartPageView extends View {
         this.productBlockHeaderPlugPageChangerM = createElement('div', 'plugPage__minusPage');
         this.productBlockHeaderPlugPageChangerM.innerText = '<';
         this.productBlockHeaderPlugPageChangerN = createElement('div', 'plugPage__page');
-        this.productBlockHeaderPlugPageChangerN.innerText = `${plug.page}`;
+        this.productBlockHeaderPlugPageChangerN.innerText = `${pagination.page}`;
         this.productBlockHeaderPlugPageChangerP = createElement('div', 'plugPage__plusPage');
         this.productBlockHeaderPlugPageChangerP.innerText = '>';
         this.productBlockHeaderPlugPageChangerWrap.append(
@@ -129,31 +135,31 @@ export class CartPageView extends View {
             this.productBlockHeaderPlugLimitInput
         );
     }
-    createCartProductBlockBodyMainElements(cartLots: ICartLot[], product: IProduct[], plug: IPlug) {
+    createCartProductBlockBodyMainElements(cartLots: ICartLot[], product: IProduct[], pagination: IPlug) {
         this.productBlockBody = createElement('div', 'cartProductBlock__body');
-        this.createItemsBlock(cartLots, product, plug);
+        this.createItemsBlock(cartLots, product, pagination);
     }
     createSummaryCartElements() {
         this.summaryBlockTitle = createElement('div', 'cartSummaryBlock__title');
         this.summaryBlockBody = createElement('div', 'cartSummaryBlock__body');
     }
 
-    createItemsBlock(cartLots: ICartLot[], product: IProduct[], plug: IPlug) {
+    createItemsBlock(cartLots: ICartLot[], product: IProduct[], pagination: IPlug) {
         cartLots.forEach((el, index) => {
             if (el != null) {
                 this.cartLotCard = createElement('div', 'cart__lot');
                 const _cartItem = product.filter((obj) => obj.id === el.id).shift();
                 if (_cartItem) {
-                    this.createItemCard(_cartItem, el.count, index, plug);
+                    this.createItemCard(_cartItem, el.count, index, pagination);
                 }
                 this.productBlockBody.append(this.cartLotCard);
             }
         });
     }
 
-    createItemCard(cartItem: IProduct, count: number, numberID: number, plug: IPlug) {
+    createItemCard(cartItem: IProduct, count: number, numberID: number, pagination: IPlug) {
         this.itemCardNum = createElement('div', `itemCardNum`);
-        this.itemCardNum.innerText = `${numberID + plug.startNumberID}`;
+        this.itemCardNum.innerText = `${numberID + pagination.startNumberID}`;
         this.itemCardPic = createElement('div', `itemCardPic`);
         this.itemCardPic.classList.add('itemCardPic');
         this.itemCardPicExemplar = createElement('container', 'itemCardPic__Exemplar');

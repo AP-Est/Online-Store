@@ -13,14 +13,14 @@ export class BaseModel {
         this.getData();
     }
     private getData() {
-        const count = () => {
+        const getCount = () => {
             return this.cartLots.reduce((acc, obj) => acc + obj.count, 0);
         };
-        const priceTotal = () => {
+        const getPriceTotal = () => {
             return this.cartLots.reduce((acc, obj) => acc + obj.price * obj.count, 0);
         };
-        this.totalCost = String(priceTotal());
-        this.cartCount = String(count());
+        this.totalCost = String(getPriceTotal());
+        this.cartCount = String(getCount());
     }
     bindChangeModel(callback: CallableFunction) {
         this.onChangeModel = callback;

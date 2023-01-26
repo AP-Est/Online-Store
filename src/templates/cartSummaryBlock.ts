@@ -40,14 +40,14 @@ function createBodyBlockProductCount(summaryVars: ISumm) {
 
 function createBodyBlockPrice(summaryVars: ISumm) {
     const bodyBlockPrice = createElement('div', 'cartSummaryBlock__Price');
-    const priceTotal = createElement('div', 'cartSummaryBlock__Price_total');
-    priceTotal.textContent = `Total: $${summaryVars.priceTotal}`;
-    if (summaryVars.priceTotal !== summaryVars.priceWithCodes) {
-        const priceWithCodes = createElement('div', 'cartSummaryBlock__Price_withCodes');
-        priceTotal.classList.add('wrongPrice');
-        priceWithCodes.textContent = `Discount: $${summaryVars.priceWithCodes}`;
-        bodyBlockPrice.append(priceTotal, priceWithCodes);
-    } else bodyBlockPrice.append(priceTotal);
+    const getPriceTotal = createElement('div', 'cartSummaryBlock__Price_total');
+    getPriceTotal.textContent = `Total: $${summaryVars.getPriceTotal}`;
+    if (summaryVars.getPriceTotal !== summaryVars.getPriceWithCodes) {
+        const getPriceWithCodes = createElement('div', 'cartSummaryBlock__Price_withCodes');
+        getPriceTotal.classList.add('wrongPrice');
+        getPriceWithCodes.textContent = `Discount: $${summaryVars.getPriceWithCodes}`;
+        bodyBlockPrice.append(getPriceTotal, getPriceWithCodes);
+    } else bodyBlockPrice.append(getPriceTotal);
     return bodyBlockPrice;
 }
 

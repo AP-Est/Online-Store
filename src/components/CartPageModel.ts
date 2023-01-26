@@ -1,36 +1,39 @@
-import { IProduct, IStoreData, storeData } from '../data/data';
-import { ICartLot, ICode, IModalData, IPlug, ISumm } from '../styles/types';
-import _notANull from '../utils/notANull';
+import { storeData } from '../data/data';
+import { ICartLot, ICode, IModalData, IPlug, IProduct, IStoreData, ISumm } from '../styles/types';
+import checkToNull from '../utils/notANull';
 export class CartPageModel {
     products: IProduct[];
     cartLots: ICartLot[];
     cartView: ICartLot[];
     storeData: IStoreData;
     onChangeModel!: CallableFunction;
-    plug: IPlug;
+    pagination: IPlug;
     summaryVars: ISumm;
     AvailableCodes: ICode[];
-    modalDate: IModalData;
+    modalData: IModalData;
     modalOn: string;
 
     constructor() {
-        _notANull();
+        checkToNull();
         this.AvailableCodes = [
             { title: 'AN', description: 'Andrey`s code', discount: 10 },
             { title: 'NA', description: 'Nat`s code', discount: 10 },
         ];
-        this.plug = {
-            limit: 3,
-            page: 1,
-            startNumberID: 1,
+        const pageStartVar = 1;
+        const limitStartVar = 3;
+        const startNumberIDStartVar = 1;
+        this.pagination = {
+            limit: limitStartVar,
+            page: pageStartVar,
+            startNumberID: startNumberIDStartVar,
         };
         this.summaryVars = {
             countItems: 0,
-            priceTotal: 0,
-            priceWithCodes: 0,
+            getPriceTotal: 0,
+            getPriceWithCodes: 0,
             codes: [{ title: 'AN', description: 'Andrey`s code - 10% - ', discount: 10 }],
         };
-        this.modalDate = {
+        this.modalData = {
             state: false,
             error: {
                 name: false,
@@ -49,14 +52,14 @@ export class CartPageModel {
             cardType:
                 'https://i.guim.co.uk/img/media/b73cc57cb1d46ae742efd06b6c58805e8600d482/16_0_2443_1466/master/2443.jpg?width=700&quality=85&auto=format&fit=max&s=fb1dca6cdd4589cd9ef2fc941935de71',
             cardValid: '',
-            cardCVV: NaN,
+            cardCVV: 0,
         };
         this.modalOn = localStorage.modalOn;
         this.checkModalOn();
-        this._getStartNumber(this.plug);
+        this._getStartNumber(this.pagination);
         this.cartLots = JSON.parse(localStorage.cart) || [];
         this.cartView = [];
-        this._getCartView(this.plug);
+        this._getCartView(this.pagination);
         this._getSummaryVars();
         this.storeData = storeData;
         this.products = storeData.products;
@@ -68,29 +71,32 @@ export class CartPageModel {
     }
     private commit(cartLots: ICartLot[], products: IProduct[]) {
         this._getSummaryVars();
-        this._getStartNumber(this.plug);
-        this._getCartView(this.plug);
+        this._getStartNumber(this.pagination);
+        this._getCartView(this.pagination);
         this._checkEmptyArray();
         localStorage.cart = JSON.stringify(cartLots);
-        this.onChangeModel(this.cartView, products, this.plug, this.summaryVars, this.modalDate);
+        this.onChangeModel(this.cartView, products, this.pagination, this.summaryVars, this.modalData);
     }
-    private _getCartView = (plug: IPlug) => {
-        this._getStartNumber(plug);
-        if (this.cartLots.length > plug.limit) {
-            this.cartView = this.cartLots.slice((plug.page - 1) * plug.limit, plug.page * plug.limit);
+    private _getCartView = (pagination: IPlug) => {
+        this._getStartNumber(pagination);
+        if (this.cartLots.length > pagination.limit) {
+            this.cartView = this.cartLots.slice(
+                (pagination.page - 1) * pagination.limit,
+                pagination.page * pagination.limit
+            );
         } else this.cartView = this.cartLots;
     };
-    private _getStartNumber = (plug: IPlug) => {
-        this.plug.startNumberID = plug.page * plug.limit - plug.limit + 1;
+    private _getStartNumber = (pagination: IPlug) => {
+        this.pagination.startNumberID = pagination.page * pagination.limit - pagination.limit + 1;
     };
 
     private _checkEmptyArray = () => {
         if (this.cartLots !== undefined && this.cartLots.length !== 0) {
-            if (this.cartLots.length < this.plug.page * this.plug.limit) {
-                if (this.cartLots.length / this.plug.limit >= 1) {
-                    this.plug.page = Math.ceil(this.cartLots.length / this.plug.limit);
-                } else this.plug.page = 1;
-                this._getCartView(this.plug);
+            if (this.cartLots.length < this.pagination.page * this.pagination.limit) {
+                if (this.cartLots.length / this.pagination.limit >= 1) {
+                    this.pagination.page = Math.ceil(this.cartLots.length / this.pagination.limit);
+                } else this.pagination.page = 1;
+                this._getCartView(this.pagination);
                 this.setQueryParameters();
             }
         }
@@ -99,16 +105,18 @@ export class CartPageModel {
         const count = () => {
             return this.cartLots.reduce((acc, obj) => acc + obj.count, 0);
         };
-        const priceTotal = () => {
+        const getPriceTotal = () => {
             return this.cartLots.reduce((acc, obj) => acc + obj.price * obj.count, 0);
         };
-        const priceWithCodes = () => {
-            return (priceTotal() * (100 - this._discountSummary()) * 0.01).toFixed(2);
+        const getPriceWithCodes = () => {
+            const fullPercent = 100;
+            const onePercent = 0.01;
+            return (getPriceTotal() * (fullPercent - this._discountSummary()) * onePercent).toFixed(2);
         };
 
         this.summaryVars.countItems = count();
-        this.summaryVars.priceTotal = priceTotal();
-        this.summaryVars.priceWithCodes = +priceWithCodes();
+        this.summaryVars.getPriceTotal = getPriceTotal();
+        this.summaryVars.getPriceWithCodes = +getPriceWithCodes();
     };
     private _discountSummary = () => {
         const arr: ICode[] = this.summaryVars.codes;
@@ -120,8 +128,8 @@ export class CartPageModel {
         const url = new URL(location.href);
         url.searchParams.delete('limit');
         url.searchParams.delete('page');
-        url.searchParams.set('limit', String(this.plug.limit));
-        url.searchParams.set('page', String(this.plug.page));
+        url.searchParams.set('limit', String(this.pagination.limit));
+        url.searchParams.set('page', String(this.pagination.page));
         history.pushState(null, '', url);
     }
     private clearQueryParameters() {
@@ -139,13 +147,15 @@ export class CartPageModel {
     }
     private getQueryParameters() {
         const url = new URL(location.href);
-        this.plug.limit = Number(url.searchParams.get('limit')) || 3;
-        this.plug.page = Number(url.searchParams.get('page')) || 1;
+        const limitStartVar = 3;
+        const pageStartVar = 1;
+        this.pagination.limit = Number(url.searchParams.get('limit')) || limitStartVar;
+        this.pagination.page = Number(url.searchParams.get('page')) || pageStartVar;
     }
     private checkModalOn() {
         if (this.modalOn && this.modalOn == 'true') {
             localStorage.modalOn = 'false';
-            this.modalDate.state = true;
+            this.modalData.state = true;
         }
     }
     handleCardItemIncrement(productId: number) {
@@ -184,24 +194,24 @@ export class CartPageModel {
     }
 
     handlePageIncrement() {
-        if (this.cartLots.length > this.plug.page * this.plug.limit) {
-            this.plug.page += 1;
+        if (this.cartLots.length > this.pagination.page * this.pagination.limit) {
+            this.pagination.page += 1;
         }
         this.setQueryParameters();
         this.commit(this.cartLots, this.products);
     }
 
     handlePageDecrement() {
-        if (this.plug.page > 1) {
-            this.plug.page -= 1;
+        if (this.pagination.page > 1) {
+            this.pagination.page -= 1;
         }
         this.setQueryParameters();
         this.commit(this.cartLots, this.products);
     }
     handleLimitChanged(limit: number) {
-        this.plug.limit = limit;
-        if (this.cartLots.length <= this.plug.limit) {
-            if (this.plug.page > 1) {
+        this.pagination.limit = limit;
+        if (this.cartLots.length <= this.pagination.limit) {
+            if (this.pagination.page > 1) {
                 this._checkEmptyArray();
             }
         }
@@ -233,132 +243,136 @@ export class CartPageModel {
         this.commit(this.cartLots, this.products);
     }
     handleOpenModalWindow() {
-        this.modalDate.state = true;
+        this.modalData.state = true;
         this.commit(this.cartLots, this.products);
     }
     handleCloseModalWindow() {
-        this.modalDate.state = false;
+        this.modalData.state = false;
         this.commit(this.cartLots, this.products);
     }
     handleName(value: string) {
         const letters = /^[A-Za-z]{3,}\s[A-Za-z]{3,}\w*/;
-        this.modalDate.name = value;
+        this.modalData.name = value;
         if (letters.test(value)) {
-            this.modalDate.error.name = false;
+            this.modalData.error.name = false;
         } else {
-            this.modalDate.error.name = true;
+            this.modalData.error.name = true;
         }
         this.commit(this.cartLots, this.products);
     }
     handlePhone(value: string) {
         const numbers = /^[+]+[0-9]{9,}/;
-        this.modalDate.phone = value;
+        this.modalData.phone = value;
         if (numbers.test(value)) {
-            this.modalDate.error.phone = false;
+            this.modalData.error.phone = false;
         } else {
-            this.modalDate.error.phone = true;
+            this.modalData.error.phone = true;
         }
         this.commit(this.cartLots, this.products);
     }
     handleAddress(value: string) {
         const letters = /^[0-9a-zA-Z,.]{5,}\s[0-9a-zA-Z,.]{5,}\s[0-9a-zA-Z,.]{5,}/;
-        this.modalDate.address = value;
+        this.modalData.address = value;
         if (letters.test(value)) {
-            this.modalDate.error.address = false;
+            this.modalData.error.address = false;
         } else {
-            this.modalDate.error.address = true;
+            this.modalData.error.address = true;
         }
         this.commit(this.cartLots, this.products);
     }
     handleMail(value: string) {
         const letters = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*[.](\w{2,3})$/;
-        this.modalDate.mail = value;
+        this.modalData.mail = value;
         if (letters.test(value)) {
-            this.modalDate.error.mail = false;
+            this.modalData.error.mail = false;
         } else {
-            this.modalDate.error.mail = true;
+            this.modalData.error.mail = true;
         }
         this.commit(this.cartLots, this.products);
     }
     handleCardNumber(value: string) {
         const letters = /\d{4}([-]|\s|)\d{4}([-]|\s|)\d{4}([-]|\s|)\d{4}/;
-        this.modalDate.cardNumber = value;
+        this.modalData.cardNumber = value;
+        const visa = '4';
+        const mastercard = '5';
+        const unipay = '6';
+        const axp = '3';
         switch (value[0]) {
-            case '4':
-                this.modalDate.cardType = 'https://cdn.visa.com/v2/assets/images/logos/visa/blue/logo.png';
+            case visa:
+                this.modalData.cardType = 'https://cdn.visa.com/v2/assets/images/logos/visa/blue/logo.png';
                 break;
-            case '5':
-                this.modalDate.cardType =
+            case mastercard:
+                this.modalData.cardType =
                     'https://www.mastercard.hu/content/dam/public/mastercardcom/eu/hu/images/mc-logo-52.svg';
                 break;
-            case '6':
-                this.modalDate.cardType = 'https://m.unionpayintl.com/imp_file/global/wap/en/static/images/logo.png';
+            case unipay:
+                this.modalData.cardType = 'https://m.unionpayintl.com/imp_file/global/wap/en/static/images/logo.png';
                 break;
-            case '3':
-                this.modalDate.cardType =
+            case axp:
+                this.modalData.cardType =
                     'https://www.aexp-static.com/cdaas/one/statics/axp-static-assets/1.8.0/package/dist/img/logos/dls-logo-stack.svg';
                 break;
             default:
-                this.modalDate.cardType =
+                this.modalData.cardType =
                     'https://i.guim.co.uk/img/media/b73cc57cb1d46ae742efd06b6c58805e8600d482/16_0_2443_1466/master/2443.jpg?width=700&quality=85&auto=format&fit=max&s=fb1dca6cdd4589cd9ef2fc941935de71';
         }
         if (letters.test(value)) {
-            this.modalDate.error.cardNumber = false;
+            this.modalData.error.cardNumber = false;
         } else {
-            this.modalDate.error.cardNumber = true;
+            this.modalData.error.cardNumber = true;
         }
         this.commit(this.cartLots, this.products);
     }
     handleCardValid(value: string) {
         const letters = /^([1]{1}[0-2]{1}|[0]{1}[1-9]{1})[/]([3-9]{1}[0-9]{1}|[2]{1}[3-9]{1})$/;
-        this.modalDate.cardValid = value;
+        this.modalData.cardValid = value;
         if (letters.test(value)) {
-            this.modalDate.error.cardValid = false;
+            this.modalData.error.cardValid = false;
         } else {
-            this.modalDate.error.cardValid = true;
+            this.modalData.error.cardValid = true;
         }
         this.commit(this.cartLots, this.products);
     }
     handleCardCVV(value: string) {
         const letters = /[0-9]{3}/;
-        this.modalDate.cardCVV = Number(value);
+        this.modalData.cardCVV = Number(value);
         if (letters.test(value)) {
-            this.modalDate.error.cardCVV = false;
+            this.modalData.error.cardCVV = false;
         } else {
-            this.modalDate.error.cardCVV = true;
+            this.modalData.error.cardCVV = true;
         }
         this.commit(this.cartLots, this.products);
     }
     handleConfirmButton() {
         if (
-            this.modalDate.error.name !== true &&
-            this.modalDate.error.phone !== true &&
-            this.modalDate.error.address !== true &&
-            this.modalDate.error.mail !== true &&
-            this.modalDate.error.cardNumber !== true &&
-            this.modalDate.error.cardValid !== true &&
-            this.modalDate.error.cardCVV !== true &&
-            this.modalDate.name !== '' &&
-            this.modalDate.phone !== '' &&
-            this.modalDate.address !== '' &&
-            this.modalDate.mail !== '' &&
-            this.modalDate.cardNumber !== '' &&
-            this.modalDate.cardValid !== '' &&
-            !Number.isNaN(this.modalDate.cardCVV)
+            this.modalData.error.name !== true &&
+            this.modalData.error.phone !== true &&
+            this.modalData.error.address !== true &&
+            this.modalData.error.mail !== true &&
+            this.modalData.error.cardNumber !== true &&
+            this.modalData.error.cardValid !== true &&
+            this.modalData.error.cardCVV !== true &&
+            this.modalData.name !== '' &&
+            this.modalData.phone !== '' &&
+            this.modalData.address !== '' &&
+            this.modalData.mail !== '' &&
+            this.modalData.cardNumber !== '' &&
+            this.modalData.cardValid !== '' &&
+            !Number.isNaN(this.modalData.cardCVV)
         ) {
             this.cartLots = [];
             localStorage.cart = JSON.stringify(this.cartLots);
             window.location.hash = '';
-            this.modalDate.state = false;
+            this.modalData.state = false;
             throw alert('Purchase completed successfully!');
         } else {
-            if (this.modalDate.name == '') this.modalDate.error.name = true;
-            if (this.modalDate.phone == '') this.modalDate.error.phone = true;
-            if (this.modalDate.address == '') this.modalDate.error.address = true;
-            if (this.modalDate.mail == '') this.modalDate.error.mail = true;
-            if (this.modalDate.cardNumber == '') this.modalDate.error.cardNumber = true;
-            if (this.modalDate.cardValid == '') this.modalDate.error.cardValid = true;
-            if (Number.isNaN(this.modalDate.cardCVV)) this.modalDate.error.cardCVV = true;
+            if (this.modalData.name == '') this.modalData.error.name = true;
+            if (this.modalData.phone == '') this.modalData.error.phone = true;
+            if (this.modalData.address == '') this.modalData.error.address = true;
+            if (this.modalData.mail == '') this.modalData.error.mail = true;
+            if (this.modalData.cardNumber == '') this.modalData.error.cardNumber = true;
+            if (this.modalData.cardValid == '') this.modalData.error.cardValid = true;
+            if (Number.isNaN(this.modalData.cardCVV)) this.modalData.error.cardCVV = true;
         }
         this.commit(this.cartLots, this.products);
     }
