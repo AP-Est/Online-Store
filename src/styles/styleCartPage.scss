@@ -1,0 +1,280 @@
+.cart__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 80vh;
+    margin: 10px;
+}
+
+.cartProductBlock {
+    width: 60vw;
+    height: 80vh;
+    background-color: rgb(240, 255, 255, 0.5);
+    border-radius: $mainBorderRadius;
+    overflow-x: auto;
+    margin: 15px;
+    .cartProductBlock__empty {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: $bigFontSize;
+        font-weight: bold;
+    }    
+}
+
+.cartProductBlock__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: $mainTitleColor;
+    height: 7vh;
+    .cartProductBlock__header_title {
+        margin: 10px;
+        margin-left: 2vw;
+        font-size: $bigFontSize;
+        font-weight: bold;
+    }
+    .cartProductBlock__plugWrapper {
+        display: flex;
+        align-items: center;
+        margin: 10px;
+
+        .cartProductBlock__plugLimit {
+            margin: 10px;
+
+            .cartProductBlock__plugLimit_input {
+                margin: 10px;
+                width: 40px;
+            }
+        }
+        .cartProductBlock__plugPage {
+            display: flex;
+            align-items: center;
+
+            .plugPage__wrapper {
+            display: flex;
+            align-items: center;
+
+            .plugPage__minusPage, 
+            .plugPage__plusPage {
+                border-radius: $mainBorderRadius;
+                background-color: $cartElementsColor;
+                margin: 10px;
+                padding: 4px;
+                text-align: center; 
+                cursor: pointer;
+            }            
+            .plugPage__page {
+                font-weight: bold;
+            }
+            }
+        }
+        
+    }
+    
+}
+
+
+
+
+.cart__lot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: $borderMain; 
+    background-color: bisque;
+    border-radius: $mainBorderRadius;
+    margin: 10px;   
+}
+
+.itemCardNum {
+    border-radius: $mainBorderRadius;
+    background-color: $cartElementsColor;
+    margin: 10px;
+    padding: 4px;
+    text-align: center;
+    
+
+}
+.itemCardPic {
+    width: 14vw;
+    height: 10vh;
+    object-fit: contain;
+    margin: 10px;
+    .itemCardPic__Exemplar {
+        width: 100%;
+        object-fit: contain;
+        .itemCardPic__Exemplar_Pic {
+            width: 100%;
+        }
+    }
+  
+}
+
+.itemCardData {
+    width: 34vw;
+    align-items: center;
+    margin: 10px;
+    .itemCardData__rd{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+.itemCardCount {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 10px;
+
+    .itemCardCount__counter{
+        display: flex;
+        margin: 10px;
+
+        .itemCardCount__counterCount {
+            margin: 10px;
+            padding: 4px;
+            text-align: center;
+        }
+        .itemCardCount__counterPlus,
+        .itemCardCount__counterMinus {
+            border-radius: $mainBorderRadius;
+            background-color: $cartElementsColor;
+            margin: 10px;
+            padding: 5px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+
+    }
+}
+
+#hideBlock{
+    display: none;        
+}
+
+
+.cartSummaryBlock {
+    width: 30vw;
+    height: 80vh;
+    background-color: rgb(61, 61, 63, 0.5);
+    border-radius: $mainBorderRadius;
+    margin: 10px;
+    overflow: hidden;
+    .cartSummaryBlock__title {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        background-color: $mainTitleColor;
+        height: 7vh;    
+        font-size: $bigFontSize;
+        font-weight: bold;
+        .cartSummaryTitle {
+            color: rgb(8, 0, 0);
+            margin: 10px;
+        }
+
+    }
+    .cartSummaryBlock__ProductCount {
+        display: flex;
+        justify-content: space-around;
+        margin: 10px;
+        font-size: $bigFontSize;
+
+    }
+    .cartSummaryBlock__Price {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        margin: 10px;
+        font-size: $mainFontSize;   
+        font-size: $bigFontSize; 
+        font-weight: bold;
+        color: $goldColor;
+    }
+    .wrongPrice{
+        text-decoration: line-through;
+    }
+    .cartSummaryBlock__AppliedCodes {
+        display: flex;
+        flex-direction: column;
+        border: $borderMain;
+        margin: 10px;
+        border-radius: $mainBorderRadius;
+
+        .cartSummaryBlock__codes_title {
+            font-size: $bigFontSize;
+            font-weight: bold;
+            text-align: center;
+            margin: 10px;
+        }
+        .cartAppliedCodes__body {
+            display: flex;
+            flex-direction: column;
+            .cartAppliedCodes__code {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-left: 10px;
+                margin-right: 10px;
+                .cartAppliedCodes__body_code {
+                    margin: 10px; 
+                    font-size: $mainFontSize;
+                    font-weight: bold;
+                    color: rgb(237, 237, 221);
+                }
+                .cartAppliedCodes__button_drop {
+                    background-color: aquamarine;
+                    font-weight: bold;
+                    border-radius: $smallBorderRadius;
+                    height: 2vh;
+                    cursor: pointer;
+                }             
+            }
+        }
+
+    }
+    .cartSummaryBlock__CodeField {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .cartSummaryBlock__CodeField_input {
+            border: $borderMain;
+            border-radius: $mainBorderRadius;
+            height: 3vh;
+            width: 20vw;
+            margin: 10px;
+            text-align: center;
+            &:focus {
+                background-color: rgb(214, 226, 229);
+            }
+        }
+    }
+    .cartSummaryBlock__Button {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        .cartSummaryBlock__Button{
+            border: $borderMain;
+            border-radius: $mainBorderRadius;
+            margin: 10px;
+            width: 20vw;
+            height: 3vh;
+            text-align: center;            
+            background-color: $mainTitleColor;
+            font-size: larger;
+            font-weight: bold;
+            cursor: pointer;
+            &:hover {
+                background-color: $goldColor;
+            }
+        }
+    }
+    
+}

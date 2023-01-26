@@ -1,0 +1,178 @@
+@import 'vars';
+html{
+    height: 100%;
+}
+
+body {
+    background: linear-gradient(90deg,rgb(215, 218, 227) 16%,rgb(44, 44, 104) 54%,rgb(53, 55, 55) 100%); 
+    font-family: $mainFontFamily;  
+    font-size: $mainFontSize;  
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.link {
+    text-decoration: none;
+}
+.wrapper__blind {
+    display: none;
+    position: absolute;
+    z-index: 99;
+    background-color: rgba(0, 0, 0, 0.7);
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+
+}
+header {
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+}
+.header__wrapper {
+    background: linear-gradient(90deg,rgb(215, 218, 227) 16%,rgb(44, 44, 104) 54%,rgb(53, 55, 55) 100%);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    font-size: $bigFontSize;
+    height: 7vh;
+    width: 90vw;
+    margin-bottom: 10px;
+    border-bottom: 10px;
+    border-radius: $mainBorderRadius;
+}
+.main__wrapper {
+    font-size: $mainFontSize;
+    border-radius: $mainBorderRadius;
+    display: flex;
+}
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    background: rgb(0, 0, 0, 0.3);
+    border-radius: 300%;
+    padding: 10px;
+}
+.footer__wrapper {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;   
+    font-size: $bigFontSize;
+    height: 5vh;
+    width: 90vw;
+
+    border-radius: $mainBorderRadius;
+}
+
+.footer__year {
+    font-size: $bigFontSize;
+    font-weight: bold;
+}
+.footer__github{
+    width: 100px;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: $mainBorderRadius;
+
+}
+
+.footer__githubOne{
+    background: url(../source/img/github1.jpg);
+    width: 45%;
+    height: 100%;
+    border-radius: $mainBorderRadius;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.footer__githubOne:hover{
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.footer__githubTwo{
+    background: url(../source/img/github2.png);
+    width: 45%;
+    height: 100%;
+    border-radius: $mainBorderRadius;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.footer__githubTwo:hover{
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.footer__school{
+    background: url(../source/img/rs_school_js.png);
+    width: 70px;
+    height: 100%;
+    border-radius: $mainBorderRadius;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.footer__school:hover{
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.header__logo_link {
+    font-size: 3rem;
+    font-weight: bold;
+    color: red;
+    
+    text-shadow: 0 0 10px rgb(53, 47, 47), 0 0 20px rgb(174, 145, 145), 0 0 30px red, 0 0 40px rgb(34, 6, 246);
+
+}
+
+.header__cart {
+    display:flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    justify-content: center;
+    width: 70px;
+    height: 70px;
+    background: url(../source/img/cart.png);
+    background-size: contain;
+    text-align: center;
+    .header__cart_text {
+        position:absolute;
+        background-color: rgb(0, 0, 0);
+        color: $mainBorderColor;
+        border: $borderMain;
+        border-radius: 20px;
+        width: 40px;
+        cursor: pointer;
+    }
+    background-repeat: no-repeat;
+}
+
+.header__cart_link {
+    font-size: $bigFontSize;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.header__cart_link:hover {
+    cursor: pointer;
+}
+
+.header__totalCost{
+  font-size: $bigFontSize;
+  font-weight: bold;
+  color: rgb(146, 141, 141);
+}

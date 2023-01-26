@@ -1,0 +1,146 @@
+.wrapper__blind{
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.cartModalWindow {
+    background-color: rgb(33, 26, 57);
+    width: 35vw;
+    height: 50vh;
+    overflow: auto;
+    border-radius: $mainBorderRadius;
+    padding: 10px;
+}
+
+.cartModalWindow__personalDataBlock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .personalDataBlock_title {
+        font-size: $mainFontSize;
+        font-weight: bold;
+        color: gold;
+        margin: 20px;
+    }
+}
+
+.cartModalWindow__personalDataBlock {
+    .personalInput {
+        max-width: 35vw;
+        width: 30vw;
+        height: 3vh;
+        border-radius: $mainBorderRadius;
+        margin: 5px;
+        text-align: center;
+    }
+    .personalDataBlock_error {
+        color: red;
+        font-size: $mainFontSize;
+        font-weight: bold;
+        width: 10vw;
+    }
+
+}
+
+.creditCardBlockBody__wrapper {
+    background: linear-gradient(90deg,rgb(0,9,36) 6%,rgb(9,9,121) 34%,rgb(0,212,255) 100%);
+    border-radius: $mainBorderRadius;
+    border: $borderMain;
+
+}
+
+.cartModalWindow__creditCardBlock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .cartModalWindow__creditCardBlock_title {
+        font-size: $mainFontSize;
+        font-weight: bold;
+        margin: 20px;
+        color: gold;
+    }
+    .creditCardBlockBody__model {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 10px;
+        .creditCardBlockBody__div_inputCard {
+            display: flex;
+            .creditCardBlockBody__cardModel_icon {
+                .cardModel__icon {
+                    width: 48px;
+                    height: 32px;
+                    object-fit: contain;
+                }
+            }
+        }
+        .creditCardBlockBody__model{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            margin: 10px;
+            flex-wrap: wrap;
+            .creditCardBlockBody__div_inputValid {
+                margin: 10px;
+                &::before {
+                    content: 'VALID:';
+                    font-weight: bold;
+                    color: gold;
+                }
+            }
+            .creditCardBlockBody__div_inputCVV {
+                margin: 10px;
+                &::before {
+                    content: 'CVV:';
+                    font-weight: bold;
+                    color: gold;
+                }
+            }
+
+        }
+        .personalDataBlock__cardModel_inputCard,
+        .personalDataBlock__cardModel_inputValid,
+        .personalDataBlock__cardModel_inputCVV
+        {
+            border-radius: $mainBorderRadius;
+            margin: 5px;
+            text-align: center;
+            height: 3vh;
+        }
+        .personalDataBlock__cardModel_inputCard{
+            width: 20vw;
+        }
+
+    }
+    .cardError {
+    color: red;
+    font-weight: bold;
+    font-size: $mainFontSize;
+    margin: 10px;
+    }
+}
+
+.cartModalBlock__button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+    .cartModalBlock__button_confirm{
+        background-color: $mainTitleColor;
+        color: gold;
+        width: 20vw;
+        height: 3vw;
+        border-radius: $mainBorderRadius;
+        font-size: large;
+        font-weight: bold;
+        cursor: pointer;
+        &:hover{
+        background-color: rgb(28, 55, 193);
+        } 
+    }
+
+          
+    
+}

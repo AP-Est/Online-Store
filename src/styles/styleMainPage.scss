@@ -1,0 +1,349 @@
+@import '/src/styles/styleSliders.scss';
+* {
+  box-sizing: border-box;
+}
+
+p{
+  margin: 0;
+}
+
+.filters{
+  width: 1/6*100%;
+  height: 50%;
+  height: 82vh;
+  border: $borderMain;
+  border-radius: 10px;
+}
+
+.goods{
+  width: 5/6*100%;
+  height: 82vh;
+  border: $borderMain;
+  border-radius: 10px;
+  overflow: auto;
+}
+
+.filters__wrapper{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 100%;
+  height: 100%;
+}
+
+.filter__wrapper {
+  display: flex;
+  flex-direction: column;
+  background-color: #c0af95;
+  border-radius: $mainBorderRadius;
+  margin: 10px;
+  padding: 5px;
+  max-height: 20vh;
+  overflow-y:auto;
+  overflow-x:hidden;
+  &::-webkit-scrollbar {
+    width: 6px;
+    color: rgb(201, 191, 191);
+  }
+  &::-webkit-scrollbar-track {
+    background: rgb(217, 210, 210);       
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: blue;   
+    border-radius: 20px;       
+    border: 3px solid rgb(207, 199, 185);  
+  }
+}
+
+.filtersButton__wrapper {
+  display: flex;
+  justify-content: space-around;
+
+  .filters__button_reset, 
+  .filters__button_copy {
+    width: 7vw;
+    height: 3vh;
+    font-size: $mainFontSize;
+    border-radius: $mainBorderRadius;
+    background-color: #c0af95;
+    margin: 5px;
+    cursor: pointer;
+    &:hover {
+      background-color: rgb(87, 161, 151);
+    }
+  }
+}
+
+
+
+.filter__header {
+ background-color: rgb(88, 145, 195);
+ text-align: center;
+ border-radius: $smallBorderRadius;
+}
+
+.checkBoxStyleCategory,
+.checkBoxStyleBrand {
+  cursor: grab;
+  &:checked {
+    cursor: grab;
+    height: 1.1rem;
+    width: 1.1rem;
+    transform: rotate(45deg);
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+    accent-color: orange;
+  }
+}
+
+.checked {
+  color: rgb(34, 27, 211);
+  
+}
+
+.modelFilter{
+  width: 100%;
+  height: 50px;
+  border: 1px solid yellow;
+  border-radius: 10px;
+  overflow: hidden;
+
+}
+
+.modelFilter__name{
+  width: 100%;
+  height: 40%;
+  border-bottom: 1px solid yellow;
+}
+
+.modelFilter__main{
+  width: 100%;
+  height: 80%;
+  background-color: #c0af95;
+}
+
+.modelFilter__text{
+  text-align: center;
+  width: 100%;
+  height: 100%;
+}
+
+.top{
+  width: 100%;
+  height: 50px;
+  border-bottom: $borderMain;
+  background: rgb(117, 117, 130, 0.3);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.sort{
+    border: $borderMain;
+    border-radius: 10px;
+}
+
+.sort__select{
+    border-radius: 10px;
+    border: $borderMain;
+    background-color: rgb(128, 128, 128, 0.8);
+    text-align: center;
+    height: 3vh;
+    width: 15vw;
+    cursor: pointer;
+}
+
+.found{
+    width: 100px;
+    height: 50px;  
+    display: flex;
+    align-items: center;
+    font-family: $mainFontFamily;
+    font-size: $bigFontSize * 0.8;
+    font-weight: bold;
+    color: $goldColor;
+}
+
+.search{
+    border: $borderMain;
+    border-radius: 10px;
+}
+
+.search__input{
+    border: $borderMain;
+    border-radius: 10px;
+    text-align: center;
+    height: 3vh;
+    width: 15vw;
+    color: black;
+    
+}
+
+.cards{
+  display: grid;
+  gap: 10px;
+  width: 100%;
+  height: auto;
+  padding: 10px;
+}
+
+.cards__small{
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 20vh;
+}
+
+.cards__large{
+    grid-template-columns: repeat(6, 1fr);
+    grid-auto-rows: 15vh;
+}
+
+.cardsDiv{
+  width: 100%;
+  border: 1px solid black;
+  border-radius: 10px;
+  position: relative;
+  border: $borderMain;
+  border-radius: $smallBorderRadius;
+  background-repeat: no-repeat;
+}
+
+.cardDiv__Name{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    border: $borderMain;
+    background-color: $mainTitleColor;
+    border-top-left-radius: $smallBorderRadius;
+    border-top-right-radius: $smallBorderRadius;
+    padding: 2px 0;
+}
+
+.cardDiv__cart{
+    position: absolute;
+    bottom: 0.3vh;
+    left: 0.4vw;
+    font-size: $fontSizedDynamicMain;
+    border: $borderMain;
+    background-color: rgb(128, 128, 128, 0.8);
+    border-radius: $smallBorderRadius;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    height: $fontSizedDynamicBig*1.5;
+    width: 55%;
+    cursor: pointer;
+    &:hover {
+      background-color: rgba(80, 128, 128, 0.8);
+    }
+}
+
+.cardDiv__details{
+    position: absolute;
+    bottom: 0.3vh;
+    right: 0.4vw;
+    font-size: $fontSizedDynamicMain;
+    border: $borderMain;
+    background-color: rgb(128, 128, 128, 0.8);
+    border-radius: $smallBorderRadius;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    cursor: pointer;
+    height: $fontSizedDynamicBig*1.5;
+    &:hover {
+      background-color: rgba(80, 128, 128, 0.8);
+    }
+}
+
+.wrapper__filtersGoods {
+    font-size: $mainFontSize;
+    border-radius: $mainBorderRadius;
+    display: flex;
+}
+
+.noneVisible{
+    color: gray;
+    opacity: 0.7;
+}
+
+.opacity{
+    opacity: 0.7;
+}
+
+.chBoxLabel{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.filterLi{
+    display: flex;
+}
+
+.cards__noproducts{
+    font-family: $mainFontFamily;
+    font-size: $bigFontSize;
+    text-align: center;
+    margin-top: 100px;
+}
+
+.displayBlock{
+    display: block;
+}
+
+.view{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90px;    
+}
+
+.view__common{
+    width: 40px;
+    height: 40px;
+    background-color: black;
+    border: $borderMain;
+    border-radius: $smallBorderRadius;
+    cursor: pointer;
+}
+
+.view__small{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    justify-items: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.view__large{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    justify-items: center;
+    align-items: center; 
+}
+
+.view__dedicated{
+    border: 4px groove orange;
+}
+
+.view__smallElement{
+    width: 6px;
+    height: 6px;
+    background-color: $mainBorderColor;
+    border-radius: $smallBorderRadius;
+}
+
+.view__largeElement{
+    width: 4px;
+    height: 4px;
+    background-color: $mainBorderColor;
+    border-radius: $smallBorderRadius;
+}
+
+.fontSizeSmall{
+    font-size: 0.6rem;
+}
