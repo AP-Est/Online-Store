@@ -1,4 +1,5 @@
-import { storeData, IProduct, IFilterData } from '../data/data';
+import { IProduct, IFilterData } from '../types/types';
+import { storeData } from '../data/data';
 import setQueryParameters from '../utils/setQueryParameters';
 import pushToLocalStorage from '../utils/pushToLocalStorage';
 import delFromLocalStorage from '../utils/delFromLocalStorage';
@@ -166,12 +167,9 @@ export class MainPageModel {
     filterByCategory(products: IProduct[], categories: string[]) {
         if (categories.length === 0) return products;
         const productsFiltered: IProduct[] = [];
-        this.products.map((cur) => {
-            for (const currentCategory of categories) {
-                if (cur.category === currentCategory) {
-                    productsFiltered.push(cur);
-                }
-            }
+        categories.map((item) => {
+            const product: IProduct[] = this.products.filter((cur) => cur.category === item);
+            productsFiltered.push(...product);
         });
         return productsFiltered;
     }
@@ -179,12 +177,9 @@ export class MainPageModel {
     filterByBrand(products: IProduct[], brands: string[]) {
         if (brands.length === 0) return products;
         const productsFiltered: IProduct[] = [];
-        this.products.map((cur) => {
-            for (const currentBrand of brands) {
-                if (cur.brand === currentBrand) {
-                    productsFiltered.push(cur);
-                }
-            }
+        brands.map((item) => {
+            const product: IProduct[] = this.products.filter((cur) => cur.brand === item);
+            productsFiltered.push(...product);
         });
         return productsFiltered;
     }
