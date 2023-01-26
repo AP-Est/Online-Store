@@ -1,6 +1,6 @@
 import { CartPageView } from 'CartPageView';
 import { CartPageModel } from 'CartPageModel';
-import { ICartLot, IProduct, IPlug, ISumm, IModalData } from '../styles/types';
+import { ICartLot, IProduct, IPlug, ISumm, IModalData } from '../types/types';
 
 export class ControllerCartPage {
     view: CartPageView;

@@ -1,4 +1,4 @@
-import { ICartLot } from '../styles/types';
+import { ICartLot } from '../types/types';
 
 export class BaseModel {
     totalCost: string;

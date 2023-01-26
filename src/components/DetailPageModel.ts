@@ -1,5 +1,5 @@
 import { storeData } from '../data/data';
-import { ICartLot, IProduct, IStoreData } from '../styles/types';
+import { ICartLot, IProduct, IStoreData } from '../types/types';
 import checkLocalStorage from '../utils/checkLocalstorage';
 export class DetailPageModel {
     cartLots: ICartLot[];

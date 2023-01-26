@@ -3,7 +3,7 @@ import { View } from './BaseView';
 import createButton from '../utils/createButton';
 import createElement from '../utils/createElement';
 import checkLocalStorage from '../utils/checkLocalstorage';
-import { IStoreData } from '../styles/types';
+import { IStoreData } from '../types/types';
 import getTotallyPrice from '../utils/getTotallyPrice';
 import getTotallyCartCount from '../utils/getTotallyCartCount';
 
