@@ -1,5 +1,5 @@
 import createElement from './createElement';
-import { IFilterData, IProduct } from '../data/data';
+import { IFilterData, IProduct } from '../types/types';
 import displayFilterCategory from './displayFilterCategory';
 import displayFilterBrands from './displayFilterBrands';
 import displaySliderPrice from './displaySliderPrice';

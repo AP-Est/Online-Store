@@ -1,6 +1,6 @@
 import { MainPageView } from 'MainPageView';
 import { MainPageModel } from 'MainPageModel';
-import { IProduct, IFilterData } from '../data/data';
+import { IProduct, IFilterData } from '../types/types';
 
 export class ControllerMainPage {
     view: MainPageView;

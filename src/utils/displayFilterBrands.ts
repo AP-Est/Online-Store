@@ -1,5 +1,5 @@
 import createElement from './createElement';
-import { IFilterData, IProduct } from '../data/data';
+import { IFilterData, IProduct } from '../types/types';
 
 export default function displayFilterBrands(products: IProduct[], filter: IFilterData, productsFiltered: IProduct[]) {
     const filterBrandsWrapper = createElement('div', 'filterBrands__wrapper');

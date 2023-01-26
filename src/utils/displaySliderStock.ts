@@ -1,5 +1,5 @@
 import createElement from './createElement';
-import { IFilterData, IProduct } from '../data/data';
+import { IFilterData, IProduct } from '../types/types';
 import { fillSlider, setToggleAccessible } from './displaySliderPrice';
 
 export default function displaySliderStock(products: IProduct[], filter: IFilterData, productsFiltered: IProduct[]) {
